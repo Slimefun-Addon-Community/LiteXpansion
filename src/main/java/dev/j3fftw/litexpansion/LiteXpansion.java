@@ -1,6 +1,9 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.items.MagThor;
+import dev.j3fftw.litexpansion.items.NanoBlade;
+import dev.j3fftw.litexpansion.items.Thorium;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.Objects.Research;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
@@ -28,13 +31,18 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         // Items
         new FoodSynthesizer().register(this);
+        new MagThor().register(this);
+        new Thorium().register(this);
 
+        // Weapon
+        new NanoBlade().register(this);
 
         setupResearches();
     }
 
     private void setupResearches() {
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "astronaut_food"), 696969, "Astronaut Food", 45),
+        Slimefun.registerResearch(new Research(new NamespacedKey(this, "sanitizing_foots"),
+                696969, "Sanitizing  foots since 2k10", 45),
             Items.FOOD_SYNTHESIZER);
     }
 

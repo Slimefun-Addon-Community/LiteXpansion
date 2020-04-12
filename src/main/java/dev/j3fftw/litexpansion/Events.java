@@ -6,6 +6,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,4 +28,18 @@ public class Events implements Listener {
             }
         }
     }
+
+    @EventHandler
+    public void onPlayerDamageDeal(EntityDamageByEntityEvent e) {
+        if (e.getDamager() instanceof Player) {
+            Player p = (Player) e.getDamager();
+            ItemStack itemInHand = p.getInventory().getItemInMainHand();
+            if (SlimefunUtils.isItemSimilar(itemInHand, Items.NANO_BLADE, false)
+                && ItemEnergy.getStoredEnergy(itemInHand) >= 5) {
+                e.setDamage(e.getDamage() * 1.75);
+                ItemEnergy.chargeItem(itemInHand, (float) -2.5);
+            }
+        }
+    }
+
 }
