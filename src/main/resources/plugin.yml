@@ -1,0 +1,7 @@
+name: LiteXpansion
+description:
+version: 1.0
+api-version: 1.14
+author: j3fftw
+depend: [Slimefun]
+main: dev.j3fftw.litexpansion.LiteXpansion
