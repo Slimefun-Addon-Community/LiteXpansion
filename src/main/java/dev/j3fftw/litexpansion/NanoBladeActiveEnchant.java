@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion;
 
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
@@ -12,7 +13,7 @@ public class NanoBladeActiveEnchant extends Enchantment {
     }
 
     public String getName() {
-        return null;
+        return "Active";
     }
 
     @Override
@@ -27,7 +28,7 @@ public class NanoBladeActiveEnchant extends Enchantment {
 
     @Override
     public EnchantmentTarget getItemTarget() {
-        return null;
+        return EnchantmentTarget.WEAPON;
     }
 
     @Override
@@ -47,6 +48,6 @@ public class NanoBladeActiveEnchant extends Enchantment {
 
     @Override
     public boolean canEnchantItem(ItemStack itemStack) {
-        return false;
+        return SlimefunUtils.isItemSimilar(itemStack, Items.NANO_BLADE, false);
     }
 }

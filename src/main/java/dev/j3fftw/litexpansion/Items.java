@@ -27,7 +27,7 @@ public final class Items {
         "&fAn advanced piece of technology which can",
         "&fcut through organic tissue with ease.",
         "",
-        "&fActivate: &aShift-Right Click",
+        "&fActivate: &aRight Click",
         "",
         "&8\u21E8 &7Consumes &e2.5J &7per hit",
         "",
@@ -53,8 +53,8 @@ public final class Items {
         Material.IRON_INGOT,
         "&b&lMag-Thor",
         "",
-        "&7&o\"An extremely durable alloy used",
-        "&7&oonly in the most advanced machines\""
+        "&7&oAn extremely durable alloy used",
+        "&7&oonly in the most advanced machines"
     );
 
     public static final SlimefunItemStack THORIUM = new SlimefunItemStack(

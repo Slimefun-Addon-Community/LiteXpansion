@@ -3,6 +3,7 @@ package dev.j3fftw.litexpansion;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.api.energy.ItemEnergy;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +19,8 @@ public class Events implements Listener {
         if (e.getFoodLevel() < p.getFoodLevel()) {
             for (ItemStack item : p.getInventory().getContents()) {
                 if (SlimefunUtils.isItemSimilar(item, Items.FOOD_SYNTHESIZER, false)
-                    && ItemEnergy.getStoredEnergy(item) >= 3) {
+                    && ItemEnergy.getStoredEnergy(item) >= 3
+                ) {
                     ItemEnergy.chargeItem(item, -3F);
                     p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);
                     e.setFoodLevel(20);
@@ -35,11 +37,14 @@ public class Events implements Listener {
             Player p = (Player) e.getDamager();
             ItemStack itemInHand = p.getInventory().getItemInMainHand();
             if (SlimefunUtils.isItemSimilar(itemInHand, Items.NANO_BLADE, false)
-                && ItemEnergy.getStoredEnergy(itemInHand) >= 5) {
+                && itemInHand.containsEnchantment(Enchantment.getByKey(Constants.NANO_BLADE_ACTIVE_ENCHANT))
+                && ItemEnergy.getStoredEnergy(itemInHand) >= 5
+            ) {
                 e.setDamage(e.getDamage() * 1.75);
                 ItemEnergy.chargeItem(itemInHand, (float) -2.5);
             }
         }
     }
+
 
 }

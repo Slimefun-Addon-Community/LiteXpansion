@@ -1,0 +1,4 @@
+options:
+#  auto-update: true
+  thorium-via-geo-miner: false
+  mag-thor-via-geo-miner: false

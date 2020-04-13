@@ -10,13 +10,13 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ThoriumResource implements GEOResource {
+public class MagThorResource implements GEOResource {
 
-    private final NamespacedKey key = new NamespacedKey(LiteXpansion.getInstance(), "thorium");
+    private final NamespacedKey key = new NamespacedKey(LiteXpansion.getInstance(), "magthor");
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
     private final boolean obtainableFromGEOMiner;
 
-    public ThoriumResource(boolean obtainableFromGEOMiner) {
+    public MagThorResource(boolean obtainableFromGEOMiner) {
         this.obtainableFromGEOMiner = obtainableFromGEOMiner;
     }
 
@@ -46,12 +46,12 @@ public class ThoriumResource implements GEOResource {
 
     @Override
     public String getName() {
-        return "Thorium";
+        return "Mag-Thor";
     }
 
     @Override
     public ItemStack getItem() {
-        return Items.THORIUM.clone();
+        return Items.MAG_THOR.clone();
     }
 
     @Override
