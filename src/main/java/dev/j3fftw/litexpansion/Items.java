@@ -6,8 +6,10 @@ import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Slime;
 
 public final class Items {
 
@@ -18,7 +20,20 @@ public final class Items {
             "&7LiteXpansion")
     );
 
+    // Armor
+
+    public static final SlimefunItemStack ELECTRIC_CHESTPLATE = new SlimefunItemStack(
+        "ELECTRIC_CHESTPLATE",
+        Material.LEATHER_CHESTPLATE, Color.TEAL,
+        "&9Electric Chestplate",
+        "",
+        "&8\u21E8 &7Negates all the damage dealt to player.",
+        "",
+        "&c&o&8\u21E8 &e\u26A1 &70 / 250 J"
+    );
+
     // Weapon
+
     public static final SlimefunItemStack NANO_BLADE = new SlimefunItemStack(
         "NANO_BLADE",
         Material.DIAMOND_SWORD,
@@ -66,6 +81,5 @@ public final class Items {
         LoreBuilder.radioactive(Radioactivity.HIGH),
         LoreBuilder.HAZMAT_SUIT_REQUIRED
     );
-
 
 }

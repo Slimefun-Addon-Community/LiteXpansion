@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -42,6 +43,26 @@ public class Events implements Listener {
             ) {
                 e.setDamage(e.getDamage() * 1.75);
                 ItemEnergy.chargeItem(itemInHand, (float) -2.5);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            Player p = (Player) e.getEntity();
+            ItemStack chestplate = p.getEquipment().getChestplate();
+            if (p.getEquipment() != null
+                && chestplate != null
+                && SlimefunUtils.isItemSimilar(chestplate, Items.ELECTRIC_CHESTPLATE,
+                false)) {
+
+                if (ItemEnergy.getStoredEnergy(chestplate) >= 5) {
+                    p.getEquipment().setChestplate(ItemEnergy.chargeItem(chestplate,
+                        (float) (e.getDamage() / -1.75)));
+
+                    e.setCancelled(true);
+                }
             }
         }
     }

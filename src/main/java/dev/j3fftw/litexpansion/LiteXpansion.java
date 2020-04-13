@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.Thorium;
@@ -51,6 +52,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         // Weapon
         new NanoBlade().register(this);
+
+        // Armor
+        new ElectricChestplate().register(this);
 
         try {
             if (!Enchantment.isAcceptingRegistrations()) {
