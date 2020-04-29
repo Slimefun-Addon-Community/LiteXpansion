@@ -1,4 +1,4 @@
 options:
-#  auto-update: true
+  auto-update: true
   thorium-via-geo-miner: true
   mag-thor-via-geo-miner: true

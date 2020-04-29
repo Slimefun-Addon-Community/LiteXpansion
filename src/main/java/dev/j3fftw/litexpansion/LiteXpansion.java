@@ -29,14 +29,15 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         return instance;
     }
 
+    @Override
     public void onEnable() {
         instance = this;
 
         new Metrics(this, 7111);
 
-//        if (config.getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
-//            new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
-//        }
+        if (config.getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
+            new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
+        }
 
         getServer().getPluginManager().registerEvents(new Events(), this);
 
@@ -86,6 +87,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             Items.NANO_BLADE);
     }
 
+    @Override
     public void onDisable() {
         instance = null;
     }
