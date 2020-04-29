@@ -41,7 +41,7 @@ public class MagThorResource implements GEOResource {
 
     @Override
     public int getMaxDeviation() {
-        return 6;
+        return 0;
     }
 
     @Override
