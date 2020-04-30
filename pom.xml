@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.github.TheBusyBiscuit</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>2ebd003f3a</version>
+            <version>2b9d109d16</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
