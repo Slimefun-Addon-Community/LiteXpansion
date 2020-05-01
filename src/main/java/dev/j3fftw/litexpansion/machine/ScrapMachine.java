@@ -131,7 +131,7 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
 
     @Override
     public int getCapacity() {
-        return 0;
+        return ENERGY_CONSUMPTION;
     }
 
     @Override

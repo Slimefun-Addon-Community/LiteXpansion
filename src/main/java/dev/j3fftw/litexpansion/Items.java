@@ -117,7 +117,7 @@ public final class Items {
     );
 
     public static final SlimefunItemStack IRIDIUM_PLATE = new SlimefunItemStack(
-        "IRIDIUM",
+        "IRIDIUM_PLATE",
         Material.PAPER,
         "&fIridium Plate",
         "",

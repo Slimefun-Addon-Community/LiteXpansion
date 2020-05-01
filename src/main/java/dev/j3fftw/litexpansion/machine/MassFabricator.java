@@ -133,7 +133,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     @Override
     public int getCapacity() {
-        return 0;
+        return ENERGY_CONSUMPTION;
     }
 
     @Override
