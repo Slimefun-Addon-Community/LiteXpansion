@@ -12,6 +12,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.cscorelib2.blocks.BlockPosition;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
@@ -118,8 +119,8 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
     }
 
     private boolean takePower(@Nonnull Block b) {
-//        if (ChargableBlock.getCharge(b) < ENERGY_CONSUMPTION) return false;
-//        ChargableBlock.addCharge(b, -ENERGY_CONSUMPTION);
+        if (ChargableBlock.getCharge(b) < ENERGY_CONSUMPTION) return false;
+        ChargableBlock.addCharge(b, -ENERGY_CONSUMPTION);
         return true;
     }
 
