@@ -9,7 +9,6 @@ import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Slime;
 
 public final class Items {
 
@@ -49,6 +48,19 @@ public final class Items {
         "&c&o&8\u21E8 &e\u26A1 &70 / 500 J"
     );
 
+    // Machines
+    public static final SlimefunItemStack SCRAP_MACHINE = new SlimefunItemStack(
+        "SCRAP_MACHINE",
+        Material.BLACK_CONCRETE,
+        "&8Scrap Machine"
+    );
+
+    public static final SlimefunItemStack MASS_FABRICATOR_MACHINE = new SlimefunItemStack(
+        "MASS_FABRICATOR_MACHINE",
+        Material.PURPLE_CONCRETE,
+        "&5Mass Fabricator"
+    );
+
     // Items
 
     public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
@@ -82,4 +94,36 @@ public final class Items {
         LoreBuilder.HAZMAT_SUIT_REQUIRED
     );
 
+    public static final SlimefunItemStack SCRAP = new SlimefunItemStack(
+        "SCRAP",
+        Material.DEAD_BUSH,
+        "&8Scrap",
+        "",
+        "&7Can be used to create &5UU-Matter"
+    );
+
+    public static final SlimefunItemStack UU_MATTER = new SlimefunItemStack(
+        "UU_MATTER",
+        Material.PURPLE_DYE,
+        "&5UU-Matter",
+        "",
+        "&7Can be used to create items or resources"
+    );
+
+    public static final SlimefunItemStack IRIDIUM = new SlimefunItemStack(
+        "IRIDIUM",
+        Material.WHITE_DYE,
+        "&fIridium"
+    );
+
+    public static final SlimefunItemStack IRIDIUM_PLATE = new SlimefunItemStack(
+        "IRIDIUM",
+        Material.PAPER,
+        "&fIridium Plate",
+        "",
+        "&7Used to create Iridium Armor"
+    );
+
+
+    private Items() {}
 }
