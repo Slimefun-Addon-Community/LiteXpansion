@@ -35,10 +35,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         new Metrics(this, 7111);
 
-        if (config.getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
-            new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
-        }
-
         getServer().getPluginManager().registerEvents(new Events(), this);
 
         config = new Config(this);
