@@ -67,6 +67,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new ScrapMachine().register(this);
         new MassFabricator().register(this);
 
+        // Register all UU-Matter recipes
+        registerUuMatterRecipes();
+
         try {
             if (!Enchantment.isAcceptingRegistrations()) {
                 Field accepting = Enchantment.class.getDeclaredField("acceptingNew");
@@ -99,7 +102,16 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new SlimefunItem(Items.LITEXPANSION, item, type, recipe).register(this);
     }
 
+    private void registerUuRecipe(@Nonnull ItemStack result, @Nonnull ItemStack[] recipe) {
+        RecipeType.ENHANCED_CRAFTING_TABLE.register(recipe, result);
+    }
+
     private void registerUuMatterRecipes() {
+        registerUuRecipe(Items.IRIDIUM, new ItemStack[] {
+            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
+            null, Items.UU_MATTER, null,
+            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
+        });
     }
 
     private void setupResearches() {
