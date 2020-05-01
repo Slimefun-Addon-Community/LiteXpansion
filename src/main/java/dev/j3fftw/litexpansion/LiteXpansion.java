@@ -76,7 +76,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
                 accepting.setAccessible(true);
                 accepting.set(null, true);
             }
-        } catch (IllegalAccessException | NoSuchFieldException ignored) {}
+        } catch (IllegalAccessException | NoSuchFieldException ignored) {
+            getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
+        }
         Enchantment.registerEnchantment(new NanoBladeActiveEnchant(Constants.NANO_BLADE_ACTIVE_ENCHANT));
 
         setupResearches();
