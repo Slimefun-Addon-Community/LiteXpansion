@@ -1,7 +1,8 @@
 name: LiteXpansion
-description:
-version: 1.0
+description: Description
+version: 1.2
 api-version: 1.14
 author: j3fftw
 depend: [Slimefun]
+softdepend: [SlimyTreeTaps]
 main: dev.j3fftw.litexpansion.LiteXpansion

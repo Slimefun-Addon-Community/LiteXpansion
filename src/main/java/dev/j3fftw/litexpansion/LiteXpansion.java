@@ -21,7 +21,6 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,7 +28,6 @@ import javax.annotation.Nonnull;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.UUID;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -284,55 +282,61 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             Items.UU_MATTER, null, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.FLINT, 32), new ItemStack[]{
+        registerUuRecipe(new ItemStack(Material.FLINT, 32), new ItemStack[] {
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.GUNPOWDER, 15), new ItemStack[]{
+        registerUuRecipe(new ItemStack(Material.GUNPOWDER, 15), new ItemStack[] {
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
             Items.UU_MATTER, null, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.INK_SAC, 48), new ItemStack[]{
+        registerUuRecipe(new ItemStack(Material.INK_SAC, 48), new ItemStack[] {
             null, Items.UU_MATTER, Items.UU_MATTER,
             null, Items.UU_MATTER, Items.UU_MATTER,
             null, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.LAVA_BUCKET), new  ItemStack[]{
+        registerUuRecipe(new ItemStack(Material.LAVA_BUCKET), new ItemStack[] {
             null, Items.UU_MATTER, null,
             null, Items.UU_MATTER, null,
             null, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.SNOWBALL, 16), new ItemStack[]{
+        registerUuRecipe(new ItemStack(Material.SNOWBALL, 16), new ItemStack[] {
             null, null, null,
             null, null, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         });
 
-        //todo add sticky resin or rubber
 
-        registerUuRecipe(new ItemStack(Material.SUGAR_CANE, 48), new ItemStack[]{
+        registerUuRecipe(new ItemStack(Material.SUGAR_CANE, 48), new ItemStack[] {
             Items.UU_MATTER, null, Items.UU_MATTER,
             Items.UU_MATTER, null, Items.UU_MATTER,
             Items.UU_MATTER, null, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.VINE, 24), new ItemStack[]{
+        registerUuRecipe(new ItemStack(Material.VINE, 24), new ItemStack[] {
             Items.UU_MATTER, null, null,
             Items.UU_MATTER, null, null,
             Items.UU_MATTER, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.WATER_BUCKET), new ItemStack[]{
+        registerUuRecipe(new ItemStack(Material.WATER_BUCKET), new ItemStack[] {
             null, null, null,
             null, Items.UU_MATTER, null,
             null, Items.UU_MATTER, null
         });
+
+        if (getServer().getPluginManager().getPlugin("SlimyTreeTaps") != null)
+            registerUuRecipe((SlimefunItemStack) SlimefunItem.getByID("STICKY_RESIN").getItem(), 21, new ItemStack[] {
+                Items.UU_MATTER, null, Items.UU_MATTER,
+                null, null, null,
+                Items.UU_MATTER, null, Items.UU_MATTER
+            });
 
     }
 
