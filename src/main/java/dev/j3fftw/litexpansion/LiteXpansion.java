@@ -104,6 +104,16 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new SlimefunItem(Items.LITEXPANSION, item, type, recipe).register(this);
     }
 
+    private void registerUuRecipe(@Nonnull SlimefunItemStack item, @Nonnull ItemStack[] recipe) {
+        this.registerUuRecipe(item.clone(), recipe);
+    }
+
+    private void registerUuRecipe(@Nonnull SlimefunItemStack item, int amount, @Nonnull ItemStack[] recipe) {
+        final ItemStack clone = item.clone();
+        clone.setAmount(amount);
+        this.registerUuRecipe(clone, recipe);
+    }
+
     private void registerUuRecipe(@Nonnull ItemStack result, @Nonnull ItemStack[] recipe) {
         RecipeType.ENHANCED_CRAFTING_TABLE.register(recipe, result);
     }
