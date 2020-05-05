@@ -36,7 +36,7 @@ public class ThoriumResource implements GEOResource {
 
     @Override
     public int getMaxDeviation() {
-        return 0;
+        return 1;
     }
 
     @Override

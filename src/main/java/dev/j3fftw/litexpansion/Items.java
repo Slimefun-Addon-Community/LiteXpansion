@@ -48,6 +48,14 @@ public final class Items {
         "&c&o&8\u21E8 &e\u26A1 &70 / 500 J"
     );
 
+    // Tools
+
+    public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
+        "WRENCH",
+        Material.GOLDEN_HOE,
+        "&6Wrench"
+    );
+
     // Machines
     public static final SlimefunItemStack SCRAP_MACHINE = new SlimefunItemStack(
         "SCRAP_MACHINE",

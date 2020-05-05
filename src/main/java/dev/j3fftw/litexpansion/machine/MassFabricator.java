@@ -51,7 +51,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
     public MassFabricator() {
         super(Items.LITEXPANSION, Items.MASS_FABRICATOR_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD,
-            REINFORCED_PLATE, SlimefunItems.COMPRESSOR, REINFORCED_PLATE,
+            REINFORCED_PLATE, Items.MACHINE_BLOCK, REINFORCED_PLATE,
             ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD
         });
         setupInv();
