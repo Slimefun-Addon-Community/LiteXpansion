@@ -120,7 +120,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
                 if (i == 4) continue;
                 final ItemStack[] recipe2 = new ItemStack[9];
                 recipe2[i] = items[0];
-                Arrays.fill(recipe2, null);
                 type.register(recipe2, result);
             }
 
@@ -130,7 +129,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         if (items.length < 9) {
             recipe = new ItemStack[9];
             System.arraycopy(items, 0, recipe, 0, items.length);
-            Arrays.fill(recipe, null);
         } else
             recipe = items;
 
@@ -157,7 +155,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         for (int i = 0; i < 9; i++) {
             final ItemStack[] recipe = new ItemStack[9];
             recipe[i] = item;
-            Arrays.fill(recipe, null);
             RecipeType.ENHANCED_CRAFTING_TABLE.register(recipe, result);
         }
     }
