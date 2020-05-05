@@ -69,6 +69,14 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         // Weapon
         new NanoBlade().register(this);
 
+        // Tools
+
+        registerItem(Items.WRENCH, RecipeType.ENHANCED_CRAFTING_TABLE,
+            SlimefunItems.BRONZE_INGOT, null, SlimefunItems.BRONZE_INGOT,
+            null, SlimefunItems.BRONZE_INGOT, null,
+            null, SlimefunItems.BRONZE_INGOT, null
+        );
+
         // Armor
         new ElectricChestplate().register(this);
 
