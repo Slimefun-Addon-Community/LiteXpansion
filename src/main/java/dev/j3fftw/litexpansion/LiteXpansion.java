@@ -18,6 +18,7 @@ import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -33,10 +34,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private static LiteXpansion instance;
 
-    public static LiteXpansion getInstance() {
-        return instance;
-    }
-
     @Override
     public void onEnable() {
         instance = this;
@@ -45,6 +42,10 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             saveDefaultConfig();
 
         new Metrics(this, 7111);
+
+        if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
+            new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
+        }
 
         getServer().getPluginManager().registerEvents(new Events(), this);
 
@@ -57,6 +58,13 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new Thorium().register(this);
         registerItem(Items.SCRAP, ScrapMachine.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE, "&7Any Item!"));
         registerItem(Items.UU_MATTER, MassFabricator.RECIPE_TYPE, Items.SCRAP);
+        registerItem(Items.REFINED_IRON, RecipeType.SMELTERY, new ItemStack(Material.IRON_INGOT));
+        registerItem(Items.MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
+            Items.REFINED_IRON, null, Items.REFINED_IRON,
+            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON
+        );
+        registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
 
         // Weapon
         new NanoBlade().register(this);
@@ -83,11 +91,12 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         Enchantment.registerEnchantment(new NanoBladeActiveEnchant(Constants.NANO_BLADE_ACTIVE_ENCHANT));
 
         setupResearches();
-        new ThoriumResource(getConfig().getBoolean("options.thorium-via-geo-miner")).register();
-        new MagThorResource(getConfig().getBoolean("options.mag-thor-via-geo-miner")).register();
+        new ThoriumResource().register();
+        new MagThorResource().register();
     }
 
-    private void registerItem(@Nonnull SlimefunItemStack item, @Nonnull RecipeType type, @Nonnull ItemStack... items) {
+    private void registerItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
+                              @Nonnull ItemStack... items) {
         ItemStack[] recipe;
         if (items.length == 1) {
             recipe = new ItemStack[] {
@@ -95,244 +104,269 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
                 null, items[0], null,
                 null, null, null
             };
-        } else if (items.length < 9) {
+            new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(this);
+
+            // make shapeless
+            for (int i = 0; i < 9; i++) {
+                if (i == 4) continue;
+                final ItemStack[] recipe2 = new ItemStack[9];
+                recipe2[i] = items[0];
+                Arrays.fill(recipe2, null);
+                type.register(recipe2, result);
+            }
+
+            return;
+        }
+
+        if (items.length < 9) {
             recipe = new ItemStack[9];
             System.arraycopy(items, 0, recipe, 0, items.length);
             Arrays.fill(recipe, null);
         } else
             recipe = items;
 
-        new SlimefunItem(Items.LITEXPANSION, item, type, recipe).register(this);
+        new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(this);
     }
 
-    private void registerUuRecipe(@Nonnull SlimefunItemStack item, @Nonnull ItemStack[] recipe) {
-        this.registerUuRecipe(item.clone(), recipe);
+    private void registerRecipe(@Nonnull SlimefunItemStack item, @Nonnull ItemStack[] recipe) {
+        this.registerRecipe(item.clone(), recipe);
     }
 
-    private void registerUuRecipe(@Nonnull SlimefunItemStack item, int amount, @Nonnull ItemStack[] recipe) {
+    private void registerRecipe(@Nonnull SlimefunItemStack item, int amount, @Nonnull ItemStack[] recipe) {
         final ItemStack clone = item.clone();
         clone.setAmount(amount);
-        this.registerUuRecipe(clone, recipe);
+        this.registerRecipe(clone, recipe);
     }
 
-    private void registerUuRecipe(@Nonnull ItemStack result, @Nonnull ItemStack[] recipe) {
+    private void registerRecipe(@Nonnull ItemStack result, @Nonnull ItemStack[] recipe) {
         RecipeType.ENHANCED_CRAFTING_TABLE.register(recipe, result);
     }
 
+    // Haha shapeless recipe bitches!!!! <3 <3 <3
+    // DEAL WITH IT KIDDOS HAHAHAHHAHAHAHAHAH
+    private void registerRecipe(@Nonnull SlimefunItemStack result, @Nonnull SlimefunItemStack item) {
+        for (int i = 0; i < 9; i++) {
+            final ItemStack[] recipe = new ItemStack[9];
+            recipe[i] = item;
+            Arrays.fill(recipe, null);
+            RecipeType.ENHANCED_CRAFTING_TABLE.register(recipe, result);
+        }
+    }
+
     private void registerUuMatterRecipes() {
-        registerUuRecipe(Items.IRIDIUM, new ItemStack[] {
+        registerRecipe(Items.IRIDIUM, new ItemStack[] {
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.COAL, 20), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.COAL, 20), new ItemStack[] {
             null, null, Items.UU_MATTER,
             Items.UU_MATTER, null, null,
             null, null, Items.UU_MATTER
         });
 
-        registerUuRecipe((SlimefunItemStack) SlimefunItems.COPPER_DUST, 5, new ItemStack[] {
+        registerRecipe((SlimefunItemStack) SlimefunItems.COPPER_DUST, 5, new ItemStack[] {
             null, null, Items.UU_MATTER,
             Items.UU_MATTER, null, Items.UU_MATTER,
             null, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.DIAMOND), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.DIAMOND), new ItemStack[] {
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.GOLD_ORE, 2), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.GOLD_ORE, 2), new ItemStack[] {
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
             null, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.IRON_ORE, 2), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.IRON_ORE, 2), new ItemStack[] {
             Items.UU_MATTER, null, Items.UU_MATTER,
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, null, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.LAPIS_LAZULI, 9), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.LAPIS_LAZULI, 9), new ItemStack[] {
             null, Items.UU_MATTER, null,
             null, Items.UU_MATTER, null,
             null, Items.UU_MATTER, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.REDSTONE, 24), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.REDSTONE, 24), new ItemStack[] {
             null, null, null,
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         });
 
-        registerUuRecipe((SlimefunItemStack) SlimefunItems.TIN_DUST, 5, new ItemStack[] {
+        registerRecipe((SlimefunItemStack) SlimefunItems.TIN_DUST, 5, new ItemStack[] {
             null, null, null,
             Items.UU_MATTER, null, Items.UU_MATTER,
             null, null, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.CHISELED_STONE_BRICKS, 48), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.CHISELED_STONE_BRICKS, 48), new ItemStack[] {
             Items.UU_MATTER, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, null,
             Items.UU_MATTER, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.CLAY_BALL, 48), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.CLAY_BALL, 48), new ItemStack[] {
             Items.UU_MATTER, Items.UU_MATTER, null,
             Items.UU_MATTER, null, null,
             Items.UU_MATTER, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.GLASS, 32), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.GLASS, 32), new ItemStack[] {
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, null, Items.UU_MATTER,
             null, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.GLOWSTONE, 8), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.GLOWSTONE, 8), new ItemStack[] {
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, null, Items.UU_MATTER,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.GRASS_BLOCK, 16), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.GRASS_BLOCK, 16), new ItemStack[] {
             null, null, null,
             Items.UU_MATTER, null, null,
             Items.UU_MATTER, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.MOSSY_COBBLESTONE, 16), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.MOSSY_COBBLESTONE, 16), new ItemStack[] {
             null, null, null,
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, null, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.MYCELIUM, 24), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.MYCELIUM, 24), new ItemStack[] {
             null, null, null,
             Items.UU_MATTER, null, Items.UU_MATTER,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.NETHERRACK, 16), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.NETHERRACK, 16), new ItemStack[] {
             null, null, Items.UU_MATTER,
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.OBSIDIAN, 12), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.OBSIDIAN, 12), new ItemStack[] {
             Items.UU_MATTER, null, Items.UU_MATTER,
             Items.UU_MATTER, null, Items.UU_MATTER,
             null, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.SANDSTONE, 16), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.SANDSTONE, 16), new ItemStack[] {
             null, null, null,
             null, null, Items.UU_MATTER,
             null, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.SNOW_BLOCK, 4), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.SNOW_BLOCK, 4), new ItemStack[] {
             Items.UU_MATTER, null, Items.UU_MATTER,
             null, null, null,
             null, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.STONE, 16), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.STONE, 16), new ItemStack[] {
             null, null, null,
             null, Items.UU_MATTER, null,
             null, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.OAK_LOG, 8), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.OAK_LOG, 8), new ItemStack[] {
             null, Items.UU_MATTER, null,
             null, null, null,
             null, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.WHITE_WOOL, 12), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.WHITE_WOOL, 12), new ItemStack[] {
             Items.UU_MATTER, null, Items.UU_MATTER,
             null, null, null,
             null, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.BONE, 32), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.BONE, 32), new ItemStack[] {
             Items.UU_MATTER, null, null,
             Items.UU_MATTER, Items.UU_MATTER, null,
             Items.UU_MATTER, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.CACTUS, 48), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.CACTUS, 48), new ItemStack[] {
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
             Items.UU_MATTER, null, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.COCOA_BEANS, 32), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.COCOA_BEANS, 32), new ItemStack[] {
             Items.UU_MATTER, Items.UU_MATTER, null,
             null, null, Items.UU_MATTER,
             Items.UU_MATTER, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.FEATHER, 32), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.FEATHER, 32), new ItemStack[] {
             null, Items.UU_MATTER, null,
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, null, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.FLINT, 32), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.FLINT, 32), new ItemStack[] {
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.GUNPOWDER, 15), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.GUNPOWDER, 15), new ItemStack[] {
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
             Items.UU_MATTER, null, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.INK_SAC, 48), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.INK_SAC, 48), new ItemStack[] {
             null, Items.UU_MATTER, Items.UU_MATTER,
             null, Items.UU_MATTER, Items.UU_MATTER,
             null, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.LAVA_BUCKET), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.LAVA_BUCKET), new ItemStack[] {
             null, Items.UU_MATTER, null,
             null, Items.UU_MATTER, null,
             null, Items.UU_MATTER, null
         });
 
-        registerUuRecipe(new ItemStack(Material.SNOWBALL, 16), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.SNOWBALL, 16), new ItemStack[] {
             null, null, null,
             null, null, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         });
 
 
-        registerUuRecipe(new ItemStack(Material.SUGAR_CANE, 48), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.SUGAR_CANE, 48), new ItemStack[] {
             Items.UU_MATTER, null, Items.UU_MATTER,
             Items.UU_MATTER, null, Items.UU_MATTER,
             Items.UU_MATTER, null, Items.UU_MATTER
         });
 
-        registerUuRecipe(new ItemStack(Material.VINE, 24), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.VINE, 24), new ItemStack[] {
             Items.UU_MATTER, null, null,
             Items.UU_MATTER, null, null,
             Items.UU_MATTER, null, null
         });
 
-        registerUuRecipe(new ItemStack(Material.WATER_BUCKET), new ItemStack[] {
+        registerRecipe(new ItemStack(Material.WATER_BUCKET), new ItemStack[] {
             null, null, null,
             null, Items.UU_MATTER, null,
             null, Items.UU_MATTER, null
         });
 
         if (getServer().getPluginManager().getPlugin("SlimyTreeTaps") != null)
-            registerUuRecipe((SlimefunItemStack) SlimefunItem.getByID("STICKY_RESIN").getItem(), 21, new ItemStack[] {
+            registerRecipe((SlimefunItemStack) SlimefunItem.getByID("STICKY_RESIN").getItem(), 21, new ItemStack[] {
                 Items.UU_MATTER, null, Items.UU_MATTER,
                 null, null, null,
                 Items.UU_MATTER, null, Items.UU_MATTER
@@ -364,5 +398,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     public String getBugTrackerURL() {
         return "https://github.com/J3fftw1/LiteXpansion/issues";
+    }
+
+    public static LiteXpansion getInstance() {
+        return instance;
     }
 }

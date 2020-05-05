@@ -14,11 +14,6 @@ public class MagThorResource implements GEOResource {
 
     private final NamespacedKey key = new NamespacedKey(LiteXpansion.getInstance(), "magthor");
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
-    private final boolean obtainableFromGEOMiner;
-
-    public MagThorResource(boolean obtainableFromGEOMiner) {
-        this.obtainableFromGEOMiner = obtainableFromGEOMiner;
-    }
 
     @Override
     public int getDefaultSupply(World.Environment environment, Biome biome) {
@@ -56,7 +51,7 @@ public class MagThorResource implements GEOResource {
 
     @Override
     public boolean isObtainableFromGEOMiner() {
-        return obtainableFromGEOMiner;
+        return true;
     }
 
 

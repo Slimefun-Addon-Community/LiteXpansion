@@ -124,6 +124,29 @@ public final class Items {
         "&7Used to create Iridium Armor"
     );
 
+    public static final SlimefunItemStack THORIUM_DUST = new SlimefunItemStack(
+        "THORIUM_DUST",
+        Material.BLACK_DYE,
+        "&8Thorium Dust"
+    );
+
+    public static final SlimefunItemStack MAGTHOR_DUST = new SlimefunItemStack(
+        "MAGTHOR_DUST",
+        Material.LIGHT_GRAY_DYE,
+        "&b&lMag Thor Dust"
+    );
+
+    public static final SlimefunItemStack REFINED_IRON = new SlimefunItemStack(
+        "REFINED_IRON",
+        Material.IRON_INGOT,
+        "&7Refined Iron"
+    );
+
+    public static final SlimefunItemStack MACHINE_BLOCK = new SlimefunItemStack(
+        "MACHINE_BLOCK",
+        Material.IRON_BLOCK,
+        "&7Machine Block"
+    );
 
     private Items() {}
 }

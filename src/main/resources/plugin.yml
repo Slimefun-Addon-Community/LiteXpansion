@@ -1,6 +1,6 @@
 name: LiteXpansion
 description: Description
-version: 1.2
+version: ${project.version}
 api-version: 1.14
 author: j3fftw
 depend: [Slimefun]

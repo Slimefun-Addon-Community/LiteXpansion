@@ -54,8 +54,8 @@ public class Events implements Listener {
             ItemStack chestplate = p.getEquipment().getChestplate();
             if (p.getEquipment() != null
                 && chestplate != null
-                && SlimefunUtils.isItemSimilar(chestplate, Items.ELECTRIC_CHESTPLATE,
-                false)) {
+                && SlimefunUtils.isItemSimilar(chestplate, Items.ELECTRIC_CHESTPLATE, false)
+            ) {
 
                 if (ItemEnergy.getStoredEnergy(chestplate) >= 5) {
                     p.getEquipment().setChestplate(ItemEnergy.chargeItem(chestplate,
