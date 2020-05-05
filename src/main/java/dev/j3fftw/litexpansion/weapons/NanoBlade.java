@@ -1,6 +1,6 @@
 package dev.j3fftw.litexpansion.weapons;
 
-import dev.j3fftw.litexpansion.Constants;
+import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.Items;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
