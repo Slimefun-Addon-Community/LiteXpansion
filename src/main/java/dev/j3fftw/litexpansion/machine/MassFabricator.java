@@ -2,6 +2,7 @@ package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
+import dev.j3fftw.litexpansion.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
@@ -36,7 +37,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
         new NamespacedKey(LiteXpansion.getInstance(), "mass_fabricator"), Items.MASS_FABRICATOR_MACHINE
     );
 
-    private static final int ENERGY_CONSUMPTION = 256;
+    private static final int ENERGY_CONSUMPTION = Utils.euToJ(166_666 / 100);
 
     private static final int[] INPUT_SLOTS = new int[] {10, 11};
     private static final int OUTPUT_SLOT = 15;
@@ -133,7 +134,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     @Override
     public int getCapacity() {
-        return ENERGY_CONSUMPTION;
+        return ENERGY_CONSUMPTION * 3;
     }
 
     @Override
