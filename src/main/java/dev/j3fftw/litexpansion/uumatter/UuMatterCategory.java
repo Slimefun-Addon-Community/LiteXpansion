@@ -96,7 +96,9 @@ public final class UuMatterCategory extends FlexCategory {
 
     @Override
     public void open(Player player, PlayerProfile playerProfile, SlimefunGuideLayout slimefunGuideLayout) {
-        menu.addItem(1, ChestMenuUtils.getBackButton(player));
+        menu.addItem(1, new CustomItem(ChestMenuUtils.getBackButton(player, "",
+            ChatColor.GRAY + SlimefunPlugin.getLocal().getMessage(player, "guide.back.guide")))
+        );
         menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
             SlimefunPlugin.getRegistry().getGuideLayout(slimefunGuideLayout).openMainMenu(playerProfile, 1);
             return false;

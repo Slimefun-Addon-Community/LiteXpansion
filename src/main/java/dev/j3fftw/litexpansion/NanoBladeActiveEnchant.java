@@ -6,12 +6,17 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class NanoBladeActiveEnchant extends Enchantment {
 
     public NanoBladeActiveEnchant(NamespacedKey key) {
         super(key);
     }
 
+    @Nonnull
+    @Override
+    @Deprecated
     public String getName() {
         return "Active";
     }
@@ -37,6 +42,7 @@ public class NanoBladeActiveEnchant extends Enchantment {
     }
 
     @Override
+    @Deprecated
     public boolean isCursed() {
         return false;
     }

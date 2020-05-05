@@ -251,7 +251,6 @@ public final class UUMatter {
         if (recipe.length < 9) {
             // Make the new length 9 and fill it with nulls
             recipe = Arrays.copyOf(recipe, 9);
-            Arrays.fill(recipe, null);
         }
 
         // Register to the enhanced crafting table

@@ -1,8 +1,6 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
-import dev.j3fftw.litexpansion.uumatter.UUMatter;
-import dev.j3fftw.litexpansion.uumatter.UuMatterCategory;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.Thorium;
@@ -11,6 +9,8 @@ import dev.j3fftw.litexpansion.machine.ScrapMachine;
 import dev.j3fftw.litexpansion.resources.MagThorResource;
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
 import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.uumatter.UUMatter;
+import dev.j3fftw.litexpansion.uumatter.UuMatterCategory;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -31,7 +31,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import javax.annotation.Nonnull;
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -54,7 +53,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         // Category
         Items.LITEXPANSION.register();
-        UuMatterCategory.INSTANCE.register();
 
         // Items
         new FoodSynthesizer().register(this);
@@ -79,7 +77,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new NanoBlade().register(this);
 
         // Tools
-
         registerItem(Items.WRENCH, RecipeType.ENHANCED_CRAFTING_TABLE,
             SlimefunItems.BRONZE_INGOT, null, SlimefunItems.BRONZE_INGOT,
             null, SlimefunItems.BRONZE_INGOT, null,
