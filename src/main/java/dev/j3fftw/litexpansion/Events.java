@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.utils.Constants;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.api.energy.ItemEnergy;
 import org.bukkit.Sound;
