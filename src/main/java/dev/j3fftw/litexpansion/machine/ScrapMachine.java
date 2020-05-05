@@ -50,7 +50,7 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
     public ScrapMachine() {
         super(Items.LITEXPANSION, Items.SCRAP_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD,
-            REINFORCED_PLATE, SlimefunItems.COMPRESSOR, REINFORCED_PLATE,
+            REINFORCED_PLATE, Items.MACHINE_BLOCK, REINFORCED_PLATE,
             ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD
         });
         setupInv();
