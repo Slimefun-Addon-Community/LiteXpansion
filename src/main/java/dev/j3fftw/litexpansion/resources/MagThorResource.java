@@ -23,7 +23,7 @@ public class MagThorResource implements GEOResource {
             case WOODED_MOUNTAINS:
             case SNOWY_MOUNTAINS:
             case MODIFIED_GRAVELLY_MOUNTAINS:
-                return random.nextInt(3) + 1;
+                return random.nextInt(2) + 1;
             default:
                 return 1;
         }
