@@ -138,12 +138,6 @@ public final class Items {
         "&8Thorium Dust"
     );
 
-    public static final SlimefunItemStack MAGTHOR_DUST = new SlimefunItemStack(
-        "MAGTHOR_DUST",
-        Material.LIGHT_GRAY_DYE,
-        "&b&lMag Thor Dust"
-    );
-
     public static final SlimefunItemStack REFINED_IRON = new SlimefunItemStack(
         "REFINED_IRON",
         Material.IRON_INGOT,
