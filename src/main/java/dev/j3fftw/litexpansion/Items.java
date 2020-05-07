@@ -56,12 +56,6 @@ public final class Items {
         "&6Wrench"
     );
 
-    public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
-        "TREETAP",
-        Material.WOODEN_HOE,
-        "&7Treetap"
-    );
-
     // Machines
     public static final SlimefunItemStack SCRAP_MACHINE = new SlimefunItemStack(
         "SCRAP_MACHINE",
@@ -160,37 +154,6 @@ public final class Items {
         "MACHINE_BLOCK",
         Material.IRON_BLOCK,
         "&7Machine Block"
-    );
-
-    public static final SlimefunItemStack UNINSULATED_COPPER_CABLE = new SlimefunItemStack(
-        "UNINSULATED_COPPER_CABLE",
-        Material.STRING,
-        "&7Uninsulated Copper Cable"
-    );
-
-    public static final SlimefunItemStack COPPER_CABLE = new SlimefunItemStack(
-        "COPPER_CABLE",
-        Material.STRING,
-        "&7Copper Cable"
-    );
-
-    public static final SlimefunItemStack RUBBER = new SlimefunItemStack(
-        "RUBBER",
-        Material.INK_SAC,
-        "&7Rubber"
-    );
-
-    public static final SlimefunItemStack ELECTRONIC_CIRCUIT = new SlimefunItemStack(
-        "ELECTRONIC_CIRCUIT",
-        Material.COBWEB,
-        "&7Electronic Circuit"
-    );
-
-    //todo make ADVANCED_CIRCUIT enchanted
-    public static final SlimefunItemStack ADVANCED_CIRCUIT = new SlimefunItemStack(
-        "ADVANCED_CIRCUIT",
-        Material.COBWEB,
-        "Advanced Circuit"
     );
 
     private Items() {}
