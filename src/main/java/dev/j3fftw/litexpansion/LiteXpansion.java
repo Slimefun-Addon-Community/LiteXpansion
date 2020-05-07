@@ -6,11 +6,9 @@ import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.ScrapMachine;
-
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
-import dev.j3fftw.litexpansion.uumatter.UuMatterCategory;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -72,6 +70,81 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON
         );
         registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
+        registerItem(Items.UNINSULATED_COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT
+        );
+
+        registerItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.RUBBER, Items.RUBBER, Items.RUBBER,
+            Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE,
+            Items.RUBBER, Items.RUBBER, Items.RUBBER
+        );
+
+        registerItem(Items.ELECTRONIC_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.COPPER_CABLE, Items.COPPER_CABLE, Items.COPPER_CABLE,
+            new ItemStack(Material.REDSTONE), Items.REFINED_IRON, new ItemStack(Material.REDSTONE),
+            Items.COPPER_CABLE, Items.COPPER_CABLE, Items.COPPER_CABLE
+        );
+
+        registerItem(Items.ADVANCED_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
+            new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE),
+            new ItemStack(Material.GLOWSTONE_DUST), Items.ELECTRONIC_CIRCUIT, new ItemStack(Material.GLOWSTONE_DUST),
+            new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE)
+        );
+
+        registerItem(Items.COAL_DUST, RecipeType.ORE_CRUSHER, new ItemStack(Material.COAL));
+        registerItem(Items.RAW_CARBON_FIBRE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.COAL_DUST, Items.COAL_DUST, null,
+            Items.COAL_DUST, Items.COAL_DUST, null
+        );
+
+        registerItem(Items.RAW_CARBON_MESH, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.RAW_CARBON_FIBRE, Items.RAW_CARBON_FIBRE, null
+        );
+
+        registerItem(Items.CARBON_PLATE, RecipeType.COMPRESSOR, Items.RAW_CARBON_MESH);
+        registerItem(Items.MIXED_METAL_INGOT, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
+            SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT,
+            SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT
+        );
+
+        registerItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
+        registerItem(Items.ADVANCED_MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE,
+            null, Items.ADVANCED_ALLOY, null,
+            Items.CARBON_PLATE, Items.MACHINE_BLOCK, Items.CARBON_PLATE,
+            null, Items.CARBON_PLATE, null
+        );
+
+        registerItem(Items.ENERGY_CRYSTAl, RecipeType.ENHANCED_CRAFTING_TABLE,
+            new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE),
+            new ItemStack(Material.REDSTONE), new ItemStack(Material.DIAMOND), new ItemStack(Material.REDSTONE),
+            new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE)
+        );
+
+        registerItem(Items.LAPOTRON_CRYSTAL, RecipeType.ENHANCED_CRAFTING_TABLE,
+            new ItemStack(Material.LAPIS_LAZULI), Items.ELECTRONIC_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI),
+            new ItemStack(Material.LAPIS_LAZULI), Items.ENERGY_CRYSTAl, new ItemStack(Material.LAPIS_LAZULI),
+            new ItemStack(Material.LAPIS_LAZULI), Items.ELECTRONIC_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI)
+        );
+
+        registerItem(Items.REINFORCED_STONE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            new ItemStack(Material.STONE), new ItemStack(Material.STONE), new ItemStack(Material.STONE),
+            new ItemStack(Material.STONE), Items.ADVANCED_ALLOY, new ItemStack(Material.STONE),
+            new ItemStack(Material.STONE), new ItemStack(Material.STONE), new ItemStack(Material.STONE)
+        );
+
+        registerItem(Items.REINFORCED_DOOR, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.REINFORCED_STONE, Items.REINFORCED_STONE, null,
+            Items.REINFORCED_STONE, Items.REINFORCED_STONE, null,
+            Items.REINFORCED_STONE, Items.REINFORCED_STONE, null
+        );
+
+        registerItem(Items.REINFORCED_GLASS, RecipeType.ENHANCED_CRAFTING_TABLE,
+            new ItemStack(Material.GLASS), new ItemStack(Material.GLASS), new ItemStack(Material.GLASS),
+            Items.ADVANCED_ALLOY, new ItemStack(Material.GLASS), Items.ADVANCED_ALLOY,
+            new ItemStack(Material.GLASS), new ItemStack(Material.GLASS), new ItemStack(Material.GLASS)
+        );
 
         // Weapon
         new NanoBlade().register(this);
@@ -81,6 +154,12 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             SlimefunItems.BRONZE_INGOT, null, SlimefunItems.BRONZE_INGOT,
             null, SlimefunItems.BRONZE_INGOT, null,
             null, SlimefunItems.BRONZE_INGOT, null
+        );
+
+        registerItem(Items.TREETAP, RecipeType.ENHANCED_CRAFTING_TABLE,
+            null, new ItemStack(Material.OAK_PLANKS), null,
+            new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.OAK_PLANKS),
+            new ItemStack(Material.OAK_PLANKS), null, null
         );
 
         // Armor
