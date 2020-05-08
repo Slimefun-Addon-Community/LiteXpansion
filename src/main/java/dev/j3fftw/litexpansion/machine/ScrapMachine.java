@@ -6,7 +6,6 @@ import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -62,9 +61,7 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
 
             blockMenuPreset.addItem(INPUT_SLOT, null, (player, i, itemStack, clickAction) -> true);
-            blockMenuPreset.addItem(OUTPUT_SLOT, null, (player, i, cursor, clickAction) ->
-                cursor != null && SlimefunUtils.isItemSimilar(cursor, Items.SCRAP, true)
-            );
+            Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
 
             blockMenuPreset.addItem(PROGRESS_SLOT, new CustomItem(Material.DEAD_BUSH, "&7Progress"));
         });
