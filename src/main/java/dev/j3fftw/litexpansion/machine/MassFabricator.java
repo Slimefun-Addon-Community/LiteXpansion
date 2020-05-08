@@ -86,8 +86,6 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
         @Nullable final BlockMenu inv = BlockStorage.getInventory(b);
         if (inv == null) return;
 
-        if (!takePower(b)) return;
-
         // yes this is ugly shush
         @Nullable final ItemStack input = inv.getItemInSlot(INPUT_SLOTS[0]);
         @Nullable final ItemStack input2 = inv.getItemInSlot(INPUT_SLOTS[1]);
@@ -99,6 +97,8 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
         if (!SlimefunUtils.isItemSimilar(input, Items.SCRAP, true)
             && !SlimefunUtils.isItemSimilar(input2, Items.SCRAP, true)) return;
+
+        if (!takePower(b)) return;
 
         // Process first tick - remove an input and put it in map.
         if (currentProgress != PROGRESS_AMOUNT) {
