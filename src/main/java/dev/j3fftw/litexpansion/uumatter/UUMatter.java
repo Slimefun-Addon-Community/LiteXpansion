@@ -1,19 +1,26 @@
 package dev.j3fftw.litexpansion.uumatter;
 
 import dev.j3fftw.litexpansion.Items;
+import dev.j3fftw.litexpansion.LiteXpansion;
+import dev.j3fftw.litexpansion.utils.Utils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import org.bukkit.Bukkit;
+import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 public final class UUMatter {
 
@@ -28,217 +35,82 @@ public final class UUMatter {
     public void register() {
         if (registered) return;
 
-        registerUuMatterRecipes();
+        final File uuMatterFile = new File(LiteXpansion.getInstance().getDataFolder(), "uumatter.yml");
+        if (!uuMatterFile.exists()) {
+            try {
+                Files.copy(this.getClass().getResourceAsStream("/uumatter.yml"), uuMatterFile.toPath());
+            } catch (IOException e) {
+                LiteXpansion.getInstance().getLogger().log(Level.SEVERE, "Failed to copy default uumatter.yml file", e);
+            }
+        }
+
+        Config config = new Config(LiteXpansion.getInstance(), "uumatter.yml");
+
+        for (String key : config.getKeys("recipes")) {
+            final int idx = key.indexOf(':');
+            final String id = key.toUpperCase().replace(' ', '_').substring(0, idx == -1 ? key.length() : idx);
+            int amount = 1;
+
+            if (idx == -1)
+                amount = Utils.getInt(key.substring(idx + 1), 1);
+
+            final ItemStack output = getOutputItem(id, amount);
+            if (output == null) continue;
+
+            final ItemStack[] recipe = new ItemStack[9];
+            parseRecipe(config, key, recipe);
+
+            this.recipes.put(output, recipe);
+        }
+        LiteXpansion.getInstance().getLogger().log(Level.INFO, "Loaded {0} UU-Matter recipes", new Object[] {
+            this.recipes.size()
+        });
+
         UuMatterCategory.INSTANCE.register();
 
         registered = true;
     }
 
-    private void registerUuMatterRecipes() {
-        addUuMatterRecipe(new ItemStack(Material.COAL, 20), new ItemStack[] {
-            null, null, Items.UU_MATTER,
-            Items.UU_MATTER, null, null,
-            null, null, Items.UU_MATTER
-        });
+    @Nullable
+    private ItemStack getOutputItem(String id, int amount) {
+        ItemStack output;
 
-        addUuMatterRecipe((SlimefunItemStack) SlimefunItems.COPPER_DUST, 5, new ItemStack[] {
-            null, null, Items.UU_MATTER,
-            Items.UU_MATTER, null, Items.UU_MATTER
-        });
+        final Material mat = Material.getMaterial(id);
+        if (mat != null) {
+            output = new ItemStack(mat, amount);
+        } else {
+            SlimefunItem item = SlimefunItem.getByID(id);
+            if (item == null) {
+                LiteXpansion.getInstance().getLogger().log(Level.WARNING,
+                    "Unable to create recipe, unknown output item: {0}", new Object[] {id});
+                return null;
+            }
+            output = item.getItem().clone();
+            output.setAmount(amount);
+        }
+        return output;
+    }
 
-        addUuMatterRecipe(new ItemStack(Material.DIAMOND), new ItemStack[] {
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
-        });
+    private void parseRecipe(@Nonnull Config config, @Nonnull String key, @Nonnull ItemStack[] recipe) {
+        int i = 0;
+        final List<String> recipeList = config.getStringList("recipes." + key);
+        for (String line : recipeList.subList(0, Math.min(recipeList.size(), 3))) {
+            if (line.length() < 3) {
+                LiteXpansion.getInstance().getLogger().log(Level.WARNING,
+                    "Failed to load recipe for {0}, recipe length expected is 3 but got {1}",
+                    new Object[] {key, line.length()}
+                );
+                return;
+            }
 
-        addUuMatterRecipe(new ItemStack(Material.GOLD_ORE, 2), new ItemStack[] {
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
-            null, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.IRON_ORE, 2), new ItemStack[] {
-            Items.UU_MATTER, null, Items.UU_MATTER,
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, null, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.LAPIS_LAZULI, 9), new ItemStack[] {
-            null, Items.UU_MATTER, null,
-            null, Items.UU_MATTER, null,
-            null, Items.UU_MATTER, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.REDSTONE, 24), new ItemStack[] {
-            null, null, null,
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe((SlimefunItemStack) SlimefunItems.TIN_DUST, 5, new ItemStack[] {
-            null, null, null,
-            Items.UU_MATTER, null, Items.UU_MATTER,
-            null, null, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.CHISELED_STONE_BRICKS, 48), new ItemStack[] {
-            Items.UU_MATTER, Items.UU_MATTER, null,
-            Items.UU_MATTER, Items.UU_MATTER, null,
-            Items.UU_MATTER, null, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.CLAY_BALL, 48), new ItemStack[] {
-            Items.UU_MATTER, Items.UU_MATTER, null,
-            Items.UU_MATTER, null, null,
-            Items.UU_MATTER, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.GLASS, 32), new ItemStack[] {
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, null, Items.UU_MATTER,
-            null, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.GLOWSTONE, 8), new ItemStack[] {
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, null, Items.UU_MATTER,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.GRASS_BLOCK, 16), new ItemStack[] {
-            null, null, null,
-            Items.UU_MATTER, null, null,
-            Items.UU_MATTER, null, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.MOSSY_COBBLESTONE, 16), new ItemStack[] {
-            null, null, null,
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, null, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.MYCELIUM, 24), new ItemStack[] {
-            null, null, null,
-            Items.UU_MATTER, null, Items.UU_MATTER,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.NETHERRACK, 16), new ItemStack[] {
-            null, null, Items.UU_MATTER,
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, null, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.OBSIDIAN, 12), new ItemStack[] {
-            Items.UU_MATTER, null, Items.UU_MATTER,
-            Items.UU_MATTER, null, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.SANDSTONE, 16), new ItemStack[] {
-            null, null, null,
-            null, null, Items.UU_MATTER,
-            null, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.SNOW_BLOCK, 4), new ItemStack[] {
-            Items.UU_MATTER, null, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.STONE, 16), new ItemStack[] {
-            null, null, null,
-            null, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.OAK_LOG, 8), new ItemStack[] {
-            null, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.WHITE_WOOL, 12), new ItemStack[] {
-            Items.UU_MATTER, null, Items.UU_MATTER,
-            null, null, null,
-            null, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.BONE, 32), new ItemStack[] {
-            Items.UU_MATTER, null, null,
-            Items.UU_MATTER, Items.UU_MATTER, null,
-            Items.UU_MATTER, null, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.CACTUS, 48), new ItemStack[] {
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
-            Items.UU_MATTER, null, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.COCOA_BEANS, 32), new ItemStack[] {
-            Items.UU_MATTER, Items.UU_MATTER, null,
-            null, null, Items.UU_MATTER,
-            Items.UU_MATTER, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.FEATHER, 32), new ItemStack[] {
-            null, Items.UU_MATTER, null,
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, null, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.FLINT, 32), new ItemStack[] {
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, Items.UU_MATTER, null,
-            Items.UU_MATTER, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.GUNPOWDER, 15), new ItemStack[] {
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
-            Items.UU_MATTER, null, null,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.INK_SAC, 48), new ItemStack[] {
-            null, Items.UU_MATTER, Items.UU_MATTER,
-            null, Items.UU_MATTER, Items.UU_MATTER,
-            null, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.LAVA_BUCKET), new ItemStack[] {
-            null, Items.UU_MATTER, null,
-            null, Items.UU_MATTER, null,
-            null, Items.UU_MATTER, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.SNOWBALL, 16), new ItemStack[] {
-            null, null, null,
-            null, null, null,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
-        });
-
-
-        addUuMatterRecipe(new ItemStack(Material.SUGAR_CANE, 48), new ItemStack[] {
-            Items.UU_MATTER, null, Items.UU_MATTER,
-            Items.UU_MATTER, null, Items.UU_MATTER,
-            Items.UU_MATTER, null, Items.UU_MATTER
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.VINE, 24), new ItemStack[] {
-            Items.UU_MATTER, null, null,
-            Items.UU_MATTER, null, null,
-            Items.UU_MATTER, null, null
-        });
-
-        addUuMatterRecipe(new ItemStack(Material.WATER_BUCKET), new ItemStack[] {
-            null, null, null,
-            null, Items.UU_MATTER, null,
-            null, Items.UU_MATTER, null
-        });
-
-        if (Bukkit.getPluginManager().getPlugin("SlimyTreeTaps") != null)
-            addUuMatterRecipe((SlimefunItemStack) SlimefunItem.getByID("STICKY_RESIN").getItem(), 21, new ItemStack[] {
-                Items.UU_MATTER, null, Items.UU_MATTER,
-                null, null, null,
-                Items.UU_MATTER, null, Items.UU_MATTER
-            });
+            final char[] chars = new char[3];
+            System.arraycopy(line.toCharArray(), 0, chars, 0, 3);
+            for (char c : chars)
+                if (c == 'x')
+                    recipe[i++] = Items.UU_MATTER.clone();
+                else
+                    recipe[i++] = null;
+        }
     }
 
     public void addUuMatterRecipe(@Nonnull SlimefunItemStack item, int amount, @Nonnull ItemStack[] recipe) {
