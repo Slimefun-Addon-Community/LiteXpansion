@@ -47,7 +47,6 @@ public final class UUMatter {
         Config config = new Config(LiteXpansion.getInstance(), "uumatter.yml");
 
         for (String key : config.getKeys("recipes")) {
-            System.out.println("-------------");
             final int idx = key.indexOf(':');
             final String id = key.toUpperCase().replace(' ', '_').substring(0, idx == -1 ? key.length() : idx);
             int amount = 1;
