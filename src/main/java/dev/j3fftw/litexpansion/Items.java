@@ -56,6 +56,12 @@ public final class Items {
         "&6Wrench"
     );
 
+    public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
+        "TREETAP",
+        Material.WOODEN_HOE,
+        "&7Treetap"
+    );
+
     // Machines
     public static final SlimefunItemStack SCRAP_MACHINE = new SlimefunItemStack(
         "SCRAP_MACHINE",
@@ -148,6 +154,110 @@ public final class Items {
         "MACHINE_BLOCK",
         Material.IRON_BLOCK,
         "&7Machine Block"
+    );
+
+    public static final SlimefunItemStack UNINSULATED_COPPER_CABLE = new SlimefunItemStack(
+        "UNINSULATED_COPPER_CABLE",
+        Material.STRING,
+        "&7Uninsulated Copper Cable"
+    );
+
+    public static final SlimefunItemStack COPPER_CABLE = new SlimefunItemStack(
+        "COPPER_CABLE",
+        Material.STRING,
+        "&7Copper Cable"
+    );
+
+    public static final SlimefunItemStack RUBBER = new SlimefunItemStack(
+        "RUBBER",
+        Material.INK_SAC,
+        "&7Rubber"
+    );
+
+    public static final SlimefunItemStack ELECTRONIC_CIRCUIT = new SlimefunItemStack(
+        "ELECTRONIC_CIRCUIT",
+        Material.COBWEB,
+        "&7Electronic Circuit"
+    );
+
+    //todo make it enchanted
+    public static final SlimefunItemStack ADVANCED_CIRCUIT = new SlimefunItemStack(
+        "ADVANCED_CIRCUIT",
+        Material.COBWEB,
+        "&7Advanced Circuit"
+    );
+
+    public static final SlimefunItemStack COAL_DUST = new SlimefunItemStack(
+        "COAL_DUST",
+        Material.BLACK_DYE,
+        "&7Coal Dust"
+    );
+
+    public static final SlimefunItemStack RAW_CARBON_FIBRE = new SlimefunItemStack(
+        "RAW_CARBON_FIBRE",
+        Material.BLACK_DYE,
+        "&7Raw Carbon Fibre"
+    );
+
+    public static final SlimefunItemStack RAW_CARBON_MESH = new SlimefunItemStack(
+        "RAW_CARBON_MESH",
+        Material.BLACK_DYE,
+        "&7Raw Carbon Mesh"
+    );
+
+    public static final SlimefunItemStack CARBON_PLATE = new SlimefunItemStack(
+        "CARBON_PLATE",
+        Material.BLACK_CARPET,
+        "&7Carbon Plate"
+    );
+
+    public static final SlimefunItemStack MIXED_METAL_INGOT = new SlimefunItemStack(
+        "MIXED_METAL_INGOT",
+        Material.GOLD_INGOT,
+        "&7Mixed Metal Ingot"
+    );
+
+    public static final SlimefunItemStack ADVANCED_ALLOY = new SlimefunItemStack(
+        "ADVANCED_ALLOY",
+        Material.GRAY_STAINED_GLASS_PANE,
+        "&7Advanced Alloy"
+    );
+
+    public static final SlimefunItemStack ADVANCED_MACHINE_BLOCK = new SlimefunItemStack(
+        "ADVANCED_MACHINE_BLOCK",
+        Material.DIAMOND_BLOCK,
+        "&7Advanced Machine Block"
+    );
+
+    public static final SlimefunItemStack ENERGY_CRYSTAl = new SlimefunItemStack(
+        "ENERGY_CRYSTAL",
+        Material.DIAMOND,
+        "&7Energy Crystal"
+    );
+
+    //todo make it enchanted
+    public static final SlimefunItemStack LAPOTRON_CRYSTAL = new SlimefunItemStack(
+        "LAPOTRON_CRYSTAL",
+        Material.DIAMOND,
+        "&7Lapotron Crystal"
+    );
+
+    public static final SlimefunItemStack REINFORCED_STONE =  new SlimefunItemStack(
+        "REINFORCED_STONE",
+        Material.STONE,
+        "&7Reinforced Stone"
+    );
+
+    public static final SlimefunItemStack REINFORCED_DOOR = new SlimefunItemStack(
+        "REINFORCED_DOOR",
+        Material.IRON_DOOR,
+        "&7Reinforced Door"
+    );
+
+    public static final SlimefunItemStack REINFORCED_GLASS = new SlimefunItemStack(
+        "REINFORCED_GLASS",
+        Material.GRAY_STAINED_GLASS,
+        "&7Reinforced Glass"
     );
 
     private Items() {}
