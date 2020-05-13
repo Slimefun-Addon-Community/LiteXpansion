@@ -9,7 +9,6 @@ import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
@@ -18,7 +17,6 @@ import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.cscorelib2.blocks.BlockPosition;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
@@ -50,9 +48,9 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     public MassFabricator() {
         super(Items.LITEXPANSION, Items.MASS_FABRICATOR_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-            ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD,
-            REINFORCED_PLATE, Items.MACHINE_BLOCK, REINFORCED_PLATE,
-            ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD
+            REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE,
+            ADVANCED_CIRCUIT_BOARD, Items.MACHINE_BLOCK, ADVANCED_CIRCUIT_BOARD,
+            REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE
         });
         setupInv();
     }
@@ -65,9 +63,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
             for (int slot : INPUT_SLOTS)
                 blockMenuPreset.addItem(slot, null, (player, i, itemStack, clickAction) -> true);
 
-            blockMenuPreset.addItem(OUTPUT_SLOT, null, (player, i, cursor, clickAction) ->
-                cursor == null || cursor.getType() == Material.AIR
-            );
+            Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
 
             blockMenuPreset.addItem(PROGRESS_SLOT, progressItem);
         });
@@ -102,8 +98,10 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
         if (!SlimefunUtils.isItemSimilar(input, Items.SCRAP, true)
             && !SlimefunUtils.isItemSimilar(input2, Items.SCRAP, true)) return;
 
+        if (!takePower(b)) return;
+
         // Process first tick - remove an input and put it in map.
-        if (currentProgress != PROGRESS_AMOUNT && takePower(b)) {
+        if (currentProgress != PROGRESS_AMOUNT) {
             if (input != null)
                 inv.consumeItem(INPUT_SLOTS[0]);
             else

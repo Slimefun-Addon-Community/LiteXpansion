@@ -62,9 +62,7 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
 
             blockMenuPreset.addItem(INPUT_SLOT, null, (player, i, itemStack, clickAction) -> true);
-            blockMenuPreset.addItem(OUTPUT_SLOT, null, (player, i, cursor, clickAction) ->
-                cursor != null && SlimefunUtils.isItemSimilar(cursor, Items.SCRAP, true)
-            );
+            Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
 
             blockMenuPreset.addItem(PROGRESS_SLOT, new CustomItem(Material.DEAD_BUSH, "&7Progress"));
         });
