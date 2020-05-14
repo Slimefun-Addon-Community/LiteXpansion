@@ -22,6 +22,7 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -59,16 +60,22 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
                 @Nullable final BlockMenu inv = BlockStorage.getInventory(location);
                 if (inv == null) return 0;
 
-                int rate = getGeneratingAmount(location.getWorld());
+                final boolean canGenerate = canGeneratePower(inv.getBlock());
+
+                final int rate = canGenerate ? getGeneratingAmount(location.getWorld()) : 0;
 
                 inv.replaceExistingItem(PROGRESS_SLOT,
-                    new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
+                    canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
                         "", "&7Generating at &6" + rate + " J",
                         "", "&7Stored: &6" + ChargableBlock.getCharge(location) + " J"
                     )
+                        : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
+                        "", "&7Not generating power, block is obstructed.",
+                        "", "&7Stored: &6" + ChargableBlock.getCharge(location) + " J")
                 );
 
-                ChargableBlock.addCharge(location, rate);
+                if (canGenerate && rate > 0)
+                    ChargableBlock.addCharge(location, rate);
 
                 return rate;
             }
@@ -85,6 +92,20 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
             return this.type.getNightGenerationRate();
         else
             return this.type.getDayGenerationRate();
+    }
+
+    private boolean canGeneratePower(@Nonnull Block block) {
+        final int highestY = block.getWorld().getHighestBlockYAt(block.getLocation());
+        // Check if it's the highest block (so no obstruction)
+        if (block.getY() == highestY) return true;
+
+        // This should go from the blocks Y to the highest Y and check for a valid obstruction
+        // (Not glass, armor stand, etc)
+        for (int i = block.getY() + 1; i < highestY; i++) {
+            if (block.getWorld().getBlockAt(block.getX(), i, block.getZ()).getType().isSolid())
+                return false;
+        }
+        return true;
     }
 
     @Override
