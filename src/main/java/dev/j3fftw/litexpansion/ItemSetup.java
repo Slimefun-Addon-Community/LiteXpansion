@@ -1,12 +1,14 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
+import dev.j3fftw.litexpansion.machine.MassFabricator;
+import dev.j3fftw.litexpansion.machine.ScrapMachine;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.NotPlaceable;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -28,6 +30,7 @@ final class ItemSetup {
         initialised = true;
 
         registerMiscItems();
+        registerEndgameItems();
         registerCarbonStuff();
         registerSolarPanels();
     }
@@ -56,6 +59,42 @@ final class ItemSetup {
             Items.CARBON_PLATE, Items.MACHINE_BLOCK, Items.CARBON_PLATE,
             null, Items.CARBON_PLATE, null
         );
+
+        // Copper cable
+        registerNonPlacableItem(Items.UNINSULATED_COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT
+        );
+
+        registerNonPlacableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.RUBBER, Items.RUBBER, Items.RUBBER,
+            Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE,
+            Items.RUBBER, Items.RUBBER, Items.RUBBER
+        );
+
+        // Circuits
+        registerNonPlacableItem(Items.ELECTRONIC_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.COPPER_CABLE, Items.COPPER_CABLE, Items.COPPER_CABLE,
+            new ItemStack(Material.REDSTONE), Items.REFINED_IRON, new ItemStack(Material.REDSTONE),
+            Items.COPPER_CABLE, Items.COPPER_CABLE, Items.COPPER_CABLE
+        );
+
+        registerNonPlacableItem(Items.ADVANCED_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
+            new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE),
+            new ItemStack(Material.GLOWSTONE_DUST), Items.ELECTRONIC_CIRCUIT, new ItemStack(Material.GLOWSTONE_DUST),
+            new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE)
+        );
+    }
+
+    private void registerEndgameItems() {
+        registerNonPlacableItem(Items.SCRAP, ScrapMachine.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE, "&7Any Item!"));
+        registerNonPlacableItem(Items.UU_MATTER, MassFabricator.RECIPE_TYPE, Items.SCRAP);
+        registerNonPlacableItem(Items.IRIDIUM, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
+            null, Items.UU_MATTER, null,
+            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
+        );
+        registerNonPlacableItem(Items.REFINED_IRON, RecipeType.SMELTERY, new ItemStack(Material.IRON_INGOT));
+        registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
     }
 
     private void registerCarbonStuff() {

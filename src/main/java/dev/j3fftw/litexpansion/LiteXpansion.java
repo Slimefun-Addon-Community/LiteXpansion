@@ -56,36 +56,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new FoodSynthesizer().register(this);
         new MagThor().register(this);
         new Thorium().register(this);
-        registerItem(Items.SCRAP, ScrapMachine.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE, "&7Any Item!"));
-        registerItem(Items.UU_MATTER, MassFabricator.RECIPE_TYPE, Items.SCRAP);
-        registerItem(Items.IRIDIUM, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
-            null, Items.UU_MATTER, null,
-            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
-        );
-        registerItem(Items.REFINED_IRON, RecipeType.SMELTERY, new ItemStack(Material.IRON_INGOT));
-        registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
-        registerItem(Items.UNINSULATED_COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT
-        );
-
-        registerItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.RUBBER, Items.RUBBER, Items.RUBBER,
-            Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE,
-            Items.RUBBER, Items.RUBBER, Items.RUBBER
-        );
-
-        registerItem(Items.ELECTRONIC_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.COPPER_CABLE, Items.COPPER_CABLE, Items.COPPER_CABLE,
-            new ItemStack(Material.REDSTONE), Items.REFINED_IRON, new ItemStack(Material.REDSTONE),
-            Items.COPPER_CABLE, Items.COPPER_CABLE, Items.COPPER_CABLE
-        );
-
-        registerItem(Items.ADVANCED_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
-            new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE),
-            new ItemStack(Material.GLOWSTONE_DUST), Items.ELECTRONIC_CIRCUIT, new ItemStack(Material.GLOWSTONE_DUST),
-            new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE)
-        );
 
         ItemSetup.INSTANCE.init();
 
@@ -119,6 +89,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new NanoBlade().register(this);
 
         // Tools
+        /*
         registerItem(Items.WRENCH, RecipeType.ENHANCED_CRAFTING_TABLE,
             SlimefunItems.BRONZE_INGOT, null, SlimefunItems.BRONZE_INGOT,
             null, SlimefunItems.BRONZE_INGOT, null,
@@ -130,6 +101,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.OAK_PLANKS),
             new ItemStack(Material.OAK_PLANKS), null, null
         );
+        */
 
         // Armor
         new ElectricChestplate().register(this);

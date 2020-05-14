@@ -235,7 +235,7 @@ public final class Items {
 
     public static final SlimefunItemStack ADVANCED_ALLOY = new SlimefunItemStack(
         "ADVANCED_ALLOY",
-        Material.GRAY_STAINED_GLASS_PANE,
+        Material.PAPER,
         "&7Advanced Alloy"
     );
 
