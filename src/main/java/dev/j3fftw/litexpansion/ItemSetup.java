@@ -37,7 +37,14 @@ final class ItemSetup {
 
     private void registerMiscItems() {
         // Advanced Alloy
-        registerNonPlacableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, SlimefunItems.REINFORCED_ALLOY_INGOT);
+        registerNonPlacableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
+
+        // Mixed Metal Ingot
+        registerItem(Items.MIXED_METAL_INGOT, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
+            SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT,
+            SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT
+        );
 
         // Reinforced glass
         registerNonPlacableItem(Items.REINFORCED_GLASS, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -86,7 +93,8 @@ final class ItemSetup {
     }
 
     private void registerEndgameItems() {
-        registerNonPlacableItem(Items.SCRAP, ScrapMachine.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE, "&7Any Item!"));
+        registerNonPlacableItem(Items.SCRAP, ScrapMachine.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE, "&7Any " +
+            "Item!"));
         registerNonPlacableItem(Items.UU_MATTER, MassFabricator.RECIPE_TYPE, Items.SCRAP);
         registerNonPlacableItem(Items.IRIDIUM, RecipeType.ENHANCED_CRAFTING_TABLE,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
