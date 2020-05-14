@@ -64,11 +64,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         );
         registerItem(Items.REFINED_IRON, RecipeType.SMELTERY, new ItemStack(Material.IRON_INGOT));
-        registerItem(Items.MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
-            Items.REFINED_IRON, null, Items.REFINED_IRON,
-            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON
-        );
         registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
         registerItem(Items.UNINSULATED_COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
             SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT
@@ -92,30 +87,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE)
         );
 
-        registerItem(Items.COAL_DUST, RecipeType.ORE_CRUSHER, new ItemStack(Material.COAL));
-        registerItem(Items.RAW_CARBON_FIBRE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.COAL_DUST, Items.COAL_DUST, null,
-            Items.COAL_DUST, Items.COAL_DUST, null
-        );
+        ItemSetup.INSTANCE.init();
 
-        registerItem(Items.RAW_CARBON_MESH, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.RAW_CARBON_FIBRE, Items.RAW_CARBON_FIBRE, null
-        );
-
-        registerItem(Items.CARBON_PLATE, RecipeType.COMPRESSOR, Items.RAW_CARBON_MESH);
-        registerItem(Items.MIXED_METAL_INGOT, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
-            SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT,
-            SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT
-        );
-
-        registerItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
-        registerItem(Items.ADVANCED_MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE,
-            null, Items.ADVANCED_ALLOY, null,
-            Items.CARBON_PLATE, Items.MACHINE_BLOCK, Items.CARBON_PLATE,
-            null, Items.CARBON_PLATE, null
-        );
-
+        /*
         registerItem(Items.ENERGY_CRYSTAl, RecipeType.ENHANCED_CRAFTING_TABLE,
             new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE),
             new ItemStack(Material.REDSTONE), new ItemStack(Material.DIAMOND), new ItemStack(Material.REDSTONE),
@@ -139,12 +113,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             Items.REINFORCED_STONE, Items.REINFORCED_STONE, null,
             Items.REINFORCED_STONE, Items.REINFORCED_STONE, null
         );
-
-        registerItem(Items.REINFORCED_GLASS, RecipeType.ENHANCED_CRAFTING_TABLE,
-            new ItemStack(Material.GLASS), new ItemStack(Material.GLASS), new ItemStack(Material.GLASS),
-            Items.ADVANCED_ALLOY, new ItemStack(Material.GLASS), Items.ADVANCED_ALLOY,
-            new ItemStack(Material.GLASS), new ItemStack(Material.GLASS), new ItemStack(Material.GLASS)
-        );
+        */
 
         // Weapon
         new NanoBlade().register(this);
