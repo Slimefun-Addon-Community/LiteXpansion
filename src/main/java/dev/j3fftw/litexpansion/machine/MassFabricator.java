@@ -87,16 +87,20 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
         if (inv == null) return;
 
         // yes this is ugly shush
-        @Nullable final ItemStack input = inv.getItemInSlot(INPUT_SLOTS[0]);
-        @Nullable final ItemStack input2 = inv.getItemInSlot(INPUT_SLOTS[1]);
+        @Nullable ItemStack input = inv.getItemInSlot(INPUT_SLOTS[0]);
+        @Nullable ItemStack input2 = inv.getItemInSlot(INPUT_SLOTS[1]);
         @Nullable final ItemStack output = inv.getItemInSlot(OUTPUT_SLOT);
         if (output != null && output.getAmount() == output.getMaxStackSize()) return;
 
+        if (!SlimefunUtils.isItemSimilar(input, Items.SCRAP, true))
+            input = null;
+        if (!SlimefunUtils.isItemSimilar(input2, Items.SCRAP, true))
+            input2 = null;
+
+        if (input == null && input2 == null) return;
+
         final BlockPosition pos = new BlockPosition(b.getWorld(), b.getX(), b.getY(), b.getZ());
         int currentProgress = progress.getOrDefault(pos, 0);
-
-        if (!SlimefunUtils.isItemSimilar(input, Items.SCRAP, true)
-            && !SlimefunUtils.isItemSimilar(input2, Items.SCRAP, true)) return;
 
         if (!takePower(b)) return;
 
