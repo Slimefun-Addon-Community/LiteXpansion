@@ -11,22 +11,14 @@ import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Research;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.lang.reflect.Field;
 
@@ -131,47 +123,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     @Override
     public void onDisable() {
         instance = null;
-    }
-
-    private void registerItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
-                              @Nonnull ItemStack... items) {
-        ItemStack[] recipe;
-        if (items.length == 1) {
-            recipe = new ItemStack[] {
-                null, null, null,
-                null, items[0], null,
-                null, null, null
-            };
-            new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(this);
-
-            // make shapeless
-            for (int i = 0; i < 9; i++) {
-                if (i == 4) continue;
-                final ItemStack[] recipe2 = new ItemStack[9];
-                recipe2[i] = items[0];
-                type.register(recipe2, result);
-            }
-
-            return;
-        }
-
-        if (items.length < 9) {
-            recipe = new ItemStack[9];
-            System.arraycopy(items, 0, recipe, 0, items.length);
-        } else
-            recipe = items;
-
-        new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(this);
-    }
-
-    // Haha shapeless recipe bitches!!!! <3 <3 <3
-    // DEAL WITH IT KIDDOS HAHAHAHHAHAHAHAHAH
-    private void registerRecipe(@Nonnull SlimefunItemStack result, @Nonnull SlimefunItemStack item) {
-        for (int i = 0; i < 9; i++) {
-            final ItemStack[] recipe = new ItemStack[9];
-            recipe[i] = item;
-            RecipeType.ENHANCED_CRAFTING_TABLE.register(recipe, result);
-        }
     }
 
     private void setupResearches() {

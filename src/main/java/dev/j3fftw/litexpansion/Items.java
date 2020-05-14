@@ -258,7 +258,7 @@ public final class Items {
         "&7Lapotron Crystal"
     );
 
-    public static final SlimefunItemStack REINFORCED_STONE =  new SlimefunItemStack(
+    public static final SlimefunItemStack REINFORCED_STONE = new SlimefunItemStack(
         "REINFORCED_STONE",
         Material.STONE,
         "&7Reinforced Stone"

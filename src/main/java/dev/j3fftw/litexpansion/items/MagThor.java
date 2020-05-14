@@ -1,13 +1,12 @@
 package dev.j3fftw.litexpansion.items;
 
 import dev.j3fftw.litexpansion.Items;
+import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.NotPlaceable;
 import org.bukkit.inventory.ItemStack;
 
-public class MagThor extends SlimefunItem implements NotPlaceable {
+public class MagThor extends UnplaceableBlock {
 
     public MagThor() {
         super(Items.LITEXPANSION, Items.MAG_THOR, RecipeType.SMELTERY, new ItemStack[] {
@@ -17,5 +16,4 @@ public class MagThor extends SlimefunItem implements NotPlaceable {
             }
         );
     }
-
 }
