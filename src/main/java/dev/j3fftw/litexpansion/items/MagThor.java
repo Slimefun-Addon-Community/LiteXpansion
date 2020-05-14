@@ -4,9 +4,10 @@ import dev.j3fftw.litexpansion.Items;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.NotPlaceable;
 import org.bukkit.inventory.ItemStack;
 
-public class MagThor extends SlimefunItem {
+public class MagThor extends SlimefunItem implements NotPlaceable {
 
     public MagThor() {
         super(Items.LITEXPANSION, Items.MAG_THOR, RecipeType.SMELTERY, new ItemStack[] {

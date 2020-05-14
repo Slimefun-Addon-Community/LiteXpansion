@@ -75,6 +75,25 @@ public final class Items {
         "&5Mass Fabricator"
     );
 
+    //// Solar panels
+    public static final SlimefunItemStack ADVANCED_SOLAR_PANEL = new SlimefunItemStack(
+        "ADVANCED_SOLAR_PANEL",
+        Material.BLACK_GLAZED_TERRACOTTA,
+        "&7Advanced Solar Panel"
+    );
+
+    public static final SlimefunItemStack HYBRID_SOLAR_PANEL = new SlimefunItemStack(
+        "HYBRID_SOLAR_PANEL",
+        Material.GRAY_GLAZED_TERRACOTTA,
+        "&7&lAdvanced Solar Panel"
+    );
+
+    public static final SlimefunItemStack ULTIMATE_SOLAR_PANEL = new SlimefunItemStack(
+        "ULTIMATE_SOLAR_PANEL",
+        Material.PURPLE_GLAZED_TERRACOTTA,
+        "&5&lUltimate Solar Panel"
+    );
+
     // Items
 
     public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
@@ -187,6 +206,8 @@ public final class Items {
         "&7Advanced Circuit"
     );
 
+    ////////////////
+    // CARBON CRAP
     public static final SlimefunItemStack COAL_DUST = new SlimefunItemStack(
         "COAL_DUST",
         Material.BLACK_DYE,
@@ -210,16 +231,11 @@ public final class Items {
         Material.BLACK_CARPET,
         "&7Carbon Plate"
     );
-
-    public static final SlimefunItemStack MIXED_METAL_INGOT = new SlimefunItemStack(
-        "MIXED_METAL_INGOT",
-        Material.GOLD_INGOT,
-        "&7Mixed Metal Ingot"
-    );
+    /////////
 
     public static final SlimefunItemStack ADVANCED_ALLOY = new SlimefunItemStack(
         "ADVANCED_ALLOY",
-        Material.GRAY_STAINED_GLASS_PANE,
+        Material.PAPER,
         "&7Advanced Alloy"
     );
 
