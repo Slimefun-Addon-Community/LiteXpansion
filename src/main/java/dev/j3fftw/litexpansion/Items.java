@@ -49,7 +49,6 @@ public final class Items {
     );
 
     // Tools
-
     public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
         "WRENCH",
         Material.GOLDEN_HOE,
@@ -60,6 +59,16 @@ public final class Items {
         "TREETAP",
         Material.WOODEN_HOE,
         "&7Treetap"
+    );
+
+    public static final SlimefunItemStack CARGO_CONFIGURATOR = new SlimefunItemStack(
+        "CARGO_CONFIGURATOR",
+        Material.COMPASS,
+        "&7Cargo Configurator",
+        "",
+        "&7> &eRight Click &7- Copy node configuration",
+        "&7> &eLeft Click  &7- Apply node configuration",
+        "&7> &eShift+Right Click &7- Clear node configuration"
     );
 
     // Machines
