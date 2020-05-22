@@ -1,12 +1,16 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.ScrapMachine;
+import io.github.thebusybiscuit.slimefun4.api.SlimefunBranch;
+import io.github.thebusybiscuit.slimefun4.core.services.UpdaterService;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
@@ -29,10 +33,15 @@ final class ItemSetup {
 
         initialised = true;
 
+        registerTools();
         registerMiscItems();
         registerEndgameItems();
         registerCarbonStuff();
         registerSolarPanels();
+    }
+
+    private void registerTools() {
+        new CargoConfigurator().register(LiteXpansion.getInstance());
     }
 
     private void registerMiscItems() {
