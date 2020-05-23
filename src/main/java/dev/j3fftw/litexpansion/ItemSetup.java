@@ -1,9 +1,13 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
+import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.items.MagThor;
+import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.ScrapMachine;
+import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunBranch;
 import io.github.thebusybiscuit.slimefun4.core.services.UpdaterService;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
@@ -34,6 +38,7 @@ final class ItemSetup {
         initialised = true;
 
         registerTools();
+        registerMachines();
         registerMiscItems();
         registerEndgameItems();
         registerCarbonStuff();
@@ -42,6 +47,13 @@ final class ItemSetup {
 
     private void registerTools() {
         new CargoConfigurator().register(LiteXpansion.getInstance());
+    }
+
+    private void registerMachines() {
+        new FoodSynthesizer().register(LiteXpansion.getInstance());
+
+        new ScrapMachine().register(LiteXpansion.getInstance());
+        new MassFabricator().register(LiteXpansion.getInstance());
     }
 
     private void registerMiscItems() {
@@ -99,6 +111,14 @@ final class ItemSetup {
             new ItemStack(Material.GLOWSTONE_DUST), Items.ELECTRONIC_CIRCUIT, new ItemStack(Material.GLOWSTONE_DUST),
             new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE)
         );
+
+        // Refined crap
+        registerNonPlaceableItem(Items.REFINED_IRON, RecipeType.SMELTERY, new ItemStack(Material.IRON_INGOT));
+        registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
+
+        // Resources
+        new MagThor().register(LiteXpansion.getInstance());
+        new Thorium().register(LiteXpansion.getInstance());
     }
 
     private void registerEndgameItems() {
@@ -116,8 +136,7 @@ final class ItemSetup {
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM
         );
 
-        registerNonPlaceableItem(Items.REFINED_IRON, RecipeType.SMELTERY, new ItemStack(Material.IRON_INGOT));
-        registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
+        new NanoBlade().register(LiteXpansion.getInstance());
     }
 
     private void registerCarbonStuff() {

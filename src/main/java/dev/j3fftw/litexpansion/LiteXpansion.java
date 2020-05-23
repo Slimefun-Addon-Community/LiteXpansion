@@ -54,11 +54,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         // Category
         Items.LITEXPANSION.register();
 
-        // Items
-        new FoodSynthesizer().register(this);
-        new MagThor().register(this);
-        new Thorium().register(this);
-
         ItemSetup.INSTANCE.init();
 
         /*
@@ -87,9 +82,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         );
         */
 
-        // Weapon
-        new NanoBlade().register(this);
-
         // Tools
         /*
         registerItem(Items.WRENCH, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -108,10 +100,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         // Armor
         new ElectricChestplate().register(this);
 
-        // Machines
-        new ScrapMachine().register(this);
-        new MassFabricator().register(this);
-
         UUMatter.INSTANCE.register();
 
         try {
@@ -127,7 +115,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         setupResearches();
         new ThoriumResource().register();
-
     }
 
     @Override
