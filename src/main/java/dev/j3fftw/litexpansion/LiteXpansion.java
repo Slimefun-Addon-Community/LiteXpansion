@@ -11,16 +11,25 @@ import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.Research;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -33,7 +42,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         if (!new File(getDataFolder(), "config.yml").exists())
             saveDefaultConfig();
 
-        new Metrics(this, 7111);
+        final Metrics metrics = new Metrics(this, 7111);
+        setupCustomMetrics(metrics);
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
@@ -136,6 +146,34 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         Slimefun.registerResearch(new Research(new NamespacedKey(this, "super_hot_fire"),
                 696971, "Super Hot Fire", 31),
             Items.NANO_BLADE);
+    }
+
+    private void setupCustomMetrics(@Nonnull Metrics metrics) {
+        metrics.addCustomChart(new Metrics.AdvancedPie("blocks_placed", () -> {
+            final Map<String, Integer> data = new HashMap<>();
+            try {
+                Class<?> blockStorage = Class.forName("me.mrCookieSlime.Slimefun.api.BlockStorage");
+
+                for (World world : Bukkit.getWorlds()) {
+                    final BlockStorage storage = BlockStorage.getStorage(world);
+                    if (storage == null) continue;
+
+                    final Field f = blockStorage.getDeclaredField("storage");
+                    f.setAccessible(true);
+                    final Map<Location, Config> blocks = (Map<Location, Config>) f.get(storage);
+
+                    for (Map.Entry<Location, Config> entry : blocks.entrySet()) {
+                        final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
+                        if (item == null || !(item.getAddon() instanceof LiteXpansion)) continue;
+
+                        data.merge(item.getID(), 1, Integer::sum);
+                    }
+                }
+            } catch (ReflectiveOperationException e) {
+                e.printStackTrace();
+            }
+            return data;
+        }));
     }
 
     public JavaPlugin getJavaPlugin() {
