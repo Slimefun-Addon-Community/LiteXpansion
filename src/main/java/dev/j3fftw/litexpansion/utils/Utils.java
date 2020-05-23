@@ -30,12 +30,4 @@ public final class Utils {
             }
         });
     }
-
-    public static int getInt(String str, int defaultVal) {
-        try {
-            return Integer.parseInt(str);
-        } catch (NumberFormatException e) {
-            return defaultVal;
-        }
-    }
 }

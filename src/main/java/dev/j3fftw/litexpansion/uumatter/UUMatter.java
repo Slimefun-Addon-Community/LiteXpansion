@@ -3,6 +3,7 @@ package dev.j3fftw.litexpansion.uumatter;
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.utils.Utils;
+import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
@@ -52,7 +53,7 @@ public final class UUMatter {
             int amount = 1;
 
             if (idx == -1)
-                amount = Utils.getInt(key.substring(idx + 1), 1);
+                amount = NumberUtils.getInt(key.substring(idx + 1), 1);
 
             final ItemStack output = getOutputItem(id, amount);
             if (output == null) continue;
