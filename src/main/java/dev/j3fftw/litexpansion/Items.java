@@ -94,7 +94,7 @@ public final class Items {
     public static final SlimefunItemStack HYBRID_SOLAR_PANEL = new SlimefunItemStack(
         "HYBRID_SOLAR_PANEL",
         Material.GRAY_GLAZED_TERRACOTTA,
-        "&7&lAdvanced Solar Panel"
+        "&b&lHybrid Solar Panel"
     );
 
     public static final SlimefunItemStack ULTIMATE_SOLAR_PANEL = new SlimefunItemStack(
