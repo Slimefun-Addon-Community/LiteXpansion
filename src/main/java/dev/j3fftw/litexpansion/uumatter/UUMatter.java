@@ -2,7 +2,6 @@ package dev.j3fftw.litexpansion.uumatter;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
-import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -50,10 +49,7 @@ public final class UUMatter {
         for (String key : config.getKeys("recipes")) {
             final int idx = key.indexOf(':');
             final String id = key.toUpperCase().replace(' ', '_').substring(0, idx == -1 ? key.length() : idx);
-            int amount = 1;
-
-            if (idx == -1)
-                amount = NumberUtils.getInt(key.substring(idx + 1), 1);
+            final int amount = NumberUtils.getInt(key.substring(idx + 1), 1);
 
             final ItemStack output = getOutputItem(id, amount);
             if (output == null) continue;
@@ -62,6 +58,8 @@ public final class UUMatter {
             parseRecipe(config, key, recipe);
 
             this.recipes.put(output, recipe);
+            System.out.println(output);
+            addUuMatterRecipe(output, recipe);
         }
         LiteXpansion.getInstance().getLogger().log(Level.INFO, "Loaded {0} UU-Matter recipes", new Object[] {
             this.recipes.size()

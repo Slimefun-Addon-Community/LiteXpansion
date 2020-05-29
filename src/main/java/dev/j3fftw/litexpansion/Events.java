@@ -50,20 +50,17 @@ public class Events implements Listener {
 
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent e) {
-        if (e.getEntity() instanceof Player) {
+        if (e.getEntity() instanceof Player && ((Player) e.getEntity()).getEquipment() != null) {
             Player p = (Player) e.getEntity();
             ItemStack chestplate = p.getEquipment().getChestplate();
-            if (p.getEquipment() != null
-                && chestplate != null
+            if (chestplate != null
                 && SlimefunUtils.isItemSimilar(chestplate, Items.ELECTRIC_CHESTPLATE, false)
+                && ItemEnergy.getStoredEnergy(chestplate) >= 5
             ) {
+                p.getEquipment().setChestplate(ItemEnergy.chargeItem(chestplate,
+                    (float) (e.getDamage() / -1.75)));
 
-                if (ItemEnergy.getStoredEnergy(chestplate) >= 5) {
-                    p.getEquipment().setChestplate(ItemEnergy.chargeItem(chestplate,
-                        (float) (e.getDamage() / -1.75)));
-
-                    e.setCancelled(true);
-                }
+                e.setCancelled(true);
             }
         }
     }

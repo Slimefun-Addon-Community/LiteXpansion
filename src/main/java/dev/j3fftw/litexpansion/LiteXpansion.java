@@ -1,15 +1,9 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
-import dev.j3fftw.litexpansion.items.FoodSynthesizer;
-import dev.j3fftw.litexpansion.items.MagThor;
-import dev.j3fftw.litexpansion.items.Thorium;
-import dev.j3fftw.litexpansion.machine.MassFabricator;
-import dev.j3fftw.litexpansion.machine.ScrapMachine;
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
-import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.Research;
@@ -30,6 +24,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -157,7 +152,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
                     }
                 }
             } catch (ReflectiveOperationException e) {
-                e.printStackTrace();
+                getLogger().log(Level.WARNING, "Failed to load placed blocks", e);
             }
             return data;
         }));
