@@ -88,19 +88,34 @@ public final class Items {
     public static final SlimefunItemStack ADVANCED_SOLAR_PANEL = new SlimefunItemStack(
         "ADVANCED_SOLAR_PANEL",
         Material.BLACK_GLAZED_TERRACOTTA,
-        "&7Advanced Solar Panel"
+        "&7Advanced Solar Panel",
+        "&9Works at Night",
+        "",
+        LoreBuilder.powerBuffer(0),
+        LoreBuilder.powerPerSecond(80) + " (Day)",
+        LoreBuilder.powerPerSecond(10) + " (Night)"
     );
 
     public static final SlimefunItemStack HYBRID_SOLAR_PANEL = new SlimefunItemStack(
         "HYBRID_SOLAR_PANEL",
         Material.GRAY_GLAZED_TERRACOTTA,
-        "&b&lHybrid Solar Panel"
+        "&b&lHybrid Solar Panel",
+        "&9Works at Night",
+        "",
+        LoreBuilder.powerBuffer(0),
+        LoreBuilder.powerPerSecond(640) + " (Day)",
+        LoreBuilder.powerPerSecond(80) + " (Night)"
     );
 
     public static final SlimefunItemStack ULTIMATE_SOLAR_PANEL = new SlimefunItemStack(
         "ULTIMATE_SOLAR_PANEL",
         Material.PURPLE_GLAZED_TERRACOTTA,
-        "&5&lUltimate Solar Panel"
+        "&5&lUltimate Solar Panel",
+        "&9Works at Night",
+        "",
+        LoreBuilder.powerBuffer(0),
+        LoreBuilder.powerPerSecond(5120) + " (Day)",
+        LoreBuilder.powerPerSecond(640) + " (Night)"
     );
 
     // Items
