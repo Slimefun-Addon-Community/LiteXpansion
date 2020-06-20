@@ -2,13 +2,12 @@ package dev.j3fftw.litexpansion.items;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemUseHandler;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.data.PersistentDataAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -55,7 +54,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
 
         final ItemStack clickedItem = e.getItem();
         final SlimefunItem item = SlimefunItem.getByItem(e.getItem());
-        if (item == null || !item.getID().equals(Items.CARGO_CONFIGURATOR.getItemID())) return;
+        if (item == null || !item.getID().equals(Items.CARGO_CONFIGURATOR.getItemId())) return;
 
         final ItemMeta meta = clickedItem.getItemMeta();
 
@@ -81,9 +80,9 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         final ItemStack clickedItemStack = block.getItem();
 
         final String blockId = block.getID();
-        if (!blockId.equals(((SlimefunItemStack) SlimefunItems.CARGO_INPUT).getItemID())
-            && !blockId.equals(((SlimefunItemStack) SlimefunItems.CARGO_OUTPUT).getItemID())
-            && !blockId.equals(((SlimefunItemStack) SlimefunItems.CARGO_OUTPUT_ADVANCED).getItemID())
+        if (!blockId.equals(SlimefunItems.CARGO_INPUT_NODE.getItemId())
+            && !blockId.equals(SlimefunItems.CARGO_OUTPUT_NODE.getItemId())
+            && !blockId.equals(SlimefunItems.CARGO_OUTPUT_NODE_2.getItemId())
         ) return;
 
         e.setCancelled(true);

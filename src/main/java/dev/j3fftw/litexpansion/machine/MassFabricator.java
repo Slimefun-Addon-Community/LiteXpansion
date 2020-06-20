@@ -26,8 +26,8 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static me.mrCookieSlime.Slimefun.Lists.SlimefunItems.ADVANCED_CIRCUIT_BOARD;
-import static me.mrCookieSlime.Slimefun.Lists.SlimefunItems.REINFORCED_PLATE;
+import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.ADVANCED_CIRCUIT_BOARD;
+import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.REINFORCED_PLATE;
 
 public class MassFabricator extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
 

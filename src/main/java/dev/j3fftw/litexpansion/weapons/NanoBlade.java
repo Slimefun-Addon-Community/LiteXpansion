@@ -3,13 +3,14 @@ package dev.j3fftw.litexpansion.weapons;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.Items;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.ChargableItem;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemUseHandler;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-public class NanoBlade extends ChargableItem {
+public class NanoBlade extends SlimefunItem {
 
     public NanoBlade() {
         super(Items.LITEXPANSION, Items.NANO_BLADE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
