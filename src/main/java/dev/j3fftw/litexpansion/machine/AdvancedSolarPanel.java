@@ -60,24 +60,27 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
                 @Nullable final BlockMenu inv = BlockStorage.getInventory(location);
                 if (inv == null) return 0;
 
-                final boolean canGenerate = canGeneratePower(inv.getBlock());
+                final int stored = ChargableBlock.getCharge(location);
+
+                final boolean canGenerate = stored < getCapacity() && canGeneratePower(inv.getBlock());
 
                 final int rate = canGenerate ? getGeneratingAmount(location.getWorld()) : 0;
 
                 inv.replaceExistingItem(PROGRESS_SLOT,
                     canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
                         "", "&7Generating at &6" + rate + " J",
-                        "", "&7Stored: &6" + ChargableBlock.getCharge(location) + " J"
+                        "", "&7Stored: &6" + (stored + rate) + " J"
                     )
                         : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
                         "", "&7Not generating power, block is obstructed.",
-                        "", "&7Stored: &6" + ChargableBlock.getCharge(location) + " J")
+                        "", "&7Stored: &6" + (stored + rate) + " J")
                 );
 
-                if (canGenerate && rate > 0)
+                if (canGenerate && rate > 0) {
                     ChargableBlock.addCharge(location, rate);
+                }
 
-                return rate;
+                return stored + rate;
             }
 
             @Override
@@ -88,6 +91,9 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
     }
 
     private int getGeneratingAmount(@Nonnull World world) {
+        if (world.getEnvironment() == World.Environment.NETHER) return this.type.getDayGenerationRate();
+        if (world.getEnvironment() == World.Environment.THE_END) return this.type.getNightGenerationRate();
+
         if (world.isThundering() || world.hasStorm() || (world.getTime() >= 13000 || world.getTime() >= 23000))
             return this.type.getNightGenerationRate();
         else
