@@ -58,7 +58,6 @@ public final class UUMatter {
             parseRecipe(config, key, recipe);
 
             this.recipes.put(output, recipe);
-            System.out.println(output);
             addUuMatterRecipe(output, recipe);
         }
         LiteXpansion.getInstance().getLogger().log(Level.INFO, "Loaded {0} UU-Matter recipes", new Object[] {
