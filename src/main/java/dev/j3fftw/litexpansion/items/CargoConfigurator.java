@@ -46,7 +46,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
     public ItemUseHandler getItemHandler() {
         return e -> e.setUseBlock(Event.Result.DENY);
     }
-
+    
     @EventHandler
     @SuppressWarnings("ConstantConditions")
     public void onCargoConfiguratorItemClick(PlayerInteractEvent e) {
