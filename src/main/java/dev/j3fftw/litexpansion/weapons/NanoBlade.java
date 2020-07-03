@@ -7,10 +7,10 @@ import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.utils.Constants;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.ChargableItem;
 import me.mrCookieSlime.Slimefun.Objects.handlers.ItemUseHandler;
 
-public class NanoBlade extends SlimefunItem {
+public class NanoBlade extends ChargableItem {
 
     public NanoBlade() {
         super(Items.LITEXPANSION, Items.NANO_BLADE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
