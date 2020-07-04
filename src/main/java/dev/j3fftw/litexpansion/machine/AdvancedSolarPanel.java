@@ -3,13 +3,13 @@ package dev.j3fftw.litexpansion.machine;
 import dev.j3fftw.litexpansion.Items;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
@@ -66,15 +66,17 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
 
                 final int rate = canGenerate ? getGeneratingAmount(location.getWorld()) : 0;
 
-                inv.replaceExistingItem(PROGRESS_SLOT,
-                    canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
-                        "", "&7Generating at &6" + rate + " J",
-                        "", "&7Stored: &6" + (stored + rate) + " J"
-                    )
-                        : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
-                        "", "&7Not generating power, block is obstructed.",
-                        "", "&7Stored: &6" + (stored + rate) + " J")
-                );
+                if (!inv.toInventory().getViewers().isEmpty()) {
+                    inv.replaceExistingItem(PROGRESS_SLOT,
+                        canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
+                            "", "&7Generating at &6" + rate + " J",
+                            "", "&7Stored: &6" + (stored + rate) + " J"
+                        )
+                            : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
+                            "", "&7Not generating power, block is obstructed.",
+                            "", "&7Stored: &6" + stored + " J")
+                    );
+                }
 
                 if (canGenerate && rate > 0) {
                     ChargableBlock.addCharge(location, rate);
