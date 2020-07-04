@@ -62,7 +62,7 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
 
                 final int stored = ChargableBlock.getCharge(location);
 
-                final boolean canGenerate = stored < getCapacity() && canGeneratePower(inv.getBlock());
+                final boolean canGenerate = stored < getCapacity() && inv.getBlock().getLightFromSky() == 15;
 
                 final int rate = canGenerate ? getGeneratingAmount(location.getWorld()) : 0;
 
@@ -100,20 +100,6 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
             return this.type.getNightGenerationRate();
         else
             return this.type.getDayGenerationRate();
-    }
-
-    private boolean canGeneratePower(@Nonnull Block block) {
-        final int highestY = block.getWorld().getHighestBlockYAt(block.getLocation());
-        // Check if it's the highest block (so no obstruction)
-        if (block.getY() == highestY) return true;
-
-        // This should go from the blocks Y to the highest Y and check for a valid obstruction
-        // (Not glass, armor stand, etc)
-        for (int i = block.getY() + 1; i < highestY; i++) {
-            if (block.getWorld().getBlockAt(block.getX(), i, block.getZ()).getType().isSolid())
-                return false;
-        }
-        return true;
     }
 
     @Override
