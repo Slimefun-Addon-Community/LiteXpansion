@@ -66,7 +66,7 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
 
                 final int rate = canGenerate ? getGeneratingAmount(location.getWorld()) : 0;
 
-                if (!inv.toInventory().getViewers().isEmpty()) {
+                if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
                     inv.replaceExistingItem(PROGRESS_SLOT,
                         canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
                             "", "&7Generating at &6" + rate + " J",
