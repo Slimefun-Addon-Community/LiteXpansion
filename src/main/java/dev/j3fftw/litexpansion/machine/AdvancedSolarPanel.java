@@ -1,6 +1,7 @@
 package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.litexpansion.Items;
+import dev.j3fftw.litexpansion.utils.Timing;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -22,6 +23,7 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -33,7 +35,8 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
     private static final int PROGRESS_SLOT = 4;
 
     private static final CustomItem generatingItem = new CustomItem(Material.GREEN_STAINED_GLASS_PANE,
-        "&cNot Generating...");
+        "&cNot Generating..."
+    );
 
     private final Type type;
 
@@ -61,9 +64,9 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
 
                 final int stored = ChargableBlock.getCharge(location);
 
-                final boolean canGenerate = stored < getCapacity() && inv.getBlock().getLightFromSky() == 15;
+                final boolean canGenerate = stored < getCapacity();
 
-                final int rate = canGenerate ? getGeneratingAmount(location.getWorld()) : 0;
+                final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), location.getWorld()) : 0;
 
                 if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
                     inv.replaceExistingItem(PROGRESS_SLOT,
@@ -72,12 +75,14 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
                             "", "&7Stored: &6" + (stored + rate) + " J"
                         )
                             : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
-                            "", "&7Not generating power, block is obstructed.",
+                            "", "&7Not generating power, already at maximum capacity.",
                             "", "&7Stored: &6" + stored + " J")
                     );
                 }
 
-                if (canGenerate && rate > 0) {
+                if (!canGenerate) return stored;
+
+                if (rate > 0) {
                     ChargableBlock.addCharge(location, rate);
                 }
 
@@ -91,11 +96,14 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
         };
     }
 
-    private int getGeneratingAmount(@Nonnull World world) {
+    private int getGeneratingAmount(@Nonnull Block b, @Nonnull World world) {
         if (world.getEnvironment() == World.Environment.NETHER) return this.type.getDayGenerationRate();
         if (world.getEnvironment() == World.Environment.THE_END) return this.type.getNightGenerationRate();
 
-        if (world.isThundering() || world.hasStorm() || (world.getTime() >= 13000 || world.getTime() >= 23000))
+        // Note: You need to get the block above for the light check, the block itself is always 0
+        if (world.isThundering() || world.hasStorm() || world.getTime() >= 13000
+            || b.getLocation().add(0, 1, 0).getBlock().getLightFromSky() != 15
+        )
             return this.type.getNightGenerationRate();
         else
             return this.type.getDayGenerationRate();
