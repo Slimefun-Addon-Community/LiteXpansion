@@ -301,7 +301,6 @@ public final class Items {
     );
 
     public static final SlimefunItemStack MIXED_METAL_INGOT = new SlimefunItemStack(
-
         "MIXED_METAL_INGOT",
         Material.IRON_INGOT,
         "&7Mixed Metal Ingot"

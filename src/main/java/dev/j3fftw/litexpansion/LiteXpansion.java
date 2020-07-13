@@ -5,11 +5,10 @@ import dev.j3fftw.litexpansion.resources.ThoriumResource;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.core.researching.Research;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.Objects.Research;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 import org.bukkit.Bukkit;
@@ -118,16 +117,17 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     }
 
     private void setupResearches() {
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "sanitizing_foots"),
-                696969, "Sanitizing  foots since 2k10", 45),
-            Items.FOOD_SYNTHESIZER);
+        new Research(new NamespacedKey(this, "sanitizing_foots"), 696969, "Sanitizing  foots since 2k10", 45)
+            .addItems(Items.FOOD_SYNTHESIZER)
+            .register();
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "superalloys"),
-            696970, "Superalloys", 35), Items.THORIUM, Items.MAG_THOR);
+        new Research(new NamespacedKey(this, "superalloys"), 696970, "Superalloys", 35)
+            .addItems(Items.THORIUM, Items.MAG_THOR)
+            .register();
 
-        Slimefun.registerResearch(new Research(new NamespacedKey(this, "super_hot_fire"),
-                696971, "Super Hot Fire", 31),
-            Items.NANO_BLADE);
+        new Research(new NamespacedKey(this, "super_hot_fire"), 696971, "Super Hot Fire", 31)
+            .addItems(Items.NANO_BLADE)
+            .register();
     }
 
     private void setupCustomMetrics(@Nonnull Metrics metrics) {
@@ -142,6 +142,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
                     final Field f = blockStorage.getDeclaredField("storage");
                     f.setAccessible(true);
+                    @SuppressWarnings("unchecked")
                     final Map<Location, Config> blocks = (Map<Location, Config>) f.get(storage);
 
                     for (Map.Entry<Location, Config> entry : blocks.entrySet()) {
