@@ -86,13 +86,16 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
 
         @Nullable final ItemStack input = inv.getItemInSlot(INPUT_SLOT);
         @Nullable final ItemStack output = inv.getItemInSlot(OUTPUT_SLOT);
-        if (output != null && output.getAmount() == output.getMaxStackSize()) return;
+        if (input == null || input.getType() == Material.AIR
+            || (output != null && output.getAmount() == output.getMaxStackSize())
+            || output == null || output.getType() != Items.SCRAP.getType() || !Items.SCRAP.getItem().isItem(input)
+        ) return;
 
         final BlockPosition pos = new BlockPosition(b.getWorld(), b.getX(), b.getY(), b.getZ());
         int currentProgress = progress.getOrDefault(pos, -1);
 
         // Process first tick - remove an input and put it in map.
-        if (input != null && input.getType() != Material.AIR && currentProgress == -1 && takePower(b)) {
+        if (currentProgress == -1 && takePower(b)) {
             inv.consumeItem(INPUT_SLOT);
             progress.put(pos, 0);
             return;
