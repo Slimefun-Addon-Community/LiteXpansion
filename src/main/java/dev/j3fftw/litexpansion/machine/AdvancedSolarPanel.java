@@ -63,7 +63,7 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
 
                 final int stored = ChargableBlock.getCharge(location);
 
-                final boolean canGenerate = stored < getCapacity();
+                final boolean canGenerate = stored < getCapacity() && !inv.getBlock().isBlockPowered();
 
                 final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), location.getWorld()) : 0;
 
