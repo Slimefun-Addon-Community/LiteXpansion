@@ -1,16 +1,13 @@
 package dev.j3fftw.litexpansion;
 
-import dev.j3fftw.litexpansion.armor.ElectricChestplate;
-import dev.j3fftw.litexpansion.resources.ThoriumResource;
-import dev.j3fftw.litexpansion.utils.Constants;
-import dev.j3fftw.litexpansion.uumatter.UUMatter;
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.core.researching.Research;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
-import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+
+import javax.annotation.Nonnull;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -18,12 +15,17 @@ import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.annotation.Nonnull;
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
+import dev.j3fftw.litexpansion.armor.ElectricChestplate;
+import dev.j3fftw.litexpansion.resources.ThoriumResource;
+import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.uumatter.UUMatter;
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.core.researching.Research;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
+import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
+import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -117,17 +119,20 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     }
 
     private void setupResearches() {
-        new Research(new NamespacedKey(this, "sanitizing_foots"), 696969, "Sanitizing  foots since 2k10", 45)
-            .addItems(Items.FOOD_SYNTHESIZER)
-            .register();
+        new Research(new NamespacedKey(this, "sanitizing_foots"),
+                696969, "Sanitizing  foots since 2k10", 45)
+        .addItems(Items.FOOD_SYNTHESIZER)
+        .register();
 
-        new Research(new NamespacedKey(this, "superalloys"), 696970, "Superalloys", 35)
-            .addItems(Items.THORIUM, Items.MAG_THOR)
-            .register();
+        new Research(new NamespacedKey(this, "superalloys"),
+                696970, "Superalloys", 35)
+        .addItems(Items.THORIUM, Items.MAG_THOR)
+        .register();
 
-        new Research(new NamespacedKey(this, "super_hot_fire"), 696971, "Super Hot Fire", 31)
-            .addItems(Items.NANO_BLADE)
-            .register();
+        new Research(new NamespacedKey(this, "super_hot_fire"),
+                696971, "Super Hot Fire", 31)
+        .addItems(Items.NANO_BLADE)
+        .register();
     }
 
     private void setupCustomMetrics(@Nonnull Metrics metrics) {
