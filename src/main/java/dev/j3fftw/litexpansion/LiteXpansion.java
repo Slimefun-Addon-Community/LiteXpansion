@@ -21,10 +21,10 @@ import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
+import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
@@ -147,6 +147,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
                     final Field f = blockStorage.getDeclaredField("storage");
                     f.setAccessible(true);
+                    @SuppressWarnings("unchecked")
                     final Map<Location, Config> blocks = (Map<Location, Config>) f.get(storage);
 
                     for (Map.Entry<Location, Config> entry : blocks.entrySet()) {

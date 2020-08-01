@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion.uumatter;
 
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -14,7 +15,6 @@ import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuideLayout;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
-import me.mrCookieSlime.Slimefun.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
@@ -43,7 +43,7 @@ public final class UuMatterCategory extends FlexCategory {
     }
 
     private ChestMenu create(Player p) {
-        final ChestMenu playerMenu = new ChestMenu(SlimefunPlugin.getLocal().getMessage(p, "guide.title.main"));
+        final ChestMenu playerMenu = new ChestMenu(SlimefunPlugin.getLocalization().getMessage(p, "guide.title.main"));
         playerMenu.setEmptySlotsClickable(false);
         return playerMenu;
     }
@@ -57,7 +57,7 @@ public final class UuMatterCategory extends FlexCategory {
             for (int i = 0; i < 9; i++) {
                 if (i == 1) {
                     menu.addItem(i, new CustomItem(ChestMenuUtils.getBackButton(p, "",
-                        ChatColor.GRAY + SlimefunPlugin.getLocal().getMessage(p, "guide.back.guide")))
+                        ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(p, "guide.back.guide")))
                     );
                     menu.addMenuClickHandler(i, (pl, s, is, action) -> {
                         open(p, profile, SlimefunGuideLayout.CHEST);
@@ -111,7 +111,7 @@ public final class UuMatterCategory extends FlexCategory {
     @Override
     public void open(Player player, PlayerProfile playerProfile, SlimefunGuideLayout slimefunGuideLayout) {
         menu.addItem(1, new CustomItem(ChestMenuUtils.getBackButton(player, "",
-            ChatColor.GRAY + SlimefunPlugin.getLocal().getMessage(player, "guide.back.guide")))
+            ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide")))
         );
 
         menu.addMenuClickHandler(1, (pl, slot, item, action) -> {

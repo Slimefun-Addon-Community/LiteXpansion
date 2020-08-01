@@ -3,14 +3,14 @@ package dev.j3fftw.litexpansion.machine;
 import dev.j3fftw.litexpansion.Items;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.GeneratorTicker;
@@ -34,7 +34,8 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
     private static final int PROGRESS_SLOT = 4;
 
     private static final CustomItem generatingItem = new CustomItem(Material.GREEN_STAINED_GLASS_PANE,
-        "&cNot Generating...");
+        "&cNot Generating..."
+    );
 
     private final Type type;
 
@@ -62,21 +63,25 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
 
                 final int stored = ChargableBlock.getCharge(location);
 
-                final boolean canGenerate = stored < getCapacity() && canGeneratePower(inv.getBlock());
+                final boolean canGenerate = stored < getCapacity() && !inv.getBlock().isBlockPowered();
 
-                final int rate = canGenerate ? getGeneratingAmount(location.getWorld()) : 0;
+                final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), location.getWorld()) : 0;
 
-                inv.replaceExistingItem(PROGRESS_SLOT,
-                    canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
-                        "", "&7Generating at &6" + rate + " J",
-                        "", "&7Stored: &6" + (stored + rate) + " J"
-                    )
-                        : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
-                        "", "&7Not generating power, block is obstructed.",
-                        "", "&7Stored: &6" + (stored + rate) + " J")
-                );
+                if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
+                    inv.replaceExistingItem(PROGRESS_SLOT,
+                        canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
+                            "", "&7Generating at &6" + rate + " J",
+                            "", "&7Stored: &6" + (stored + rate) + " J"
+                        )
+                            : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
+                            "", "&7Not generating power, already at maximum capacity.",
+                            "", "&7Stored: &6" + stored + " J")
+                    );
+                }
 
-                if (canGenerate && rate > 0) {
+                if (!canGenerate) return stored;
+
+                if (rate > 0) {
                     ChargableBlock.addCharge(location, rate);
                 }
 
@@ -90,28 +95,17 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
         };
     }
 
-    private int getGeneratingAmount(@Nonnull World world) {
+    private int getGeneratingAmount(@Nonnull Block b, @Nonnull World world) {
         if (world.getEnvironment() == World.Environment.NETHER) return this.type.getDayGenerationRate();
         if (world.getEnvironment() == World.Environment.THE_END) return this.type.getNightGenerationRate();
 
-        if (world.isThundering() || world.hasStorm() || (world.getTime() >= 13000 || world.getTime() >= 23000))
+        // Note: You need to get the block above for the light check, the block itself is always 0
+        if (world.isThundering() || world.hasStorm() || world.getTime() >= 13000
+            || b.getLocation().add(0, 1, 0).getBlock().getLightFromSky() != 15
+        )
             return this.type.getNightGenerationRate();
         else
             return this.type.getDayGenerationRate();
-    }
-
-    private boolean canGeneratePower(@Nonnull Block block) {
-        final int highestY = block.getWorld().getHighestBlockYAt(block.getLocation());
-        // Check if it's the highest block (so no obstruction)
-        if (block.getY() == highestY) return true;
-
-        // This should go from the blocks Y to the highest Y and check for a valid obstruction
-        // (Not glass, armor stand, etc)
-        for (int i = block.getY() + 1; i < highestY; i++) {
-            if (block.getWorld().getBlockAt(block.getX(), i, block.getZ()).getType().isSolid())
-                return false;
-        }
-        return true;
     }
 
     @Override
