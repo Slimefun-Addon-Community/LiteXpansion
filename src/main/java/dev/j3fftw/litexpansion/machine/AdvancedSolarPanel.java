@@ -1,10 +1,18 @@
 package dev.j3fftw.litexpansion.machine;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.inventory.ItemStack;
+
 import dev.j3fftw.litexpansion.Items;
-import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
+import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -13,23 +21,13 @@ import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
-import me.mrCookieSlime.Slimefun.Objects.handlers.GeneratorTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> implements InventoryBlock,
-    EnergyNetComponent {
+public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, EnergyNetProvider {
 
     private static final int PROGRESS_SLOT = 4;
 
@@ -51,48 +49,34 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
                 blockMenuPreset.addItem(PROGRESS_SLOT, generatingItem);
             });
     }
-
+    
     @Override
-    public GeneratorTicker getItemHandler() {
-        return new GeneratorTicker() {
+    public int getGeneratedOutput(Location l, Config data) {
+        @Nullable final BlockMenu inv = BlockStorage.getInventory(l);
+        if (inv == null) return 0;
 
-            @Override
-            public double generateEnergy(Location location, SlimefunItem slimefunItem, Config config) {
-                @Nullable final BlockMenu inv = BlockStorage.getInventory(location);
-                if (inv == null) return 0;
+        final int stored = ChargableBlock.getCharge(l);
+        final boolean canGenerate = stored < getCapacity() && !inv.getBlock().isBlockPowered();
+        final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), l.getWorld()) : 0;
 
-                final int stored = ChargableBlock.getCharge(location);
+        if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
+            inv.replaceExistingItem(PROGRESS_SLOT,
+                canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
+                    "", "&7Generating at &6" + rate + " J",
+                    "", "&7Stored: &6" + (stored + rate) + " J"
+                )
+                    : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
+                    "", "&7Not generating power, already at maximum capacity.",
+                    "", "&7Stored: &6" + stored + " J")
+            );
+        }
 
-                final boolean canGenerate = stored < getCapacity() && !inv.getBlock().isBlockPowered();
-
-                final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), location.getWorld()) : 0;
-
-                if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
-                    inv.replaceExistingItem(PROGRESS_SLOT,
-                        canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
-                            "", "&7Generating at &6" + rate + " J",
-                            "", "&7Stored: &6" + (stored + rate) + " J"
-                        )
-                            : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
-                            "", "&7Not generating power, already at maximum capacity.",
-                            "", "&7Stored: &6" + stored + " J")
-                    );
-                }
-
-                if (!canGenerate) return stored;
-
-                if (rate > 0) {
-                    ChargableBlock.addCharge(location, rate);
-                }
-
-                return stored + rate;
-            }
-
-            @Override
-            public boolean explode(Location location) {
-                return false;
-            }
-        };
+        return rate;
+    }
+    
+    @Override
+    public boolean willExplode(Location l, Config data) {
+        return false;
     }
 
     private int getGeneratingAmount(@Nonnull Block b, @Nonnull World world) {
@@ -137,11 +121,13 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
             Items.ADVANCED_ALLOY, SlimefunItems.SOLAR_PANEL, Items.ADVANCED_ALLOY,
             SlimefunItems.ADVANCED_CIRCUIT_BOARD, Items.ADVANCED_MACHINE_BLOCK, SlimefunItems.ADVANCED_CIRCUIT_BOARD
         }),
+
         HYBRID(Items.HYBRID_SOLAR_PANEL, 640, 80, 1200, 1_000_000, new ItemStack[] {
             Items.CARBON_PLATE, new ItemStack(Material.LAPIS_BLOCK), Items.CARBON_PLATE,
             Items.IRIDIUM_PLATE, Items.ADVANCED_MACHINE_BLOCK, Items.IRIDIUM_PLATE,
             SlimefunItems.ADVANCED_CIRCUIT_BOARD, Items.IRIDIUM_PLATE, SlimefunItems.ADVANCED_CIRCUIT_BOARD
         }),
+
         ULTIMATE(Items.ULTIMATE_SOLAR_PANEL, 5120, 640, 5120, 10_000_000, new ItemStack[] {
             Items.HYBRID_SOLAR_PANEL, Items.HYBRID_SOLAR_PANEL, Items.HYBRID_SOLAR_PANEL,
             Items.HYBRID_SOLAR_PANEL, SlimefunItems.ADVANCED_CIRCUIT_BOARD, Items.HYBRID_SOLAR_PANEL,
@@ -154,6 +140,7 @@ public class AdvancedSolarPanel extends SimpleSlimefunItem<GeneratorTicker> impl
         private final int nightGenerationRate;
         private final int output;
         private final int storage;
+
         @Nonnull
         private final ItemStack[] recipe;
     }
