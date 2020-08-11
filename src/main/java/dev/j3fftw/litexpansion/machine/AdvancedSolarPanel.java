@@ -1,14 +1,5 @@
 package dev.j3fftw.litexpansion.machine;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.inventory.ItemStack;
-
 import dev.j3fftw.litexpansion.Items;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
@@ -26,6 +17,14 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, EnergyNetProvider {
 
@@ -49,14 +48,14 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
                 blockMenuPreset.addItem(PROGRESS_SLOT, generatingItem);
             });
     }
-    
+
     @Override
     public int getGeneratedOutput(Location l, Config data) {
         @Nullable final BlockMenu inv = BlockStorage.getInventory(l);
         if (inv == null) return 0;
 
         final int stored = ChargableBlock.getCharge(l);
-        final boolean canGenerate = stored < getCapacity() && !inv.getBlock().isBlockPowered();
+        final boolean canGenerate = stored < getCapacity();
         final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), l.getWorld()) : 0;
 
         if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
@@ -73,7 +72,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
         return rate;
     }
-    
+
     @Override
     public boolean willExplode(Location l, Config data) {
         return false;

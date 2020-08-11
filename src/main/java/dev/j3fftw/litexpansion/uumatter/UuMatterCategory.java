@@ -1,22 +1,21 @@
 package dev.j3fftw.litexpansion.uumatter;
 
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import org.bukkit.ChatColor;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.core.categories.FlexCategory;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuideLayout;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.ChatColor;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public final class UuMatterCategory extends FlexCategory {
 
@@ -82,8 +81,9 @@ public final class UuMatterCategory extends FlexCategory {
     }
 
     private void displayItem(ChestMenu menu, Player p, PlayerProfile profile, ItemStack output, ItemStack[] recipe) {
-        final ChestMenu.MenuClickHandler clickHandler = (pl, s, clickedItem, a) -> onIngredientClick(profile, clickedItem);
-        
+        final ChestMenu.MenuClickHandler clickHandler = (pl, s, clickedItem, a) -> onIngredientClick(profile,
+            clickedItem);
+
         for (int i = 0; i < 9; ++i) {
             menu.addItem(recipeSlots[i], recipe[i], clickHandler);
         }
@@ -92,13 +92,13 @@ public final class UuMatterCategory extends FlexCategory {
         menu.addItem(19, RecipeType.ENHANCED_CRAFTING_TABLE.getItem(p), ChestMenuUtils.getEmptyClickHandler());
         menu.addItem(25, output, ChestMenuUtils.getEmptyClickHandler());
     }
-    
+
     private boolean onIngredientClick(PlayerProfile profile, ItemStack clickedItem) {
         if (clickedItem != null) {
             // This must be UU Matter then.
             SlimefunGuide.displayItem(profile, Items.UU_MATTER, true);
         }
-        
+
         return false;
     }
 

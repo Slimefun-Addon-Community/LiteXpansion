@@ -16,12 +16,6 @@ public class Timing {
         this.name = name;
     }
 
-    public static Timing create(String name) {
-        final Timing timing = new Timing(name);
-        timing.start();
-        return timing;
-    }
-
     public void start() {
         this.start = System.nanoTime();
     }
@@ -58,5 +52,11 @@ public class Timing {
 
     private String time(long a, long b) {
         return (b - a) + "ns (" + ((b - a) / 1e6) + "ms)";
+    }
+
+    public static Timing create(String name) {
+        final Timing timing = new Timing(name);
+        timing.start();
+        return timing;
     }
 }

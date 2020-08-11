@@ -1,8 +1,5 @@
 package dev.j3fftw.litexpansion.weapons;
 
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
-
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.utils.Constants;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
@@ -10,6 +7,8 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
 
 public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rechargeable {
 
