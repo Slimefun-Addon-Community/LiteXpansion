@@ -71,8 +71,8 @@ public class RefinedSmeltery extends MultiBlockMachine {
                         craft(p, b, inv, inputs.get(i), output, outputInv);
                     }
                     else SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
-                    return;
                 }
+                return;
             }
         }
 
