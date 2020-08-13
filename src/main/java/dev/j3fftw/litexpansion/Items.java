@@ -306,5 +306,11 @@ public final class Items {
         "&7Mixed Metal Ingot"
     );
 
+    public static final SlimefunItemStack REFINED_SMELTERY = new SlimefunItemStack(
+        "REFINED_SMELTERY",
+        Material.BLAST_FURNACE,
+        "&7Refined Smeltery"
+    );
+
     private Items() {}
 }
