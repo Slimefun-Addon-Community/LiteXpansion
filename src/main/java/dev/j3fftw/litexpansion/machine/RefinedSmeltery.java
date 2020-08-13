@@ -3,6 +3,7 @@ package dev.j3fftw.litexpansion.machine;
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
@@ -69,10 +70,13 @@ public class RefinedSmeltery extends MultiBlockMachine {
                     if (outputInv != null) {
                         craft(p, b, inv, inputs.get(i), output, outputInv);
                     }
+                    else SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
                     return;
                 }
             }
         }
+
+        SlimefunPlugin.getLocalization().sendMessage(p, "machines.unknown-material", true);
     }
 
     private void craft(Player p, Block b, Inventory inv, ItemStack[] recipe, ItemStack output, Inventory outputInv) {
