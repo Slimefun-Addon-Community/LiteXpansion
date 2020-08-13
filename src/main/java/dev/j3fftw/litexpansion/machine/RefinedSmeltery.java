@@ -69,8 +69,8 @@ public class RefinedSmeltery extends MultiBlockMachine {
 
                     if (outputInv != null) {
                         craft(p, b, inv, inputs.get(i), output, outputInv);
-                    }
-                    else SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
+                    } else
+                        SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
                 }
                 return;
             }
@@ -104,8 +104,8 @@ public class RefinedSmeltery extends MultiBlockMachine {
                         && !SlimefunUtils.isItemSimilar(converting,
                         inv.getContents()[j], true)) {
                         return false;
-                    }
-                    else if (SlimefunUtils.isItemSimilar(inv.getContents()[j], converting, true)) break;
+                    } else if
+                    (SlimefunUtils.isItemSimilar(inv.getContents()[j], converting, true)) break;
                 }
             }
         }
