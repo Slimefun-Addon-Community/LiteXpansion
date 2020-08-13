@@ -69,8 +69,7 @@ public class RefinedSmeltery extends MultiBlockMachine {
 
                     if (outputInv != null) {
                         craft(p, b, inv, inputs.get(i), output, outputInv);
-                    }
-                    else SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
+                    } else SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
                 }
                 return;
             }
@@ -82,7 +81,8 @@ public class RefinedSmeltery extends MultiBlockMachine {
     private void craft(Player p, Block b, Inventory inv, ItemStack[] recipe, ItemStack output, Inventory outputInv) {
         for (ItemStack removing : recipe) {
             if (removing != null) {
-                InvUtils.removeItem(inv, removing.getAmount(), true, stack -> SlimefunUtils.isItemSimilar(stack, removing, true));
+                InvUtils.removeItem(inv, removing.getAmount(), true, stack -> SlimefunUtils.isItemSimilar(stack,
+                    removing, true));
             }
         }
 
@@ -99,10 +99,10 @@ public class RefinedSmeltery extends MultiBlockMachine {
         for (ItemStack converting : inputs.get(i)) {
             if (converting != null) {
                 for (int j = 0; j < inv.getContents().length; j++) {
-                    if (j == (inv.getContents().length - 1) && !SlimefunUtils.isItemSimilar(converting, inv.getContents()[j], true)) {
+                    if (j == (inv.getContents().length - 1) && !SlimefunUtils.isItemSimilar(converting,
+                        inv.getContents()[j], true)) {
                         return false;
-                    }
-                    else if (SlimefunUtils.isItemSimilar(inv.getContents()[j], converting, true)) break;
+                    } else if (SlimefunUtils.isItemSimilar(inv.getContents()[j], converting, true)) break;
                 }
             }
         }
@@ -110,5 +110,5 @@ public class RefinedSmeltery extends MultiBlockMachine {
         return true;
     }
 
-    }
+}
 
