@@ -43,7 +43,7 @@ public final class Items {
         "",
         "&fActivate: &aRight Click",
         "",
-        "&8\u21E8 &7Consumes &e2.5J &7per hit",
+        "&8\u21E8 &7Consumes &e10J &7per hit",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 500 J"
     );
@@ -311,6 +311,7 @@ public final class Items {
         Material.BLAST_FURNACE,
         "&7Refined Smeltery"
     );
+
 
     private Items() {}
 }
