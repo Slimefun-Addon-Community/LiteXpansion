@@ -40,7 +40,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
     private static final int[] INPUT_SLOTS = new int[] {10, 11};
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
-    private static final int PROGRESS_AMOUNT = 100; // Divide by 2 for seconds it takes
+    private static final int PROGRESS_AMOUNT = 200; // Divide by 2 for seconds it takes
 
     private static final Map<BlockPosition, Integer> progress = new HashMap<>();
 
