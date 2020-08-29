@@ -35,7 +35,8 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
         new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.SCRAP_MACHINE
     );
 
-    private static final int ENERGY_CONSUMPTION = Utils.euToJ(10);
+    public static int ENERGY_CONSUMPTION = Utils.euToJ(10);
+    public static int CAPACITY = Utils.euToJ(45);
 
     private static final int INPUT_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
@@ -133,7 +134,7 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
 
     @Override
     public int getCapacity() {
-        return Utils.euToJ(45);
+        return Utils.euToJ(CAPACITY);
     }
 
     @Override
