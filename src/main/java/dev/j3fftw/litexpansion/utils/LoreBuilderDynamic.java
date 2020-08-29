@@ -42,23 +42,19 @@ public final class LoreBuilderDynamic {
         return "&8\u21E8 &b\u26A1 &7Speed: &b" + speed + 'x';
     }
 
-    public static String powerBuffer(double power) {
-        if (t == 0) {
-            return power(powerFormat.format(1 / (1.0 / 20) * power), " Buffer");
-        } else {
-            return power(powerFormat.format(1 / (t / 20) * power), " Buffer");
-        }
+    public static String powerBuffer(int power) {
+        return power(power, " Buffer");
     }
 
     public static String powerPerSecond(double power) {
         if (t == 0) {
-            return power(powerFormat.format(1 / (1.0 / 20) * power), "/s");
+            return power(Integer.parseInt(powerFormat.format(1 / (1.0 / 20) * power)), "/s");
         } else {
-            return power(powerFormat.format(1 / (t / 20) * power), "/s");
+            return power(Integer.parseInt(powerFormat.format(1 / (t / 20) * power)), "/s");
         }
     }
 
-    public static String power(String power, String suffix) {
+    public static String power(int power, String suffix) {
         return "&8\u21E8 &e\u26A1 &7" + power + " J" + suffix;
     }
 
