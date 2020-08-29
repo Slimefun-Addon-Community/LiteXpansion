@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
@@ -11,13 +12,8 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 
-import javax.annotation.Nullable;
-
-
 
 public final class Items {
-
-    private static int t = SlimefunPlugin.getCfg().getInt("URID.custom-ticker-delay");
 
     // Category
     public static final Category LITEXPANSION = new Category(
@@ -86,8 +82,8 @@ public final class Items {
         "",
         "&fProduces &8Scrap &ffrom anything",
         "",
-        LoreBuilder.powerBuffer(1/(t/20)*450),
-        LoreBuilder.powerPerSecond(1/(t/20)*10)
+        LoreBuilderDynamic.powerBuffer(450),
+        LoreBuilderDynamic.powerPerSecond(10)
     );
 
     public static final SlimefunItemStack MASS_FABRICATOR_MACHINE = new SlimefunItemStack(
@@ -97,8 +93,8 @@ public final class Items {
         "",
         "&fConverts &8Scrap &fto &5UU-Matter",
         "",
-        LoreBuilder.powerBuffer(1/(t/20)*49998),
-        LoreBuilder.powerPerSecond(1/(t/20)*16666)
+        LoreBuilderDynamic.powerBuffer(49998),
+        LoreBuilderDynamic.powerPerSecond(16666)
     );
 
     //// Solar panels
@@ -108,9 +104,9 @@ public final class Items {
         "&7Advanced Solar Panel",
         "&9Works at Night",
         "",
-        LoreBuilder.powerBuffer(0),
-        LoreBuilder.powerPerSecond(1/(t/20)*80) + " (Day)",
-        LoreBuilder.powerPerSecond(1/(t/20)*10) + " (Night)"
+        LoreBuilderDynamic.powerBuffer(320000),
+        LoreBuilderDynamic.powerPerSecond(80) + " (Day)",
+        LoreBuilderDynamic.powerPerSecond(10) + " (Night)"
     );
 
     public static final SlimefunItemStack HYBRID_SOLAR_PANEL = new SlimefunItemStack(
@@ -119,9 +115,9 @@ public final class Items {
         "&b&lHybrid Solar Panel",
         "&9Works at Night",
         "",
-        LoreBuilder.powerBuffer(0),
-        LoreBuilder.powerPerSecond(1/(t/20)*640) + " (Day)",
-        LoreBuilder.powerPerSecond(1/(t/20)*80) + " (Night)"
+        LoreBuilderDynamic.powerBuffer(1000000),
+        LoreBuilderDynamic.powerPerSecond(640) + " (Day)",
+        LoreBuilderDynamic.powerPerSecond(80) + " (Night)"
     );
 
     public static final SlimefunItemStack ULTIMATE_SOLAR_PANEL = new SlimefunItemStack(
@@ -130,9 +126,9 @@ public final class Items {
         "&5&lUltimate Solar Panel",
         "&9Works at Night",
         "",
-        LoreBuilder.powerBuffer(0),
-        LoreBuilder.powerPerSecond(1/(t/20)*5120) + " (Day)",
-        LoreBuilder.powerPerSecond(1/(t/20)*640) + " (Night)"
+        LoreBuilderDynamic.powerBuffer(10000000),
+        LoreBuilderDynamic.powerPerSecond(5120) + " (Day)",
+        LoreBuilderDynamic.powerPerSecond(640) + " (Night)"
     );
 
     // Items
