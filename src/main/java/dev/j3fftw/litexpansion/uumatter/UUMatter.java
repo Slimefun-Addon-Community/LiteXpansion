@@ -30,7 +30,7 @@ public final class UUMatter {
 
     private boolean registered;
 
-    public UUMatter() {}
+    private UUMatter() {}
 
     public void register() {
         if (registered) return;
