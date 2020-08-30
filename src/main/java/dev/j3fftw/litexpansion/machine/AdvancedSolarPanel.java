@@ -72,7 +72,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
         final int stored = ChargableBlock.getCharge(l);
         final boolean canGenerate = stored < getCapacity();
-        final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), Objects.requireNonNull(l.getWorld())) : 0;
+        final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), l.getWorld()) : 0;
 
         if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
             inv.replaceExistingItem(PROGRESS_SLOT,

@@ -79,7 +79,7 @@ public final class Items {
     public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
         "FOOD_SYNTHESIZER",
         new CustomItem(SkullItem.fromHash("a11a2df7d37af40ed5ce442fd2d78cd8ebcdcdc029d2ae691a2b64395cdf"),
-        "Food Synthesizer"),
+            "Food Synthesizer"),
         "&dFood Synthesizer",
         "",
         "&fKeeps you fed with artificial food.",
@@ -100,7 +100,7 @@ public final class Items {
     public static final SlimefunItemStack THORIUM = new SlimefunItemStack(
         "THORIUM",
         new CustomItem(SkullItem.fromHash("427d1a6184c62d4c4a67f862b8e19ec001abe4c7d889f23349e8dafe6d033"),
-        "Thorium"),
+            "Thorium"),
         "&8Thorium",
         "",
         LoreBuilder.radioactive(Radioactivity.HIGH),
