@@ -57,7 +57,7 @@ public class Events implements Listener {
                 SlimefunItem.getByID(Items.ELECTRIC_CHESTPLATE.getItemId());
             if (chestplate != null
                 && electricChestplate.isItem(chestplate)
-                && electricChestplate.removeItemCharge(chestplate, (float) (e.getDamage() / -1.75))
+                && electricChestplate.removeItemCharge(chestplate, (float) (e.getDamage() / 1.75))
             ) {
                 e.setCancelled(true);
             }

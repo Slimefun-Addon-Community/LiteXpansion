@@ -1,5 +1,9 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
+import dev.j3fftw.litexpansion.machine.MassFabricator;
+import dev.j3fftw.litexpansion.machine.ScrapMachine;
+import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -36,12 +40,12 @@ public final class Items {
     public static final SlimefunItemStack NANO_BLADE = new SlimefunItemStack(
         "NANO_BLADE",
         Material.DIAMOND_SWORD,
-        "&2Nano Blade",
+        "&2Nano Blade &c(Off)",
         "",
         "&fAn advanced piece of technology which can",
         "&fcut through organic tissue with ease.",
         "",
-        "&fActivate: &aRight Click",
+        "&fToggle: &aRight Click",
         "",
         "&8\u21E8 &7Consumes &e10J &7per hit",
         "",
@@ -71,55 +75,7 @@ public final class Items {
         "&7> &eShift+Right Click &7- Clear node configuration"
     );
 
-    // Machines
-    public static final SlimefunItemStack SCRAP_MACHINE = new SlimefunItemStack(
-        "SCRAP_MACHINE",
-        Material.BLACK_CONCRETE,
-        "&8Scrap Machine"
-    );
-
-    public static final SlimefunItemStack MASS_FABRICATOR_MACHINE = new SlimefunItemStack(
-        "MASS_FABRICATOR_MACHINE",
-        Material.PURPLE_CONCRETE,
-        "&5Mass Fabricator"
-    );
-
-    //// Solar panels
-    public static final SlimefunItemStack ADVANCED_SOLAR_PANEL = new SlimefunItemStack(
-        "ADVANCED_SOLAR_PANEL",
-        Material.BLACK_GLAZED_TERRACOTTA,
-        "&7Advanced Solar Panel",
-        "&9Works at Night",
-        "",
-        LoreBuilder.powerBuffer(0),
-        LoreBuilder.powerPerSecond(80) + " (Day)",
-        LoreBuilder.powerPerSecond(10) + " (Night)"
-    );
-
-    public static final SlimefunItemStack HYBRID_SOLAR_PANEL = new SlimefunItemStack(
-        "HYBRID_SOLAR_PANEL",
-        Material.GRAY_GLAZED_TERRACOTTA,
-        "&b&lHybrid Solar Panel",
-        "&9Works at Night",
-        "",
-        LoreBuilder.powerBuffer(0),
-        LoreBuilder.powerPerSecond(640) + " (Day)",
-        LoreBuilder.powerPerSecond(80) + " (Night)"
-    );
-
-    public static final SlimefunItemStack ULTIMATE_SOLAR_PANEL = new SlimefunItemStack(
-        "ULTIMATE_SOLAR_PANEL",
-        Material.PURPLE_GLAZED_TERRACOTTA,
-        "&5&lUltimate Solar Panel",
-        "&9Works at Night",
-        "",
-        LoreBuilder.powerBuffer(0),
-        LoreBuilder.powerPerSecond(5120) + " (Day)",
-        LoreBuilder.powerPerSecond(640) + " (Night)"
-    );
-
     // Items
-
     public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
         "FOOD_SYNTHESIZER",
         new CustomItem(SkullItem.fromHash("a11a2df7d37af40ed5ce442fd2d78cd8ebcdcdc029d2ae691a2b64395cdf"),
@@ -306,12 +262,69 @@ public final class Items {
         "&7Mixed Metal Ingot"
     );
 
+    // Machines
+    public static final SlimefunItemStack SCRAP_MACHINE = new SlimefunItemStack(
+        "SCRAP_MACHINE",
+        Material.BLACK_CONCRETE,
+        "&8Scrap Machine",
+        "",
+        "&fProduces &8Scrap &ffrom anything",
+        "",
+        LoreBuilderDynamic.powerBuffer(ScrapMachine.CAPACITY),
+        LoreBuilderDynamic.powerPerTick(ScrapMachine.ENERGY_CONSUMPTION)
+    );
+
+    public static final SlimefunItemStack MASS_FABRICATOR_MACHINE = new SlimefunItemStack(
+        "MASS_FABRICATOR_MACHINE",
+        Material.PURPLE_CONCRETE,
+        "&5Mass Fabricator",
+        "",
+        "&fConverts &8Scrap &fto &5UU-Matter",
+        "",
+        LoreBuilderDynamic.powerBuffer(MassFabricator.CAPACITY),
+        LoreBuilderDynamic.powerPerTick(MassFabricator.ENERGY_CONSUMPTION)
+    );
+
+    //// Solar panels
+    public static final SlimefunItemStack ADVANCED_SOLAR_PANEL = new SlimefunItemStack(
+        "ADVANCED_SOLAR_PANEL",
+        Material.BLACK_GLAZED_TERRACOTTA,
+        "&7&lAdvanced Solar Panel",
+        "&9Works at Night",
+        "",
+        LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ADVANCED_STORAGE),
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ADVANCED_DAY_RATE) + " (Day)",
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ADVANCED_NIGHT_RATE) + " (Night)"
+    );
+
+    public static final SlimefunItemStack HYBRID_SOLAR_PANEL = new SlimefunItemStack(
+        "HYBRID_SOLAR_PANEL",
+        Material.GRAY_GLAZED_TERRACOTTA,
+        "&b&lHybrid Solar Panel",
+        "&9Works at Night",
+        "",
+        LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.HYBRID_STORAGE),
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.HYBRID_DAY_RATE) + " (Day)",
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.HYBRID_NIGHT_RATE) + " (Night)"
+    );
+
+    public static final SlimefunItemStack ULTIMATE_SOLAR_PANEL = new SlimefunItemStack(
+        "ULTIMATE_SOLAR_PANEL",
+        Material.PURPLE_GLAZED_TERRACOTTA,
+        "&5&lUltimate Solar Panel",
+        "&9Works at Night",
+        "",
+        LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ULTIMATE_STORAGE),
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_DAY_RATE) + " (Day)",
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_NIGHT_RATE) + " (Night)"
+    );
+
+    //Basic Machines
     public static final SlimefunItemStack REFINED_SMELTERY = new SlimefunItemStack(
         "REFINED_SMELTERY",
         Material.BLAST_FURNACE,
         "&7Refined Smeltery"
     );
-
 
     private Items() {}
 }

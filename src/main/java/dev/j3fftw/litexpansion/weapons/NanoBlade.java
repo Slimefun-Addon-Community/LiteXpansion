@@ -7,8 +7,10 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rechargeable {
 
@@ -29,12 +31,16 @@ public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rec
     @Override
     public ItemUseHandler getItemHandler() {
         return event -> {
+            final ItemMeta nanoBladeMeta = event.getItem().getItemMeta();
             final Enchantment enchantment = Enchantment.getByKey(Constants.NANO_BLADE_ACTIVE_ENCHANT);
-            final int removedLevel = event.getItem().removeEnchantment(enchantment);
 
-            if (removedLevel == 0) {
-                event.getItem().addEnchantment(enchantment, 1);
+            if (!nanoBladeMeta.removeEnchant(enchantment)) {
+                nanoBladeMeta.addEnchant(enchantment, 1, false);
+                nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "Nano Blade" + ChatColor.GREEN + " (On)");
+            } else {
+                nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "Nano Blade" + ChatColor.RED + " (Off)");
             }
+            event.getItem().setItemMeta(nanoBladeMeta);
         };
     }
 }
