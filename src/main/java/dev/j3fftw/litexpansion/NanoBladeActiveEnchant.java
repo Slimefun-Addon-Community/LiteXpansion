@@ -61,7 +61,7 @@ public class NanoBladeActiveEnchant extends Enchantment {
             final ItemMeta itemMeta = item.getItemMeta();
             final Optional<String> id = SlimefunPlugin.getItemDataService().getItemData(itemMeta);
             if (id.isPresent()) {
-                return id.get().equals((Items.NANO_BLADE).getItemId());
+                return id.get().equals(Items.NANO_BLADE.getItemId());
             }
         }
         return false;
