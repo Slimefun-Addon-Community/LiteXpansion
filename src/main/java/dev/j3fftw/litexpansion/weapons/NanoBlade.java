@@ -31,16 +31,14 @@ public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rec
     @Override
     public ItemUseHandler getItemHandler() {
         return event -> {
-            ItemMeta nanoBladeMeta;
+            ItemMeta nanoBladeMeta = event.getItem().getItemMeta();
             final Enchantment enchantment = Enchantment.getByKey(Constants.NANO_BLADE_ACTIVE_ENCHANT);
-            final int removedLevel = event.getItem().removeEnchantment(enchantment);
 
-            if (removedLevel == 0) {
-                event.getItem().addEnchantment(enchantment, 1);
-                nanoBladeMeta = event.getItem().getItemMeta();
+            if (!nanoBladeMeta.hasEnchant(enchantment)) {
+                nanoBladeMeta.addEnchant(enchantment, 1, false);
                 nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "Nano Blade" + ChatColor.GREEN + " (On)");
             } else {
-                nanoBladeMeta = event.getItem().getItemMeta();
+                nanoBladeMeta.removeEnchant(enchantment);
                 nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "Nano Blade" + ChatColor.RED + " (Off)");
             }
             event.getItem().setItemMeta(nanoBladeMeta);
