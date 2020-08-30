@@ -38,7 +38,7 @@ public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rec
             if (removedLevel == 0) {
                 event.getItem().addEnchantment(enchantment, 1);
                 nanoBladeMeta = event.getItem().getItemMeta();
-                nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "Nano Blade" + ChatColor.GREEN+ " (On)");
+                nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "Nano Blade" + ChatColor.GREEN + " (On)");
             } else {
                 nanoBladeMeta = event.getItem().getItemMeta();
                 nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "Nano Blade" + ChatColor.RED + " (Off)");
