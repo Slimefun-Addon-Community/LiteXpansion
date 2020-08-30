@@ -1,13 +1,16 @@
 package dev.j3fftw.litexpansion;
 
-import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 
+@SuppressWarnings("NullableProblems")
 public class NanoBladeActiveEnchant extends Enchantment {
 
     public NanoBladeActiveEnchant(NamespacedKey key) {
@@ -53,7 +56,14 @@ public class NanoBladeActiveEnchant extends Enchantment {
     }
 
     @Override
-    public boolean canEnchantItem(ItemStack itemStack) {
-        return SlimefunUtils.isItemSimilar(itemStack, Items.NANO_BLADE, false);
+    public boolean canEnchantItem(ItemStack item) {
+        if (item.hasItemMeta()) {
+            ItemMeta itemMeta = item.getItemMeta();
+            Optional<String> id = SlimefunPlugin.getItemDataService().getItemData(itemMeta);
+            if (id.isPresent()) {
+                return (id.get().equals((Items.NANO_BLADE).getItemId()));
+            }
+        }
+        return false;
     }
 }
