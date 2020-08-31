@@ -15,8 +15,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
 
-import static dev.j3fftw.litexpansion.Items.FOOD_SYNTHESIZER;
-
 public class Events implements Listener {
 
     @EventHandler
@@ -60,7 +58,7 @@ public class Events implements Listener {
 
     @EventHandler
     public void onHungerDamage(EntityDamageEvent e) {
-        if (FOOD_SYNTHESIZER == null || FOOD_SYNTHESIZER.getItem().isDisabled() || !(e.getEntity() instanceof Player)) {
+        if (Items.FOOD_SYNTHESIZER == null || Items.FOOD_SYNTHESIZER.getItem().isDisabled() || !(e.getEntity() instanceof Player)) {
             return;
         }
 
@@ -70,7 +68,7 @@ public class Events implements Listener {
     }
 
     public void checkAndConsume(Player p, FoodLevelChangeEvent e) {
-        FoodSynthesizer foodSynth=(FoodSynthesizer)SlimefunItem.getByID(FOOD_SYNTHESIZER.getItemId());
+        FoodSynthesizer foodSynth=(FoodSynthesizer)SlimefunItem.getByID(Items.FOOD_SYNTHESIZER.getItemId());
         for(ItemStack item:p.getInventory().getContents()){
             if(foodSynth.isItem(item)&&foodSynth.removeItemCharge(item,3F)){
                 p.playSound(p.getLocation(),Sound.ENTITY_GENERIC_EAT,1.5F,1F);
