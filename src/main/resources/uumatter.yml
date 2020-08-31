@@ -112,7 +112,7 @@ recipes:
     - ' xx'
     - ' x '
   LAVA_BUCKET:
-    - ' x '
+    - '  x'
     - ' x '
     - ' x '
   WATER_BUCKET:
