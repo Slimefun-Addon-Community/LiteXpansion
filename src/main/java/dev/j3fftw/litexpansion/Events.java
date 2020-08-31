@@ -21,15 +21,7 @@ public class Events implements Listener {
     public void onHunger(FoodLevelChangeEvent e) {
         Player p = (Player) e.getEntity();
         if (e.getFoodLevel() < p.getFoodLevel()) {
-            FoodSynthesizer foodSynth = (FoodSynthesizer) SlimefunItem.getByID(Items.FOOD_SYNTHESIZER.getItemId());
-            for (ItemStack item : p.getInventory().getContents()) {
-                if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 3F)) {
-                    p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);
-                    e.setFoodLevel(20);
-                    p.setSaturation(5);
-                    break;
-                }
-            }
+            checkAndConsume(p, e);
         }
     }
 
@@ -60,6 +52,31 @@ public class Events implements Listener {
                 && electricChestplate.removeItemCharge(chestplate, (float) (e.getDamage() / 1.75))
             ) {
                 e.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onHungerDamage(EntityDamageEvent e) {
+        if (Items.FOOD_SYNTHESIZER == null || Items.FOOD_SYNTHESIZER.getItem().isDisabled() || !(e.getEntity() instanceof Player)) {
+            return;
+        }
+
+        if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+            checkAndConsume((Player) e.getEntity(), null);
+        }
+    }
+
+    public void checkAndConsume(Player p, FoodLevelChangeEvent e) {
+        FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
+        for(ItemStack item:p.getInventory().getContents()){
+            if(foodSynth.isItem(item)&&foodSynth.removeItemCharge(item,3F)){
+                p.playSound(p.getLocation(),Sound.ENTITY_GENERIC_EAT,1.5F,1F);
+                p.setFoodLevel(20);
+                p.setSaturation(5);
+                if (e != null) {
+                    e.setFoodLevel(20);
+                }
             }
         }
     }
