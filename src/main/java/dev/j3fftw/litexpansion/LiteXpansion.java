@@ -46,6 +46,17 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         getServer().getPluginManager().registerEvents(new Events(), this);
 
         // Category
+        try {
+            if (!Enchantment.isAcceptingRegistrations()) {
+                Field accepting = Enchantment.class.getDeclaredField("acceptingNew");
+                accepting.setAccessible(true);
+                accepting.set(null, true);
+            }
+        } catch (IllegalAccessException | NoSuchFieldException ignored) {
+            getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
+        }
+        Enchantment.registerEnchantment(new GlowEnchant(Constants.GLOW));
+
         Items.LITEXPANSION.register();
 
         ItemSetup.INSTANCE.init();
@@ -95,17 +106,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new ElectricChestplate().register(this);
 
         UUMatter.INSTANCE.register();
-
-        try {
-            if (!Enchantment.isAcceptingRegistrations()) {
-                Field accepting = Enchantment.class.getDeclaredField("acceptingNew");
-                accepting.setAccessible(true);
-                accepting.set(null, true);
-            }
-        } catch (IllegalAccessException | NoSuchFieldException ignored) {
-            getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
-        }
-        Enchantment.registerEnchantment(new NanoBladeActiveEnchant(Constants.NANO_BLADE_ACTIVE_ENCHANT));
 
         setupResearches();
         new ThoriumResource().register();

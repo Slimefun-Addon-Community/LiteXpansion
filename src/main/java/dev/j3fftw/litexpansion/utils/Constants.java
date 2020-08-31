@@ -5,8 +5,8 @@ import org.bukkit.NamespacedKey;
 
 public final class Constants {
 
-    public static final NamespacedKey NANO_BLADE_ACTIVE_ENCHANT = new NamespacedKey(LiteXpansion.getInstance(),
-        "nano_blade_active_enchant");
+    public static final NamespacedKey GLOW = new NamespacedKey(LiteXpansion.getInstance(),
+            "glow");
 
     private Constants() {}
 

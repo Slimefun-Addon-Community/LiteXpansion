@@ -32,7 +32,7 @@ public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rec
     public ItemUseHandler getItemHandler() {
         return event -> {
             final ItemMeta nanoBladeMeta = event.getItem().getItemMeta();
-            final Enchantment enchantment = Enchantment.getByKey(Constants.NANO_BLADE_ACTIVE_ENCHANT);
+            final Enchantment enchantment = Enchantment.getByKey(Constants.GLOW);
 
             if (!nanoBladeMeta.removeEnchant(enchantment)) {
                 nanoBladeMeta.addEnchant(enchantment, 1, false);

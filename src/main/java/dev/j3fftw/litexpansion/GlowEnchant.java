@@ -10,10 +10,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-@SuppressWarnings("NullableProblems")
-public class NanoBladeActiveEnchant extends Enchantment {
+public class GlowEnchant extends Enchantment {
 
-    public NanoBladeActiveEnchant(NamespacedKey key) {
+    public GlowEnchant(NamespacedKey key) {
         super(key);
     }
 
@@ -21,7 +20,7 @@ public class NanoBladeActiveEnchant extends Enchantment {
     @Override
     @Deprecated
     public String getName() {
-        return "Active";
+        return "Glow";
     }
 
     @Override
@@ -36,7 +35,7 @@ public class NanoBladeActiveEnchant extends Enchantment {
 
     @Override
     public EnchantmentTarget getItemTarget() {
-        return EnchantmentTarget.WEAPON;
+        return EnchantmentTarget.ALL;
     }
 
     @Override
@@ -61,9 +60,11 @@ public class NanoBladeActiveEnchant extends Enchantment {
             final ItemMeta itemMeta = item.getItemMeta();
             final Optional<String> id = SlimefunPlugin.getItemDataService().getItemData(itemMeta);
             if (id.isPresent()) {
-                return id.get().equals(Items.NANO_BLADE.getItemId());
+                return id.get().equals(Items.ADVANCED_CIRCUIT.getItemId())
+                        || id.get().equals(Items.NANO_BLADE.getItemId());
             }
         }
         return false;
     }
+
 }
