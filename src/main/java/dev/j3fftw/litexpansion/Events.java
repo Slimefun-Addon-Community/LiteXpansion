@@ -32,7 +32,7 @@ public class Events implements Listener {
             ItemStack itemInHand = p.getInventory().getItemInMainHand();
             final NanoBlade nanoBlade = (NanoBlade) SlimefunItem.getByID(Items.NANO_BLADE.getItemId());
             if (nanoBlade.isItem(itemInHand)
-                && itemInHand.containsEnchantment(Enchantment.getByKey(Constants.GLOW))
+                && itemInHand.containsEnchantment(Enchantment.getByKey(Constants.GLOW_ENCHANT))
                 && nanoBlade.removeItemCharge(itemInHand, 10)
             ) {
                 e.setDamage(e.getDamage() * 1.75);

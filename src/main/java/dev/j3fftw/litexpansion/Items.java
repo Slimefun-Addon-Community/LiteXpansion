@@ -329,7 +329,7 @@ public final class Items {
     );
 
     static {
-        ADVANCED_CIRCUIT.addUnsafeEnchantment(Enchantment.getByKey(Constants.GLOW), 1);
+        ADVANCED_CIRCUIT.addUnsafeEnchantment(Enchantment.getByKey(Constants.GLOW_ENCHANT), 1);
     }
 
     private Items() {}
