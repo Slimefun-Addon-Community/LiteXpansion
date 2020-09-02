@@ -5,6 +5,7 @@ import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
@@ -27,10 +28,6 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.MEDIUM_CAPACITOR;
-import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.REINFORCED_PLATE;
-import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.OIL_BUCKET;
-
 public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
@@ -51,9 +48,9 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
 
     public RubberSynthesizer() {
         super(Items.LITEXPANSION, Items.RUBBER_SYNTHESIZER_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-                REINFORCED_PLATE, MEDIUM_CAPACITOR, REINFORCED_PLATE,
-                new ItemStack(Material.PISTON), Items.MACHINE_BLOCK, new ItemStack(Material.PISTON),
-                REINFORCED_PLATE, new ItemStack(Material.FLINT_AND_STEEL), REINFORCED_PLATE
+            SlimefunItems.REINFORCED_PLATE, SlimefunItems.MEDIUM_CAPACITOR, SlimefunItems.REINFORCED_PLATE,
+            new ItemStack(Material.PISTON), Items.MACHINE_BLOCK, new ItemStack(Material.PISTON),
+            SlimefunItems.REINFORCED_PLATE, new ItemStack(Material.FLINT_AND_STEEL), SlimefunItems.REINFORCED_PLATE
         });
         setupInv();
     }
@@ -90,7 +87,7 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
         @Nullable final ItemStack input = inv.getItemInSlot(INPUT_SLOT);
         @Nullable final ItemStack output = inv.getItemInSlot(OUTPUT_SLOT);
         if (input == null || input.getType() == Material.AIR
-                || !SlimefunUtils.isItemSimilar(input, OIL_BUCKET, true)
+                || !SlimefunUtils.isItemSimilar(input, SlimefunItems.OIL_BUCKET, true)
                 || (output != null
                 && (output.getType() != Items.RUBBER.getType()
                 || output.getAmount() == output.getMaxStackSize()
