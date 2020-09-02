@@ -27,7 +27,9 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.*;
+import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.MEDIUM_CAPACITOR;
+import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.REINFORCED_PLATE;
+import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.OIL_BUCKET;
 
 public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
 
@@ -35,13 +37,13 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
             new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.RUBBER_SYNTHESIZER_MACHINE
     );
 
-    public static final int ENERGY_CONSUMPTION = 20_000 / 26;
+    private static final int PROGRESS_AMOUNT = 26; // Divide by 2 for seconds it takes
+    public static final int ENERGY_CONSUMPTION = 20_000 / PROGRESS_AMOUNT;
     public static final int CAPACITY = ENERGY_CONSUMPTION * 5;
 
     private static final int INPUT_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
-    private static final int PROGRESS_AMOUNT = 26; // Divide by 2 for seconds it takes
 
     private static final Map<BlockPosition, Integer> progress = new HashMap<>();
 
@@ -90,7 +92,8 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
         if (input == null || input.getType() == Material.AIR
                 || !SlimefunUtils.isItemSimilar(input, OIL_BUCKET, true)
                 || (output != null
-                && (output.getType() != Items.RUBBER.getType() || output.getAmount() == output.getMaxStackSize()
+                && (output.getType() != Items.RUBBER.getType()
+                || output.getAmount() == output.getMaxStackSize()
                 || !Items.RUBBER.getItem().isItem(output)))
         ) return;
 

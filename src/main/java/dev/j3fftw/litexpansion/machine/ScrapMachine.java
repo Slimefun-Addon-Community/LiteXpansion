@@ -89,7 +89,8 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
         @Nullable final ItemStack output = inv.getItemInSlot(OUTPUT_SLOT);
         if (input == null || input.getType() == Material.AIR
             || (output != null
-            && (output.getType() != Items.SCRAP.getType() || output.getAmount() == output.getMaxStackSize()
+            && (output.getType() != Items.SCRAP.getType()
+            || output.getAmount() == output.getMaxStackSize()
             || !Items.SCRAP.getItem().isItem(output)))
         ) return;
 
