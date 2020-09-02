@@ -5,8 +5,9 @@ import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
-import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -27,42 +28,42 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ScrapMachine extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
+public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
-        new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.SCRAP_MACHINE
+            new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.RUBBER_SYNTHESIZER_MACHINE
     );
 
-    public static final int ENERGY_CONSUMPTION = 100;
-    public static final int CAPACITY = 450;
+    private static final int PROGRESS_AMOUNT = 26; // Divide by 2 for seconds it takes
+    public static final int ENERGY_CONSUMPTION = 20_000 / PROGRESS_AMOUNT;
+    public static final int CAPACITY = ENERGY_CONSUMPTION * 5;
 
     private static final int INPUT_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
-    private static final int PROGRESS_AMOUNT = 10; // Divide by 2 for seconds it takes
 
     private static final Map<BlockPosition, Integer> progress = new HashMap<>();
 
-    private static final CustomItem progressItem = new CustomItem(Material.DEAD_BUSH, "&7Progress");
+    private static final CustomItem progressItem = new CustomItem(Material.FIRE_CHARGE, "&7Idle");
 
-    public ScrapMachine() {
-        super(Items.LITEXPANSION, Items.SCRAP_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-            SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.REINFORCED_PLATE, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
-            SlimefunItems.REINFORCED_PLATE, Items.MACHINE_BLOCK, SlimefunItems.REINFORCED_PLATE,
-            SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.REINFORCED_PLATE, SlimefunItems.ADVANCED_CIRCUIT_BOARD
+    public RubberSynthesizer() {
+        super(Items.LITEXPANSION, Items.RUBBER_SYNTHESIZER_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
+            SlimefunItems.REINFORCED_PLATE, SlimefunItems.MEDIUM_CAPACITOR, SlimefunItems.REINFORCED_PLATE,
+            new ItemStack(Material.PISTON), Items.MACHINE_BLOCK, new ItemStack(Material.PISTON),
+            SlimefunItems.REINFORCED_PLATE, new ItemStack(Material.FLINT_AND_STEEL), SlimefunItems.REINFORCED_PLATE
         });
         setupInv();
     }
 
     private void setupInv() {
-        createPreset(this, "&8Scrap Machine", blockMenuPreset -> {
+        createPreset(this, "&6Rubber Synthesizer", blockMenuPreset -> {
             for (int i = 0; i < 27; i++)
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
 
             blockMenuPreset.addItem(INPUT_SLOT, null, (player, i, itemStack, clickAction) -> true);
             Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
 
-            blockMenuPreset.addItem(PROGRESS_SLOT, new CustomItem(Material.DEAD_BUSH, "&7Progress"));
+            blockMenuPreset.addItem(PROGRESS_SLOT, progressItem);
         });
     }
 
@@ -70,7 +71,7 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
     public void preRegister() {
         this.addItemHandler(new BlockTicker() {
             public void tick(Block b, SlimefunItem sf, Config data) {
-                ScrapMachine.this.tick(b);
+                RubberSynthesizer.this.tick(b);
             }
 
             public boolean isSynchronized() {
@@ -86,10 +87,11 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
         @Nullable final ItemStack input = inv.getItemInSlot(INPUT_SLOT);
         @Nullable final ItemStack output = inv.getItemInSlot(OUTPUT_SLOT);
         if (input == null || input.getType() == Material.AIR
-            || (output != null
-            && (output.getType() != Items.SCRAP.getType()
-            || output.getAmount() == output.getMaxStackSize()
-            || !Items.SCRAP.getItem().isItem(output)))
+                || !SlimefunUtils.isItemSimilar(input, SlimefunItems.OIL_BUCKET, true)
+                || (output != null
+                && (output.getType() != Items.RUBBER.getType()
+                || output.getAmount() == output.getMaxStackSize()
+                || !Items.RUBBER.getItem().isItem(output)))
         ) return;
 
         final BlockPosition pos = new BlockPosition(b.getWorld(), b.getX(), b.getY(), b.getZ());
@@ -97,7 +99,6 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
 
         // Process first tick - remove an input and put it in map.
         if (currentProgress == -1 && takePower(b)) {
-            inv.consumeItem(INPUT_SLOT);
             progress.put(pos, 0);
             return;
         }
@@ -106,17 +107,18 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
         if (currentProgress == -1 || !takePower(b)) return;
 
         if (currentProgress == PROGRESS_AMOUNT) {
+            inv.consumeItem(INPUT_SLOT);
             if (output != null && output.getAmount() > 0)
                 output.setAmount(output.getAmount() + 1);
             else {
-                inv.replaceExistingItem(OUTPUT_SLOT, Items.SCRAP.clone());
+                inv.replaceExistingItem(OUTPUT_SLOT, Items.RUBBER.clone());
             }
             progress.remove(pos);
             ChestMenuUtils.updateProgressbar(inv, PROGRESS_SLOT, PROGRESS_AMOUNT, PROGRESS_AMOUNT, progressItem);
         } else {
             progress.put(pos, ++currentProgress);
             ChestMenuUtils.updateProgressbar(inv, PROGRESS_SLOT, PROGRESS_AMOUNT - currentProgress, PROGRESS_AMOUNT,
-                progressItem);
+                    progressItem);
         }
     }
 
