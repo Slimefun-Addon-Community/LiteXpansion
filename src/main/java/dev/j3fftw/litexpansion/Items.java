@@ -2,6 +2,7 @@ package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
+import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.machine.ScrapMachine;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
@@ -181,7 +182,6 @@ public final class Items {
         "&7Electronic Circuit"
     );
 
-    //todo make it enchanted
     public static final SlimefunItemStack ADVANCED_CIRCUIT = new SlimefunItemStack(
         "ADVANCED_CIRCUIT",
         Material.COBWEB,
@@ -285,6 +285,17 @@ public final class Items {
         "",
         LoreBuilderDynamic.powerBuffer(MassFabricator.CAPACITY),
         LoreBuilderDynamic.powerPerTick(MassFabricator.ENERGY_CONSUMPTION)
+    );
+
+    public static final SlimefunItemStack RUBBER_SYNTHESIZER_MACHINE = new SlimefunItemStack(
+            "RUBBER_SYNTHESIZER_MACHINE",
+            Material.ORANGE_CONCRETE,
+            "&6Rubber Synthesizer",
+            "",
+            "&fConverts Bucket of Oil to &7Rubber",
+            "",
+            LoreBuilderDynamic.powerBuffer(RubberSynthesizer.CAPACITY),
+            LoreBuilderDynamic.powerPerTick(RubberSynthesizer.ENERGY_CONSUMPTION)
     );
 
     //// Solar panels

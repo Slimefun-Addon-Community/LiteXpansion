@@ -4,10 +4,7 @@ import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.Thorium;
-import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
-import dev.j3fftw.litexpansion.machine.MassFabricator;
-import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
-import dev.j3fftw.litexpansion.machine.ScrapMachine;
+import dev.j3fftw.litexpansion.machine.*;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
@@ -50,10 +47,14 @@ final class ItemSetup {
 
         new ScrapMachine().register(LiteXpansion.getInstance());
         new MassFabricator().register(LiteXpansion.getInstance());
+        new RubberSynthesizer().register(LiteXpansion.getInstance());
         new RefinedSmeltery().register(LiteXpansion.getInstance());
     }
 
     private void registerMiscItems() {
+        //Rubber
+        registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
+
         // Advanced Alloy
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
 
