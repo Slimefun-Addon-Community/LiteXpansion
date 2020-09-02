@@ -133,7 +133,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
         ADVANCED(Items.ADVANCED_SOLAR_PANEL, ADVANCED_DAY_RATE, ADVANCED_NIGHT_RATE, ADVANCED_OUTPUT, ADVANCED_STORAGE, new ItemStack[] {
             Items.REINFORCED_GLASS, Items.REINFORCED_GLASS, Items.REINFORCED_GLASS,
-            Items.ADVANCED_ALLOY, SlimefunItems.SOLAR_PANEL, Items.ADVANCED_ALLOY,
+            Items.ADVANCED_ALLOY, SlimefunItems.SOLAR_GENERATOR_2, Items.ADVANCED_ALLOY,
             SlimefunItems.ADVANCED_CIRCUIT_BOARD, Items.ADVANCED_MACHINE_BLOCK, SlimefunItems.ADVANCED_CIRCUIT_BOARD
         }),
 
