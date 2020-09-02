@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
+@SuppressWarnings("NullableProblems")
 public class GlowEnchant extends Enchantment {
 
     public GlowEnchant(NamespacedKey key) {

@@ -45,7 +45,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         getServer().getPluginManager().registerEvents(new Events(), this);
 
-        // Category
+        // Enchantment
         try {
             if (!Enchantment.isAcceptingRegistrations()) {
                 Field accepting = Enchantment.class.getDeclaredField("acceptingNew");
@@ -57,6 +57,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         }
         Enchantment.registerEnchantment(new GlowEnchant(Constants.GLOW_ENCHANT));
 
+        // Category
         Items.LITEXPANSION.register();
 
         ItemSetup.INSTANCE.init();
