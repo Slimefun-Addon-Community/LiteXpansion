@@ -158,7 +158,7 @@ final class ItemSetup {
         new AdvancedSolarPanel(AdvancedSolarPanel.Type.ULTIMATE).register(LiteXpansion.getInstance());
     }
 
-    ////////////////////////
+    //Register Items
     private void registerItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
                               @Nonnull ItemStack... items) {
         ItemStack[] recipe;
