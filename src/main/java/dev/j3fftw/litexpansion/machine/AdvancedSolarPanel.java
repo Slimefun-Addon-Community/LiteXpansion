@@ -91,11 +91,11 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
                 canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
                     "", "&bRate: " + generationType,
                     "&7Generating at &6" + Utils.powerFormatAndFadeDecimals(Utils.perTickToPerSecond(rate)) + " J/s &8(" + rate + " J/t)",
-                    "", "&7Stored: &6" + (stored + rate) + " J"
+                    "", "&7Stored: &6" + Utils.powerFormatAndFadeDecimals(stored + rate) + " J"
                 )
                     : new CustomItem(Material.ORANGE_STAINED_GLASS_PANE, "&cNot Generating",
                     "", "&7Generator has reached maximum capacity.",
-                    "", "&7Stored: &6" + stored + " J")
+                    "", "&7Stored: &6" + Utils.powerFormatAndFadeDecimals(stored) + " J")
             );
         }
 

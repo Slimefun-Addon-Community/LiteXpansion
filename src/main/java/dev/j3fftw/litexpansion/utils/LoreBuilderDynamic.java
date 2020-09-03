@@ -17,7 +17,7 @@ public final class LoreBuilderDynamic {
 
 
 
-    public static String powerBuffer(int power) {
+    public static String powerBuffer(double power) {
         return power(power, " Buffer");
     }
 
