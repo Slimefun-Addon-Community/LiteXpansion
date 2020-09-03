@@ -1,6 +1,7 @@
 package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.litexpansion.Items;
+import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -49,6 +50,8 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         "&cNot Generating..."
     );
 
+    String time;
+
     private final Type type;
 
     public AdvancedSolarPanel(Type type) {
@@ -76,11 +79,12 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
             inv.replaceExistingItem(PROGRESS_SLOT,
                 canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
-                    "", "&7Generating at &6" + rate + " J",
+                    "", "&eTime: " + time,
+                    "&7Generating at &6" + Utils.powerFormatAndFadeDecimals(Utils.perTickToPerSecond(rate)) + " J/s &8(" + rate + " J/t)",
                     "", "&7Stored: &6" + (stored + rate) + " J"
                 )
-                    : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
-                    "", "&7Not generating power, already at maximum capacity.",
+                    : new CustomItem(Material.ORANGE_STAINED_GLASS_PANE, "&cNot Generating",
+                    "", "&7Generator has reached maximum capacity.",
                     "", "&7Stored: &6" + stored + " J")
             );
         }
@@ -100,10 +104,14 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         // Note: You need to get the block above for the light check, the block itself is always 0
         if (world.isThundering() || world.hasStorm() || world.getTime() >= 13000
             || b.getLocation().add(0, 1, 0).getBlock().getLightFromSky() != 15
-        )
+        ) {
+            time = "&8Night";
             return this.type.getNightGenerationRate();
-        else
+        }
+        else {
+            time = "&bDay";
             return this.type.getDayGenerationRate();
+        }
     }
 
     @Override
