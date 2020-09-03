@@ -21,6 +21,8 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
+import static org.bukkit.Bukkit.getServer;
+
 final class ItemSetup {
 
     protected static final ItemSetup INSTANCE = new ItemSetup();
@@ -44,6 +46,7 @@ final class ItemSetup {
 
     private void registerTools() {
         new CargoConfigurator().register(LiteXpansion.getInstance());
+        new Wrench().register(LiteXpansion.getInstance());
     }
 
     private void registerMachines() {
@@ -51,14 +54,19 @@ final class ItemSetup {
 
         new ScrapMachine().register(LiteXpansion.getInstance());
         new MassFabricator().register(LiteXpansion.getInstance());
-        new RubberSynthesizer().register(LiteXpansion.getInstance());
         new RefinedSmeltery().register(LiteXpansion.getInstance());
     }
 
-    private void registerMiscItems() {
-        //Rubber
-        registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
+    //Disable when SlimyTreeTaps exists
+    private void registerRubber() {
+        if (getServer().getPluginManager().getPlugin("SlimyTreeTaps") == null) {
+            //Rubber
+            registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
+            new RubberSynthesizer().register(LiteXpansion.getInstance());
+        }
+    }
 
+    private void registerMiscItems() {
         // Advanced Alloy
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
 
@@ -96,9 +104,9 @@ final class ItemSetup {
         );
 
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.RUBBER, Items.RUBBER, Items.RUBBER,
+            SlimefunItem.getByID("RUBBER").getItem(), SlimefunItem.getByID("RUBBER").getItem(), SlimefunItem.getByID("RUBBER").getItem(),
             Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE,
-            Items.RUBBER, Items.RUBBER, Items.RUBBER
+            SlimefunItem.getByID("RUBBER").getItem(), SlimefunItem.getByID("RUBBER").getItem(), SlimefunItem.getByID("RUBBER").getItem(), SlimefunItem.getByID("RUBBER").getItem()
         );
 
         // Circuits
