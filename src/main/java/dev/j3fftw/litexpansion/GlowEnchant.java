@@ -21,7 +21,7 @@ public class GlowEnchant extends Enchantment {
     @Override
     @Deprecated
     public String getName() {
-        return "Glow";
+        return "LX_Glow";
     }
 
     @Override
