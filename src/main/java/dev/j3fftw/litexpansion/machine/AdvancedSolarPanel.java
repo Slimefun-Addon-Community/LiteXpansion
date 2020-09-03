@@ -50,8 +50,6 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         "&cNot Generating..."
     );
 
-    String generationType;
-
     private final Type type;
 
     public AdvancedSolarPanel(Type type) {
@@ -75,6 +73,8 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         final int stored = ChargableBlock.getCharge(l);
         final boolean canGenerate = stored < getCapacity();
         final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), l.getWorld()) : 0;
+
+        String generationType = "&4Unknown";
 
         if (rate == this.type.getDayGenerationRate()) {
             generationType = "&aOverworld &e(Day)";

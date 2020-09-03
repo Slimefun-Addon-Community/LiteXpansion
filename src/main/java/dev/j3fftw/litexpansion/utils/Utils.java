@@ -44,7 +44,7 @@ public final class Utils {
     }
 
     public static double perTickToPerSecond(double power) {
-        if (Constants.CUSTOM_TICKER_DELAY == 0) {
+        if (Constants.CUSTOM_TICKER_DELAY <= 0) {
             return (Constants.SERVER_TICK_RATE * power);
         } else {
             return (1 / ( (double) Constants.CUSTOM_TICKER_DELAY / Constants.SERVER_TICK_RATE) * power);
