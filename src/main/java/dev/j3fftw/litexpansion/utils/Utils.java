@@ -15,9 +15,10 @@ import java.util.Locale;
 
 public final class Utils {
 
-    private Utils() {}
+    private static final DecimalFormat powerFormat = new DecimalFormat("###,###.##",
+        DecimalFormatSymbols.getInstance(Locale.ROOT));
 
-    private static final DecimalFormat powerFormat = new DecimalFormat("###,###.##", DecimalFormatSymbols.getInstance(Locale.ROOT));
+    private Utils() {}
 
     public static String powerFormatAndFadeDecimals(double power) {
         String formattedString = powerFormat.format(power);
@@ -47,7 +48,7 @@ public final class Utils {
         if (Constants.CUSTOM_TICKER_DELAY <= 0) {
             return (Constants.SERVER_TICK_RATE * power);
         } else {
-            return (1 / ( (double) Constants.CUSTOM_TICKER_DELAY / Constants.SERVER_TICK_RATE) * power);
+            return (1 / ((double) Constants.CUSTOM_TICKER_DELAY / Constants.SERVER_TICK_RATE) * power);
         }
     }
 }
