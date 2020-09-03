@@ -46,11 +46,11 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
     private static final int PROGRESS_SLOT = 4;
 
-    private static final CustomItem generatingItem = new CustomItem(Material.GREEN_STAINED_GLASS_PANE,
+    private static final CustomItem generatingItem = new CustomItem(Material.ORANGE_STAINED_GLASS_PANE,
         "&cNot Generating..."
     );
 
-    String time;
+    String generationType;
 
     private final Type type;
 
@@ -76,10 +76,20 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         final boolean canGenerate = stored < getCapacity();
         final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), l.getWorld()) : 0;
 
+        if (rate == this.type.getDayGenerationRate()) {
+            generationType = "&aOverworld &e(Day)";
+        } if (rate == this.type.getNightGenerationRate()){
+            generationType = "&aOverworld &8(Night)";
+        } if (l.getWorld().getEnvironment() == World.Environment.NETHER){
+            generationType = "&cNether &e(Day)";
+        } if (l.getWorld().getEnvironment() == World.Environment.THE_END){
+            generationType = "&5End &8(Night)";
+        }
+
         if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
             inv.replaceExistingItem(PROGRESS_SLOT,
                 canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
-                    "", "&eTime: " + time,
+                    "", "&bRate: " + generationType,
                     "&7Generating at &6" + Utils.powerFormatAndFadeDecimals(Utils.perTickToPerSecond(rate)) + " J/s &8(" + rate + " J/t)",
                     "", "&7Stored: &6" + (stored + rate) + " J"
                 )
@@ -105,11 +115,8 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         if (world.isThundering() || world.hasStorm() || world.getTime() >= 13000
             || b.getLocation().add(0, 1, 0).getBlock().getLightFromSky() != 15
         ) {
-            time = "&8Night";
             return this.type.getNightGenerationRate();
-        }
-        else {
-            time = "&bDay";
+        } else {
             return this.type.getDayGenerationRate();
         }
     }
