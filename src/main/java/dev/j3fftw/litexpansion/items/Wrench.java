@@ -68,7 +68,7 @@ public class Wrench extends SimpleSlimefunItem<ItemUseHandler> implements Listen
                     BlockStorage.clearBlockInfo(interactedBlock);
                     interactedBlock.getLocation().getWorld().dropItemNaturally(interactedBlock.getLocation(), slimefunBlockDrop);
 
-                    if (interactedBlock instanceof InventoryBlock) {
+                    if (BlockStorage.hasInventory(interactedBlock)) {
                         p.sendMessage("This is an inventory block");
                         BlockMenu blockInventory = BlockStorage.getInventory(interactedBlock);
                         int[] inputSlots = ((InventoryBlock) interactedBlock).getInputSlots();
