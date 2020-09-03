@@ -33,12 +33,12 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
     public static final RecipeType RECIPE_TYPE = new RecipeType(
         new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.RUBBER_SYNTHESIZER_MACHINE
     );
-    public static final int CAPACITY = ENERGY_CONSUMPTION * 5;
-    private static final int PROGRESS_AMOUNT = 26; // Divide by 2 for seconds it takes
-    public static final int ENERGY_CONSUMPTION = 20_000 / PROGRESS_AMOUNT;
     private static final int INPUT_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
+    private static final int PROGRESS_AMOUNT = 26; // Divide by 2 for seconds it takes
+    public static final int ENERGY_CONSUMPTION = 20_000 / PROGRESS_AMOUNT;
+    public static final int CAPACITY = ENERGY_CONSUMPTION * 5;
 
     private static final Map<BlockPosition, Integer> progress = new HashMap<>();
 
