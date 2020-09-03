@@ -1,6 +1,7 @@
 package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.litexpansion.Items;
+import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -45,7 +46,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
     private static final int PROGRESS_SLOT = 4;
 
-    private static final CustomItem generatingItem = new CustomItem(Material.GREEN_STAINED_GLASS_PANE,
+    private static final CustomItem generatingItem = new CustomItem(Material.ORANGE_STAINED_GLASS_PANE,
         "&cNot Generating..."
     );
 
@@ -73,15 +74,28 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         final boolean canGenerate = stored < getCapacity();
         final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), l.getWorld()) : 0;
 
+        String generationType = "&4Unknown";
+
+         if (l.getWorld().getEnvironment() == World.Environment.NETHER){
+            generationType = "&cNether &e(Day)";
+        } else if (l.getWorld().getEnvironment() == World.Environment.THE_END){
+            generationType = "&5End &8(Night)";
+        } else if (rate == this.type.getDayGenerationRate()) {
+            generationType = "&aOverworld &e(Day)";
+        } else if (rate == this.type.getNightGenerationRate()){
+            generationType = "&aOverworld &8(Night)";
+        }
+
         if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
             inv.replaceExistingItem(PROGRESS_SLOT,
                 canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&aGenerating",
-                    "", "&7Generating at &6" + rate + " J",
-                    "", "&7Stored: &6" + (stored + rate) + " J"
+                    "", "&bRate: " + generationType,
+                    "&7Generating at &6" + Utils.powerFormatAndFadeDecimals(Utils.perTickToPerSecond(rate)) + " J/s &8(" + rate + " J/t)",
+                    "", "&7Stored: &6" + Utils.powerFormatAndFadeDecimals(stored + rate) + " J"
                 )
-                    : new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cNot Generating",
-                    "", "&7Not generating power, already at maximum capacity.",
-                    "", "&7Stored: &6" + stored + " J")
+                    : new CustomItem(Material.ORANGE_STAINED_GLASS_PANE, "&cNot Generating",
+                    "", "&7Generator has reached maximum capacity.",
+                    "", "&7Stored: &6" + Utils.powerFormatAndFadeDecimals(stored) + " J")
             );
         }
 
@@ -100,10 +114,11 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         // Note: You need to get the block above for the light check, the block itself is always 0
         if (world.isThundering() || world.hasStorm() || world.getTime() >= 13000
             || b.getLocation().add(0, 1, 0).getBlock().getLightFromSky() != 15
-        )
+        ) {
             return this.type.getNightGenerationRate();
-        else
+        } else {
             return this.type.getDayGenerationRate();
+        }
     }
 
     @Override
