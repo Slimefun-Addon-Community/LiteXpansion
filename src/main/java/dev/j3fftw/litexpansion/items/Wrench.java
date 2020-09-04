@@ -34,6 +34,9 @@ import static org.bukkit.Bukkit.getLogger;
 
 public class Wrench extends SimpleSlimefunItem<ItemUseHandler> implements Listener {
 
+    protected static final int[] cargoSlots = { 19, 20, 21, 28, 29, 30, 37, 38, 39 };
+    protected static final String[] wrenchableBlockIds = { SlimefunItems.CARGO_INPUT_NODE.getItemId(), SlimefunItems.CARGO_OUTPUT_NODE.getItemId(), SlimefunItems.CARGO_OUTPUT_NODE_2.getItemId(), SlimefunItems.CARGO_CONNECTOR_NODE.getItemId(), SlimefunItems.SMALL_CAPACITOR.getItemId(), SlimefunItems.MEDIUM_CAPACITOR.getItemId(), SlimefunItems.LARGE_CAPACITOR.getItemId(), SlimefunItems.BIG_CAPACITOR.getItemId(), SlimefunItems.CARBONADO_EDGED_CAPACITOR.getItemId(), SlimefunItems.TRASH_CAN.getItemId() };
+
     public Wrench() {
         super(Items.LITEXPANSION, Items.WRENCH, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
                 Items.REFINED_IRON, SlimefunItems.REINFORCED_PLATE, Items.REFINED_IRON,
@@ -54,31 +57,36 @@ public class Wrench extends SimpleSlimefunItem<ItemUseHandler> implements Listen
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            Block interactedBlock = e.getClickedBlock();
-
             if (SlimefunUtils.isItemSimilar(e.getItem(), Items.WRENCH, true, false)) {
                 e.setCancelled(true);
 
-                final SlimefunItem slimefunBlock = BlockStorage.check(e.getClickedBlock());
+                Block interactedBlock = e.getClickedBlock();
+                SlimefunItem slimefunBlock = BlockStorage.check(e.getClickedBlock());
 
-                if (BlockStorage.hasBlockInfo(interactedBlock)) {
+                if (slimefunBlock == null) {
+                    p.sendMessage(ChatColor.RED + "Hey buddy boy this can only be used on cargo nodes and capacitors!");
+                    return;
+                }
 
-                    ItemStack slimefunBlockDrop = slimefunBlock.getItem();
+                for (String wrenchableBlockId : wrenchableBlockIds) {
+                    if (slimefunBlock.getID() == wrenchableBlockId) {
 
-                    BlockStorage.clearBlockInfo(interactedBlock);
-                    interactedBlock.getLocation().getWorld().dropItemNaturally(interactedBlock.getLocation(), slimefunBlockDrop);
+                        ItemStack slimefunBlockDrop = slimefunBlock.getItem();
 
-                    if (BlockStorage.hasInventory(interactedBlock)) {
-                        p.sendMessage("This is an inventory block");
-                        BlockMenu blockInventory = BlockStorage.getInventory(interactedBlock);
-                        int[] inputSlots = ((InventoryBlock) interactedBlock).getInputSlots();
-                        for (int slot : inputSlots) {
-                            p.sendMessage("The input slots are " + slot);
-                            p.sendMessage("The item in this slot is " + blockInventory.getItemInSlot(slot));
-                            interactedBlock.getLocation().getWorld().dropItemNaturally(interactedBlock.getLocation(), blockInventory.getItemInSlot(slot));
+                        BlockStorage.clearBlockInfo(interactedBlock);
+                        interactedBlock.getLocation().getWorld().dropItemNaturally(interactedBlock.getLocation(), slimefunBlockDrop);
+
+                        if (slimefunBlock.getID() == SlimefunItems.CARGO_INPUT_NODE.getItemId() || slimefunBlock.getID() == SlimefunItems.CARGO_OUTPUT_NODE_2.getItemId()) {
+                            for (int slot : cargoSlots) {
+                                ItemStack cargoDrop = BlockStorage.getInventory(interactedBlock).getItemInSlot(slot);
+                                if (cargoDrop != null) {
+                                    interactedBlock.getLocation().getWorld().dropItemNaturally(interactedBlock.getLocation(), cargoDrop);
+                                }
+                            }
+
                         }
+                        interactedBlock.setType(Material.AIR);
                     }
-                    interactedBlock.setType(Material.AIR);
                 }
             }
         }

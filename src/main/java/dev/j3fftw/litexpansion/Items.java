@@ -59,7 +59,10 @@ public final class Items {
     public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
         "WRENCH",
         Material.GOLDEN_HOE,
-        "&6Wrench"
+        "&6Wrench",
+        "",
+        "&fRight click &cCargo Nodes &fand &aCapacitors",
+        "&fto instantly break them"
     );
 
     public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
