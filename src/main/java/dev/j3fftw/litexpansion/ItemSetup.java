@@ -4,7 +4,6 @@ import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.Thorium;
-import dev.j3fftw.litexpansion.items.Wrench;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
@@ -21,8 +20,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
-
-import static org.bukkit.Bukkit.getServer;
 
 final class ItemSetup {
 
@@ -43,12 +40,10 @@ final class ItemSetup {
         registerEndgameItems();
         registerCarbonStuff();
         registerSolarPanels();
-        registerRubber();
     }
 
     private void registerTools() {
         new CargoConfigurator().register(LiteXpansion.getInstance());
-        new Wrench().register(LiteXpansion.getInstance());
     }
 
     private void registerMachines() {
@@ -56,19 +51,14 @@ final class ItemSetup {
 
         new ScrapMachine().register(LiteXpansion.getInstance());
         new MassFabricator().register(LiteXpansion.getInstance());
+        new RubberSynthesizer().register(LiteXpansion.getInstance());
         new RefinedSmeltery().register(LiteXpansion.getInstance());
     }
 
-    //Disable when SlimyTreeTaps exists
-    private void registerRubber() {
-        if (getServer().getPluginManager().getPlugin("SlimyTreeTaps") == null) {
-            //Rubber
-            registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
-            new RubberSynthesizer().register(LiteXpansion.getInstance());
-        }
-    }
-
     private void registerMiscItems() {
+        //Rubber
+        registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
+
         // Advanced Alloy
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
 
@@ -106,9 +96,9 @@ final class ItemSetup {
         );
 
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            SlimefunItem.getByID("RUBBER").getItem(), SlimefunItem.getByID("RUBBER").getItem(), SlimefunItem.getByID("RUBBER").getItem(),
+            Items.RUBBER, Items.RUBBER, Items.RUBBER,
             Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE,
-            SlimefunItem.getByID("RUBBER").getItem(), SlimefunItem.getByID("RUBBER").getItem(), SlimefunItem.getByID("RUBBER").getItem(), SlimefunItem.getByID("RUBBER").getItem()
+            Items.RUBBER, Items.RUBBER, Items.RUBBER
         );
 
         // Circuits
