@@ -49,7 +49,7 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
     public void onGlassCut(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_BLOCK && isItem(e.getItem()) && removeItemCharge(e.getItem(), COST)) {
+        if (e.getAction() == Action.LEFT_CLICK_BLOCK && isItem(e.getItem())) {
             e.setCancelled(true);
 
             SlimefunItem slimefunItem = BlockStorage.check(e.getClickedBlock());
@@ -60,7 +60,8 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
 
             if (e.getClickedBlock().getType() == Material.GLASS
                 || e.getClickedBlock().getType().name().endsWith("_GLASS")
-                || e.getClickedBlock().getType().name().endsWith("_PANE")) {
+                || e.getClickedBlock().getType().name().endsWith("_PANE")
+                && removeItemCharge(e.getItem(), COST)) {
                 e.getClickedBlock().getLocation().getWorld().dropItemNaturally(e.getClickedBlock().getLocation(),
                     new ItemStack(e.getClickedBlock().getType()));
                 e.getClickedBlock().setType(Material.AIR);
