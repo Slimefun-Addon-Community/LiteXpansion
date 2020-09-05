@@ -22,9 +22,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements Listener {
 
-    private static final Material[] cuttableBlocks = { Material.GLASS, Material.WHITE_STAINED_GLASS, Material.ORANGE_STAINED_GLASS, Material.MAGENTA_STAINED_GLASS, Material.LIGHT_BLUE_STAINED_GLASS, Material.YELLOW_STAINED_GLASS, Material.LIME_STAINED_GLASS, Material.PINK_STAINED_GLASS, Material.GRAY_STAINED_GLASS, Material.LIGHT_GRAY_STAINED_GLASS, Material.CYAN_STAINED_GLASS, Material.PURPLE_STAINED_GLASS, Material.BLUE_STAINED_GLASS, Material.BROWN_STAINED_GLASS, Material.GREEN_STAINED_GLASS, Material.RED_STAINED_GLASS, Material.BLACK_STAINED_GLASS };
-
-
     public GlassCutter() {
         super(Items.LITEXPANSION, Items.GLASS_CUTTER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
@@ -53,12 +50,9 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
                 return;
             }
 
-            for (Material cuttableBlock : cuttableBlocks) {
-                if (e.getClickedBlock().getType() == cuttableBlock) {
-                    ItemStack droppedGlass = new ItemStack(cuttableBlock);
-                    e.getClickedBlock().getLocation().getWorld().dropItemNaturally(e.getClickedBlock().getLocation(), droppedGlass);
-                    e.getClickedBlock().setType(Material.AIR);
-                }
+            if (e.getClickedBlock().getType() == Material.GLASS || e.getClickedBlock().getType().name().endsWith("_GLASS") || e.getClickedBlock().getType().name().endsWith("_PANE")) {
+                e.getClickedBlock().getLocation().getWorld().dropItemNaturally(e.getClickedBlock().getLocation(), new ItemStack(e.getClickedBlock().getType()));
+                e.getClickedBlock().setType(Material.AIR);
             }
         }
     }
