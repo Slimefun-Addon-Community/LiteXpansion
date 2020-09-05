@@ -11,7 +11,7 @@ public final class Constants {
     public static final int CUSTOM_TICKER_DELAY = SlimefunPlugin.getCfg().getInt("URID.custom-ticker-delay");
 
     public static final NamespacedKey GLOW_ENCHANT = new NamespacedKey(LiteXpansion.getInstance(),
-            "glow_enchant");
+        "glow_enchant");
 
     private Constants() {}
 

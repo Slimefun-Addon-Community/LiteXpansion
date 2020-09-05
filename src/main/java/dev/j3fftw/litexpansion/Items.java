@@ -291,14 +291,14 @@ public final class Items {
     );
 
     public static final SlimefunItemStack RUBBER_SYNTHESIZER_MACHINE = new SlimefunItemStack(
-            "RUBBER_SYNTHESIZER_MACHINE",
-            Material.ORANGE_CONCRETE,
-            "&6Rubber Synthesizer",
-            "",
-            "&fConverts Bucket of Oil to &7Rubber",
-            "",
-            LoreBuilderDynamic.powerBuffer(RubberSynthesizer.CAPACITY),
-            LoreBuilderDynamic.powerPerTick(RubberSynthesizer.ENERGY_CONSUMPTION)
+        "RUBBER_SYNTHESIZER_MACHINE",
+        Material.ORANGE_CONCRETE,
+        "&6Rubber Synthesizer",
+        "",
+        "&fConverts Bucket of Oil to &7Rubber",
+        "",
+        LoreBuilderDynamic.powerBuffer(RubberSynthesizer.CAPACITY),
+        LoreBuilderDynamic.powerPerTick(RubberSynthesizer.ENERGY_CONSUMPTION)
     );
 
     //// Solar panels
