@@ -351,6 +351,7 @@ public final class Items {
 
     static {
         ADVANCED_CIRCUIT.addEnchantment(Enchantment.getByKey(Constants.GLOW_ENCHANT), 1);
+        GLASS_CUTTER.addEnchantment(Enchantment.getByKey(Constants.GLOW_ENCHANT), 1);
     }
 
     private Items() {}
