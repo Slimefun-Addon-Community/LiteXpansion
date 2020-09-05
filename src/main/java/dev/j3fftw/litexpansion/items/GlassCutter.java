@@ -5,7 +5,6 @@ import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
-import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -50,6 +49,7 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
         if (e.getAction() == Action.LEFT_CLICK_BLOCK && isItem(e.getItem())) {
             e.setCancelled(true);
 
+            String blockName = e.getClickedBlock().getType().name();
             SlimefunItem slimefunItem = BlockStorage.check(e.getClickedBlock());
 
             if (slimefunItem != null) {
@@ -57,8 +57,8 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
             }
 
             if ((e.getClickedBlock().getType() == Material.GLASS
-                || e.getClickedBlock().getType().name().endsWith("_GLASS")
-                || e.getClickedBlock().getType().name().endsWith("_PANE"))
+                || blockName.endsWith("_GLASS")
+                || blockName.endsWith("_PANE"))
                 && removeItemCharge(e.getItem(), 0.5F)) {
                 e.getClickedBlock().getLocation().getWorld().dropItemNaturally(e.getClickedBlock().getLocation(),
                     new ItemStack(e.getClickedBlock().getType()));
