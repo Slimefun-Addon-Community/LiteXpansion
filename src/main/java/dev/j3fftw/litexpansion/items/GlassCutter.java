@@ -10,6 +10,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -49,20 +50,20 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
         if (e.getAction() == Action.LEFT_CLICK_BLOCK && isItem(e.getItem())) {
             e.setCancelled(true);
 
-            String blockName = e.getClickedBlock().getType().name();
+            Block block = e.getClickedBlock();
             SlimefunItem slimefunItem = BlockStorage.check(e.getClickedBlock());
 
             if (slimefunItem != null) {
                 return;
             }
 
-            if ((e.getClickedBlock().getType() == Material.GLASS
-                || blockName.endsWith("_GLASS")
-                || blockName.endsWith("_PANE"))
+            if ((block.getType() == Material.GLASS
+                || e.getClickedBlock().getType().name().endsWith("_GLASS")
+                || e.getClickedBlock().getType().name().endsWith("_PANE"))
                 && removeItemCharge(e.getItem(), 0.5F)) {
-                e.getClickedBlock().getLocation().getWorld().dropItemNaturally(e.getClickedBlock().getLocation(),
-                    new ItemStack(e.getClickedBlock().getType()));
-                e.getClickedBlock().setType(Material.AIR);
+                block.getLocation().getWorld().dropItemNaturally(block.getLocation(),
+                    new ItemStack(block.getType()));
+                block.setType(Material.AIR);
             }
         }
     }
