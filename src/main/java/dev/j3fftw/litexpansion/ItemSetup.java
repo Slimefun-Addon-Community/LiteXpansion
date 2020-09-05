@@ -2,6 +2,7 @@ package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
@@ -44,6 +45,7 @@ final class ItemSetup {
 
     private void registerTools() {
         new CargoConfigurator().register(LiteXpansion.getInstance());
+        new GlassCutter().register(LiteXpansion.getInstance());
     }
 
     private void registerMachines() {

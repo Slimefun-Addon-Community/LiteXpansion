@@ -67,7 +67,7 @@ public final class Items {
         Material.GHAST_TEAR,
         "&fGlass Cutter",
         "",
-        "Cuts glass with ease"
+        "&fCuts glass with ease"
     );
 
     public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
