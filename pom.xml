@@ -39,11 +39,6 @@
             <version>v1.6.1</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.github.TheBusyBiscuit</groupId>
-            <artifactId>SlimyTreeTaps</artifactId>
-            <version>b97239fb3a</version>
-        </dependency>
 
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
