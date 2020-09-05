@@ -27,7 +27,6 @@ final class ItemSetup {
     protected static final ItemSetup INSTANCE = new ItemSetup();
     private final ItemStack glass = new ItemStack(Material.GLASS);
     private boolean initialised;
-    private ItemStack rubberItem;
 
     private ItemSetup() {}
 
@@ -38,11 +37,11 @@ final class ItemSetup {
 
         registerTools();
         registerMachines();
+        registerRubber();
         registerMiscItems();
         registerEndgameItems();
         registerCarbonStuff();
         registerSolarPanels();
-        registerRubber();
     }
 
     private void registerTools() {
@@ -63,10 +62,12 @@ final class ItemSetup {
             registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
             new RubberSynthesizer().register(LiteXpansion.getInstance());
         }
-        rubberItem = SlimefunItem.getByID("RUBBER").getItem();
     }
 
     private void registerMiscItems() {
+
+        ItemStack rubberItem = SlimefunItem.getByID("RUBBER").getItem();
+
         // Advanced Alloy
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
 
