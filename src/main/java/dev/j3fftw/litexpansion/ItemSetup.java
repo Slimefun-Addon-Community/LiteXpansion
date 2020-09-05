@@ -16,12 +16,11 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
-
-import static org.bukkit.Bukkit.getServer;
 
 final class ItemSetup {
 
@@ -60,7 +59,7 @@ final class ItemSetup {
 
     //Disable when SlimyTreeTaps exists
     private void registerRubber() {
-        if (!getServer().getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
+        if (!Bukkit.getServer().getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
             //Rubber
             registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
             new RubberSynthesizer().register(LiteXpansion.getInstance());
