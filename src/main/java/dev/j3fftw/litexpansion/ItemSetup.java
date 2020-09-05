@@ -65,8 +65,7 @@ final class ItemSetup {
     }
 
     private void registerMiscItems() {
-
-        ItemStack rubberItem = SlimefunItem.getByID("RUBBER").getItem();
+        final ItemStack rubberItem = SlimefunItem.getByID("RUBBER").getItem();
 
         // Advanced Alloy
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
