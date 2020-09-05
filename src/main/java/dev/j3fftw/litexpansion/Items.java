@@ -19,7 +19,7 @@ import org.bukkit.enchantments.Enchantment;
 
 public final class Items {
 
-    static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
+    private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
 
     // Category
     public static final Category LITEXPANSION = new Category(
