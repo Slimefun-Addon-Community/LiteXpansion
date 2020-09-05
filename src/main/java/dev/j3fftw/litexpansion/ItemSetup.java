@@ -27,8 +27,7 @@ final class ItemSetup {
     protected static final ItemSetup INSTANCE = new ItemSetup();
     private final ItemStack glass = new ItemStack(Material.GLASS);
     private boolean initialised;
-
-    private final ItemStack rubberItem = SlimefunItem.getByID("RUBBER").getItem();
+    private ItemStack rubberItem;
 
     private ItemSetup() {}
 
@@ -64,6 +63,7 @@ final class ItemSetup {
             registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
             new RubberSynthesizer().register(LiteXpansion.getInstance());
         }
+        rubberItem = SlimefunItem.getByID("RUBBER").getItem();
     }
 
     private void registerMiscItems() {
