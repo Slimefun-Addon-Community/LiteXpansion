@@ -16,6 +16,7 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -26,6 +27,8 @@ final class ItemSetup {
     protected static final ItemSetup INSTANCE = new ItemSetup();
     private final ItemStack glass = new ItemStack(Material.GLASS);
     private boolean initialised;
+
+    private final ItemStack rubberItem = SlimefunItem.getByID("RUBBER").getItem();
 
     private ItemSetup() {}
 
@@ -40,6 +43,7 @@ final class ItemSetup {
         registerEndgameItems();
         registerCarbonStuff();
         registerSolarPanels();
+        registerRubber();
     }
 
     private void registerTools() {
@@ -48,17 +52,21 @@ final class ItemSetup {
 
     private void registerMachines() {
         new FoodSynthesizer().register(LiteXpansion.getInstance());
-
         new ScrapMachine().register(LiteXpansion.getInstance());
         new MassFabricator().register(LiteXpansion.getInstance());
-        new RubberSynthesizer().register(LiteXpansion.getInstance());
         new RefinedSmeltery().register(LiteXpansion.getInstance());
     }
 
-    private void registerMiscItems() {
-        //Rubber
-        registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
+    //Disable when SlimyTreeTaps exists
+    private void registerRubber() {
+        if (!Bukkit.getServer().getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
+            //Rubber
+            registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
+            new RubberSynthesizer().register(LiteXpansion.getInstance());
+        }
+    }
 
+    private void registerMiscItems() {
         // Advanced Alloy
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
 
@@ -96,9 +104,9 @@ final class ItemSetup {
         );
 
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.RUBBER, Items.RUBBER, Items.RUBBER,
+            rubberItem, rubberItem, rubberItem,
             Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE,
-            Items.RUBBER, Items.RUBBER, Items.RUBBER
+            rubberItem, rubberItem, rubberItem
         );
 
         // Circuits
