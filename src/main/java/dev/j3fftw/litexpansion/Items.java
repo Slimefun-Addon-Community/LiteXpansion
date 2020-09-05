@@ -62,6 +62,14 @@ public final class Items {
         "&6Wrench"
     );
 
+    public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
+        "WRENCH",
+        Material.GHAST_TEAR,
+        "&fGlass Cutter",
+        "",
+        "Cuts glass with ease"
+    );
+
     public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
         "TREETAP",
         Material.WOODEN_HOE,
