@@ -2,6 +2,7 @@ package dev.j3fftw.litexpansion.items;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
+import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
@@ -25,7 +26,9 @@ import org.bukkit.inventory.ItemStack;
  * @author FluffyBear
  *
  */
-public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements Listener {
+public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements Listener, Rechargeable {
+
+    private static float COST = 0.5F;
 
     public GlassCutter() {
         super(Items.LITEXPANSION, Items.GLASS_CUTTER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
@@ -46,8 +49,7 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
     public void onGlassCut(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_BLOCK
-            && SlimefunUtils.isItemSimilar(e.getItem(), Items.GLASS_CUTTER, true, false)) {
+        if (e.getAction() == Action.LEFT_CLICK_BLOCK && isItem(e.getItem()) && removeItemCharge(e.getItem(), COST)) {
             e.setCancelled(true);
 
             SlimefunItem slimefunItem = BlockStorage.check(e.getClickedBlock());
@@ -64,5 +66,10 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
                 e.getClickedBlock().setType(Material.AIR);
             }
         }
+    }
+
+    @Override
+    public float getMaxItemCharge(ItemStack itemStack) {
+        return 300;
     }
 }

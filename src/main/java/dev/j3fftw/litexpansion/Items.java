@@ -63,11 +63,13 @@ public final class Items {
     );
 
     public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
-        "WRENCH",
+        "GLASS_CUTTER",
         Material.GHAST_TEAR,
-        "&fGlass Cutter",
+        "&bGlass Cutter",
         "",
-        "&fCuts glass with ease"
+        "&7Cuts glass quickly",
+        "",
+        "&c&o&8\u21E8 &e\u26A1 &70 / 300 J"
     );
 
     public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
