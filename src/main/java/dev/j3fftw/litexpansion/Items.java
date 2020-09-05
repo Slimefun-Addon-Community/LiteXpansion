@@ -19,6 +19,8 @@ import org.bukkit.enchantments.Enchantment;
 
 public final class Items {
 
+    static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
+
     // Category
     public static final Category LITEXPANSION = new Category(
         new NamespacedKey(LiteXpansion.getInstance(), "litexpansion"),
@@ -350,8 +352,8 @@ public final class Items {
     );
 
     static {
-        ADVANCED_CIRCUIT.addEnchantment(Enchantment.getByKey(Constants.GLOW_ENCHANT), 1);
-        GLASS_CUTTER.addEnchantment(Enchantment.getByKey(Constants.GLOW_ENCHANT), 1);
+        ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
+        GLASS_CUTTER.addEnchantment(glowEnchant, 1);
     }
 
     private Items() {}

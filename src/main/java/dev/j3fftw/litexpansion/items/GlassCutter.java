@@ -28,12 +28,10 @@ import org.bukkit.inventory.ItemStack;
  */
 public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements Listener, Rechargeable {
 
-    private static float COST = 0.5F;
-
     public GlassCutter() {
         super(Items.LITEXPANSION, Items.GLASS_CUTTER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
-            new ItemStack(Material.SHEARS), Items.CARBON_PLATE, new ItemStack(Material.SHEARS),
+            new ItemStack(Material.SHEARS), Items.ADVANCED_CIRCUIT, new ItemStack(Material.SHEARS),
             null, Items.CARBON_PLATE, null
         });
 
@@ -61,7 +59,7 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
             if ((e.getClickedBlock().getType() == Material.GLASS
                 || e.getClickedBlock().getType().name().endsWith("_GLASS")
                 || e.getClickedBlock().getType().name().endsWith("_PANE"))
-                && removeItemCharge(e.getItem(), COST)) {
+                && removeItemCharge(e.getItem(), 0.5F)) {
                 e.getClickedBlock().getLocation().getWorld().dropItemNaturally(e.getClickedBlock().getLocation(),
                     new ItemStack(e.getClickedBlock().getType()));
                 e.getClickedBlock().setType(Material.AIR);
