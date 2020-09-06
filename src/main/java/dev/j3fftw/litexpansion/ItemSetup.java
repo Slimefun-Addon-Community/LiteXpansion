@@ -31,8 +31,6 @@ final class ItemSetup {
     private boolean initialised;
     private final SlimefunAddon plugin = LiteXpansion.getInstance();
 
-    private final ItemStack rubberItem = SlimefunItem.getByID("RUBBER").getItem();
-
     private ItemSetup() {}
 
     public void init() {
@@ -42,11 +40,11 @@ final class ItemSetup {
 
         registerTools();
         registerMachines();
+        registerRubber();
         registerMiscItems();
         registerEndgameItems();
         registerCarbonStuff();
         registerSolarPanels();
-        registerRubber();
     }
 
     private void registerTools() {
@@ -71,6 +69,8 @@ final class ItemSetup {
     }
 
     private void registerMiscItems() {
+        final ItemStack rubberItem = SlimefunItem.getByID("RUBBER").getItem();
+
         // Advanced Alloy
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
 
