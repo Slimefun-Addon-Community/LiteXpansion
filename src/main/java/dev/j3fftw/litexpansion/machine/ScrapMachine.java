@@ -122,8 +122,8 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
     }
 
     private boolean takePower(@Nonnull Block b) {
-        if (getCharge((Location) b) < ENERGY_CONSUMPTION) return false;
-        addCharge((Location) b, -ENERGY_CONSUMPTION);
+        if (getCharge(b.getLocation()) < ENERGY_CONSUMPTION) return false;
+        addCharge(b.getLocation(), -ENERGY_CONSUMPTION);
         return true;
     }
 
