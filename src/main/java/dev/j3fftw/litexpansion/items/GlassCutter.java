@@ -55,7 +55,7 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
         ) {
             e.setCancelled(true);
 
-            final SlimefunItem slimefunItem = BlockStorage.check(e.getClickedBlock());
+            final SlimefunItem slimefunItem = BlockStorage.check(block);
 
             if (slimefunItem != null) {
                 return;
