@@ -59,7 +59,6 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
             });
     }
 
-
     @Override
     public int getGeneratedOutput(@Nonnull Location l, @Nonnull Config data) {
         @Nullable final BlockMenu inv = BlockStorage.getInventory(l);
