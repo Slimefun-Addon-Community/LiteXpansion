@@ -33,13 +33,13 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
     public static final RecipeType RECIPE_TYPE = new RecipeType(
         new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.RUBBER_SYNTHESIZER_MACHINE
     );
+
     private static final int INPUT_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
     private static final int PROGRESS_AMOUNT = 26; // Divide by 2 for seconds it takes
     public static final int ENERGY_CONSUMPTION = 20_000 / PROGRESS_AMOUNT;
     public static final int CAPACITY = ENERGY_CONSUMPTION * 5;
-
     private static final Map<BlockPosition, Integer> progress = new HashMap<>();
 
     private static final CustomItem progressItem = new CustomItem(Material.FIRE_CHARGE, "&7Idle");
@@ -47,10 +47,10 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
     public RubberSynthesizer() {
         super(Items.LITEXPANSION, Items.RUBBER_SYNTHESIZER_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE,
             new ItemStack[] {
-            SlimefunItems.REINFORCED_PLATE, SlimefunItems.MEDIUM_CAPACITOR, SlimefunItems.REINFORCED_PLATE,
-            new ItemStack(Material.PISTON), Items.MACHINE_BLOCK, new ItemStack(Material.PISTON),
-            SlimefunItems.REINFORCED_PLATE, new ItemStack(Material.FLINT_AND_STEEL), SlimefunItems.REINFORCED_PLATE
-        });
+                SlimefunItems.REINFORCED_PLATE, SlimefunItems.MEDIUM_CAPACITOR, SlimefunItems.REINFORCED_PLATE,
+                new ItemStack(Material.PISTON), Items.MACHINE_BLOCK, new ItemStack(Material.PISTON),
+                SlimefunItems.REINFORCED_PLATE, new ItemStack(Material.FLINT_AND_STEEL), SlimefunItems.REINFORCED_PLATE
+            });
         setupInv();
     }
 

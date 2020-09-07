@@ -13,7 +13,6 @@ import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,7 +25,6 @@ import org.bukkit.inventory.ItemStack;
  * glass and glass panes quickly.
  *
  * @author FluffyBear
- *
  */
 public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements Listener, Rechargeable {
 
@@ -47,21 +45,23 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
     @EventHandler
     @SuppressWarnings("ConstantConditions")
     public void onGlassCut(PlayerInteractEvent e) {
-        Block block = e.getClickedBlock();
+        final Block block = e.getClickedBlock();
         if (e.getAction() == Action.LEFT_CLICK_BLOCK && isItem(e.getItem())
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
-            block.getLocation(), ProtectableAction.BREAK_BLOCK)) {
+            block.getLocation(), ProtectableAction.BREAK_BLOCK)
+        ) {
             e.setCancelled(true);
 
-            SlimefunItem slimefunItem = BlockStorage.check(e.getClickedBlock());
+            final SlimefunItem slimefunItem = BlockStorage.check(e.getClickedBlock());
 
             if (slimefunItem != null) {
                 return;
             }
 
             if ((block.getType() == Material.GLASS
+                || block.getType() == Material.GLASS_PANE
                 || block.getType().name().endsWith("_GLASS")
-                || block.getType().name().endsWith("_PANE"))
+                || block.getType().name().endsWith("_GLASS_PANE"))
                 && removeItemCharge(e.getItem(), 0.5F)
             ) {
                 block.getLocation().getWorld().dropItemNaturally(block.getLocation(),
