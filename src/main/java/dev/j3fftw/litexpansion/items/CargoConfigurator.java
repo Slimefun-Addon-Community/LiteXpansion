@@ -42,6 +42,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         Bukkit.getPluginManager().registerEvents(this, LiteXpansion.getInstance());
     }
 
+    @Nonnull
     @Override
     public ItemUseHandler getItemHandler() {
         return e -> e.setUseBlock(Event.Result.DENY);

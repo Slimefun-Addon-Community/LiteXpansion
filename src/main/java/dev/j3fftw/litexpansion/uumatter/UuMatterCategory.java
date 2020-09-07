@@ -17,6 +17,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public final class UuMatterCategory extends FlexCategory {
 
     public static final UuMatterCategory INSTANCE = new UuMatterCategory();
@@ -103,7 +105,8 @@ public final class UuMatterCategory extends FlexCategory {
     }
 
     @Override
-    public boolean isVisible(Player player, PlayerProfile playerProfile, SlimefunGuideLayout slimefunGuideLayout) {
+    public boolean isVisible(@Nonnull Player player, @Nonnull PlayerProfile playerProfile,
+                             @Nonnull SlimefunGuideLayout slimefunGuideLayout) {
         // This implementation makes little sense in a Cheat Sheet context
         return slimefunGuideLayout != SlimefunGuideLayout.CHEAT_SHEET;
     }

@@ -21,6 +21,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+
 /**
  * The {@link GlassCutter} is a {@link SimpleSlimefunItem} that breaks
  * glass and glass panes quickly.
@@ -39,6 +41,7 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
         Bukkit.getPluginManager().registerEvents(this, LiteXpansion.getInstance());
     }
 
+    @Nonnull
     public ItemUseHandler getItemHandler() {
         return e -> e.setUseBlock(Event.Result.DENY);
     }

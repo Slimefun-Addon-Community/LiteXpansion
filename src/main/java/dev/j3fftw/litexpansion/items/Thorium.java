@@ -9,6 +9,8 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class Thorium extends UnplaceableBlock implements Radioactive {
 
     private static final ItemStack thorium = new CustomItem(Material.PAPER, "&fHint!",
@@ -23,6 +25,7 @@ public class Thorium extends UnplaceableBlock implements Radioactive {
         );
     }
 
+    @Nonnull
     @Override
     public Radioactivity getRadioactivity() {
         return Radioactivity.HIGH;
