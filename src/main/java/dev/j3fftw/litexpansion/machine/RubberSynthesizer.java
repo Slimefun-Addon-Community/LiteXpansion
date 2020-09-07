@@ -18,6 +18,7 @@ import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.cscorelib2.blocks.BlockPosition;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -122,11 +123,12 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
     }
 
     private boolean takePower(@Nonnull Block b) {
-        if (ChargableBlock.getCharge(b) < ENERGY_CONSUMPTION) return false;
-        ChargableBlock.addCharge(b, -ENERGY_CONSUMPTION);
+        if (getCharge(b.getLocation()) < ENERGY_CONSUMPTION) return false;
+        addCharge(b.getLocation(), -ENERGY_CONSUMPTION);
         return true;
     }
 
+    @Nonnull
     @Override
     public EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;

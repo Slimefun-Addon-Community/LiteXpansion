@@ -12,6 +12,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import javax.annotation.Nonnull;
+
 public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rechargeable {
 
     public NanoBlade() {
@@ -28,6 +30,7 @@ public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rec
         return 500;
     }
 
+    @Nonnull
     @Override
     public ItemUseHandler getItemHandler() {
         return event -> {

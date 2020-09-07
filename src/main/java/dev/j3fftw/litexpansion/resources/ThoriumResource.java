@@ -8,6 +8,7 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ThoriumResource implements GEOResource {
@@ -39,11 +40,13 @@ public class ThoriumResource implements GEOResource {
         return 1;
     }
 
+    @Nonnull
     @Override
     public String getName() {
         return "Thorium";
     }
 
+    @Nonnull
     @Override
     public ItemStack getItem() {
         return Items.THORIUM.clone();

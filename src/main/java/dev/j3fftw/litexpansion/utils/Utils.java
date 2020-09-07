@@ -23,7 +23,8 @@ public final class Utils {
     public static String powerFormatAndFadeDecimals(double power) {
         String formattedString = powerFormat.format(power);
         if (formattedString.indexOf('.') != -1) {
-            return formattedString.substring(0, formattedString.indexOf('.')) + ChatColor.DARK_GRAY + formattedString.substring(formattedString.indexOf('.')) + ChatColor.GRAY;
+            return formattedString.substring(0, formattedString.indexOf('.')) + ChatColor.DARK_GRAY
+                + formattedString.substring(formattedString.indexOf('.')) + ChatColor.GRAY;
         } else {
             return formattedString;
         }

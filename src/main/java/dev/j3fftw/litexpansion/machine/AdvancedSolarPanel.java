@@ -15,7 +15,6 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Location;
@@ -61,11 +60,11 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
     }
 
     @Override
-    public int getGeneratedOutput(Location l, Config data) {
+    public int getGeneratedOutput(@Nonnull Location l, @Nonnull Config data) {
         @Nullable final BlockMenu inv = BlockStorage.getInventory(l);
         if (inv == null) return 0;
 
-        final int stored = ChargableBlock.getCharge(l);
+        final int stored = getCharge(l);
         final boolean canGenerate = stored < getCapacity();
         final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), l.getWorld()) : 0;
 
@@ -99,7 +98,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
     }
 
     @Override
-    public boolean willExplode(Location l, Config data) {
+    public boolean willExplode(@Nonnull Location l, @Nonnull Config data) {
         return false;
     }
 
@@ -117,6 +116,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         }
     }
 
+    @Nonnull
     @Override
     public EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.GENERATOR;
