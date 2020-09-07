@@ -11,6 +11,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.Event;
@@ -46,9 +47,11 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
     @SuppressWarnings("ConstantConditions")
     public void onGlassCut(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
+        final Material blockType = block.getType();
+        final Location blockLocation = block.getLocation();
         if (e.getAction() == Action.LEFT_CLICK_BLOCK && isItem(e.getItem())
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
-            block.getLocation(), ProtectableAction.BREAK_BLOCK)
+            blockLocation, ProtectableAction.BREAK_BLOCK)
         ) {
             e.setCancelled(true);
 
@@ -58,14 +61,14 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
                 return;
             }
 
-            if ((block.getType() == Material.GLASS
-                || block.getType() == Material.GLASS_PANE
-                || block.getType().name().endsWith("_GLASS")
-                || block.getType().name().endsWith("_GLASS_PANE"))
+            if ((blockType == Material.GLASS
+                || blockType == Material.GLASS_PANE
+                || blockType.name().endsWith("_GLASS")
+                || blockType.name().endsWith("_GLASS_PANE"))
                 && removeItemCharge(e.getItem(), 0.5F)
             ) {
-                block.getLocation().getWorld().dropItemNaturally(block.getLocation(),
-                    new ItemStack(block.getType()));
+                blockLocation.getWorld().dropItemNaturally(blockLocation,
+                    new ItemStack(blockType));
                 block.setType(Material.AIR);
             }
         }
