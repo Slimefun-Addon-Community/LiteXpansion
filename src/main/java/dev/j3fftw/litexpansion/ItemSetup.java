@@ -2,6 +2,7 @@ package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
@@ -10,6 +11,7 @@ import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.machine.ScrapMachine;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -27,6 +29,7 @@ final class ItemSetup {
     protected static final ItemSetup INSTANCE = new ItemSetup();
     private final ItemStack glass = new ItemStack(Material.GLASS);
     private boolean initialised;
+    private final SlimefunAddon plugin = LiteXpansion.getInstance();
 
     private ItemSetup() {}
 
@@ -45,7 +48,8 @@ final class ItemSetup {
     }
 
     private void registerTools() {
-        new CargoConfigurator().register(LiteXpansion.getInstance());
+        new CargoConfigurator().register(plugin);
+        new GlassCutter().register(plugin);
     }
 
     private void registerMachines() {
@@ -128,8 +132,8 @@ final class ItemSetup {
         registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
 
         // Resources
-        new MagThor().register(LiteXpansion.getInstance());
-        new Thorium().register(LiteXpansion.getInstance());
+        new MagThor().register(plugin);
+        new Thorium().register(plugin);
     }
 
     private void registerEndgameItems() {
@@ -147,7 +151,7 @@ final class ItemSetup {
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM
         );
 
-        new NanoBlade().register(LiteXpansion.getInstance());
+        new NanoBlade().register(plugin);
     }
 
     private void registerCarbonStuff() {
@@ -165,9 +169,9 @@ final class ItemSetup {
     }
 
     private void registerSolarPanels() {
-        new AdvancedSolarPanel(AdvancedSolarPanel.Type.ADVANCED).register(LiteXpansion.getInstance());
-        new AdvancedSolarPanel(AdvancedSolarPanel.Type.HYBRID).register(LiteXpansion.getInstance());
-        new AdvancedSolarPanel(AdvancedSolarPanel.Type.ULTIMATE).register(LiteXpansion.getInstance());
+        new AdvancedSolarPanel(AdvancedSolarPanel.Type.ADVANCED).register(plugin);
+        new AdvancedSolarPanel(AdvancedSolarPanel.Type.HYBRID).register(plugin);
+        new AdvancedSolarPanel(AdvancedSolarPanel.Type.ULTIMATE).register(plugin);
     }
 
     //Register Items
@@ -180,7 +184,7 @@ final class ItemSetup {
                 null, items[0], null,
                 null, null, null
             };
-            new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(LiteXpansion.getInstance());
+            new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
 
             // make shapeless
             for (int i = 0; i < 9; i++) {
@@ -199,7 +203,7 @@ final class ItemSetup {
         } else
             recipe = items;
 
-        new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(LiteXpansion.getInstance());
+        new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
 
     private void registerNonPlaceableItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
@@ -211,7 +215,7 @@ final class ItemSetup {
                 null, items[0], null,
                 null, null, null
             };
-            new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(LiteXpansion.getInstance());
+            new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
 
             // make shapeless
             for (int i = 0; i < 9; i++) {
@@ -230,7 +234,7 @@ final class ItemSetup {
         } else
             recipe = items;
 
-        new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(LiteXpansion.getInstance());
+        new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
 
     // Haha shapeless recipe bitches!!!! <3 <3 <3

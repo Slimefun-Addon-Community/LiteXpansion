@@ -19,6 +19,8 @@ import org.bukkit.enchantments.Enchantment;
 
 public final class Items {
 
+    private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
+
     // Category
     public static final Category LITEXPANSION = new Category(
         new NamespacedKey(LiteXpansion.getInstance(), "litexpansion"),
@@ -60,6 +62,16 @@ public final class Items {
         "WRENCH",
         Material.GOLDEN_HOE,
         "&6Wrench"
+    );
+
+    public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
+        "GLASS_CUTTER",
+        Material.GHAST_TEAR,
+        "&bGlass Cutter",
+        "",
+        "&7Cuts glass quickly",
+        "",
+        "&c&o&8\u21E8 &e\u26A1 &70 / 300 J"
     );
 
     public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
@@ -340,7 +352,8 @@ public final class Items {
     );
 
     static {
-        ADVANCED_CIRCUIT.addEnchantment(Enchantment.getByKey(Constants.GLOW_ENCHANT), 1);
+        ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
+        GLASS_CUTTER.addEnchantment(glowEnchant, 1);
     }
 
     private Items() {}
