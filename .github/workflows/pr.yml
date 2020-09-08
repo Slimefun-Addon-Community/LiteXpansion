@@ -1,0 +1,22 @@
+name: Pull Request
+
+on:
+  pull_request:
+    types: [created]
+
+jobs:
+  auto-approve:
+    name: Label PRs
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v1
+    - name: PR Labeler
+      uses: WalshyDev/pr-labels@v1
+      with:
+        token: "${{ secrets.GITHUB_TOKEN }}"
+        fix: 'Fix'
+        feature: 'Feature'
+        pref: 'Performance Improvement'
+        preformance: 'Performance Improvement'
