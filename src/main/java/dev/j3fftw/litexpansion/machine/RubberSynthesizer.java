@@ -124,7 +124,7 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
 
     private boolean takePower(@Nonnull Block b) {
         if (getCharge(b.getLocation()) < ENERGY_CONSUMPTION) return false;
-        addCharge(b.getLocation(), -ENERGY_CONSUMPTION);
+        removeCharge(b.getLocation(), ENERGY_CONSUMPTION);
         return true;
     }
 
