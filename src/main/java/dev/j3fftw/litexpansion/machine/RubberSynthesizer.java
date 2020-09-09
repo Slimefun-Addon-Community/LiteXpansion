@@ -14,11 +14,9 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.cscorelib2.blocks.BlockPosition;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -40,6 +38,8 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
     private static final int PROGRESS_SLOT = 13;
     private static final int PROGRESS_AMOUNT = 26; // Divide by 2 for seconds it takes
     public static final int ENERGY_CONSUMPTION = 20_000 / PROGRESS_AMOUNT;
+    // this line below keeps going to the top whenever hitting ctrl+alt+L
+    // I don't know how to fix
     public static final int CAPACITY = ENERGY_CONSUMPTION * 5;
     private static final Map<BlockPosition, Integer> progress = new HashMap<>();
 

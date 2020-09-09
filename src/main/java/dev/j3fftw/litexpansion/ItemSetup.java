@@ -7,6 +7,7 @@ import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
+import dev.j3fftw.litexpansion.machine.MetalForge;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.machine.ScrapMachine;
@@ -57,6 +58,7 @@ final class ItemSetup {
         new ScrapMachine().register(LiteXpansion.getInstance());
         new MassFabricator().register(LiteXpansion.getInstance());
         new RefinedSmeltery().register(LiteXpansion.getInstance());
+        new MetalForge().register(LiteXpansion.getInstance());
     }
 
     //Disable when SlimyTreeTaps exists
@@ -145,9 +147,9 @@ final class ItemSetup {
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         );
-        registerItem(Items.IRIDIUM_PLATE, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(Items.IRIDIUM_PLATE, MetalForge.METAL_FORGE,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM,
-            Items.ADVANCED_ALLOY, new ItemStack(Material.DIAMOND), Items.ADVANCED_ALLOY,
+            Items.ADVANCED_ALLOY, null, Items.ADVANCED_ALLOY,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM
         );
 
