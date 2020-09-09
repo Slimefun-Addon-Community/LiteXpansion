@@ -108,9 +108,9 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
         if (currentProgress == PROGRESS_AMOUNT) {
             inv.consumeItem(INPUT_SLOT);
             if (output != null && output.getAmount() > 0)
-                output.setAmount(output.getAmount() + 1);
+                output.setAmount(output.getAmount() + 6);
             else {
-                inv.replaceExistingItem(OUTPUT_SLOT, Items.RUBBER.clone());
+                inv.replaceExistingItem(OUTPUT_SLOT, new CustomItem(Items.RUBBER, 6));
             }
             progress.remove(pos);
             ChestMenuUtils.updateProgressbar(inv, PROGRESS_SLOT, PROGRESS_AMOUNT, PROGRESS_AMOUNT, progressItem);
