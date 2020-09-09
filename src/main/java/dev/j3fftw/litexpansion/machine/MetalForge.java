@@ -8,6 +8,8 @@ import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.inventory.InvUtils;
+import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -55,6 +57,18 @@ public class MetalForge extends MultiBlockMachine {
         return items;
     }
 
+    protected Inventory createVirtualInventory (Inventory inv){
+        Inventory fakeInv = Bukkit.createInventory(null, 9, "Fake Inventory");
+
+        for (int j = 0; j < inv.getContents().length; j++) {
+            ItemStack stack = inv.getContents()[j] != null && inv.getContents()[j].getAmount() > 1 ?
+                new CustomItem(inv.getContents()[j], inv.getContents()[j].getAmount() - 1) : null;
+            fakeInv.setItem(j, stack);
+        }
+
+        return fakeInv;
+    }
+
     @Override
     public void onInteract(Player p, Block b) {
         Block dispBlock = b.getRelative(BlockFace.DOWN);
@@ -67,7 +81,8 @@ public class MetalForge extends MultiBlockMachine {
                 final ItemStack output = RecipeType.getRecipeOutputList(this, inputs.get(i)).clone();
 
                 if (Slimefun.hasUnlocked(p, output, true)) {
-                    final Inventory outputInv = findOutputInventory(output, dispBlock, inv);
+                    final Inventory fakeInv = createVirtualInventory(inv);
+                    final Inventory outputInv = findOutputInventory(output, dispBlock, inv, fakeInv);
 
                     if (outputInv != null) {
                         craft(p, b, inv, inputs.get(i), output, outputInv);

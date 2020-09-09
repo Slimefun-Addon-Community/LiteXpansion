@@ -149,7 +149,7 @@ final class ItemSetup {
         );
         registerItem(Items.IRIDIUM_PLATE, MetalForge.RECIPE_TYPE,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM,
-            Items.ADVANCED_ALLOY, null, Items.ADVANCED_ALLOY,
+            Items.ADVANCED_ALLOY, new ItemStack(Material.DIAMOND), Items.ADVANCED_ALLOY,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM
         );
 
