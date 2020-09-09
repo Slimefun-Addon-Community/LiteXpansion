@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rechargeable {
 
     public NanoBlade() {
-        super(Items.LITEXPANSION, Items.NANO_BLADE, MetalForge.METAL_FORGE, new ItemStack[] {
+        super(Items.LITEXPANSION, Items.NANO_BLADE, MetalForge.RECIPE_TYPE, new ItemStack[] {
                 null, Items.MAG_THOR, null,
                 null, Items.MAG_THOR, null,
                 null, SlimefunItems.ADVANCED_CIRCUIT_BOARD, null

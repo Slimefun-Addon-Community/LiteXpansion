@@ -24,7 +24,7 @@ import java.util.List;
 
 public class MetalForge extends MultiBlockMachine {
 
-    public static final RecipeType METAL_FORGE = new RecipeType(
+    public static final RecipeType RECIPE_TYPE = new RecipeType(
         new NamespacedKey(LiteXpansion.getInstance(), "metal_forge"),
         Items.METAL_FORGE,
         "",
@@ -45,7 +45,7 @@ public class MetalForge extends MultiBlockMachine {
     @Nonnull
     @Override
     public List<ItemStack> getDisplayRecipes() {
-        List<ItemStack> items = new ArrayList<>();
+        final List<ItemStack> items = new ArrayList<>();
 
         for (int i = 0; i < recipes.size() - 1; i += 2) {
             items.add(recipes.get(i)[0]);
@@ -60,14 +60,14 @@ public class MetalForge extends MultiBlockMachine {
         Block dispBlock = b.getRelative(BlockFace.DOWN);
         Dispenser disp = (Dispenser) dispBlock.getState();
         Inventory inv = disp.getInventory();
-        List<ItemStack[]> inputs = RecipeType.getRecipeInputList(this);
+        final List<ItemStack[]> inputs = RecipeType.getRecipeInputList(this);
 
         for (int i = 0; i < inputs.size(); i++) {
             if (canCraft(inv, inputs, i)) {
-                ItemStack output = RecipeType.getRecipeOutputList(this, inputs.get(i)).clone();
+                final ItemStack output = RecipeType.getRecipeOutputList(this, inputs.get(i)).clone();
 
                 if (Slimefun.hasUnlocked(p, output, true)) {
-                    Inventory outputInv = findOutputInventory(output, dispBlock, inv);
+                    final Inventory outputInv = findOutputInventory(output, dispBlock, inv);
 
                     if (outputInv != null) {
                         craft(p, b, inv, inputs.get(i), output, outputInv);
@@ -92,7 +92,7 @@ public class MetalForge extends MultiBlockMachine {
         outputInv.addItem(output);
         p.getWorld().playSound(p.getLocation(), Sound.BLOCK_ANVIL_BREAK, 1, 1);
 
-        Block diamondBlock = b.getRelative(BlockFace.DOWN).getRelative(BlockFace.DOWN);
+        Block diamondBlock = b.getRelative(BlockFace.DOWN, 2);
         diamondBlock.setType(Material.AIR);
     }
 

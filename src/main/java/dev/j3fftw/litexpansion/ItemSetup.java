@@ -129,7 +129,7 @@ final class ItemSetup {
         );
 
         // Refined crap
-        registerNonPlaceableItem(Items.REFINED_IRON, RefinedSmeltery.REFINED_SMELTERY_RECIPE,
+        registerNonPlaceableItem(Items.REFINED_IRON, RefinedSmeltery.RECIPE_TYPE,
             new ItemStack(Material.IRON_INGOT));
         registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
 
@@ -147,7 +147,7 @@ final class ItemSetup {
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         );
-        registerItem(Items.IRIDIUM_PLATE, MetalForge.METAL_FORGE,
+        registerItem(Items.IRIDIUM_PLATE, MetalForge.RECIPE_TYPE,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM,
             Items.ADVANCED_ALLOY, null, Items.ADVANCED_ALLOY,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM

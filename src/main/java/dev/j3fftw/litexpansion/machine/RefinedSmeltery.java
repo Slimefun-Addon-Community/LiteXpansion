@@ -25,7 +25,7 @@ import java.util.List;
 
 public class RefinedSmeltery extends MultiBlockMachine {
 
-    public static final RecipeType REFINED_SMELTERY_RECIPE = new RecipeType(
+    public static final RecipeType RECIPE_TYPE = new RecipeType(
         new NamespacedKey(LiteXpansion.getInstance(), "refined_smeltery"),
         Items.REFINED_SMELTERY,
         "",
