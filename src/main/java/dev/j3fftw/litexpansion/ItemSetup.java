@@ -60,7 +60,18 @@ final class ItemSetup {
         if (!Bukkit.getServer().getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
             //Rubber
             registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
-            new RubberSynthesizer().register(LiteXpansion.getInstance());
+            new RubberSynthesizer() {
+
+                @Override
+                public int getEnergyConsumption() {
+                    return 9;
+                }
+
+                @Override
+                public int getSpeed() {
+                    return 1;
+                }
+            }.register(LiteXpansion.getInstance());
         }
     }
 

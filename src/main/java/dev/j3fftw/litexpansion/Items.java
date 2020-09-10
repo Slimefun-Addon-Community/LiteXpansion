@@ -287,7 +287,7 @@ public final class Items {
         LoreBuilderDynamic.powerPerTick(MassFabricator.ENERGY_CONSUMPTION)
     );
 
-    public static final SlimefunItemStack RUBBER_SYNTHESIZER_MACHINE = new SlimefunItemStack(
+    public static final SlimefunItemStack RUBBER_SYNTHESIZER = new SlimefunItemStack(
         "RUBBER_SYNTHESIZER_MACHINE",
         Material.ORANGE_CONCRETE,
         "&6Rubber Synthesizer",
