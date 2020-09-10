@@ -8,6 +8,7 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -59,6 +60,7 @@ public class RubberSynthesizer extends AContainer implements RecipeDisplayItem {
         return "&6Rubber Synthesizer";
     }
 
+    @Nonnull
     @Override
     public String getMachineIdentifier() {
         return "RUBBER_SYNTHESIZER";

@@ -61,8 +61,9 @@ public class GlowEnchant extends Enchantment {
             final ItemMeta itemMeta = item.getItemMeta();
             final Optional<String> id = SlimefunPlugin.getItemDataService().getItemData(itemMeta);
             if (id.isPresent()) {
-                return id.get().equals(Items.ADVANCED_CIRCUIT.getItemId())
-                    || id.get().equals(Items.NANO_BLADE.getItemId());
+                return (id.get().equals(Items.ADVANCED_CIRCUIT.getItemId()))
+                    || (id.get().equals(Items.NANO_BLADE.getItemId()))
+                    || (id.get().equals(Items.GLASS_CUTTER.getItemId()));
             }
         }
         return false;
