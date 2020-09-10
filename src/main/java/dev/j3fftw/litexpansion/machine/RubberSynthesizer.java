@@ -15,10 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.ADVANCED_CIRCUIT_BOARD;
-import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.REINFORCED_PLATE;
-
-public abstract class RubberSynthesizer extends AContainer implements RecipeDisplayItem {
+public class RubberSynthesizer extends AContainer implements RecipeDisplayItem {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
         new NamespacedKey(LiteXpansion.getInstance(), "rubber_synthesizer"), Items.RUBBER_SYNTHESIZER
@@ -28,16 +25,16 @@ public abstract class RubberSynthesizer extends AContainer implements RecipeDisp
 
     public RubberSynthesizer() {
         super(Items.LITEXPANSION, Items.RUBBER_SYNTHESIZER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-            REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE,
-            ADVANCED_CIRCUIT_BOARD, Items.MACHINE_BLOCK, ADVANCED_CIRCUIT_BOARD,
-            REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE
+            SlimefunItems.REINFORCED_PLATE, SlimefunItems.MEDIUM_CAPACITOR, SlimefunItems.REINFORCED_PLATE,
+            new ItemStack(Material.PISTON), Items.MACHINE_BLOCK, new ItemStack(Material.PISTON),
+            SlimefunItems.REINFORCED_PLATE, new ItemStack(Material.FLINT_AND_STEEL), SlimefunItems.REINFORCED_PLATE
         });
     }
 
     @Override
     protected void registerDefaultRecipes() {
         registerRecipe(13, new ItemStack[]{new CustomItem(SlimefunItems.OIL_BUCKET)},
-            new ItemStack[]{new CustomItem(Items.RUBBER, 8)});
+            new ItemStack[]{new CustomItem(Items.RUBBER, 8), new ItemStack(Material.BUCKET)});
     }
 
     @Override
@@ -69,6 +66,16 @@ public abstract class RubberSynthesizer extends AContainer implements RecipeDisp
 
     @Override
     public int getCapacity() {
-        return 256;
+        return CAPACITY;
+    }
+
+    @Override
+    public int getEnergyConsumption() {
+        return ENERGY_CONSUMPTION;
+    }
+
+    @Override
+    public int getSpeed() {
+        return 1;
     }
 }
