@@ -73,6 +73,7 @@ public final class Items {
         "&7Mining Drill",
         "",
         "&7Instantly breaks stone and stone variants",
+        "&7Right click to break block slower",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
     );
@@ -81,7 +82,8 @@ public final class Items {
         Material.DIAMOND_SHOVEL,
         "&bDiamond Drill",
         "",
-        "&7Instantly breaks obsidian",
+        "&7Instantly breaks obsidian, stone, and stone variants",
+        "&7Right click to break block slower",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
     );

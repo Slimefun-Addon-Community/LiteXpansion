@@ -33,7 +33,7 @@ import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 
 public class Events implements Listener {
 
-    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList( Material.STONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE ));
+    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList( Material.STONE, Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE, Material.NETHERRACK, Material.END_STONE ));
 
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {
@@ -96,7 +96,8 @@ public class Events implements Listener {
         final Location blockLocation = block.getLocation();
 
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getByID(Items.MINING_DRILL.getItemId());
-        if (drillableBlocks.contains(blockType) && miningDrill.isItem(e.getItem())
+
+        if (miningDrill.isItem(e.getItem()) && drillableBlocks.contains(blockType)
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, ProtectableAction.BREAK_BLOCK)
         ) {
@@ -131,8 +132,11 @@ public class Events implements Listener {
         final Location blockLocation = block.getLocation();
 
         final DiamondDrill diamondDrill = (DiamondDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
-        if (blockType.equals(Material.OBSIDIAN) && diamondDrill.isItem(e.getItem())
-            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(), blockLocation, ProtectableAction.BREAK_BLOCK)
+
+        if ((diamondDrill.isItem(e.getItem())
+            && drillableBlocks.contains(blockType) || blockType.equals(Material.OBSIDIAN))
+            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
+            blockLocation, ProtectableAction.BREAK_BLOCK)
         ) {
             e.setCancelled(true);
 
