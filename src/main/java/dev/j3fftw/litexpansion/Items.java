@@ -63,7 +63,8 @@ public final class Items {
         Material.GHAST_TEAR,
         "&bGlass Cutter",
         "",
-        "&7Cuts glass quickly",
+        "&7> &eLeft Click &7- Cut glass quickly",
+        "&7> &eRight Click  &7- Cut glass slowly",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 300 J"
     );

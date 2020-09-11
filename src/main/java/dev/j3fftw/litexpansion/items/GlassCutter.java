@@ -46,35 +46,6 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
         return e -> e.setUseBlock(Event.Result.DENY);
     }
 
-    @EventHandler
-    @SuppressWarnings("ConstantConditions")
-    public void onGlassCut(PlayerInteractEvent e) {
-        final Block block = e.getClickedBlock();
-        if (block == null) return;
-
-        final Material blockType = block.getType();
-        final Location blockLocation = block.getLocation();
-
-        if (e.getAction() == Action.LEFT_CLICK_BLOCK
-            && (blockType == Material.GLASS
-                || blockType == Material.GLASS_PANE
-                || blockType.name().endsWith("_GLASS")
-                || blockType.name().endsWith("_GLASS_PANE")
-            ) && isItem(e.getItem())
-            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(), blockLocation, ProtectableAction.BREAK_BLOCK) 
-        ) {
-            e.setCancelled(true);
-
-            final SlimefunItem slimefunItem = BlockStorage.check(block);
-            
-            if (slimefunItem == null && removeItemCharge(e.getItem(), 0.5F)) {
-                blockLocation.getWorld().dropItemNaturally(blockLocation,
-                    new ItemStack(blockType));
-                block.setType(Material.AIR);
-            }
-        }
-    }
-
     @Override
     public float getMaxItemCharge(ItemStack itemStack) {
         return 300;
