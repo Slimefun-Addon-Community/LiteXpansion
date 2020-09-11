@@ -76,16 +76,16 @@ public class MetalForge extends MultiBlockMachine {
         Inventory inv = disp.getInventory();
         final List<ItemStack[]> inputs = RecipeType.getRecipeInputList(this);
 
-        for (int i = 0; i < inputs.size(); i++) {
-            if (canCraft(inv, inputs, i)) {
-                final ItemStack output = RecipeType.getRecipeOutputList(this, inputs.get(i)).clone();
+        for (ItemStack[] input : inputs) {
+            if (canCraft(inv, input)) {
+                final ItemStack output = RecipeType.getRecipeOutputList(this, input).clone();
 
                 if (Slimefun.hasUnlocked(p, output, true)) {
                     final Inventory fakeInv = createVirtualInventory(inv);
                     final Inventory outputInv = findOutputInventory(output, dispBlock, inv, fakeInv);
 
                     if (outputInv != null) {
-                        craft(p, b, inv, inputs.get(i), output, outputInv);
+                        craft(p, b, inv, input, output, outputInv);
                     } else
                         SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
                 }
@@ -111,15 +111,11 @@ public class MetalForge extends MultiBlockMachine {
         diamondBlock.setType(Material.AIR);
     }
 
-    private boolean canCraft(Inventory inv, List<ItemStack[]> inputs, int i) {
-        for (ItemStack converting : inputs.get(i)) {
-            if (converting != null) {
-                for (int j = 0; j < inv.getContents().length; j++) {
-                    if (j == (inv.getContents().length - 1)
-                        && !SlimefunUtils.isItemSimilar(converting,
-                        inv.getContents()[j], true)) {
-                        return false;
-                    } else if (SlimefunUtils.isItemSimilar(inv.getContents()[j], converting, true)) break;
+    private boolean canCraft(Inventory inv, ItemStack[] recipe) {
+        for (int j = 0; j < inv.getContents().length; j++) {
+            if (!SlimefunUtils.isItemSimilar(inv.getContents()[j], recipe[j], true)) {
+                if (!SlimefunUtils.isItemSimilar(inv.getContents()[j], recipe[j], false)) {
+                    return false;
                 }
             }
         }
