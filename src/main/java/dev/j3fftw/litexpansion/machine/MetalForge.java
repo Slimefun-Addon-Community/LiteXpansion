@@ -6,6 +6,7 @@ import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.inventory.InvUtils;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
@@ -57,7 +58,7 @@ public class MetalForge extends MultiBlockMachine {
         return items;
     }
 
-    protected Inventory createVirtualInventory (Inventory inv){
+    protected Inventory createVirtualInventory(Inventory inv) {
         Inventory fakeInv = Bukkit.createInventory(null, 9, "Fake Inventory");
 
         for (int j = 0; j < inv.getContents().length; j++) {
@@ -112,15 +113,19 @@ public class MetalForge extends MultiBlockMachine {
     }
 
     private boolean canCraft(Inventory inv, ItemStack[] recipe) {
+        int counter = 0;
         for (int j = 0; j < inv.getContents().length; j++) {
-            if (!SlimefunUtils.isItemSimilar(inv.getContents()[j], recipe[j], true)) {
-                if (!SlimefunUtils.isItemSimilar(inv.getContents()[j], recipe[j], false)) {
-                    return false;
-                }
+
+            SlimefunItem sfItemInv = SlimefunItem.getByItem(inv.getContents()[j]);
+            SlimefunItem sfItemRecipe = SlimefunItem.getByItem(recipe[j]);
+            if (sfItemInv == null && sfItemRecipe == null) {
+                counter++;
+            } else if (sfItemInv != null && sfItemRecipe != null
+                && sfItemInv.getID().equals(sfItemRecipe.getID())) {
+                counter++;
             }
         }
-
-        return true;
+        return counter == inv.getContents().length;
     }
 
 }
