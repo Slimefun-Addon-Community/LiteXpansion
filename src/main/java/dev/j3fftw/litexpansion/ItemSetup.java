@@ -77,7 +77,7 @@ final class ItemSetup {
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
 
         // Mixed Metal Ingot
-        registerItem(Items.MIXED_METAL_INGOT, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(Items.MIXED_METAL_INGOT, MetalForge.RECIPE_TYPE,
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
             SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT,
             SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT
@@ -91,21 +91,21 @@ final class ItemSetup {
         );
 
         // Machine block
-        registerItem(Items.MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(Items.MACHINE_BLOCK, MetalForge.RECIPE_TYPE,
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
             Items.REFINED_IRON, null, Items.REFINED_IRON,
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON
         );
 
         // Advanced Machine Block
-        registerItem(Items.ADVANCED_MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(Items.ADVANCED_MACHINE_BLOCK, MetalForge.RECIPE_TYPE,
             null, Items.ADVANCED_ALLOY, null,
             Items.CARBON_PLATE, Items.MACHINE_BLOCK, Items.CARBON_PLATE,
             null, Items.CARBON_PLATE, null
         );
 
         // Copper cable
-        registerNonPlaceableItem(Items.UNINSULATED_COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerNonPlaceableItem(Items.UNINSULATED_COPPER_CABLE, MetalForge.RECIPE_TYPE,
             SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT
         );
 
