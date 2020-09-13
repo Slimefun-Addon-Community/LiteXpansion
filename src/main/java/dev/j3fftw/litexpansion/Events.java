@@ -3,6 +3,7 @@ package dev.j3fftw.litexpansion;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -11,6 +12,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
@@ -33,7 +35,9 @@ import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 
 public class Events implements Listener {
 
-    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList( Material.STONE, Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE, Material.NETHERRACK, Material.END_STONE ));
+    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList( Material.STONE,
+        Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
+        Material.NETHERRACK, Material.END_STONE ));
 
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {
@@ -108,7 +112,9 @@ public class Events implements Listener {
             if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
                 .removeItemCharge(e.getItem(), 0.5F)) {
                 // This allows other plugins to register broken block as player broken
-                block.breakNaturally(e.getPlayer().getInventory().getItemInMainHand());
+                BlockBreakEvent newevent = new BlockBreakEvent(block, e.getPlayer());
+                Bukkit.getServer().getPluginManager().callEvent(newevent);
+                block.setType(Material.AIR);
                 e.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
 
                 // This has to be done because the item in the main hand is not a pickaxe
@@ -134,7 +140,9 @@ public class Events implements Listener {
         final DiamondDrill diamondDrill = (DiamondDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
 
         if ((diamondDrill.isItem(e.getItem())
-            && drillableBlocks.contains(blockType) || blockType.equals(Material.OBSIDIAN))
+            && (drillableBlocks.contains(blockType)
+            || blockType.equals(Material.OBSIDIAN)
+            || blockType.toString().endsWith("_ORE")))
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, ProtectableAction.BREAK_BLOCK)
         ) {
@@ -145,10 +153,18 @@ public class Events implements Listener {
             if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
                 .removeItemCharge(e.getItem(), 1.5F)) {
                 // This allows other plugins to register broken block as player broken
-                block.breakNaturally(e.getPlayer().getInventory().getItemInMainHand());
+                BlockBreakEvent newevent = new BlockBreakEvent(block, e.getPlayer());
+                Bukkit.getServer().getPluginManager().callEvent(newevent);
+                block.setType(Material.AIR);
                 e.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
 
-                blockLocation.getWorld().dropItem(blockLocation, new ItemStack(Material.OBSIDIAN));
+                // This has to be done because the item in the main hand is not a pickaxe
+                if (blockType == Material.STONE) {
+                    blockLocation.getWorld().dropItem(blockLocation, new ItemStack(Material.COBBLESTONE));
+
+                } else {
+                    blockLocation.getWorld().dropItem(blockLocation, new ItemStack(blockType));
+                }
             }
         }
     }
