@@ -64,7 +64,6 @@ public class GlowEnchant extends Enchantment {
                 return (id.get().equals(Items.ADVANCED_CIRCUIT.getItemId()))
                     || (id.get().equals(Items.NANO_BLADE.getItemId()))
                     || (id.get().equals(Items.GLASS_CUTTER.getItemId()))
-                    || (id.get().equals(Items.MINING_DRILL.getItemId()))
                     || (id.get().equals(Items.DIAMOND_DRILL.getItemId()));
             }
         }

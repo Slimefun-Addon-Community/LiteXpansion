@@ -333,7 +333,6 @@ public final class Items {
     static {
         ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
         GLASS_CUTTER.addEnchantment(glowEnchant, 1);
-        MINING_DRILL.addEnchantment(glowEnchant, 1);
         DIAMOND_DRILL.addEnchantment(glowEnchant, 1);
     }
 
