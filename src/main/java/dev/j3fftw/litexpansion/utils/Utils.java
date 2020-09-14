@@ -54,6 +54,14 @@ public final class Utils {
         }
     }
 
+    public static String wrenchFailureChance() {
+        if (!Constants.MACHINE_BREAK_REQUIRES_WRENCH) {
+            return "0";
+        } else {
+            return String.valueOf((Constants.WRENCH_FAIL_CHANCE * 100));
+        }
+    }
+
     public static void send(Player p, String message) {
         p.sendMessage(ChatColor.GRAY + "[LiteXpansion] " + ChatColors.color(message));
     }
