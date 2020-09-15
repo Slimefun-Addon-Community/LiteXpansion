@@ -87,7 +87,7 @@ public class Events implements Listener {
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
-        final GlassCutter glassCutter = (GlassCutter) SlimefunItem.getByID(Items.GLASS_CUTTER.getItemId());
+        final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
 
         if ((blockType == Material.GLASS
             || blockType == Material.GLASS_PANE
