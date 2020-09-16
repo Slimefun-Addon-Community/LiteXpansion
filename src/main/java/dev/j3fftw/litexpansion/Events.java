@@ -3,6 +3,7 @@ package dev.j3fftw.litexpansion;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -94,7 +95,8 @@ public class Events implements Listener {
             || blockType.name().endsWith("_GLASS")
             || blockType.name().endsWith("_GLASS_PANE")
         ) && glassCutter.isItem(e.getItem())
-            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(), blockLocation, ProtectableAction.BREAK_BLOCK)
+            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
+            blockLocation, ProtectableAction.BREAK_BLOCK)
         ) {
             e.setCancelled(true);
 
@@ -105,7 +107,8 @@ public class Events implements Listener {
                 blockLocation.getWorld().dropItemNaturally(blockLocation,
                     new ItemStack(blockType));
                 block.setType(Material.AIR);
-                e.getPlayer().playSound(block.getLocation(), Sound.BLOCK_GLASS_HIT, 1.5F, 1F);
+                e.getPlayer().playSound(block.getLocation(), Sound.BLOCK_GLASS_HIT,
+                    SoundCategory.BLOCKS, 1.5F, 1F);
             }
         }
     }
