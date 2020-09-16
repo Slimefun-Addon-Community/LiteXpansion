@@ -90,12 +90,13 @@ public class Events implements Listener {
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
+        final ItemStack item = e.getItem();
 
         if ((blockType == Material.GLASS
             || blockType == Material.GLASS_PANE
             || blockType.name().endsWith("_GLASS")
             || blockType.name().endsWith("_GLASS_PANE")
-        ) && glassCutter.isItem(e.getItem())
+        ) && glassCutter.isItem(item)
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, ProtectableAction.BREAK_BLOCK)
         ) {
@@ -103,8 +104,8 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
-                .removeItemCharge(e.getItem(), 0.5F)) {
+            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(item))
+                .removeItemCharge(item, 0.5F)) {
                 blockLocation.getWorld().dropItemNaturally(blockLocation,
                     new ItemStack(blockType));
                 block.setType(Material.AIR);
