@@ -29,10 +29,10 @@ import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 
 public class Events implements Listener {
 
-    final NanoBlade nanoBlade = (NanoBlade) Items.NANO_BLADE.getItem();
-    final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
-    final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
-    final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
+    private final NanoBlade nanoBlade = (NanoBlade) Items.NANO_BLADE.getItem();
+    private final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
+    private final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
+    private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
 
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {
