@@ -101,7 +101,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         */
 
         // Armor
-        new ElectricChestplate().register(this);
 
         UUMatter.INSTANCE.register();
 
