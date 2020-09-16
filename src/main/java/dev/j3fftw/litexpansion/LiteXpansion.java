@@ -43,7 +43,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
         }
 
-        getServer().getPluginManager().registerEvents(new Events(), this);
+
 
         // Enchantment
         try {
@@ -61,6 +61,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         Items.LITEXPANSION.register();
 
         ItemSetup.INSTANCE.init();
+
+        getServer().getPluginManager().registerEvents(new Events(), this);
 
         /*
         registerItem(Items.ENERGY_CRYSTAl, RecipeType.ENHANCED_CRAFTING_TABLE,

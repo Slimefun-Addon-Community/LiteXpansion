@@ -29,6 +29,11 @@ import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 
 public class Events implements Listener {
 
+    final NanoBlade nanoBlade = (NanoBlade) Items.NANO_BLADE.getItem();
+    final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
+    final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
+    final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
+
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {
         Player p = (Player) e.getEntity();
@@ -42,7 +47,6 @@ public class Events implements Listener {
         if (e.getDamager() instanceof Player) {
             Player p = (Player) e.getDamager();
             ItemStack itemInHand = p.getInventory().getItemInMainHand();
-            final NanoBlade nanoBlade = (NanoBlade) SlimefunItem.getByID(Items.NANO_BLADE.getItemId());
             if (nanoBlade.isItem(itemInHand)
                 && itemInHand.containsEnchantment(Enchantment.getByKey(Constants.GLOW_ENCHANT))
                 && nanoBlade.removeItemCharge(itemInHand, 10)
@@ -57,8 +61,6 @@ public class Events implements Listener {
         if (e.getEntity() instanceof Player && ((Player) e.getEntity()).getEquipment() != null) {
             Player p = (Player) e.getEntity();
             ItemStack chestplate = p.getEquipment().getChestplate();
-            final ElectricChestplate electricChestplate = (ElectricChestplate)
-                SlimefunItem.getByID(Items.ELECTRIC_CHESTPLATE.getItemId());
             if (chestplate != null
                 && electricChestplate.isItem(chestplate)
                 && electricChestplate.removeItemCharge(chestplate, (float) (e.getDamage() / 1.75))
@@ -88,7 +90,6 @@ public class Events implements Listener {
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
-        final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
 
         if ((blockType == Material.GLASS
             || blockType == Material.GLASS_PANE
@@ -114,7 +115,6 @@ public class Events implements Listener {
     }
 
     public void checkAndConsume(Player p, FoodLevelChangeEvent e) {
-        FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
         for (ItemStack item : p.getInventory().getContents()) {
             if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 3F)) {
                 p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);
