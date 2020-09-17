@@ -10,7 +10,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class FoodSynthesizer extends SlimefunItem implements Rechargeable {
+public class FoodSynthesizer extends SlimefunItem implements Rechargeable, NotPlaceable {
 
     public FoodSynthesizer() {
         super(Items.LITEXPANSION, Items.FOOD_SYNTHESIZER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
