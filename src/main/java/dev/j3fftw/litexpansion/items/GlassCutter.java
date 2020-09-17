@@ -67,7 +67,7 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
             
-            if (slimefunItem != null && removeItemCharge(e.getItem(), 0.5F)) {
+            if (slimefunItem == null && removeItemCharge(e.getItem(), 0.5F)) {
                 blockLocation.getWorld().dropItemNaturally(blockLocation,
                     new ItemStack(blockType));
                 block.setType(Material.AIR);
