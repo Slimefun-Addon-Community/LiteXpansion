@@ -308,6 +308,13 @@ public final class Items {
         Material.BLAST_FURNACE,
         "&7Refined Smeltery"
     );
+
+    public static final SlimefunItemStack METAL_FORGE = new SlimefunItemStack(
+        "METAL_FORGE",
+        Material.DISPENSER,
+        "&7Metal Forge"
+    );
+
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
 
     static {
