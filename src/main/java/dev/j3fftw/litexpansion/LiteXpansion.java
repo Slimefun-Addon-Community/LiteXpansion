@@ -105,7 +105,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         new Research(new NamespacedKey(this, "does_this_even_matter"),
             696974, "Does this even matter", 150)
-            .addItems(Items.UU_MATTER, Items.SCRAP, Items.MASS_FABRICATOR_MACHINE, Items.SCRAP_MACHINE)
+            .addItems(Items.UU_MATTER, Items.SCRAP, Items.MASS_FABRICATOR_MACHINE, Items.RECYCLER)
             .register();
 
         new Research(new NamespacedKey(this, "what_a_configuration"),

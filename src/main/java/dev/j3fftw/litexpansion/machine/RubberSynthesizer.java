@@ -30,7 +30,7 @@ import java.util.Map;
 public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
-        new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.RUBBER_SYNTHESIZER_MACHINE
+        new NamespacedKey(LiteXpansion.getInstance(), "rubber_synthesizer_machine"), Items.RUBBER_SYNTHESIZER_MACHINE
     );
 
     private static final int INPUT_SLOT = 11;
