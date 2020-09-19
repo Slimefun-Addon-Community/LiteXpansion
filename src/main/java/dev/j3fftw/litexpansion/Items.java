@@ -242,7 +242,7 @@ public final class Items {
     );
     // Machines
     public static final SlimefunItemStack RECYCLER = new SlimefunItemStack(
-        "RECYCLER",
+        "SCRAP_MACHINE",
         Material.BLACK_CONCRETE,
         "&8Recycler",
         "",
