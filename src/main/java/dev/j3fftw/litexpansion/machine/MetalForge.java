@@ -6,9 +6,11 @@ import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.inventory.InvUtils;
-import org.bukkit.Effect;
+import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -23,22 +25,23 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RefinedSmeltery extends MultiBlockMachine {
+public class MetalForge extends MultiBlockMachine {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
-        new NamespacedKey(LiteXpansion.getInstance(), "refined_smeltery"),
-        Items.REFINED_SMELTERY,
+        new NamespacedKey(LiteXpansion.getInstance(), "metal_forge"),
+        Items.METAL_FORGE,
         "",
-        "&7Used to refine ingots"
+        "&7Used to Forge Metals"
     );
 
-    private static final ItemStack stone_bricks = new ItemStack(Material.STONE_BRICKS);
+    private static final ItemStack anvil = new ItemStack(Material.ANVIL);
+    private static final ItemStack ironBlock = new ItemStack(Material.IRON_BLOCK);
 
-    public RefinedSmeltery() {
-        super(Items.LITEXPANSION, Items.REFINED_SMELTERY, new ItemStack[] {
-            null, new ItemStack(Material.STONE_BRICK_WALL), null,
-            stone_bricks, new ItemStack(Material.DISPENSER), stone_bricks,
-            null, new ItemStack(Material.FLINT_AND_STEEL), null
+    public MetalForge() {
+        super(Items.LITEXPANSION, Items.METAL_FORGE, new ItemStack[] {
+            anvil, new ItemStack(Material.STONE_BRICK_WALL), anvil,
+            ironBlock, new ItemStack(Material.DISPENSER), ironBlock,
+            null, new ItemStack(Material.DIAMOND_BLOCK), null
         }, new ItemStack[0], BlockFace.DOWN);
     }
 
@@ -55,6 +58,18 @@ public class RefinedSmeltery extends MultiBlockMachine {
         return items;
     }
 
+    protected Inventory createVirtualInventory(Inventory inv) {
+        Inventory fakeInv = Bukkit.createInventory(null, 9, "Fake Inventory");
+
+        for (int j = 0; j < inv.getContents().length; j++) {
+            ItemStack stack = inv.getContents()[j] != null && inv.getContents()[j].getAmount() > 1 ?
+                new CustomItem(inv.getContents()[j], inv.getContents()[j].getAmount() - 1) : null;
+            fakeInv.setItem(j, stack);
+        }
+
+        return fakeInv;
+    }
+
     @Override
     public void onInteract(Player p, Block b) {
         Block dispBlock = b.getRelative(BlockFace.DOWN);
@@ -62,15 +77,16 @@ public class RefinedSmeltery extends MultiBlockMachine {
         Inventory inv = disp.getInventory();
         final List<ItemStack[]> inputs = RecipeType.getRecipeInputList(this);
 
-        for (int i = 0; i < inputs.size(); i++) {
-            if (canCraft(inv, inputs, i)) {
-                ItemStack output = RecipeType.getRecipeOutputList(this, inputs.get(i)).clone();
+        for (ItemStack[] input : inputs) {
+            if (canCraft(inv, input)) {
+                final ItemStack output = RecipeType.getRecipeOutputList(this, input).clone();
 
                 if (Slimefun.hasUnlocked(p, output, true)) {
-                    final Inventory outputInv = findOutputInventory(output, dispBlock, inv);
+                    final Inventory fakeInv = createVirtualInventory(inv);
+                    final Inventory outputInv = findOutputInventory(output, dispBlock, inv, fakeInv);
 
                     if (outputInv != null) {
-                        craft(p, b, inv, inputs.get(i), output, outputInv);
+                        craft(p, b, inv, input, output, outputInv);
                     } else
                         SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
                 }
@@ -90,29 +106,26 @@ public class RefinedSmeltery extends MultiBlockMachine {
         }
 
         outputInv.addItem(output);
-        p.getWorld().playSound(p.getLocation(), Sound.BLOCK_LAVA_POP, 1, 1);
-        p.getWorld().playEffect(b.getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
+        p.getWorld().playSound(p.getLocation(), Sound.BLOCK_ANVIL_BREAK, 1, 1);
 
-        Block fire = b.getRelative(BlockFace.DOWN).getRelative(BlockFace.DOWN);
-        fire.getWorld().playEffect(fire.getLocation(), Effect.STEP_SOUND, fire.getType());
-        fire.setType(Material.AIR);
+        Block diamondBlock = b.getRelative(BlockFace.DOWN, 2);
+        diamondBlock.setType(Material.AIR);
     }
 
-    private boolean canCraft(Inventory inv, List<ItemStack[]> inputs, int i) {
-        for (ItemStack converting : inputs.get(i)) {
-            if (converting != null) {
-                for (int j = 0; j < inv.getContents().length; j++) {
-                    if (j == (inv.getContents().length - 1)
-                        && !SlimefunUtils.isItemSimilar(converting,
-                        inv.getContents()[j], true)) {
-                        return false;
-                    } else if (SlimefunUtils.isItemSimilar(inv.getContents()[j], converting, true)) break;
-                }
+    private boolean canCraft(Inventory inv, ItemStack[] recipe) {
+        int counter = 0;
+        for (int j = 0; j < inv.getContents().length; j++) {
+
+            SlimefunItem sfItemInv = SlimefunItem.getByItem(inv.getContents()[j]);
+            SlimefunItem sfItemRecipe = SlimefunItem.getByItem(recipe[j]);
+            if (sfItemInv == null && sfItemRecipe == null) {
+                counter++;
+            } else if (sfItemInv != null && sfItemRecipe != null
+                && sfItemInv.getID().equals(sfItemRecipe.getID())) {
+                counter++;
             }
         }
-
-        return true;
+        return counter == inv.getContents().length;
     }
 
 }
-
