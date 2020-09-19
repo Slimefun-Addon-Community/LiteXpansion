@@ -3,7 +3,7 @@ package dev.j3fftw.litexpansion;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
-import dev.j3fftw.litexpansion.machine.ScrapMachine;
+import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
@@ -241,15 +241,15 @@ public final class Items {
         "&7Mixed Metal Ingot"
     );
     // Machines
-    public static final SlimefunItemStack SCRAP_MACHINE = new SlimefunItemStack(
+    public static final SlimefunItemStack RECYCLER = new SlimefunItemStack(
         "SCRAP_MACHINE",
         Material.BLACK_CONCRETE,
-        "&8Scrap Machine",
+        "&8Recycler",
         "",
         "&fProduces &8Scrap &ffrom anything",
         "",
-        LoreBuilderDynamic.powerBuffer(ScrapMachine.CAPACITY),
-        LoreBuilderDynamic.powerPerTick(ScrapMachine.ENERGY_CONSUMPTION)
+        LoreBuilderDynamic.powerBuffer(Recycler.CAPACITY),
+        LoreBuilderDynamic.powerPerTick(Recycler.ENERGY_CONSUMPTION)
     );
     public static final SlimefunItemStack MASS_FABRICATOR_MACHINE = new SlimefunItemStack(
         "MASS_FABRICATOR_MACHINE",
@@ -308,6 +308,13 @@ public final class Items {
         Material.BLAST_FURNACE,
         "&7Refined Smeltery"
     );
+
+    public static final SlimefunItemStack METAL_FORGE = new SlimefunItemStack(
+        "METAL_FORGE",
+        Material.DISPENSER,
+        "&7Metal Forge"
+    );
+
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
 
     static {
