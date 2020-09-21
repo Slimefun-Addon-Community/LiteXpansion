@@ -2,7 +2,6 @@ package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.litexpansion.Items;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.generators.CoalGenerator;
-import io.github.thebusybiscuit.slimefun4.implementation.items.electric.generators.LavaGenerator;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import org.bukkit.Material;
