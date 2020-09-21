@@ -209,10 +209,11 @@ public final class Items {
         Material.DIAMOND_BLOCK,
         "&7Advanced Machine Block"
     );
-    public static final SlimefunItemStack ENERGY_CRYSTAl = new SlimefunItemStack(
-        "ENERGY_CRYSTAL",
+
+    public static final SlimefunItemStack LAPOTRON_CRYSTAL = new SlimefunItemStack(
+        "LAPOTRON_CRYSTAL",
         Material.DIAMOND,
-        "&7Energy Crystal"
+        "&7Lapotron Crystal"
     );
     public static final SlimefunItemStack REINFORCED_STONE = new SlimefunItemStack(
         "REINFORCED_STONE",
@@ -344,6 +345,7 @@ public final class Items {
     static {
         ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
         GLASS_CUTTER.addEnchantment(glowEnchant, 1);
+        LAPOTRON_CRYSTAL.addEnchantment(glowEnchant, 1);
     }
 
     private Items() {}
