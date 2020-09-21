@@ -8,9 +8,11 @@ import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.MetalForge;
+import dev.j3fftw.litexpansion.machine.MultiFunctionalElectricStorageUnit;
+import dev.j3fftw.litexpansion.machine.MultiFunctionalStorageUnit;
+import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
-import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -59,6 +61,8 @@ final class ItemSetup {
         new MassFabricator().register(LiteXpansion.getInstance());
         new RefinedSmeltery().register(LiteXpansion.getInstance());
         new MetalForge().register(LiteXpansion.getInstance());
+        new MultiFunctionalElectricStorageUnit().register(LiteXpansion.getInstance());
+        new MultiFunctionalStorageUnit().register(LiteXpansion.getInstance());
     }
 
     //Disable when SlimyTreeTaps exists
@@ -115,6 +119,19 @@ final class ItemSetup {
             rubberItem, rubberItem, rubberItem
         );
 
+        registerItem(Items.GOLD_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.GOLD_INGOT));
+
+        registerItem(Items.GOLD_ITEM_CASING, ManualMill.RECIIPE_TYPE, Items.GOLD_PLATE);
+
+        registerItem(new SlimefunItemStack(Items.UNINSULATED_GOLD_CABLE, 3),
+            ManualMill.RECIPE_TYPE, Items.GOLD_ITEM_CASING
+        );
+
+        registerItem(Items.GOLD_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            rubberItem, Items.UNINSULATED_GOLD_CABLE
+        );
+
+
         // Circuits
         registerNonPlaceableItem(Items.ELECTRONIC_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
             Items.COPPER_CABLE, Items.COPPER_CABLE, Items.COPPER_CABLE,
@@ -126,6 +143,18 @@ final class ItemSetup {
             new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE),
             new ItemStack(Material.GLOWSTONE_DUST), Items.ELECTRONIC_CIRCUIT, new ItemStack(Material.GLOWSTONE_DUST),
             new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE)
+        );
+
+        registerItem(Items.ENERGY_CRYSTAl, RecipeType.ENHANCED_CRAFTING_TABLE,
+            new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE),
+            new ItemStack(Material.REDSTONE), new ItemStack(Material.DIAMOND), new ItemStack(Material.REDSTONE),
+            new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE)
+        );
+
+        registerItem(Items.LAPOTRON_CRYSTAL, RecipeType.ENHANCED_CRAFTING_TABLE,
+            new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI),
+            new ItemStack(Material.LAPIS_LAZULI), Items.ENERGY_CRYSTAl, new ItemStack(Material.LAPIS_LAZULI),
+            new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI)
         );
 
         // Refined crap

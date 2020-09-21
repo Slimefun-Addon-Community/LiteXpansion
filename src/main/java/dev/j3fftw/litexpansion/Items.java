@@ -2,8 +2,8 @@ package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
-import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.machine.Recycler;
+import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
@@ -302,6 +302,36 @@ public final class Items {
         LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_DAY_RATE) + " (Day)",
         LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_NIGHT_RATE) + " (Night)"
     );
+    public static final SlimefunItemStack MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT = new SlimefunItemStack(
+        "MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT",
+        Material.IRON_BLOCK,
+        "MFE"
+    );
+    public static final SlimefunItemStack MULTI_FUNCTIONAL_STORAGE_UNIT = new SlimefunItemStack(
+        "MULTI_FUNCTIONAL_STORAGE_UNIT",
+        Material.DIAMOND_BLOCK,
+        "MFSU"
+    );
+    public static final SlimefunItemStack GOLD_PLATE = new SlimefunItemStack(
+        "GOLD_PLATE",
+        Material.YELLOW_CARPET,
+        "&7Gold Plate"
+    );
+    public static final SlimefunItemStack GOLD_ITEM_CASING = new SlimefunItemStack(
+        "GOLD_ITEM_CASING",
+        Material.YELLOW_CARPET,
+        "&7Gold Item Casing"
+    );
+    public static final SlimefunItemStack UNINSULATED_GOLD_CABLE = new SlimefunItemStack(
+        "UNINSULATED_GOLD_CABLE",
+        Material.STRING,
+        "&7Uninsulated Gold Cable"
+    );
+    public static final SlimefunItemStack GOLD_CABLE = new SlimefunItemStack(
+        "GOLD_CABLE",
+        Material.STRING,
+        "&7Gold Cable"
+    );
     //Basic Machines
     public static final SlimefunItemStack REFINED_SMELTERY = new SlimefunItemStack(
         "REFINED_SMELTERY",
@@ -320,6 +350,7 @@ public final class Items {
     static {
         ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
         GLASS_CUTTER.addEnchantment(glowEnchant, 1);
+        LAPOTRON_CRYSTAL.addEnchantment(glowEnchant, 1);
     }
 
     private Items() {}
