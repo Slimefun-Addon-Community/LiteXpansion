@@ -214,12 +214,6 @@ public final class Items {
         Material.DIAMOND,
         "&7Energy Crystal"
     );
-    //todo make it enchanted
-    public static final SlimefunItemStack LAPOTRON_CRYSTAL = new SlimefunItemStack(
-        "LAPOTRON_CRYSTAL",
-        Material.DIAMOND,
-        "&7Lapotron Crystal"
-    );
     public static final SlimefunItemStack REINFORCED_STONE = new SlimefunItemStack(
         "REINFORCED_STONE",
         Material.STONE,
@@ -350,7 +344,6 @@ public final class Items {
     static {
         ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
         GLASS_CUTTER.addEnchantment(glowEnchant, 1);
-        LAPOTRON_CRYSTAL.addEnchantment(glowEnchant, 1);
     }
 
     private Items() {}

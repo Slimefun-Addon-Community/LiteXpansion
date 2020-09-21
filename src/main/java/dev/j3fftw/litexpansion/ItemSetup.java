@@ -151,7 +151,7 @@ final class ItemSetup {
             new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE)
         );
 
-        registerItem(Items.LAPOTRON_CRYSTAL, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(SlimefunItems.POWER_CRYSTAL, RecipeType.ENHANCED_CRAFTING_TABLE,
             new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI),
             new ItemStack(Material.LAPIS_LAZULI), Items.ENERGY_CRYSTAl, new ItemStack(Material.LAPIS_LAZULI),
             new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI)
