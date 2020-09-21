@@ -38,7 +38,6 @@ public class Generator extends CoalGenerator {
         return 10;
     }
 
-    LavaGenerator
     @Override
     protected void registerDefaultFuelTypes() {
 
