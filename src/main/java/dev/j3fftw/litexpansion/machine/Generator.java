@@ -40,99 +40,42 @@ public class Generator extends CoalGenerator {
     @Override
     protected void registerDefaultFuelTypes() {
 
-        registerFuel(new MachineFuel(100, new ItemStack(Material.LAVA_BUCKET)));
-        registerFuel(new MachineFuel(80, new ItemStack(Material.COAL_BLOCK)));
-        registerFuel(new MachineFuel(20, new ItemStack(Material.DRIED_KELP_BLOCK)));
-        registerFuel(new MachineFuel(12, new ItemStack(Material.BLAZE_ROD)));
-        registerFuel(new MachineFuel(8, new ItemStack(Material.COAL)));
-        registerFuel(new MachineFuel(8, new ItemStack(Material.CHARCOAL)));
-
-        for (Material mat : Tag.ITEMS_BOATS.getValues()) {
-            registerFuel(new MachineFuel(6, new ItemStack(mat)));
-        }
-
-        registerFuel(new MachineFuel(6, new ItemStack(Material.SCAFFOLDING)));
-
-        for (Material mat : Tag.LOGS.getValues()) {
-            registerFuel(new MachineFuel(2, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.PLANKS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.WOODEN_SLABS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.WOODEN_BUTTONS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.WOODEN_FENCES.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.WOODEN_TRAPDOORS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.WOODEN_PRESSURE_PLATES.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-        for (Material mat : Tag.WOODEN_DOORS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.BANNERS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.CARPETS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.SIGNS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.SAPLINGS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        for (Material mat : Tag.WOOL.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
-        }
-
-        registerFuel(new MachineFuel(1, new ItemStack(Material.WOODEN_AXE)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.WOODEN_HOE)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.WOODEN_PICKAXE)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.WOODEN_SHOVEL)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.WOODEN_SWORD)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.LADDER)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.CRAFTING_TABLE)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.CARTOGRAPHY_TABLE)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.FLETCHING_TABLE)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.SMITHING_TABLE)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.LOOM)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.BOOKSHELF)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.LECTERN)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.COMPOSTER)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.CHEST)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.TRAPPED_CHEST)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.BARREL)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.DAYLIGHT_DETECTOR)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.JUKEBOX)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.NOTE_BLOCK)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.BROWN_MUSHROOM_BLOCK)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.RED_MUSHROOM_BLOCK)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.MUSHROOM_STEM)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.CROSSBOW)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.BOW)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.FISHING_ROD)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.BOWL)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.STICK)));
-        registerFuel(new MachineFuel(1, new ItemStack(Material.BAMBOO)));
+        super.registerFuel(new MachineFuel(100, new ItemStack(Material.LAVA_BUCKET)));
+        super.registerFuel(new MachineFuel(80, new ItemStack(Material.COAL_BLOCK)));
+        super.registerFuel(new MachineFuel(20, new ItemStack(Material.DRIED_KELP_BLOCK)));
+        super.registerFuel(new MachineFuel(12, new ItemStack(Material.BLAZE_ROD)));
+        super.registerFuel(new MachineFuel(8, new ItemStack(Material.COAL)));
+        super.registerFuel(new MachineFuel(8, new ItemStack(Material.CHARCOAL)));
+        super.registerFuel(new MachineFuel(6, new ItemStack(Material.SCAFFOLDING)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.WOODEN_AXE)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.WOODEN_HOE)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.WOODEN_PICKAXE)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.WOODEN_SHOVEL)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.WOODEN_SWORD)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.LADDER)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.CRAFTING_TABLE)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.CARTOGRAPHY_TABLE)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.FLETCHING_TABLE)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.SMITHING_TABLE)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.LOOM)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.BOOKSHELF)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.LECTERN)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.COMPOSTER)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.CHEST)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.TRAPPED_CHEST)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.BARREL)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.DAYLIGHT_DETECTOR)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.JUKEBOX)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.NOTE_BLOCK)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.BROWN_MUSHROOM_BLOCK)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.RED_MUSHROOM_BLOCK)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.MUSHROOM_STEM)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.CROSSBOW)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.BOW)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.FISHING_ROD)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.BOWL)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.STICK)));
+        super.registerFuel(new MachineFuel(1, new ItemStack(Material.BAMBOO)));
 
     }
 
