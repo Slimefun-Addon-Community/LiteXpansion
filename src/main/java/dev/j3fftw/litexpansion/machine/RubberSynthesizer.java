@@ -32,15 +32,13 @@ public class RubberSynthesizer extends SlimefunItem implements InventoryBlock, E
     public static final RecipeType RECIPE_TYPE = new RecipeType(
         new NamespacedKey(LiteXpansion.getInstance(), "rubber_synthesizer_machine"), Items.RUBBER_SYNTHESIZER_MACHINE
     );
-
+    private static final int PROGRESS_AMOUNT = 26; // Divide by 2 for seconds it takes
+    public static final int ENERGY_CONSUMPTION = 20_000 / PROGRESS_AMOUNT;
+    public static final int CAPACITY = 5 * ENERGY_CONSUMPTION;
     private static final int INPUT_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
-    private static final int PROGRESS_AMOUNT = 26; // Divide by 2 for seconds it takes
-    public static final int ENERGY_CONSUMPTION = 20_000 / PROGRESS_AMOUNT;
-    // this line below keeps going to the top whenever hitting ctrl+alt+L
-    // I don't know how to fix
-    public static final int CAPACITY = ENERGY_CONSUMPTION * 5;
+
     private static final Map<BlockPosition, Integer> progress = new HashMap<>();
 
     private static final CustomItem progressItem = new CustomItem(Material.FIRE_CHARGE, "&7Idle");
