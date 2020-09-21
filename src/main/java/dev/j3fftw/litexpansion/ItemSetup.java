@@ -6,11 +6,13 @@ import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
+import dev.j3fftw.litexpansion.machine.Generator;
+import dev.j3fftw.litexpansion.machine.ManualMill;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.MetalForge;
+import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
-import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -59,6 +61,7 @@ final class ItemSetup {
         new MassFabricator().register(LiteXpansion.getInstance());
         new RefinedSmeltery().register(LiteXpansion.getInstance());
         new MetalForge().register(LiteXpansion.getInstance());
+        new Generator().register(LiteXpansion.getInstance());
     }
 
     //Disable when SlimyTreeTaps exists
@@ -104,16 +107,37 @@ final class ItemSetup {
             null, Items.CARBON_PLATE, null
         );
 
-        // Copper cable
-        registerNonPlaceableItem(Items.UNINSULATED_COPPER_CABLE, MetalForge.RECIPE_TYPE,
-            SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT
+        registerItem(Items.TIN_PLATE, MetalForge.RECIPE_TYPE, SlimefunItems.TIN_INGOT);
+
+        registerItem(Items.TIN_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.TIN_PLATE);
+
+        registerItem(new SlimefunItemStack(Items.UNINSULATED_TIN_CABLE, 3),
+            ManualMill.RECIPE_TYPE, Items.TIN_ITEM_CASING
         );
 
-        registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            rubberItem, rubberItem, rubberItem,
-            Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE,
-            rubberItem, rubberItem, rubberItem
+        registerItem(Items.TIN_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            rubberItem, Items.UNINSULATED_TIN_CABLE
         );
+
+        // Copper cable
+
+        registerItem(Items.COPPER_PLATE, ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT);
+
+        registerItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
+
+        registerItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
+            ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT)
+        ;
+
+        registerItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            rubberItem, Items.UNINSULATED_COPPER_CABLE
+        );
+        
+        registerItem(Items.RE_BATTERY, RecipeType.ENHANCED_CRAFTING_TABLE,
+            null, Items.TIN_CABLE, null,
+            Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING,
+            Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING
+            );
 
         // Circuits
         registerNonPlaceableItem(Items.ELECTRONIC_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
