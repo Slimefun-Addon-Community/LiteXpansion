@@ -29,7 +29,7 @@ public class Generator extends AGenerator {
     @Nonnull
     @Override
     public ItemStack getProgressBar() {
-        return new ItemStack(Material.FIRE);
+        return new ItemStack(Material.FIRE_CHARGE);
     }
 
     @Override
