@@ -95,7 +95,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         new Research(new NamespacedKey(this, "machinereee"),
             696972, "Machinereeeeee", 30)
-            .addItems(Items.METAL_FORGE, Items.REFINED_SMELTERY, Items.RUBBER_SYNTHESIZER_MACHINE)
+            .addItems(Items.METAL_FORGE, Items.REFINED_SMELTERY, Items.RUBBER_SYNTHESIZER_MACHINE, Items.MANUAL_MILL,
+                Items.GENERATOR)
             .register();
 
         new Research(new NamespacedKey(this, "the_better_panel"),
@@ -115,7 +116,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         new Research(new NamespacedKey(this, "platings"),
             696976, "Platings", 40)
-            .addItems(Items.IRIDIUM_PLATE)
+            .addItems(Items.IRIDIUM_PLATE, Items.COPPER_PLATE, Items.TIN_PLATE)
             .register();
 
         new Research(new NamespacedKey(this, "rubber"),
@@ -150,7 +151,18 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         new Research(new NamespacedKey(this, "what_are_these_cables"),
             696983, "What are these cables", 25)
-            .addItems(Items.UNINSULATED_COPPER_CABLE, Items.COPPER_CABLE)
+            .addItems(Items.UNINSULATED_COPPER_CABLE, Items.COPPER_CABLE,
+                Items.UNINSULATED_COPPER_CABLE, Items.TIN_CABLE)
+            .register();
+
+        new Research(new NamespacedKey(this, "triple_a"),
+            696984, "Triple a", 20)
+            .addItems(Items.RE_BATTERY)
+            .register();
+
+        new Research(new NamespacedKey(this, "casing"),
+            696985, "S 340", 20)
+            .addItems(Items.TIN_ITEM_CASING, Items.COPPER_ITEM_CASING)
             .register();
     }
 

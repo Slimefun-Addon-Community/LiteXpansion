@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManualMill extends MultiBlockMachine  {
+public class ManualMill extends MultiBlockMachine {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
         new NamespacedKey(LiteXpansion.getInstance(), "manual_mill"),

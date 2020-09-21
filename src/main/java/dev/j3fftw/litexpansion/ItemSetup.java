@@ -62,6 +62,7 @@ final class ItemSetup {
         new RefinedSmeltery().register(LiteXpansion.getInstance());
         new MetalForge().register(LiteXpansion.getInstance());
         new Generator().register(LiteXpansion.getInstance());
+        new ManualMill().register(LiteXpansion.getInstance());
     }
 
     //Disable when SlimyTreeTaps exists
@@ -132,12 +133,12 @@ final class ItemSetup {
         registerItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
             rubberItem, Items.UNINSULATED_COPPER_CABLE
         );
-        
+
         registerItem(Items.RE_BATTERY, RecipeType.ENHANCED_CRAFTING_TABLE,
             null, Items.TIN_CABLE, null,
             Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING,
             Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING
-            );
+        );
 
         // Circuits
         registerNonPlaceableItem(Items.ELECTRONIC_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
