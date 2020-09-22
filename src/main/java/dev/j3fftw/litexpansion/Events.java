@@ -71,7 +71,7 @@ public class Events implements Listener {
     public void checkAndConsume(Player p, FoodLevelChangeEvent e) {
         FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
         for (ItemStack item : p.getInventory().getContents()) {
-            if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 3F)) {
+            if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 5F)) {
                 p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);
                 p.setFoodLevel(20);
                 p.setSaturation(5);
