@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 
 final class ItemSetup {
 
-    protected static final ItemSetup INSTANCE = new ItemSetup();
+    static final ItemSetup INSTANCE = new ItemSetup();
     private final ItemStack glass = new ItemStack(Material.GLASS);
     private final SlimefunAddon plugin = LiteXpansion.getInstance();
     private boolean initialised;
