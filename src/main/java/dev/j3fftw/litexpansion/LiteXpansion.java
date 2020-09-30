@@ -55,10 +55,10 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         } catch (IllegalAccessException | NoSuchFieldException ignored) {
             getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
         }
-        Enchantment.registerEnchantment(new GlowEnchant(Constants.GLOW_ENCHANT));
 
-        // Category
-        Items.LITEXPANSION.register();
+        Enchantment.registerEnchantment(new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
+                "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER"
+        }));
 
         ItemSetup.INSTANCE.init();
 
