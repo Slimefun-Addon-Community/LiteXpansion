@@ -2,7 +2,7 @@
 LiteXpansion is a Slimefun4 Addon that started with adding the use full items/machines from SlimeXpansion. This slowly is changing into an Industrial Craft 2 Addon.
 
 ## :world_map: Navigation
-* [Download] 
+* [Download](#floppy_disk-download)
 * [Contents](#contents)
   * [Items](#card_index_dividers-items)
   * [Machines](#electric_plug-machines)
@@ -13,7 +13,7 @@ LiteXpansion is a Slimefun4 Addon that started with adding the use full items/ma
 * [Discord](#computer-discord)
 
 ## :floppy_disk: Download
-To download LiteXpansion please click [here](https://thebusybiscuit.github.io/builds/J3fftw1/LiteXpansion/master/)
+To download LiteXpansion please click here: [Download LiteXpansion](https://thebusybiscuit.github.io/builds/J3fftw1/LiteXpansion/master/)
 
 **IMPORTANT: As mentioned before, you have to have Slimefun to use LiteXpansion. If you do not have Slimefun yet please go here: [Slimefun repository](https://github.com/Slimefun/Slimefun4). If you have problems with the download please go here: [Slimefun Wiki](https://github.com/Slimefun/Slimefun4/wiki/Installing-Slimefun)**
 
