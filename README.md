@@ -2,6 +2,14 @@
 LiteXpansion is a Slimefun4 Addon that started with adding the use full items/machines from SlimeXpansion. This slowly is changing into an Industrial Craft 2 Addon.
 
 ## :world_map: Navigation
+* [Contents](#contents)
+  * [Items](#card_index_dividers-items)
+  * [Machines](#electric_plug-machines)
+  * [Tools](#hammer_and_wrench-tools)
+  * [Weapons](#crossed_swords-weapons)
+  * [Armour](#shield-armour)
+  * [UU Matter](#brain-uu-matter)
+
 
 ## Contents
 ### :card_index_dividers: Items
