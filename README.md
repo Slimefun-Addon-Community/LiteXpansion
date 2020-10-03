@@ -72,7 +72,8 @@ recipes:
 ```
 
 ### :computer: Discord
-If you need to find a Slimefun item ID you can join the [official SF Discord here](https://slimefun.dev/discord) and doing `!item <name/ID>` in the `#bot-spam` channel.
+If you need to find a Slimefun item ID you can join the official Slimefun Discord by clicking the image below this text and doing `!item <name/ID>` in the `#bot-spam` channel.
+You can also generally chat about LiteXpansion in the `#litexpansion` channel.
 
 <p align="center">
   <a href="https://discord.gg/slimefun">
