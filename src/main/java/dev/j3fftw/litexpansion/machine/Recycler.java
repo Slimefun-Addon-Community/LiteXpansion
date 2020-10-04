@@ -26,10 +26,10 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ScrapMachine extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
+public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
-        new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.SCRAP_MACHINE
+        new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.RECYCLER
     );
 
     public static final int ENERGY_CONSUMPTION = 100;
@@ -44,8 +44,8 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
 
     private static final CustomItem progressItem = new CustomItem(Material.DEAD_BUSH, "&7Progress");
 
-    public ScrapMachine() {
-        super(Items.LITEXPANSION, Items.SCRAP_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
+    public Recycler() {
+        super(Items.LITEXPANSION, Items.RECYCLER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.REINFORCED_PLATE, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
             SlimefunItems.REINFORCED_PLATE, Items.MACHINE_BLOCK, SlimefunItems.REINFORCED_PLATE,
             SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.REINFORCED_PLATE, SlimefunItems.ADVANCED_CIRCUIT_BOARD
@@ -54,7 +54,7 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
     }
 
     private void setupInv() {
-        createPreset(this, "&8Scrap Machine", blockMenuPreset -> {
+        createPreset(this, "&8Recycler", blockMenuPreset -> {
             for (int i = 0; i < 27; i++)
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
 
@@ -69,7 +69,7 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
     public void preRegister() {
         this.addItemHandler(new BlockTicker() {
             public void tick(Block b, SlimefunItem sf, Config data) {
-                ScrapMachine.this.tick(b);
+                Recycler.this.tick(b);
             }
 
             public boolean isSynchronized() {

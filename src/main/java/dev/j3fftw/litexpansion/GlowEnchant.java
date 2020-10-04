@@ -1,20 +1,27 @@
 package dev.j3fftw.litexpansion;
 
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import javax.annotation.Nonnull;
+
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import javax.annotation.Nonnull;
-import java.util.Optional;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 
-@SuppressWarnings("NullableProblems")
 public class GlowEnchant extends Enchantment {
 
-    public GlowEnchant(NamespacedKey key) {
+    private final Set<String> ids = new HashSet<>();
+
+    public GlowEnchant(@Nonnull NamespacedKey key, @Nonnull String[] applicableItems) {
         super(key);
+        ids.addAll(Arrays.asList(applicableItems));
     }
 
     @Nonnull
@@ -60,10 +67,9 @@ public class GlowEnchant extends Enchantment {
         if (item.hasItemMeta()) {
             final ItemMeta itemMeta = item.getItemMeta();
             final Optional<String> id = SlimefunPlugin.getItemDataService().getItemData(itemMeta);
+
             if (id.isPresent()) {
-                return (id.get().equals(Items.ADVANCED_CIRCUIT.getItemId()))
-                    || (id.get().equals(Items.NANO_BLADE.getItemId()))
-                    || (id.get().equals(Items.GLASS_CUTTER.getItemId()));
+                return ids.contains(id.get());
             }
         }
         return false;

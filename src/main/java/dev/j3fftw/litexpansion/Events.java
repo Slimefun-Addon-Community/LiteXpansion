@@ -3,6 +3,15 @@ package dev.j3fftw.litexpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import dev.j3fftw.litexpansion.armor.ElectricChestplate;
+import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.weapons.NanoBlade;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -194,16 +203,17 @@ public class Events implements Listener {
         }
     }
 
-    public void checkAndConsume(Player p, FoodLevelChangeEvent e) {
+    public void checkAndConsume(@Nonnull Player p, @Nullable FoodLevelChangeEvent e) {
         FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
         for (ItemStack item : p.getInventory().getContents()) {
-            if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 3F)) {
+            if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 5F)) {
                 p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);
                 p.setFoodLevel(20);
                 p.setSaturation(5);
                 if (e != null) {
                     e.setFoodLevel(20);
                 }
+                break;
             }
         }
     }
