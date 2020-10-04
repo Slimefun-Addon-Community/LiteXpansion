@@ -142,7 +142,8 @@ public class Events implements Listener {
 
                 wrench.damageItem(p, playerWrench);
 
-            } else if (sfBlock != null && (sfBlock.getID().startsWith("CARGO_NODE")
+            } else if (sfBlock != null
+                && (sfBlock.getID().startsWith("CARGO_NODE")
                 || sfBlock instanceof TrashCan)) {
 
                 wrenchBlock(p, block, false, true);
@@ -154,16 +155,16 @@ public class Events implements Listener {
         }
     }
 
-    public static void wrenchBlock(Player p, Block block, boolean fail, boolean byInteract) {
+    public static void wrenchBlock(Player p, Block b, boolean fail, boolean byInteract) {
 
         if (fail) {
 
-            World blockWorld = block.getWorld();
-            Location blockLocation = block.getLocation();
-            SlimefunItem slimefunBlock = BlockStorage.check(block);
-            BlockMenu blockInventory = BlockStorage.getInventory(block);
+            World blockWorld = b.getWorld();
+            Location blockLocation = b.getLocation();
+            SlimefunItem slimefunBlock = BlockStorage.check(b);
+            BlockMenu blockInventory = BlockStorage.getInventory(b);
 
-            if (BlockStorage.hasInventory(block)) {
+            if (BlockStorage.hasInventory(b)) {
                 int[] inputSlots = ((InventoryBlock) slimefunBlock).getInputSlots();
                 for (int slot : inputSlots) {
 
@@ -179,16 +180,16 @@ public class Events implements Listener {
                 }
             }
 
-            BlockStorage.clearBlockInfo(block);
-            block.setType(Material.AIR);
-            block.getWorld().dropItemNaturally(block.getLocation(), Items.MACHINE_BLOCK.clone());
+            BlockStorage.clearBlockInfo(b);
+            b.setType(Material.AIR);
+            b.getWorld().dropItemNaturally(b.getLocation(), Items.MACHINE_BLOCK.clone());
 
             if (byInteract) {
                 Utils.send(p, "&cOh no! Your wrench failed!");
             }
 
         } else {
-            BlockBreakEvent breakEvent = new BlockBreakEvent(block, p);
+            BlockBreakEvent breakEvent = new BlockBreakEvent(b, p);
             Bukkit.getServer().getPluginManager().callEvent(breakEvent);
         }
     }
