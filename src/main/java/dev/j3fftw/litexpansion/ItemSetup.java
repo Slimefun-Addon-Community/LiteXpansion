@@ -52,7 +52,7 @@ final class ItemSetup {
     private void registerTools() {
         new CargoConfigurator().register(plugin);
         new GlassCutter().register(plugin);
-        new Wrench().register(plugin);
+        // new Wrench().register(plugin);
     }
 
     private void registerMachines() {
