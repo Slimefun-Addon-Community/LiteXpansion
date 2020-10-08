@@ -159,7 +159,7 @@ public class Events implements Listener {
                 wrench.damageItem(p, playerWrench);
 
             } else {
-                Utils.send(p, "&cYou can not use the wrench on this block!");
+                //Utils.send(p, "&cYou can not use the wrench on this block!");
             }
         }
     }
