@@ -15,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -36,11 +37,28 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         if (!new File(getDataFolder(), "config.yml").exists())
             saveDefaultConfig();
 
+        if (!getConfig().contains("options.need-wrench-to-break-machines")) {
+            getConfig().set("options.need-wrench-to-break-machines", false);
+            saveConfig();
+        }
+
+        if (!getConfig().contains("options.wrench-failure-chance")) {
+            getConfig().set("options.wrench-failure-chance", 0.0);
+            saveConfig();
+        }
+
         final Metrics metrics = new Metrics(this, 7111);
         setupCustomMetrics(metrics);
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
+        }
+
+        if (getConfig().getDouble("options.wrench-failure-chance") < 0
+            || getConfig().getDouble("options.wrench-failure-chance") > 1
+        ) {
+            getLogger().log(Level.SEVERE, "The wrench failure chance must be or be between 0 and 1!");
+            getServer().getPluginManager().disablePlugin(this);
         }
 
         getServer().getPluginManager().registerEvents(new Events(), this);
@@ -55,48 +73,12 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         } catch (IllegalAccessException | NoSuchFieldException ignored) {
             getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
         }
-        Enchantment.registerEnchantment(new GlowEnchant(Constants.GLOW_ENCHANT));
 
-        // Category
-        Items.LITEXPANSION.register();
+        Enchantment.registerEnchantment(new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
+                "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER"
+        }));
 
         ItemSetup.INSTANCE.init();
-
-        /*
-        registerItem(Items.ENERGY_CRYSTAl, RecipeType.ENHANCED_CRAFTING_TABLE,
-            new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE),
-            new ItemStack(Material.REDSTONE), new ItemStack(Material.DIAMOND), new ItemStack(Material.REDSTONE),
-            new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE), new ItemStack(Material.REDSTONE)
-        );
-
-        registerItem(Items.LAPOTRON_CRYSTAL, RecipeType.ENHANCED_CRAFTING_TABLE,
-            new ItemStack(Material.LAPIS_LAZULI), Items.ELECTRONIC_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI),
-            new ItemStack(Material.LAPIS_LAZULI), Items.ENERGY_CRYSTAl, new ItemStack(Material.LAPIS_LAZULI),
-            new ItemStack(Material.LAPIS_LAZULI), Items.ELECTRONIC_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI)
-        );
-
-        registerItem(Items.REINFORCED_STONE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            new ItemStack(Material.STONE), new ItemStack(Material.STONE), new ItemStack(Material.STONE),
-            new ItemStack(Material.STONE), Items.ADVANCED_ALLOY, new ItemStack(Material.STONE),
-            new ItemStack(Material.STONE), new ItemStack(Material.STONE), new ItemStack(Material.STONE)
-        );
-
-        registerItem(Items.REINFORCED_DOOR, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.REINFORCED_STONE, Items.REINFORCED_STONE, null,
-            Items.REINFORCED_STONE, Items.REINFORCED_STONE, null,
-            Items.REINFORCED_STONE, Items.REINFORCED_STONE, null
-        );
-        */
-
-        // Tools
-        /*
-
-        registerItem(Items.TREETAP, RecipeType.ENHANCED_CRAFTING_TABLE,
-            null, new ItemStack(Material.OAK_PLANKS), null,
-            new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.OAK_PLANKS), new ItemStack(Material.OAK_PLANKS),
-            new ItemStack(Material.OAK_PLANKS), null, null
-        );
-        */
 
         // Armor
         new ElectricChestplate().register(this);
@@ -120,12 +102,73 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         new Research(new NamespacedKey(this, "superalloys"),
             696970, "Superalloys", 35)
-            .addItems(Items.THORIUM, Items.MAG_THOR)
+            .addItems(Items.THORIUM, Items.MAG_THOR, Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.MIXED_METAL_INGOT,
+                Items.REFINED_IRON)
             .register();
 
         new Research(new NamespacedKey(this, "super_hot_fire"),
             696971, "Super Hot Fire", 31)
-            .addItems(Items.NANO_BLADE)
+            .addItems(Items.NANO_BLADE, Items.ELECTRIC_CHESTPLATE)
+            .register();
+
+        new Research(new NamespacedKey(this, "machinereee"),
+            696972, "Machinereeeeee", 30)
+            .addItems(Items.METAL_FORGE, Items.REFINED_SMELTERY, Items.RUBBER_SYNTHESIZER_MACHINE)
+            .register();
+
+        new Research(new NamespacedKey(this, "the_better_panel"),
+            696973, "These are the better panels", 45)
+            .addItems(Items.ADVANCED_SOLAR_PANEL, Items.ULTIMATE_SOLAR_PANEL, Items.HYBRID_SOLAR_PANEL)
+            .register();
+
+        new Research(new NamespacedKey(this, "does_this_even_matter"),
+            696974, "Does this even matter", 150)
+            .addItems(Items.UU_MATTER, Items.SCRAP, Items.MASS_FABRICATOR_MACHINE, Items.RECYCLER)
+            .register();
+
+        new Research(new NamespacedKey(this, "what_a_configuration"),
+            696975, "What a configuration", 39)
+            .addItems(Items.CARGO_CONFIGURATOR)
+            .register();
+
+        new Research(new NamespacedKey(this, "platings"),
+            696976, "Platings", 40)
+            .addItems(Items.IRIDIUM_PLATE)
+            .register();
+
+        new Research(new NamespacedKey(this, "rubber"),
+            696977, "Rubber", 25)
+            .addItems(Items.RUBBER)
+            .register();
+
+        new Research(new NamespacedKey(this, "circuits"),
+            696978, "Circuits", 25)
+            .addItems(Items.ELECTRONIC_CIRCUIT, Items.ADVANCED_CIRCUIT)
+            .register();
+
+        new Research(new NamespacedKey(this, "reinforcement_is_coming"),
+            696979, "Reinforcement is coming", 15)
+            .addItems(Items.REINFORCED_DOOR, Items.REINFORCED_GLASS, Items.REINFORCED_STONE)
+            .register();
+
+        new Research(new NamespacedKey(this, "only_glass"),
+            696980, "Only glass", 40)
+            .addItems(Items.GLASS_CUTTER)
+            .register();
+
+        new Research(new NamespacedKey(this, "machine_blocks"),
+            696981, "Machine Blocks", 35)
+            .addItems(Items.MACHINE_BLOCK, Items.ADVANCED_MACHINE_BLOCK)
+            .register();
+
+        new Research(new NamespacedKey(this, "coal_mesh"),
+            696982, "Coal mesh", 30)
+            .addItems(Items.COAL_DUST, Items.RAW_CARBON_MESH, Items.RAW_CARBON_FIBRE, Items.CARBON_PLATE)
+            .register();
+
+        new Research(new NamespacedKey(this, "what_are_these_cables"),
+            696983, "What are these cables", 25)
+            .addItems(Items.UNINSULATED_COPPER_CABLE, Items.COPPER_CABLE)
             .register();
     }
 
@@ -169,5 +212,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     public static LiteXpansion getInstance() {
         return instance;
+    }
+
+    public static FileConfiguration getCfg() {
+        return instance.getConfig();
     }
 }

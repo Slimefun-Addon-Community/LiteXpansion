@@ -1,12 +1,25 @@
 package dev.j3fftw.litexpansion;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import dev.j3fftw.litexpansion.armor.ElectricChestplate;
+import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.items.Wrench;
+import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.utils.Utils;
+import dev.j3fftw.litexpansion.weapons.NanoBlade;
+import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
+import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.items.cargo.TrashCan;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
+import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -16,28 +29,15 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
-import dev.j3fftw.litexpansion.armor.ElectricChestplate;
-import dev.j3fftw.litexpansion.items.DiamondDrill;
-import dev.j3fftw.litexpansion.items.FoodSynthesizer;
-import dev.j3fftw.litexpansion.items.MiningDrill;
-import dev.j3fftw.litexpansion.utils.Constants;
-import dev.j3fftw.litexpansion.utils.Utils;
-import dev.j3fftw.litexpansion.weapons.NanoBlade;
-import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Optional;
+
 
 public class Events implements Listener {
-
-    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList( Material.STONE,
-        Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
-        Material.NETHERRACK, Material.END_STONE ));
 
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {
@@ -80,7 +80,8 @@ public class Events implements Listener {
 
     @EventHandler
     public void onHungerDamage(EntityDamageEvent e) {
-        if (Items.FOOD_SYNTHESIZER == null || Items.FOOD_SYNTHESIZER.getItem().isDisabled()
+        if (Items.FOOD_SYNTHESIZER == null
+            || Items.FOOD_SYNTHESIZER.getItem().isDisabled()
             || !(e.getEntity() instanceof Player)) {
             return;
         }
@@ -91,106 +92,124 @@ public class Events implements Listener {
     }
 
     @EventHandler
-    @SuppressWarnings("ConstantConditions")
-    public void onStoneDrill(PlayerInteractEvent e) {
-        final Block block = e.getClickedBlock();
-        if (block == null) return;
+    public void onBlockBreak(BlockBreakEvent e) {
 
-        final Material blockType = block.getType();
-        final Location blockLocation = block.getLocation();
+        Player p = e.getPlayer();
+        Block block = e.getBlock();
+        Wrench wrench = (Wrench) Items.WRENCH.getItem();
 
-        final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getByID(Items.MINING_DRILL.getItemId());
-
-        if (miningDrill.isItem(e.getItem()) && drillableBlocks.contains(blockType)
+        if (Constants.MACHINE_BREAK_REQUIRES_WRENCH
+            && !wrench.isItem(p.getInventory().getItemInMainHand())
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
-            blockLocation, ProtectableAction.BREAK_BLOCK)
+            block.getLocation(), ProtectableAction.BREAK_BLOCK)
         ) {
-            e.setCancelled(true);
 
-            final SlimefunItem slimefunItem = BlockStorage.check(block);
+            SlimefunItem slimefunBlock = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
-                .removeItemCharge(e.getItem(), 0.5F)) {
-                // This allows other plugins to register broken block as player broken
-                BlockBreakEvent newevent = new BlockBreakEvent(block, e.getPlayer());
-                Bukkit.getServer().getPluginManager().callEvent(newevent);
-                block.setType(Material.AIR);
-                e.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
-
-                // This has to be done because the item in the main hand is not a pickaxe
-                if (blockType == Material.STONE) {
-                    blockLocation.getWorld().dropItem(blockLocation, new ItemStack(Material.COBBLESTONE));
-
-                } else {
-                    blockLocation.getWorld().dropItem(blockLocation, new ItemStack(blockType));
-                }
+            if (slimefunBlock instanceof EnergyNetComponent) {
+                e.setCancelled(true);
+                wrenchBlock(p, block, true, false);
+                Utils.send(p, "&cYou need a Wrench to break Slimefun machines!");
+                Utils.send(p, "&c(Slimefun Guide > LiteXpansion > Wrench)");
             }
         }
     }
 
     @EventHandler
     @SuppressWarnings("ConstantConditions")
-    public void onObsidiaDrill(PlayerInteractEvent e) {
-        final Block block = e.getClickedBlock();
-        if (block == null) return;
+    public void onWrenchUse(PlayerRightClickEvent e) {
 
-        final Material blockType = block.getType();
-        final Location blockLocation = block.getLocation();
+        Player p = e.getPlayer();
+        Wrench wrench = (Wrench) Items.WRENCH.getItem();
+        ItemStack playerWrench = p.getInventory().getItemInMainHand();
+        final Optional<Block> block = e.getClickedBlock();
 
-        final DiamondDrill diamondDrill = (DiamondDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
+        if (!block.isPresent()) return;
 
-        if ((diamondDrill.isItem(e.getItem())
-            && (drillableBlocks.contains(blockType)
-            || blockType.equals(Material.OBSIDIAN)
-            || blockType.toString().endsWith("_ORE")))
+        if (e.getHand() == EquipmentSlot.HAND && wrench.isItem(playerWrench)
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
-            blockLocation, ProtectableAction.BREAK_BLOCK)
-        ) {
-            e.setCancelled(true);
+            block.get().getLocation(), ProtectableAction.BREAK_BLOCK)) {
 
-            final SlimefunItem slimefunItem = BlockStorage.check(block);
+            SlimefunItem sfBlock = BlockStorage.check(block.get());
 
-            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
-                .removeItemCharge(e.getItem(), 1.5F)) {
-                // This allows other plugins to register broken block as player broken
-                BlockBreakEvent newevent = new BlockBreakEvent(block, e.getPlayer());
-                Bukkit.getServer().getPluginManager().callEvent(newevent);
-                block.setType(Material.AIR);
-                e.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
+            if (sfBlock instanceof EnergyNetComponent) {
 
-                // This has to be done because the item in the main hand is not a pickaxe
-                if (blockType == Material.STONE) {
-                    blockLocation.getWorld().dropItem(blockLocation, new ItemStack(Material.COBBLESTONE));
+                if (Constants.MACHINE_BREAK_REQUIRES_WRENCH) {
 
-                } else {
-                    blockLocation.getWorld().dropItem(blockLocation, new ItemStack(blockType));
+                    double random = Math.random();
+                    wrenchBlock(p, block.get(), random <= Constants.WRENCH_FAIL_CHANCE, true);
+
+                } else if (!Constants.MACHINE_BREAK_REQUIRES_WRENCH) {
+                    wrenchBlock(p, block.get(), false, true);
                 }
+
+                wrench.damageItem(p, playerWrench);
+
+            } else if (sfBlock != null
+                && (sfBlock.getID().startsWith("CARGO_NODE")
+                || sfBlock instanceof TrashCan)) {
+
+                wrenchBlock(p, block.get(), false, true);
+                wrench.damageItem(p, playerWrench);
+
+            } else {
+                Utils.send(p, "&cYou can not use the wrench on this block!");
             }
         }
     }
 
-    @EventHandler
-    public void onDiamondDrillUpgrade(InventoryClickEvent e) {
-        Player p = (Player) e.getWhoClicked();
-        // 1.16 inventory, compare strings
-        final DiamondDrill diamondDrill = (DiamondDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
-        if (diamondDrill.isItem(e.getCurrentItem()) && p.getOpenInventory().getType().toString().equals("SMITHING")) {
+    public static void wrenchBlock(Player p, Block b, boolean fail, boolean byInteract) {
 
-            e.setCancelled(true);
-            Utils.send(p, "&cYou can not upgrade your Diamond Drill!");
+        if (fail) {
+
+            World blockWorld = b.getWorld();
+            Location blockLocation = b.getLocation();
+            SlimefunItem slimefunBlock = BlockStorage.check(b);
+            BlockMenu blockInventory = BlockStorage.getInventory(b);
+
+
+            if (BlockStorage.hasInventory(b)) {
+                int[] inputSlots = ((InventoryBlock) slimefunBlock).getInputSlots();
+                for (int slot : inputSlots) {
+                    if (blockInventory.getItemInSlot(slot) != null) {
+                        blockWorld.dropItemNaturally(blockLocation,
+                            blockInventory.getItemInSlot(slot));
+                    }
+                }
+                int[] outputSlots = ((InventoryBlock) slimefunBlock).getOutputSlots();
+                for (int slot : outputSlots) {
+                    if (blockInventory.getItemInSlot(slot) != null) {
+                        blockWorld.dropItemNaturally(blockLocation,
+                            blockInventory.getItemInSlot(slot));
+                    }
+                }
+            }
+
+            BlockStorage.clearBlockInfo(b);
+            b.setType(Material.AIR);
+            b.getWorld().dropItemNaturally(b.getLocation(), Items.MACHINE_BLOCK.clone());
+
+            if (byInteract) {
+                Utils.send(p, "&cOh no! Your wrench failed!");
+            }
+
+        } else {
+            BlockBreakEvent breakEvent = new BlockBreakEvent(b, p);
+            Bukkit.getServer().getPluginManager().callEvent(breakEvent);
         }
     }
 
-    public void checkAndConsume(Player p, FoodLevelChangeEvent e) {
+    public void checkAndConsume(@Nonnull Player p, @Nullable FoodLevelChangeEvent e) {
         FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
         for (ItemStack item : p.getInventory().getContents()) {
-            if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 3F)) {
+            if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 5F)) {
                 p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);
                 p.setFoodLevel(20);
                 p.setSaturation(5);
                 if (e != null) {
                     e.setFoodLevel(20);
                 }
+                break;
             }
         }
     }

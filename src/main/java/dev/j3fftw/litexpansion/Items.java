@@ -3,9 +3,10 @@ package dev.j3fftw.litexpansion;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
-import dev.j3fftw.litexpansion.machine.ScrapMachine;
+import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
+import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -56,7 +57,12 @@ public final class Items {
     public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
         "WRENCH",
         Material.GOLDEN_HOE,
-        "&6Wrench"
+        "&6Wrench",
+        "",
+        "&7Click any machine, generator, capacitor,",
+        "&7or cargo node to instantly break it!",
+        "",
+        "&4Failure Chance: &e" + Utils.wrenchFailureChance() + "%"
     );
     public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
         "GLASS_CUTTER",
@@ -261,15 +267,15 @@ public final class Items {
         "&7Mixed Metal Ingot"
     );
     // Machines
-    public static final SlimefunItemStack SCRAP_MACHINE = new SlimefunItemStack(
+    public static final SlimefunItemStack RECYCLER = new SlimefunItemStack(
         "SCRAP_MACHINE",
         Material.BLACK_CONCRETE,
-        "&8Scrap Machine",
+        "&8Recycler",
         "",
         "&fProduces &8Scrap &ffrom anything",
         "",
-        LoreBuilderDynamic.powerBuffer(ScrapMachine.CAPACITY),
-        LoreBuilderDynamic.powerPerTick(ScrapMachine.ENERGY_CONSUMPTION)
+        LoreBuilderDynamic.powerBuffer(Recycler.CAPACITY),
+        LoreBuilderDynamic.powerPerTick(Recycler.ENERGY_CONSUMPTION)
     );
     public static final SlimefunItemStack MASS_FABRICATOR_MACHINE = new SlimefunItemStack(
         "MASS_FABRICATOR_MACHINE",
@@ -282,7 +288,7 @@ public final class Items {
         LoreBuilderDynamic.powerPerTick(MassFabricator.ENERGY_CONSUMPTION)
     );
     public static final SlimefunItemStack RUBBER_SYNTHESIZER_MACHINE = new SlimefunItemStack(
-        "RUBBER_SYNTHESIZER_MACHINE",
+        "RUBBER_SYNTHESIZER",
         Material.ORANGE_CONCRETE,
         "&6Rubber Synthesizer",
         "",
@@ -328,6 +334,13 @@ public final class Items {
         Material.BLAST_FURNACE,
         "&7Refined Smeltery"
     );
+
+    public static final SlimefunItemStack METAL_FORGE = new SlimefunItemStack(
+        "METAL_FORGE",
+        Material.DISPENSER,
+        "&7Metal Forge"
+    );
+
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
 
     static {

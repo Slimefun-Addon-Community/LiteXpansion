@@ -1,17 +1,17 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
-import dev.j3fftw.litexpansion.items.DiamondDrill;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
-import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
+import dev.j3fftw.litexpansion.items.Wrench;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
+import dev.j3fftw.litexpansion.machine.MetalForge;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
-import dev.j3fftw.litexpansion.machine.ScrapMachine;
+import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 
 final class ItemSetup {
 
-    protected static final ItemSetup INSTANCE = new ItemSetup();
+    static final ItemSetup INSTANCE = new ItemSetup();
     private final ItemStack glass = new ItemStack(Material.GLASS);
     private final SlimefunAddon plugin = LiteXpansion.getInstance();
     private boolean initialised;
@@ -52,15 +52,15 @@ final class ItemSetup {
     private void registerTools() {
         new CargoConfigurator().register(plugin);
         new GlassCutter().register(plugin);
-        new MiningDrill().register(plugin);
-        new DiamondDrill().register(plugin);
+        new Wrench().register(plugin);
     }
 
     private void registerMachines() {
         new FoodSynthesizer().register(LiteXpansion.getInstance());
-        new ScrapMachine().register(LiteXpansion.getInstance());
+        new Recycler().register(LiteXpansion.getInstance());
         new MassFabricator().register(LiteXpansion.getInstance());
         new RefinedSmeltery().register(LiteXpansion.getInstance());
+        new MetalForge().register(LiteXpansion.getInstance());
     }
 
     //Disable when SlimyTreeTaps exists
@@ -79,7 +79,7 @@ final class ItemSetup {
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
 
         // Mixed Metal Ingot
-        registerItem(Items.MIXED_METAL_INGOT, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(Items.MIXED_METAL_INGOT, MetalForge.RECIPE_TYPE,
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
             SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT,
             SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT
@@ -93,21 +93,21 @@ final class ItemSetup {
         );
 
         // Machine block
-        registerItem(Items.MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(Items.MACHINE_BLOCK, MetalForge.RECIPE_TYPE,
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
             Items.REFINED_IRON, null, Items.REFINED_IRON,
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON
         );
 
         // Advanced Machine Block
-        registerItem(Items.ADVANCED_MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(Items.ADVANCED_MACHINE_BLOCK, MetalForge.RECIPE_TYPE,
             null, Items.ADVANCED_ALLOY, null,
             Items.CARBON_PLATE, Items.MACHINE_BLOCK, Items.CARBON_PLATE,
             null, Items.CARBON_PLATE, null
         );
 
         // Copper cable
-        registerNonPlaceableItem(Items.UNINSULATED_COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerNonPlaceableItem(Items.UNINSULATED_COPPER_CABLE, MetalForge.RECIPE_TYPE,
             SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT
         );
 
@@ -131,7 +131,7 @@ final class ItemSetup {
         );
 
         // Refined crap
-        registerNonPlaceableItem(Items.REFINED_IRON, RefinedSmeltery.REFINED_SMELTERY_RECIPE,
+        registerNonPlaceableItem(Items.REFINED_IRON, RefinedSmeltery.RECIPE_TYPE,
             new ItemStack(Material.IRON_INGOT));
         registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
 
@@ -141,7 +141,7 @@ final class ItemSetup {
     }
 
     private void registerEndgameItems() {
-        registerNonPlaceableItem(Items.SCRAP, ScrapMachine.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE,
+        registerNonPlaceableItem(Items.SCRAP, Recycler.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE,
             "&7Any Item!"));
         registerNonPlaceableItem(Items.UU_MATTER, MassFabricator.RECIPE_TYPE, Items.SCRAP);
         registerNonPlaceableItem(Items.IRIDIUM, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -149,7 +149,7 @@ final class ItemSetup {
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         );
-        registerItem(Items.IRIDIUM_PLATE, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerNonPlaceableItem(Items.IRIDIUM_PLATE, MetalForge.RECIPE_TYPE,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM,
             Items.ADVANCED_ALLOY, new ItemStack(Material.DIAMOND), Items.ADVANCED_ALLOY,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM

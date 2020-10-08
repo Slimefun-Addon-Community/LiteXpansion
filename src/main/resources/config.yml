@@ -1,2 +1,4 @@
 options:
   auto-update: true
+  need-wrench-to-break-machines: true
+  wrench-failure-chance: 0.0
