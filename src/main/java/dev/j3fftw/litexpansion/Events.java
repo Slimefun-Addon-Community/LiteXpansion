@@ -1,17 +1,23 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.armor.ElectricChestplate;
+import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.items.Wrench;
+import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.utils.Utils;
+import dev.j3fftw.litexpansion.weapons.NanoBlade;
+import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
+import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.items.cargo.TrashCan;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
+import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import dev.j3fftw.litexpansion.armor.ElectricChestplate;
-import dev.j3fftw.litexpansion.items.FoodSynthesizer;
-import dev.j3fftw.litexpansion.utils.Constants;
-import dev.j3fftw.litexpansion.weapons.NanoBlade;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -23,25 +29,12 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
-
-import dev.j3fftw.litexpansion.armor.ElectricChestplate;
-import dev.j3fftw.litexpansion.items.FoodSynthesizer;
-import dev.j3fftw.litexpansion.items.Wrench;
-import dev.j3fftw.litexpansion.utils.Constants;
-import dev.j3fftw.litexpansion.utils.Utils;
-import dev.j3fftw.litexpansion.weapons.NanoBlade;
-import io.github.thebusybiscuit.slimefun4.implementation.items.cargo.TrashCan;
-import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 
 public class Events implements Listener {
@@ -87,7 +80,8 @@ public class Events implements Listener {
 
     @EventHandler
     public void onHungerDamage(EntityDamageEvent e) {
-        if (Items.FOOD_SYNTHESIZER == null || Items.FOOD_SYNTHESIZER.getItem().isDisabled()
+        if (Items.FOOD_SYNTHESIZER == null
+            || Items.FOOD_SYNTHESIZER.getItem().isDisabled()
             || !(e.getEntity() instanceof Player)) {
             return;
         }
@@ -123,30 +117,30 @@ public class Events implements Listener {
 
     @EventHandler
     @SuppressWarnings("ConstantConditions")
-    public void onWrenchUse(PlayerInteractEvent e) {
+    public void onWrenchUse(PlayerRightClickEvent e) {
 
         Player p = e.getPlayer();
         Wrench wrench = (Wrench) Items.WRENCH.getItem();
         ItemStack playerWrench = p.getInventory().getItemInMainHand();
-        final Block block = e.getClickedBlock();
+        final Optional<Block> block = e.getClickedBlock();
 
-        if (block == null) return;
+        if (!block.isPresent()) return;
 
         if (e.getHand() == EquipmentSlot.HAND && wrench.isItem(playerWrench)
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
-            block.getLocation(), ProtectableAction.BREAK_BLOCK)) {
+            block.get().getLocation(), ProtectableAction.BREAK_BLOCK)) {
 
-            SlimefunItem sfBlock = BlockStorage.check(block);
+            SlimefunItem sfBlock = BlockStorage.check(block.get());
 
             if (sfBlock instanceof EnergyNetComponent) {
 
                 if (Constants.MACHINE_BREAK_REQUIRES_WRENCH) {
 
                     double random = Math.random();
-                    wrenchBlock(p, block, random <= Constants.WRENCH_FAIL_CHANCE, true);
+                    wrenchBlock(p, block.get(), random <= Constants.WRENCH_FAIL_CHANCE, true);
 
-                } else {
-                    wrenchBlock(p, block, false, true);
+                } else if (!Constants.MACHINE_BREAK_REQUIRES_WRENCH) {
+                    wrenchBlock(p, block.get(), false, true);
                 }
 
                 wrench.damageItem(p, playerWrench);
@@ -155,7 +149,7 @@ public class Events implements Listener {
                 && (sfBlock.getID().startsWith("CARGO_NODE")
                 || sfBlock instanceof TrashCan)) {
 
-                wrenchBlock(p, block, false, true);
+                wrenchBlock(p, block.get(), false, true);
                 wrench.damageItem(p, playerWrench);
 
             } else {
@@ -173,18 +167,20 @@ public class Events implements Listener {
             SlimefunItem slimefunBlock = BlockStorage.check(b);
             BlockMenu blockInventory = BlockStorage.getInventory(b);
 
+
             if (BlockStorage.hasInventory(b)) {
                 int[] inputSlots = ((InventoryBlock) slimefunBlock).getInputSlots();
                 for (int slot : inputSlots) {
-
                     if (blockInventory.getItemInSlot(slot) != null) {
-                        blockWorld.dropItemNaturally(blockLocation, blockInventory.getItemInSlot(slot));
+                        blockWorld.dropItemNaturally(blockLocation,
+                            blockInventory.getItemInSlot(slot));
                     }
                 }
                 int[] outputSlots = ((InventoryBlock) slimefunBlock).getOutputSlots();
                 for (int slot : outputSlots) {
                     if (blockInventory.getItemInSlot(slot) != null) {
-                        blockWorld.dropItemNaturally(blockLocation, blockInventory.getItemInSlot(slot));
+                        blockWorld.dropItemNaturally(blockLocation,
+                            blockInventory.getItemInSlot(slot));
                     }
                 }
             }
