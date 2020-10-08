@@ -72,12 +72,12 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         setupResearches();
         new ThoriumResource().register();
 
-        if (Wrench.wrenchFailChance.getValue() < 0
-            || Wrench.wrenchFailChance.getValue() > 1
-        ) {
-            getLogger().log(Level.SEVERE, "The wrench failure chance must be or be between 0 and 1!");
-            getServer().getPluginManager().disablePlugin(this);
-        }
+//        if (Wrench.wrenchFailChance.getValue() < 0
+//            || Wrench.wrenchFailChance.getValue() > 1
+//        ) {
+//            getLogger().log(Level.SEVERE, "The wrench failure chance must be or be between 0 and 1!");
+//            getServer().getPluginManager().disablePlugin(this);
+//        }
     }
 
     @Override
