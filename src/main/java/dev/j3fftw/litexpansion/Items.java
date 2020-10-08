@@ -6,6 +6,7 @@ import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
+import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -56,7 +57,12 @@ public final class Items {
     public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
         "WRENCH",
         Material.GOLDEN_HOE,
-        "&6Wrench"
+        "&6Wrench",
+        "",
+        "&7Click any machine, generator, capacitor,",
+        "&7or cargo node to instantly break it!",
+        "",
+        "&4Failure Chance: &e" + Utils.wrenchFailureChance() + "%"
     );
     public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
         "GLASS_CUTTER",

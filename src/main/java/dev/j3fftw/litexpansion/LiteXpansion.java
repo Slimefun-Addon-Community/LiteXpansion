@@ -15,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -36,11 +37,28 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         if (!new File(getDataFolder(), "config.yml").exists())
             saveDefaultConfig();
 
+        if (!getConfig().contains("options.need-wrench-to-break-machines")) {
+            getConfig().set("options.need-wrench-to-break-machines", false);
+            saveConfig();
+        }
+
+        if (!getConfig().contains("options.wrench-failure-chance")) {
+            getConfig().set("options.wrench-failure-chance", 0.0);
+            saveConfig();
+        }
+
         final Metrics metrics = new Metrics(this, 7111);
         setupCustomMetrics(metrics);
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
+        }
+
+        if (getConfig().getDouble("options.wrench-failure-chance") < 0
+            || getConfig().getDouble("options.wrench-failure-chance") > 1
+        ) {
+            getLogger().log(Level.SEVERE, "The wrench failure chance must be or be between 0 and 1!");
+            getServer().getPluginManager().disablePlugin(this);
         }
 
         getServer().getPluginManager().registerEvents(new Events(), this);
@@ -194,5 +212,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     public static LiteXpansion getInstance() {
         return instance;
+    }
+
+    public static FileConfiguration getCfg() {
+        return instance.getConfig();
     }
 }
