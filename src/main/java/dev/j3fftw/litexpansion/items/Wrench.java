@@ -1,6 +1,7 @@
 package dev.j3fftw.litexpansion.items;
 
 
+import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
@@ -23,12 +24,17 @@ import javax.annotation.Nonnull;
  */
 public class Wrench extends SimpleSlimefunItem<ItemUseHandler> implements DamageableItem {
 
+    public static final ItemSetting<Boolean> machineBreakRequiresWrench = new ItemSetting<>("machine-break-requires-wrench", false);
+    public static final ItemSetting<Double> wrenchFailChance = new ItemSetting<>("wrench-failure-chance", 0.0);
+
     public Wrench() {
         super(Items.LITEXPANSION, Items.WRENCH, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             SlimefunItems.COPPER_INGOT, null, SlimefunItems.COPPER_INGOT,
             null, SlimefunItems.COPPER_INGOT, null,
             null, SlimefunItems.COPPER_INGOT, null
         });
+
+        addItemSetting(machineBreakRequiresWrench, wrenchFailChance);
     }
 
     @Nonnull
@@ -39,5 +45,13 @@ public class Wrench extends SimpleSlimefunItem<ItemUseHandler> implements Damage
     @Override
     public boolean isDamageable() {
         return true;
+    }
+
+    public static String getFailureChance() {
+        if (!Wrench.machineBreakRequiresWrench.getValue()) {
+            return "0";
+        } else {
+            return String.valueOf((Wrench.wrenchFailChance.getValue() * 100));
+        }
     }
 }

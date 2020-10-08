@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.items.Wrench;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
@@ -17,6 +18,9 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
 
 public final class Items {
 
@@ -61,8 +65,7 @@ public final class Items {
         "",
         "&7Click any machine, generator, capacitor,",
         "&7or cargo node to instantly break it!",
-        "",
-        "&4Failure Chance: &e" + Utils.wrenchFailureChance() + "%"
+        ""
     );
     public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
         "GLASS_CUTTER",
@@ -322,11 +325,6 @@ public final class Items {
     );
 
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
-
-    static {
-        ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
-        GLASS_CUTTER.addEnchantment(glowEnchant, 1);
-    }
 
     private Items() {}
 }

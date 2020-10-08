@@ -28,18 +28,13 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 
-import dev.j3fftw.litexpansion.armor.ElectricChestplate;
-import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.Wrench;
-import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.Utils;
-import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.implementation.items.cargo.TrashCan;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 
@@ -104,7 +99,7 @@ public class Events implements Listener {
         Block block = e.getBlock();
         Wrench wrench = (Wrench) Items.WRENCH.getItem();
 
-        if (Constants.MACHINE_BREAK_REQUIRES_WRENCH
+        if (Wrench.machineBreakRequiresWrench.getValue()
             && !wrench.isItem(p.getInventory().getItemInMainHand())
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
             block.getLocation(), ProtectableAction.BREAK_BLOCK)
@@ -140,10 +135,10 @@ public class Events implements Listener {
 
             if (sfBlock instanceof EnergyNetComponent) {
 
-                if (Constants.MACHINE_BREAK_REQUIRES_WRENCH) {
+                if (Wrench.machineBreakRequiresWrench.getValue()) {
 
                     double random = Math.random();
-                    wrenchBlock(p, block, random <= Constants.WRENCH_FAIL_CHANCE, true);
+                    wrenchBlock(p, block, random <= Wrench.wrenchFailChance.getValue(), true);
 
                 } else {
                     wrenchBlock(p, block, false, true);
@@ -159,7 +154,7 @@ public class Events implements Listener {
                 wrench.damageItem(p, playerWrench);
 
             } else {
-                // Utils.send(p, "&cYou can not use the wrench on this block!");
+                Utils.send(p, "&cYou can not use the wrench on this block!");
             }
         }
     }

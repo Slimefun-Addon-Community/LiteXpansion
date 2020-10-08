@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion.utils;
 
+import dev.j3fftw.litexpansion.items.Wrench;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
@@ -51,14 +52,6 @@ public final class Utils {
             return (Constants.SERVER_TICK_RATE * power);
         } else {
             return (1 / ((double) Constants.CUSTOM_TICKER_DELAY / Constants.SERVER_TICK_RATE) * power);
-        }
-    }
-
-    public static String wrenchFailureChance() {
-        if (!Constants.MACHINE_BREAK_REQUIRES_WRENCH) {
-            return "0";
-        } else {
-            return String.valueOf((Constants.WRENCH_FAIL_CHANCE * 100));
         }
     }
 
