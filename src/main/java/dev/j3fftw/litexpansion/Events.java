@@ -92,6 +92,7 @@ public class Events implements Listener {
         }
     }
 
+    /*
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
 
@@ -197,6 +198,8 @@ public class Events implements Listener {
             Bukkit.getServer().getPluginManager().callEvent(breakEvent);
         }
     }
+
+     */
 
     public void checkAndConsume(@Nonnull Player p, @Nullable FoodLevelChangeEvent e) {
         FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
