@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.github.TheBusyBiscuit</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>RC-16</version>
+            <version>RC-17</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -66,6 +66,13 @@
                 <directory>${basedir}/src/main/resources/</directory>
                 <includes>
                     <include>*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}</directory>
+
+                <includes>
+                    <include>LICENSE</include>
                 </includes>
             </resource>
         </resources>
