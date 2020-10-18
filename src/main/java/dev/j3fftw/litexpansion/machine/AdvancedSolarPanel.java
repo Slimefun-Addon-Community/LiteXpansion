@@ -6,8 +6,6 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +22,9 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, EnergyNetProvider {
 
@@ -102,8 +103,12 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
     }
 
     private int getGeneratingAmount(@Nonnull Block b, @Nonnull World world) {
-        if (world.getEnvironment() == World.Environment.NETHER) return this.type.getDayGenerationRate();
-        if (world.getEnvironment() == World.Environment.THE_END) return this.type.getNightGenerationRate();
+        if (world.getEnvironment() == World.Environment.NETHER) {
+            return this.type.getDayGenerationRate();
+        }
+        if (world.getEnvironment() == World.Environment.THE_END) {
+            return this.type.getNightGenerationRate();
+        }
 
         // Note: You need to get the block above for the light check, the block itself is always 0
         if (world.isThundering() || world.hasStorm() || world.getTime() >= 13000

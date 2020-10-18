@@ -3,6 +3,15 @@ package dev.j3fftw.litexpansion.uumatter;
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
+import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,14 +21,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public final class UUMatter {
 
@@ -51,7 +52,9 @@ public final class UUMatter {
             final int amount = NumberUtils.getInt(key.substring(idx + 1), 1);
 
             final ItemStack output = getOutputItem(id, amount);
-            if (output == null) continue;
+            if (output == null) {
+                continue;
+            }
 
             final ItemStack[] recipe = new ItemStack[9];
             parseRecipe(config, key, recipe);
@@ -103,10 +106,11 @@ public final class UUMatter {
             final char[] chars = new char[3];
             System.arraycopy(line.toCharArray(), 0, chars, 0, 3);
             for (char c : chars)
-                if (c == 'x')
+                if (c == 'x') {
                     recipe[i++] = Items.UU_MATTER.clone();
-                else
+                } else {
                     recipe[i++] = null;
+                }
         }
     }
 

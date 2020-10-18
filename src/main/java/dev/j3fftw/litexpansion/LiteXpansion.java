@@ -6,12 +6,6 @@ import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
@@ -25,6 +19,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.annotation.Nonnull;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private static LiteXpansion instance;
@@ -33,8 +34,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     public void onEnable() {
         instance = this;
 
-        if (!new File(getDataFolder(), "config.yml").exists())
+        if (!new File(getDataFolder(), "config.yml").exists()) {
             saveDefaultConfig();
+        }
 
         final Metrics metrics = new Metrics(this, 7111);
         setupCustomMetrics(metrics);
@@ -80,12 +82,12 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     public void onDisable() {
         instance = null;
     }
-    
+
     private void registerEnchantments() {
         Enchantment glowEnchantment = new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
-                "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER"
+            "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER"
         });
-        
+
         // Prevent double-registration errors
         if (Enchantment.getByKey(glowEnchantment.getKey()) == null) {
             Enchantment.registerEnchantment(glowEnchantment);
@@ -178,7 +180,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
                 for (World world : Bukkit.getWorlds()) {
                     final BlockStorage storage = BlockStorage.getStorage(world);
-                    if (storage == null) continue;
+                    if (storage == null) {
+                        continue;
+                    }
 
                     final Field f = blockStorage.getDeclaredField("storage");
                     f.setAccessible(true);
@@ -187,7 +191,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
                     for (Map.Entry<Location, Config> entry : blocks.entrySet()) {
                         final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
-                        if (item == null || !(item.getAddon() instanceof LiteXpansion)) continue;
+                        if (item == null || !(item.getAddon() instanceof LiteXpansion)) {
+                            continue;
+                        }
 
                         data.merge(item.getId(), 1, Integer::sum);
                     }
