@@ -122,15 +122,13 @@ final class ItemSetup {
             rubberItem, Items.UNINSULATED_TIN_CABLE
         );
 
-        // Copper cable
-
         registerNonPlaceableItem(Items.COPPER_PLATE, ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT);
 
         registerNonPlaceableItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
 
         registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
-            ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT);
-        ;
+            ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT
+        );
 
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
             rubberItem, Items.UNINSULATED_COPPER_CABLE
@@ -157,7 +155,8 @@ final class ItemSetup {
 
         // Refined crap
         registerNonPlaceableItem(Items.REFINED_IRON, RefinedSmeltery.RECIPE_TYPE,
-            new ItemStack(Material.IRON_INGOT));
+            new ItemStack(Material.IRON_INGOT)
+        );
         registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
 
         // Resources
@@ -216,13 +215,7 @@ final class ItemSetup {
             new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
 
             // make shapeless
-            for (int i = 0; i < 9; i++) {
-                if (i == 4) continue;
-                final ItemStack[] recipe2 = new ItemStack[9];
-                recipe2[i] = items[0];
-                type.register(recipe2, result);
-            }
-
+            recipeResult(result, type, items);
             return;
         }
 
@@ -234,6 +227,15 @@ final class ItemSetup {
         }
 
         new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
+    }
+
+    private void recipeResult(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type, @Nonnull ItemStack[] items) {
+        for (int i = 0; i < 9; i++) {
+            if (i == 4) continue;
+            final ItemStack[] recipe2 = new ItemStack[9];
+            recipe2[i] = items[0];
+            type.register(recipe2, result);
+        }
     }
 
     private void registerNonPlaceableItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
@@ -248,14 +250,7 @@ final class ItemSetup {
             new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
 
             // make shapeless
-            for (int i = 0; i < 9; i++) {
-                if (i == 4) continue;
-                final ItemStack[] recipe2 = new ItemStack[9];
-                recipe2[i] = items[0];
-                type.register(recipe2, result);
-            }
-
-            return;
+            recipeResult(result, type, items);
         }
 
         if (items.length < 9) {
