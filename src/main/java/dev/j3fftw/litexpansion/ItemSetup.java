@@ -10,6 +10,8 @@ import dev.j3fftw.litexpansion.machine.Generator;
 import dev.j3fftw.litexpansion.machine.ManualMill;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.MetalForge;
+import dev.j3fftw.litexpansion.machine.MultiFunctionalElectricStorageUnit;
+import dev.j3fftw.litexpansion.machine.MultiFunctionalStorageUnit;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
@@ -63,7 +65,8 @@ final class ItemSetup {
         new MassFabricator().register(LiteXpansion.getInstance());
         new RefinedSmeltery().register(LiteXpansion.getInstance());
         new MetalForge().register(LiteXpansion.getInstance());
-        new Generator().register(LiteXpansion.getInstance());
+		new MultiFunctionalElectricStorageUnit().register(LiteXpansion.getInstance());
+        new MultiFunctionalStorageUnit().register(LiteXpansion.getInstance());        new Generator().register(LiteXpansion.getInstance());
         new ManualMill().register(LiteXpansion.getInstance());
     }
 
@@ -139,7 +142,17 @@ final class ItemSetup {
             Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING,
             Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING
         );
+        registerItem(Items.GOLD_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.GOLD_INGOT));
 
+        registerItem(Items.GOLD_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.GOLD_PLATE);
+
+        registerItem(new SlimefunItemStack(Items.UNINSULATED_GOLD_CABLE, 3),
+            ManualMill.RECIPE_TYPE, Items.GOLD_ITEM_CASING
+        );
+
+        registerItem(Items.GOLD_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            rubberItem, Items.UNINSULATED_GOLD_CABLE
+        );
         // Circuits
         registerNonPlaceableItem(Items.ELECTRONIC_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
             Items.COPPER_CABLE, Items.COPPER_CABLE, Items.COPPER_CABLE,
@@ -151,6 +164,13 @@ final class ItemSetup {
             new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE),
             new ItemStack(Material.GLOWSTONE_DUST), Items.ELECTRONIC_CIRCUIT, new ItemStack(Material.GLOWSTONE_DUST),
             new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE)
+        );
+
+
+        registerItem(Items.LAPOTRON_CRYSTAL, RecipeType.ENHANCED_CRAFTING_TABLE,
+            new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI),
+            new ItemStack(Material.LAPIS_LAZULI), SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.LAPIS_LAZULI),
+            new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI)
         );
 
         // Refined crap

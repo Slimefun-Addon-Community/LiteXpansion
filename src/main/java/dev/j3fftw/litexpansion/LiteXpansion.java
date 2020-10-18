@@ -84,7 +84,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private void registerEnchantments() {
         Enchantment glowEnchantment = new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
-            "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER",
+            "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER", "LAPOTRON_CRYSTAL"
         });
 
         // Prevent double-registration errors

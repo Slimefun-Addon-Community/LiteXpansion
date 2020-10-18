@@ -248,12 +248,7 @@ public final class Items {
         Material.DIAMOND_BLOCK,
         "&7Advanced Machine Block"
     );
-    public static final SlimefunItemStack ENERGY_CRYSTAl = new SlimefunItemStack(
-        "ENERGY_CRYSTAL",
-        Material.DIAMOND,
-        "&7Energy Crystal"
-    );
-    //todo make it enchanted
+
     public static final SlimefunItemStack LAPOTRON_CRYSTAL = new SlimefunItemStack(
         "LAPOTRON_CRYSTAL",
         Material.DIAMOND,
@@ -340,6 +335,36 @@ public final class Items {
         LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ULTIMATE_STORAGE),
         LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_DAY_RATE) + " (Day)",
         LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_NIGHT_RATE) + " (Night)"
+    );
+    public static final SlimefunItemStack MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT = new SlimefunItemStack(
+        "MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT",
+        Material.IRON_BLOCK,
+        "MFE"
+    );
+    public static final SlimefunItemStack MULTI_FUNCTIONAL_STORAGE_UNIT = new SlimefunItemStack(
+        "MULTI_FUNCTIONAL_STORAGE_UNIT",
+        Material.DIAMOND_BLOCK,
+        "MFSU"
+    );
+    public static final SlimefunItemStack GOLD_PLATE = new SlimefunItemStack(
+        "GOLD_PLATE",
+        Material.YELLOW_CARPET,
+        "&7Gold Plate"
+    );
+    public static final SlimefunItemStack GOLD_ITEM_CASING = new SlimefunItemStack(
+        "GOLD_ITEM_CASING",
+        Material.YELLOW_CARPET,
+        "&7Gold Item Casing"
+    );
+    public static final SlimefunItemStack UNINSULATED_GOLD_CABLE = new SlimefunItemStack(
+        "UNINSULATED_GOLD_CABLE",
+        Material.STRING,
+        "&7Uninsulated Gold Cable"
+    );
+    public static final SlimefunItemStack GOLD_CABLE = new SlimefunItemStack(
+        "GOLD_CABLE",
+        Material.STRING,
+        "&7Gold Cable"
     );
     //Basic Machines
     public static final SlimefunItemStack REFINED_SMELTERY = new SlimefunItemStack(
