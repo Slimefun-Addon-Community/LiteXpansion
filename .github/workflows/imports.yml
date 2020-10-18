@@ -10,7 +10,7 @@ jobs:
 
     name: Clean up Imports
     runs-on: ubuntu-latest
-    if: "contains(toJSON(github.event.commits.*.msg), '[ci skip]') == false"
+    if: "contains(toJSON(github.event.commits.*.msg), '[CI skip]') == false"
 
     steps:
     - name: Checkout repository
