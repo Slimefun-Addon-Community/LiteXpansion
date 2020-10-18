@@ -76,16 +76,15 @@ public class MetalForge extends MultiBlockMachine {
         Inventory inv = disp.getInventory();
         final List<ItemStack[]> inputs = RecipeType.getRecipeInputList(this);
 
-        for (ItemStack[] input : inputs) {
-            if (canCraft(inv, input)) {
-                final ItemStack output = RecipeType.getRecipeOutputList(this, input).clone();
+        for (int i = 0; i < inputs.size(); i++) {
+            if (canCraft(inv, inputs, i)) {
+                ItemStack output = RecipeType.getRecipeOutputList(this, inputs.get(i)).clone();
 
                 if (Slimefun.hasUnlocked(p, output, true)) {
-                    final Inventory fakeInv = createVirtualInventory(inv);
-                    final Inventory outputInv = findOutputInventory(output, dispBlock, inv, fakeInv);
+                    final Inventory outputInv = findOutputInventory(output, dispBlock, inv);
 
                     if (outputInv != null) {
-                        craft(p, b, inv, input, output, outputInv);
+                        craft(p, b, inv, inputs.get(i), output, outputInv);
                     } else {
                         SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
                     }
@@ -112,20 +111,22 @@ public class MetalForge extends MultiBlockMachine {
         diamondBlock.setType(Material.AIR);
     }
 
-    private boolean canCraft(Inventory inv, ItemStack[] recipe) {
-        int counter = 0;
-        for (int j = 0; j < inv.getContents().length; j++) {
-
-            SlimefunItem sfItemInv = SlimefunItem.getByItem(inv.getContents()[j]);
-            SlimefunItem sfItemRecipe = SlimefunItem.getByItem(recipe[j]);
-            if (sfItemInv == null && sfItemRecipe == null) {
-                counter++;
-            } else if (sfItemInv != null && sfItemRecipe != null
-                && sfItemInv.getId().equals(sfItemRecipe.getId())) {
-                counter++;
+    private boolean canCraft(Inventory inv, List<ItemStack[]> inputs, int i) {
+        for (ItemStack converting : inputs.get(i)) {
+            if (converting != null) {
+                for (int j = 0; j < inv.getContents().length; j++) {
+                    if (j == (inv.getContents().length - 1)
+                        && !SlimefunUtils.isItemSimilar(converting,
+                        inv.getContents()[j], true)) {
+                        return false;
+                    } else if (SlimefunUtils.isItemSimilar(inv.getContents()[j], converting, true)) {
+                        break;
+                    }
+                }
             }
         }
-        return counter == inv.getContents().length;
+
+        return true;
     }
 
 }
