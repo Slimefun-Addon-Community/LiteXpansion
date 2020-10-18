@@ -1,18 +1,16 @@
 package dev.j3fftw.litexpansion.items;
 
 
+import dev.j3fftw.litexpansion.Items;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemSetting;
+import io.github.thebusybiscuit.slimefun4.core.attributes.DamageableItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
+import javax.annotation.Nonnull;
+import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
-
-import dev.j3fftw.litexpansion.Items;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import io.github.thebusybiscuit.slimefun4.core.attributes.DamageableItem;
-import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-
-import javax.annotation.Nonnull;
 
 /**
  * The {@link Wrench} is a {@link SimpleSlimefunItem} that breaks
