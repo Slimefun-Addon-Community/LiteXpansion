@@ -110,9 +110,9 @@ final class ItemSetup {
             null, Items.CARBON_PLATE, null
         );
 
-        registerItem(Items.TIN_PLATE, MetalForge.RECIPE_TYPE, SlimefunItems.TIN_INGOT);
+        registerNonPlaceableItem(Items.TIN_PLATE, MetalForge.RECIPE_TYPE, SlimefunItems.TIN_INGOT);
 
-        registerItem(Items.TIN_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.TIN_PLATE);
+        registerNonPlaceableItem(Items.TIN_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.TIN_PLATE);
 
         registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_TIN_CABLE, 3),
             ManualMill.RECIPE_TYPE, Items.TIN_ITEM_CASING
@@ -124,9 +124,9 @@ final class ItemSetup {
 
         // Copper cable
 
-        registerItem(Items.COPPER_PLATE, ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT);
+        registerNonPlaceableItem(Items.COPPER_PLATE, ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT);
 
-        registerItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
+        registerNonPlaceableItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
 
         registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
             ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT);
