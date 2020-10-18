@@ -5,6 +5,7 @@ import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
@@ -25,9 +26,6 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.ADVANCED_CIRCUIT_BOARD;
-import static io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems.REINFORCED_PLATE;
-
 public class MassFabricator extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
@@ -46,11 +44,14 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     private static final CustomItem progressItem = new CustomItem(Items.UU_MATTER.getType(), "&7Progress");
 
+    private static final ItemStack plate = SlimefunItems.REINFORCED_PLATE;
+    private static final ItemStack circuitBoard = SlimefunItems.ADVANCED_CIRCUIT_BOARD;
+
     public MassFabricator() {
         super(Items.LITEXPANSION, Items.MASS_FABRICATOR_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-            REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE,
-            ADVANCED_CIRCUIT_BOARD, Items.MACHINE_BLOCK, ADVANCED_CIRCUIT_BOARD,
-            REINFORCED_PLATE, ADVANCED_CIRCUIT_BOARD, REINFORCED_PLATE
+            plate, circuitBoard, plate,
+            circuitBoard, Items.MACHINE_BLOCK, circuitBoard,
+            plate, circuitBoard, plate
         });
         setupInv();
     }
