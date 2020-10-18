@@ -1,7 +1,5 @@
 package dev.j3fftw.litexpansion;
 
-import javax.annotation.Nonnull;
-
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
