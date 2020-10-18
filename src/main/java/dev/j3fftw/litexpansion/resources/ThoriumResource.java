@@ -3,13 +3,12 @@ package dev.j3fftw.litexpansion.resources;
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
+import java.util.concurrent.ThreadLocalRandom;
+import javax.annotation.Nonnull;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class ThoriumResource implements GEOResource {
 

@@ -1,9 +1,8 @@
 package dev.j3fftw.litexpansion.utils;
 
 import java.util.ArrayList;
-import javax.annotation.Nonnull;
 import java.util.List;
-import java.lang.Runnable;
+import javax.annotation.Nonnull;
 
 public class Timing {
 
