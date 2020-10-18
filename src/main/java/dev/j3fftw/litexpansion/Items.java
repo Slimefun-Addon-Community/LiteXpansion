@@ -15,7 +15,6 @@ import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.enchantments.Enchantment;
 
 public final class Items {
 
@@ -56,7 +55,11 @@ public final class Items {
     public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
         "WRENCH",
         Material.GOLDEN_HOE,
-        "&6Wrench"
+        "&6Wrench",
+        "",
+        "&7Click any machine, generator, capacitor,",
+        "&7or cargo node to instantly break it!",
+        ""
     );
     public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
         "GLASS_CUTTER",
@@ -299,7 +302,7 @@ public final class Items {
         LoreBuilderDynamic.powerPerTick(MassFabricator.ENERGY_CONSUMPTION)
     );
     public static final SlimefunItemStack RUBBER_SYNTHESIZER_MACHINE = new SlimefunItemStack(
-        "RUBBER_SYNTHESIZER_MACHINE",
+        "RUBBER_SYNTHESIZER",
         Material.ORANGE_CONCRETE,
         "&6Rubber Synthesizer",
         "",
@@ -369,13 +372,6 @@ public final class Items {
         Material.GLASS_BOTTLE,
         "&7RE Battery"
     );
-
-    private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
-
-    static {
-        ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
-        GLASS_CUTTER.addEnchantment(glowEnchant, 1);
-    }
 
     private Items() {}
 }

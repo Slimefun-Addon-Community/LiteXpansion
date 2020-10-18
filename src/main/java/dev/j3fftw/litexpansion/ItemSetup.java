@@ -17,6 +17,7 @@ import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
+import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
@@ -25,11 +26,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
-
 final class ItemSetup {
 
-    protected static final ItemSetup INSTANCE = new ItemSetup();
+    static final ItemSetup INSTANCE = new ItemSetup();
     private final ItemStack glass = new ItemStack(Material.GLASS);
     private final SlimefunAddon plugin = LiteXpansion.getInstance();
     private boolean initialised;
@@ -37,7 +36,9 @@ final class ItemSetup {
     private ItemSetup() {}
 
     public void init() {
-        if (initialised) return;
+        if (initialised) {
+            return;
+        }
 
         initialised = true;
 
@@ -53,6 +54,7 @@ final class ItemSetup {
     private void registerTools() {
         new CargoConfigurator().register(plugin);
         new GlassCutter().register(plugin);
+        // new Wrench().register(plugin);
     }
 
     private void registerMachines() {
@@ -227,8 +229,9 @@ final class ItemSetup {
         if (items.length < 9) {
             recipe = new ItemStack[9];
             System.arraycopy(items, 0, recipe, 0, items.length);
-        } else
+        } else {
             recipe = items;
+        }
 
         new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
@@ -258,8 +261,9 @@ final class ItemSetup {
         if (items.length < 9) {
             recipe = new ItemStack[9];
             System.arraycopy(items, 0, recipe, 0, items.length);
-        } else
+        } else {
             recipe = items;
+        }
 
         new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }

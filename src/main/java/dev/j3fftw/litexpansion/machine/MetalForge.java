@@ -5,6 +5,9 @@ import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
@@ -20,10 +23,6 @@ import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MetalForge extends MultiBlockMachine {
 
@@ -87,8 +86,9 @@ public class MetalForge extends MultiBlockMachine {
 
                     if (outputInv != null) {
                         craft(p, b, inv, input, output, outputInv);
-                    } else
+                    } else {
                         SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
+                    }
                 }
                 return;
             }
@@ -121,7 +121,7 @@ public class MetalForge extends MultiBlockMachine {
             if (sfItemInv == null && sfItemRecipe == null) {
                 counter++;
             } else if (sfItemInv != null && sfItemRecipe != null
-                && sfItemInv.getID().equals(sfItemRecipe.getID())) {
+                && sfItemInv.getId().equals(sfItemRecipe.getId())) {
                 counter++;
             }
         }
