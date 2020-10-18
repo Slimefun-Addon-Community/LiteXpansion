@@ -4,7 +4,6 @@ import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
-import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
@@ -15,7 +14,6 @@ import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.enchantments.Enchantment;
 
 public final class Items {
 
@@ -56,7 +54,11 @@ public final class Items {
     public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
         "WRENCH",
         Material.GOLDEN_HOE,
-        "&6Wrench"
+        "&6Wrench",
+        "",
+        "&7Click any machine, generator, capacitor,",
+        "&7or cargo node to instantly break it!",
+        ""
     );
     public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
         "GLASS_CUTTER",
@@ -82,6 +84,43 @@ public final class Items {
         "&7> &eShift+Right Click &7- Clear node configuration"
     );
     // Items
+
+    public static final SlimefunItemStack TIN_PLATE = new SlimefunItemStack(
+        "TIN_PLATE",
+        Material.WHITE_CARPET,
+        "&7Tin Plate"
+    );
+
+    public static final SlimefunItemStack TIN_ITEM_CASING = new SlimefunItemStack(
+        "TIN_ITEM_CASING",
+        Material.WHITE_CARPET,
+        "&7Tin Item Casing"
+    );
+
+    public static final SlimefunItemStack UNINSULATED_TIN_CABLE = new SlimefunItemStack(
+        "UNINSULATED_TIN_CABLE",
+        Material.STRING,
+        "&7Uninsulated Tin Cable"
+    );
+
+    public static final SlimefunItemStack TIN_CABLE = new SlimefunItemStack(
+        "TIN_CABLE",
+        Material.STRING,
+        "&7Tin Cable"
+    );
+
+    public static final SlimefunItemStack COPPER_PLATE = new SlimefunItemStack(
+        "COPPER_PLATE",
+        Material.ORANGE_CARPET,
+        "&7Copper Plate"
+    );
+
+    public static final SlimefunItemStack COPPER_ITEM_CASING = new SlimefunItemStack(
+        "COPPER_ITEM_CASING",
+        Material.ORANGE_CARPET,
+        "&7Copper Item Casing"
+    );
+
     public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
         "FOOD_SYNTHESIZER",
         new CustomItem(SkullItem.fromHash("a11a2df7d37af40ed5ce442fd2d78cd8ebcdcdc029d2ae691a2b64395cdf"),
@@ -257,7 +296,7 @@ public final class Items {
         LoreBuilderDynamic.powerPerTick(MassFabricator.ENERGY_CONSUMPTION)
     );
     public static final SlimefunItemStack RUBBER_SYNTHESIZER_MACHINE = new SlimefunItemStack(
-        "RUBBER_SYNTHESIZER_MACHINE",
+        "RUBBER_SYNTHESIZER",
         Material.ORANGE_CONCRETE,
         "&6Rubber Synthesizer",
         "",
@@ -340,13 +379,23 @@ public final class Items {
         "&7Metal Forge"
     );
 
-    private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
+    public static final SlimefunItemStack MANUAL_MILL = new SlimefunItemStack(
+        "MANUAL_MILL",
+        Material.DISPENSER,
+        "&7Manual Mill"
+    );
 
-    static {
-        ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
-        GLASS_CUTTER.addEnchantment(glowEnchant, 1);
-        LAPOTRON_CRYSTAL.addEnchantment(glowEnchant, 1);
-    }
+    public static final SlimefunItemStack GENERATOR = new SlimefunItemStack(
+        "GENERATOR",
+        Material.IRON_BLOCK,
+        "&7Generator"
+    );
+
+    public static final SlimefunItemStack RE_BATTERY = new SlimefunItemStack(
+        "RE_BATTERY",
+        Material.GLASS_BOTTLE,
+        "&7RE Battery"
+    );
 
     private Items() {}
 }

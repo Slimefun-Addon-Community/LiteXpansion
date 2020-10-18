@@ -24,11 +24,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class MetalForge extends MultiBlockMachine {
+public class ManualMill extends MultiBlockMachine {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
-        new NamespacedKey(LiteXpansion.getInstance(), "metal_forge"),
-        Items.METAL_FORGE,
+        new NamespacedKey(LiteXpansion.getInstance(), "manual_mill"),
+        Items.MANUAL_MILL,
         "",
         "&7Used to Forge Metals"
     );
@@ -36,11 +36,11 @@ public class MetalForge extends MultiBlockMachine {
     private static final ItemStack anvil = new ItemStack(Material.ANVIL);
     private static final ItemStack ironBlock = new ItemStack(Material.IRON_BLOCK);
 
-    public MetalForge() {
-        super(Items.LITEXPANSION, Items.METAL_FORGE, new ItemStack[] {
+    public ManualMill() {
+        super(Items.LITEXPANSION, Items.MANUAL_MILL, new ItemStack[] {
             anvil, new ItemStack(Material.STONE_BRICK_WALL), anvil,
             ironBlock, new ItemStack(Material.DISPENSER), ironBlock,
-            null, new ItemStack(Material.DIAMOND_BLOCK), null
+            null, ironBlock, null
         }, new ItemStack[0], BlockFace.DOWN);
     }
 
@@ -86,9 +86,8 @@ public class MetalForge extends MultiBlockMachine {
 
                     if (outputInv != null) {
                         craft(p, b, inv, input, output, outputInv);
-                    } else {
+                    } else
                         SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
-                    }
                 }
                 return;
             }
@@ -108,8 +107,8 @@ public class MetalForge extends MultiBlockMachine {
         outputInv.addItem(output);
         p.getWorld().playSound(p.getLocation(), Sound.BLOCK_ANVIL_BREAK, 1, 1);
 
-        Block diamondBlock = b.getRelative(BlockFace.DOWN, 2);
-        diamondBlock.setType(Material.AIR);
+        Block ironBlock = b.getRelative(BlockFace.DOWN, 2);
+        ironBlock.setType(Material.AIR);
     }
 
     private boolean canCraft(Inventory inv, ItemStack[] recipe) {
@@ -121,7 +120,7 @@ public class MetalForge extends MultiBlockMachine {
             if (sfItemInv == null && sfItemRecipe == null) {
                 counter++;
             } else if (sfItemInv != null && sfItemRecipe != null
-                && sfItemInv.getId().equals(sfItemRecipe.getId())) {
+                && sfItemInv.getID().equals(sfItemRecipe.getID())) {
                 counter++;
             }
         }
