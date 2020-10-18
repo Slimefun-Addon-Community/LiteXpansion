@@ -53,8 +53,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         if (e.getItem() == null || e.getMaterial() != Material.COMPASS) return;
 
         final ItemStack clickedItem = e.getItem();
-        final SlimefunItem item = SlimefunItem.getByItem(e.getItem());
-        if (item == null || !item.getID().equals(Items.CARGO_CONFIGURATOR.getItemId())) return;
+        if (!this.isItem(clickedItem)) return;
 
         final ItemMeta meta = clickedItem.getItemMeta();
 
@@ -79,7 +78,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
 
         final ItemStack clickedItemStack = block.getItem();
 
-        final String blockId = block.getID();
+        final String blockId = block.getId();
         if (!blockId.equals(SlimefunItems.CARGO_INPUT_NODE.getItemId())
             && !blockId.equals(SlimefunItems.CARGO_OUTPUT_NODE.getItemId())
             && !blockId.equals(SlimefunItems.CARGO_OUTPUT_NODE_2.getItemId())

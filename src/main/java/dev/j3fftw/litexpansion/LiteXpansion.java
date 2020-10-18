@@ -14,9 +14,9 @@ import java.util.logging.Level;
 import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -56,9 +56,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
         }
 
-        Enchantment.registerEnchantment(new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
-                "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER"
-        }));
+        registerEnchantments();
 
         ItemSetup.INSTANCE.init();
 
@@ -81,6 +79,17 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     @Override
     public void onDisable() {
         instance = null;
+    }
+    
+    private void registerEnchantments() {
+        Enchantment glowEnchantment = new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
+                "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER"
+        });
+        
+        // Prevent double-registration errors
+        if (Enchantment.getByKey(glowEnchantment.getKey()) == null) {
+            Enchantment.registerEnchantment(glowEnchantment);
+        }
     }
 
     private void setupResearches() {
@@ -180,7 +189,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
                         final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
                         if (item == null || !(item.getAddon() instanceof LiteXpansion)) continue;
 
-                        data.merge(item.getID(), 1, Integer::sum);
+                        data.merge(item.getId(), 1, Integer::sum);
                     }
                 }
             } catch (ReflectiveOperationException e) {
