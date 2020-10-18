@@ -18,7 +18,6 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 
-
 public final class Items {
 
     // Category
@@ -320,8 +319,6 @@ public final class Items {
         Material.DISPENSER,
         "&7Metal Forge"
     );
-
-    private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
 
     private Items() {}
 }

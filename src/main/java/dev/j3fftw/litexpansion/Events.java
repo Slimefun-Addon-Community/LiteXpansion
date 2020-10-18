@@ -1,8 +1,12 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.armor.ElectricChestplate;
+import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -12,13 +16,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
-
-import dev.j3fftw.litexpansion.armor.ElectricChestplate;
-import dev.j3fftw.litexpansion.items.FoodSynthesizer;
-import dev.j3fftw.litexpansion.utils.Constants;
-import dev.j3fftw.litexpansion.weapons.NanoBlade;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-
 
 public class Events implements Listener {
 
