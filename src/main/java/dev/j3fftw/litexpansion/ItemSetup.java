@@ -114,11 +114,11 @@ final class ItemSetup {
 
         registerItem(Items.TIN_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.TIN_PLATE);
 
-        registerItem(new SlimefunItemStack(Items.UNINSULATED_TIN_CABLE, 3),
+        registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_TIN_CABLE, 3),
             ManualMill.RECIPE_TYPE, Items.TIN_ITEM_CASING
         );
 
-        registerItem(Items.TIN_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerNonPlaceableItem(Items.TIN_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
             rubberItem, Items.UNINSULATED_TIN_CABLE
         );
 
@@ -128,11 +128,11 @@ final class ItemSetup {
 
         registerItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
 
-        registerItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
-            ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT)
+        registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
+            ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT);
         ;
 
-        registerItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
             rubberItem, Items.UNINSULATED_COPPER_CABLE
         );
 
