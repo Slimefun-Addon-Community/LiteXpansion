@@ -23,6 +23,6 @@ jobs:
       with:
         files: '**/*.java'
         skipCommit: false
-        commitMessage: "[CI skip] Cleaned up Imports"
+        commitMessage: "Cleaned up Imports"
         args: "--fix-imports-only --replace"
         githubToken: ${{ secrets.GITHUB_TOKEN }}
