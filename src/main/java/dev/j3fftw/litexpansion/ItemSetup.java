@@ -236,27 +236,23 @@ final class ItemSetup {
             new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
 
             // make shapeless
-            recipeResult(result, type, items);
+            for (int i = 0; i < 9; i++) {
+                if (i == 4) continue;
+                final ItemStack[] recipe2 = new ItemStack[9];
+                recipe2[i] = items[0];
+                type.register(recipe2, result);
+            }
+
             return;
         }
 
         if (items.length < 9) {
             recipe = new ItemStack[9];
             System.arraycopy(items, 0, recipe, 0, items.length);
-        } else {
+        } else
             recipe = items;
-        }
 
         new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
-    }
-
-    private void recipeResult(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type, @Nonnull ItemStack[] items) {
-        for (int i = 0; i < 9; i++) {
-            if (i == 4) continue;
-            final ItemStack[] recipe2 = new ItemStack[9];
-            recipe2[i] = items[0];
-            type.register(recipe2, result);
-        }
     }
 
     private void registerNonPlaceableItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
@@ -271,15 +267,21 @@ final class ItemSetup {
             new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
 
             // make shapeless
-            recipeResult(result, type, items);
+            for (int i = 0; i < 9; i++) {
+                if (i == 4) continue;
+                final ItemStack[] recipe2 = new ItemStack[9];
+                recipe2[i] = items[0];
+                type.register(recipe2, result);
+            }
+
+            return;
         }
 
         if (items.length < 9) {
             recipe = new ItemStack[9];
             System.arraycopy(items, 0, recipe, 0, items.length);
-        } else {
+        } else
             recipe = items;
-        }
 
         new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
