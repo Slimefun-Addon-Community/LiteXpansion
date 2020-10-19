@@ -84,7 +84,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private void registerEnchantments() {
         Enchantment glowEnchantment = new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
-            "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER", "LAPOTRON_CRYSTAL"
+            "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER", "LAPOTRON_CRYSTAL",
+            "ADVANCEDLX_SOLAR_HELMET", "HYBRID_SOLAR_HELMET", "ULTIMATE_SOLAR_HELMET"
         });
 
         // Prevent double-registration errors
@@ -133,7 +134,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         new Research(new NamespacedKey(this, "platings"),
             696976, "Platings", 40)
-            .addItems(Items.IRIDIUM_PLATE, Items.COPPER_PLATE, Items.TIN_PLATE)
+            .addItems(Items.IRIDIUM_PLATE, Items.COPPER_PLATE, Items.TIN_PLATE, Items.DIAMOND_PLATE, Items.IRON_PLATE,
+                Items.GOLD_PLATE, Items.THORIUM_PLATE)
             .register();
 
         new Research(new NamespacedKey(this, "rubber"),
@@ -180,6 +182,12 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new Research(new NamespacedKey(this, "casing"),
             696985, "S 340", 20)
             .addItems(Items.TIN_ITEM_CASING, Items.COPPER_ITEM_CASING)
+            .register();
+
+        new Research(new NamespacedKey(this, "solar_helmets"),
+            696986, "More solar helmets", 30)
+            .addItems(Items.HYBRID_SOLAR_HELMET, Items.ADVANCED_SOLAR_HELMET, Items.ADVANCEDLX_SOLAR_HELMET,
+                Items.CARBONADO_SOLAR_HELMET, Items.ENERGIZED_SOLAR_HELMET, Items.ULTIMATE_SOLAR_HELMET)
             .register();
     }
 

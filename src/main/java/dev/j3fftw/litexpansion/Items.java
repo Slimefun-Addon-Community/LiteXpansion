@@ -397,5 +397,59 @@ public final class Items {
         "&7RE Battery"
     );
 
+    public static final SlimefunItemStack ADVANCED_SOLAR_HELMET = new SlimefunItemStack(
+        "ADVANCED_SOLAR_HELMET",
+        Material.IRON_HELMET,
+        "&7Advanced Solar Helmet"
+    );
+
+    public static final SlimefunItemStack CARBONADO_SOLAR_HELMET = new SlimefunItemStack(
+        "CARBONADO_SOLAR_HELMET",
+        Material.GOLDEN_HELMET,
+        "&7Carbonado Solar Helmet"
+    );
+
+    public static final SlimefunItemStack ENERGIZED_SOLAR_HELMET = new SlimefunItemStack(
+        "ENERGIZED_SOLAR_HELMET",
+        Material.GOLDEN_HELMET,
+        "&7Energized Solar Helmet"
+    );
+
+    public static final SlimefunItemStack ADVANCEDLX_SOLAR_HELMET = new SlimefunItemStack(
+        "ADVANCEDLX_SOLAR_HELMET",
+        Material.DIAMOND_HELMET,
+        "&7Super Advanced Solar Helmet"
+    );
+
+    public static final SlimefunItemStack HYBRID_SOLAR_HELMET = new SlimefunItemStack(
+        "HYBRID_SOLAR_HELMET",
+        Material.DIAMOND_HELMET,
+        "&7Hybrid Solar Helmet"
+    );
+
+    public static final SlimefunItemStack ULTIMATE_SOLAR_HELMET = new SlimefunItemStack(
+        "ULTIMATE_SOLAR_HELMET",
+        Material.DIAMOND_HELMET,
+        "&7Ultimate Solar Helmet"
+    );
+
+    public static final SlimefunItemStack IRON_PLATE = new SlimefunItemStack(
+        "IRON_PLATE",
+        Material.WHITE_CARPET,
+        "&7Iron Plate"
+    );
+
+    public static final SlimefunItemStack DIAMOND_PLATE = new SlimefunItemStack(
+        "DIAMOND_PLATE",
+        Material.CYAN_CARPET,
+        "&7Diamond Plate"
+    );
+
+    public static final SlimefunItemStack THORIUM_PLATE = new SlimefunItemStack(
+        "THORIUM_PLATE",
+        Material.GRAY_CARPET,
+        "&7Thorium Plate"
+    );
+
     private Items() {}
 }
