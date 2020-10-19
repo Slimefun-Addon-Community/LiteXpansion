@@ -8,6 +8,7 @@ import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuideLayout;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import javax.annotation.Nonnull;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
@@ -17,30 +18,16 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
-
 public final class UuMatterCategory extends FlexCategory {
 
     public static final UuMatterCategory INSTANCE = new UuMatterCategory();
 
     private final int[] recipeSlots = new int[] {12, 13, 14, 21, 22, 23, 30, 31, 32};
-    private ChestMenu menu;
 
     private UuMatterCategory() {
         super(new NamespacedKey(LiteXpansion.getInstance(), "uumatter_category"),
             new CustomItem(Items.UU_MATTER, "&5UU-Matter Recipes")
         );
-
-        setupInv();
-    }
-
-    private void setupInv() {
-        menu = new ChestMenu("&5UU-Matter Recipes");
-
-        // Header
-        for (int i = 0; i < 9; ++i) {
-            menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
-        }
     }
 
     private ChestMenu create(Player p) {
@@ -64,12 +51,15 @@ public final class UuMatterCategory extends FlexCategory {
                         open(p, profile, SlimefunGuideLayout.CHEST);
                         return false;
                     });
-                } else
+                } else {
                     menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
+                }
             }
 
             ItemStack[] recipe = UUMatter.INSTANCE.getRecipes().get(result);
-            if (recipe == null) return;
+            if (recipe == null) {
+                return;
+            }
 
             this.displayItem(menu, p, profile, result, recipe);
 
@@ -113,6 +103,15 @@ public final class UuMatterCategory extends FlexCategory {
 
     @Override
     public void open(Player player, PlayerProfile playerProfile, SlimefunGuideLayout slimefunGuideLayout) {
+        ChestMenu menu = new ChestMenu("&5UU-Matter Recipes");
+
+        // Header
+        for (int i = 0; i < 9; ++i) {
+            menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
+        }
+
+        menu.setEmptySlotsClickable(false);
+
         menu.addItem(1, new CustomItem(ChestMenuUtils.getBackButton(player, "",
             ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide")))
         );

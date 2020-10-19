@@ -1,11 +1,9 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
-import dev.j3fftw.litexpansion.items.DiamondDrill;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
-import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
@@ -28,7 +26,7 @@ import javax.annotation.Nonnull;
 
 final class ItemSetup {
 
-    protected static final ItemSetup INSTANCE = new ItemSetup();
+    static final ItemSetup INSTANCE = new ItemSetup();
     private final ItemStack glass = new ItemStack(Material.GLASS);
     private final SlimefunAddon plugin = LiteXpansion.getInstance();
     private boolean initialised;
@@ -36,7 +34,9 @@ final class ItemSetup {
     private ItemSetup() {}
 
     public void init() {
-        if (initialised) return;
+        if (initialised) {
+            return;
+        }
 
         initialised = true;
 
@@ -47,20 +47,27 @@ final class ItemSetup {
         registerEndgameItems();
         registerCarbonStuff();
         registerSolarPanels();
+        registerSolarHelmets();
     }
 
     private void registerTools() {
         new CargoConfigurator().register(plugin);
         new GlassCutter().register(plugin);
+        // new Wrench().register(plugin);
         new MiningDrill().register(plugin);
         new DiamondDrill().register(plugin);
     }
 
     private void registerMachines() {
         new FoodSynthesizer().register(LiteXpansion.getInstance());
-        new ScrapMachine().register(LiteXpansion.getInstance());
+        new Recycler().register(LiteXpansion.getInstance());
         new MassFabricator().register(LiteXpansion.getInstance());
         new RefinedSmeltery().register(LiteXpansion.getInstance());
+        new MetalForge().register(LiteXpansion.getInstance());
+        new MultiFunctionalElectricStorageUnit().register(LiteXpansion.getInstance());
+        new MultiFunctionalStorageUnit().register(LiteXpansion.getInstance());
+        new Generator().register(LiteXpansion.getInstance());
+        new ManualMill().register(LiteXpansion.getInstance());
     }
 
     //Disable when SlimyTreeTaps exists
@@ -79,7 +86,7 @@ final class ItemSetup {
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
 
         // Mixed Metal Ingot
-        registerItem(Items.MIXED_METAL_INGOT, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(Items.MIXED_METAL_INGOT, MetalForge.RECIPE_TYPE,
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
             SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT, SlimefunItems.BRONZE_INGOT,
             SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT
@@ -93,29 +100,64 @@ final class ItemSetup {
         );
 
         // Machine block
-        registerItem(Items.MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(Items.MACHINE_BLOCK, MetalForge.RECIPE_TYPE,
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
             Items.REFINED_IRON, null, Items.REFINED_IRON,
             Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON
         );
 
         // Advanced Machine Block
-        registerItem(Items.ADVANCED_MACHINE_BLOCK, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerItem(Items.ADVANCED_MACHINE_BLOCK, MetalForge.RECIPE_TYPE,
             null, Items.ADVANCED_ALLOY, null,
             Items.CARBON_PLATE, Items.MACHINE_BLOCK, Items.CARBON_PLATE,
             null, Items.CARBON_PLATE, null
         );
 
-        // Copper cable
-        registerNonPlaceableItem(Items.UNINSULATED_COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT, SlimefunItems.COPPER_INGOT
+        registerNonPlaceableItem(Items.TIN_PLATE, MetalForge.RECIPE_TYPE, SlimefunItems.TIN_INGOT);
+
+        registerNonPlaceableItem(Items.TIN_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.TIN_PLATE);
+
+        registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_TIN_CABLE, 3),
+            ManualMill.RECIPE_TYPE, Items.TIN_ITEM_CASING
+        );
+
+        registerNonPlaceableItem(Items.TIN_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            rubberItem, Items.UNINSULATED_TIN_CABLE
+        );
+
+        registerNonPlaceableItem(Items.COPPER_PLATE, ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT);
+
+        registerNonPlaceableItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
+
+        registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
+            ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT
         );
 
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            rubberItem, rubberItem, rubberItem,
-            Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE, Items.UNINSULATED_COPPER_CABLE,
-            rubberItem, rubberItem, rubberItem
+            rubberItem, Items.UNINSULATED_COPPER_CABLE
         );
+
+        registerItem(Items.RE_BATTERY, RecipeType.ENHANCED_CRAFTING_TABLE,
+            null, Items.TIN_CABLE, null,
+            Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING,
+            Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING
+        );
+        registerNonPlaceableItem(Items.GOLD_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.GOLD_INGOT));
+
+        registerNonPlaceableItem(Items.GOLD_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.GOLD_PLATE);
+
+        registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_GOLD_CABLE, 3),
+            ManualMill.RECIPE_TYPE, Items.GOLD_ITEM_CASING
+        );
+
+        registerNonPlaceableItem(Items.GOLD_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+            rubberItem, Items.UNINSULATED_GOLD_CABLE
+        );
+
+        registerNonPlaceableItem(Items.IRON_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.IRON_INGOT));
+        registerNonPlaceableItem(Items.DIAMOND_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.DIAMOND));
+        registerNonPlaceableItem(Items.THORIUM_PLATE, MetalForge.RECIPE_TYPE, Items.THORIUM);
+
 
         // Circuits
         registerNonPlaceableItem(Items.ELECTRONIC_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -130,9 +172,17 @@ final class ItemSetup {
             new ItemStack(Material.REDSTONE), new ItemStack(Material.LAPIS_LAZULI), new ItemStack(Material.REDSTONE)
         );
 
+
+        registerItem(Items.LAPOTRON_CRYSTAL, RecipeType.ENHANCED_CRAFTING_TABLE,
+            new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI),
+            new ItemStack(Material.LAPIS_LAZULI), SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.LAPIS_LAZULI),
+            new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI)
+        );
+
         // Refined crap
-        registerNonPlaceableItem(Items.REFINED_IRON, RefinedSmeltery.REFINED_SMELTERY_RECIPE,
-            new ItemStack(Material.IRON_INGOT));
+        registerNonPlaceableItem(Items.REFINED_IRON, RefinedSmeltery.RECIPE_TYPE,
+            new ItemStack(Material.IRON_INGOT)
+        );
         registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
 
         // Resources
@@ -141,7 +191,7 @@ final class ItemSetup {
     }
 
     private void registerEndgameItems() {
-        registerNonPlaceableItem(Items.SCRAP, ScrapMachine.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE,
+        registerNonPlaceableItem(Items.SCRAP, Recycler.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE,
             "&7Any Item!"));
         registerNonPlaceableItem(Items.UU_MATTER, MassFabricator.RECIPE_TYPE, Items.SCRAP);
         registerNonPlaceableItem(Items.IRIDIUM, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -149,7 +199,7 @@ final class ItemSetup {
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         );
-        registerItem(Items.IRIDIUM_PLATE, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerNonPlaceableItem(Items.IRIDIUM_PLATE, MetalForge.RECIPE_TYPE,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM,
             Items.ADVANCED_ALLOY, new ItemStack(Material.DIAMOND), Items.ADVANCED_ALLOY,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM
@@ -178,6 +228,15 @@ final class ItemSetup {
         new AdvancedSolarPanel(AdvancedSolarPanel.Type.ULTIMATE).register(plugin);
     }
 
+    private void registerSolarHelmets() {
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ADVANCED).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.CARBONADO).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ENERGIZED).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.HYBRID).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ADVANCEDLX).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ULTIMATE).register(plugin);
+    }
+
     //Register Items
     private void registerItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
                               @Nonnull ItemStack... items) {
@@ -192,7 +251,9 @@ final class ItemSetup {
 
             // make shapeless
             for (int i = 0; i < 9; i++) {
-                if (i == 4) continue;
+                if (i == 4) {
+                    continue;
+                }
                 final ItemStack[] recipe2 = new ItemStack[9];
                 recipe2[i] = items[0];
                 type.register(recipe2, result);
@@ -204,8 +265,9 @@ final class ItemSetup {
         if (items.length < 9) {
             recipe = new ItemStack[9];
             System.arraycopy(items, 0, recipe, 0, items.length);
-        } else
+        } else {
             recipe = items;
+        }
 
         new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
@@ -235,8 +297,9 @@ final class ItemSetup {
         if (items.length < 9) {
             recipe = new ItemStack[9];
             System.arraycopy(items, 0, recipe, 0, items.length);
-        } else
+        } else {
             recipe = items;
+        }
 
         new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }

@@ -7,6 +7,10 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -21,15 +25,10 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
-
-public class ScrapMachine extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
+public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
-        new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.SCRAP_MACHINE
+        new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.RECYCLER
     );
 
     public static final int ENERGY_CONSUMPTION = 100;
@@ -44,8 +43,8 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
 
     private static final CustomItem progressItem = new CustomItem(Material.DEAD_BUSH, "&7Progress");
 
-    public ScrapMachine() {
-        super(Items.LITEXPANSION, Items.SCRAP_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
+    public Recycler() {
+        super(Items.LITEXPANSION, Items.RECYCLER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.REINFORCED_PLATE, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
             SlimefunItems.REINFORCED_PLATE, Items.MACHINE_BLOCK, SlimefunItems.REINFORCED_PLATE,
             SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.REINFORCED_PLATE, SlimefunItems.ADVANCED_CIRCUIT_BOARD
@@ -54,7 +53,7 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
     }
 
     private void setupInv() {
-        createPreset(this, "&8Scrap Machine", blockMenuPreset -> {
+        createPreset(this, "&8Recycler", blockMenuPreset -> {
             for (int i = 0; i < 27; i++)
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
 
@@ -69,7 +68,7 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
     public void preRegister() {
         this.addItemHandler(new BlockTicker() {
             public void tick(Block b, SlimefunItem sf, Config data) {
-                ScrapMachine.this.tick(b);
+                Recycler.this.tick(b);
             }
 
             public boolean isSynchronized() {
@@ -89,7 +88,9 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
             && (output.getType() != Items.SCRAP.getType()
             || output.getAmount() == output.getMaxStackSize()
             || !Items.SCRAP.getItem().isItem(output)))
-        ) return;
+        ) {
+            return;
+        }
 
         final BlockPosition pos = new BlockPosition(b.getWorld(), b.getX(), b.getY(), b.getZ());
         int currentProgress = progress.getOrDefault(pos, -1);
@@ -102,7 +103,9 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
         }
 
         // No progress and no input item, no tick needed. Or if there was no power (but can be processed)
-        if (currentProgress == -1 || !takePower(b)) return;
+        if (currentProgress == -1 || !takePower(b)) {
+            return;
+        }
 
         if (currentProgress == PROGRESS_AMOUNT) {
             if (output != null && output.getAmount() > 0)
@@ -122,7 +125,9 @@ public class ScrapMachine extends SlimefunItem implements InventoryBlock, Energy
     private boolean takePower(@Nonnull Block b) {
         if (getCharge(b.getLocation()) < ENERGY_CONSUMPTION) return false;
         removeCharge(b.getLocation(), ENERGY_CONSUMPTION);
-        return true;
+        {
+            return true;
+        }
     }
 
     @Nonnull

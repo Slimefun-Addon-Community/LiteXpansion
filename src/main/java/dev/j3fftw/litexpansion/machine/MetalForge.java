@@ -11,7 +11,8 @@ import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.inventory.InvUtils;
-import org.bukkit.Effect;
+import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -22,22 +23,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class RefinedSmeltery extends MultiBlockMachine {
+public class MetalForge extends MultiBlockMachine {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
-        new NamespacedKey(LiteXpansion.getInstance(), "refined_smeltery"),
-        Items.REFINED_SMELTERY,
+        new NamespacedKey(LiteXpansion.getInstance(), "metal_forge"),
+        Items.METAL_FORGE,
         "",
-        "&7Used to refine ingots"
+        "&7Used to Forge Metals"
     );
 
-    private static final ItemStack stone_bricks = new ItemStack(Material.STONE_BRICKS);
+    private static final ItemStack anvil = new ItemStack(Material.ANVIL);
+    private static final ItemStack ironBlock = new ItemStack(Material.IRON_BLOCK);
 
-    public RefinedSmeltery() {
-        super(Items.LITEXPANSION, Items.REFINED_SMELTERY, new ItemStack[] {
-            null, new ItemStack(Material.STONE_BRICK_WALL), null,
-            stone_bricks, new ItemStack(Material.DISPENSER), stone_bricks,
-            null, new ItemStack(Material.FLINT_AND_STEEL), null
+    public MetalForge() {
+        super(Items.LITEXPANSION, Items.METAL_FORGE, new ItemStack[] {
+            anvil, new ItemStack(Material.STONE_BRICK_WALL), anvil,
+            ironBlock, new ItemStack(Material.DISPENSER), ironBlock,
+            null, new ItemStack(Material.DIAMOND_BLOCK), null
         }, new ItemStack[0], BlockFace.DOWN);
     }
 
@@ -52,6 +54,18 @@ public class RefinedSmeltery extends MultiBlockMachine {
         }
 
         return items;
+    }
+
+    protected Inventory createVirtualInventory(Inventory inv) {
+        Inventory fakeInv = Bukkit.createInventory(null, 9, "Fake Inventory");
+
+        for (int j = 0; j < inv.getContents().length; j++) {
+            ItemStack stack = inv.getContents()[j] != null && inv.getContents()[j].getAmount() > 1 ?
+                new CustomItem(inv.getContents()[j], inv.getContents()[j].getAmount() - 1) : null;
+            fakeInv.setItem(j, stack);
+        }
+
+        return fakeInv;
     }
 
     @Override
@@ -90,12 +104,10 @@ public class RefinedSmeltery extends MultiBlockMachine {
         }
 
         outputInv.addItem(output);
-        p.getWorld().playSound(p.getLocation(), Sound.BLOCK_LAVA_POP, 1, 1);
-        p.getWorld().playEffect(b.getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
+        p.getWorld().playSound(p.getLocation(), Sound.BLOCK_ANVIL_BREAK, 1, 1);
 
-        Block fire = b.getRelative(BlockFace.DOWN).getRelative(BlockFace.DOWN);
-        fire.getWorld().playEffect(fire.getLocation(), Effect.STEP_SOUND, fire.getType());
-        fire.setType(Material.AIR);
+        Block diamondBlock = b.getRelative(BlockFace.DOWN, 2);
+        diamondBlock.setType(Material.AIR);
     }
 
     private boolean canCraft(Inventory inv, List<ItemStack[]> inputs, int i) {
@@ -117,4 +129,3 @@ public class RefinedSmeltery extends MultiBlockMachine {
     }
 
 }
-

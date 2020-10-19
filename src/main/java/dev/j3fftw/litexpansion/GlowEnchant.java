@@ -13,8 +13,11 @@ import java.util.Optional;
 @SuppressWarnings("NullableProblems")
 public class GlowEnchant extends Enchantment {
 
-    public GlowEnchant(NamespacedKey key) {
+    private final Set<String> ids = new HashSet<>();
+
+    public GlowEnchant(@Nonnull NamespacedKey key, @Nonnull String[] applicableItems) {
         super(key);
+        ids.addAll(Arrays.asList(applicableItems));
     }
 
     @Nonnull
@@ -34,6 +37,7 @@ public class GlowEnchant extends Enchantment {
         return 1;
     }
 
+    @Nonnull
     @Override
     public EnchantmentTarget getItemTarget() {
         return EnchantmentTarget.ALL;
@@ -51,7 +55,7 @@ public class GlowEnchant extends Enchantment {
     }
 
     @Override
-    public boolean conflictsWith(Enchantment enchantment) {
+    public boolean conflictsWith(@Nonnull Enchantment enchantment) {
         return false;
     }
 
@@ -60,11 +64,9 @@ public class GlowEnchant extends Enchantment {
         if (item.hasItemMeta()) {
             final ItemMeta itemMeta = item.getItemMeta();
             final Optional<String> id = SlimefunPlugin.getItemDataService().getItemData(itemMeta);
+
             if (id.isPresent()) {
-                return (id.get().equals(Items.ADVANCED_CIRCUIT.getItemId()))
-                    || (id.get().equals(Items.NANO_BLADE.getItemId()))
-                    || (id.get().equals(Items.GLASS_CUTTER.getItemId()))
-                    || (id.get().equals(Items.DIAMOND_DRILL.getItemId()));
+                return ids.contains(id.get());
             }
         }
         return false;
