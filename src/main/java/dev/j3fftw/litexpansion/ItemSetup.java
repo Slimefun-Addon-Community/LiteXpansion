@@ -1,6 +1,6 @@
 package dev.j3fftw.litexpansion;
 
-import dev.j3fftw.litexpansion.armor.SolarHelmets;
+import dev.j3fftw.litexpansion.armor.AdvancedSolarHelmet;
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
@@ -232,12 +232,12 @@ final class ItemSetup {
     }
 
     private void registerSolarHelmets() {
-        new SolarHelmets(SolarHelmets.Type.ADVANCED).register(plugin);
-        new SolarHelmets(SolarHelmets.Type.CARBONADO).register(plugin);
-        new SolarHelmets(SolarHelmets.Type.ENERGIZED).register(plugin);
-        new SolarHelmets(SolarHelmets.Type.HYBRID).register(plugin);
-        new SolarHelmets(SolarHelmets.Type.ADVANCEDLX).register(plugin);
-        new SolarHelmets(SolarHelmets.Type.ULTIMATE).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ADVANCED).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.CARBONADO).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ENERGIZED).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.HYBRID).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ADVANCEDLX).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ULTIMATE).register(plugin);
     }
 
     //Register Items

@@ -12,11 +12,12 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-public class SolarHelmets extends SolarHelmet {
+public class AdvancedSolarHelmet extends SolarHelmet {
 
+    @Nonnull
     private final Type type;
 
-    public SolarHelmets(Type type) {
+    public AdvancedSolarHelmet(Type type) {
         super(Items.LITEXPANSION, type.getItem(), RecipeType.ENHANCED_CRAFTING_TABLE, type.getRecipe(),
             type.getGenerationRate()
         );
