@@ -26,7 +26,7 @@ public final class UuMatterCategory extends FlexCategory {
 
     private UuMatterCategory() {
         super(new NamespacedKey(LiteXpansion.getInstance(), "uumatter_category"),
-                new CustomItem(Items.UU_MATTER, "&5UU-Matter Recipes")
+            new CustomItem(Items.UU_MATTER, "&5UU-Matter Recipes")
         );
     }
 
@@ -45,7 +45,7 @@ public final class UuMatterCategory extends FlexCategory {
             for (int i = 0; i < 9; i++) {
                 if (i == 1) {
                     menu.addItem(i, new CustomItem(ChestMenuUtils.getBackButton(p, "",
-                            ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(p, "guide.back.guide")))
+                        ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(p, "guide.back.guide")))
                     );
                     menu.addMenuClickHandler(i, (pl, s, is, action) -> {
                         open(p, profile, SlimefunGuideLayout.CHEST);
@@ -74,7 +74,7 @@ public final class UuMatterCategory extends FlexCategory {
 
     private void displayItem(ChestMenu menu, Player p, PlayerProfile profile, ItemStack output, ItemStack[] recipe) {
         final ChestMenu.MenuClickHandler clickHandler = (pl, s, clickedItem, a) -> onIngredientClick(profile,
-                clickedItem);
+            clickedItem);
 
         for (int i = 0; i < 9; ++i) {
             menu.addItem(recipeSlots[i], recipe[i], clickHandler);
@@ -113,7 +113,7 @@ public final class UuMatterCategory extends FlexCategory {
         menu.setEmptySlotsClickable(false);
 
         menu.addItem(1, new CustomItem(ChestMenuUtils.getBackButton(player, "",
-                ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide")))
+            ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide")))
         );
 
         menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
