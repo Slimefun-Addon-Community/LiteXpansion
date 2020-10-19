@@ -5,13 +5,12 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
+import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import org.bukkit.Material;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
 
 /**
  * The {@link MiningDrill} is a {@link SimpleSlimefunItem} that breaks
