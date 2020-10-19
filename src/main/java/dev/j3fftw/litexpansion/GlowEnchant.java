@@ -8,9 +8,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
-@SuppressWarnings("NullableProblems")
 public class GlowEnchant extends Enchantment {
 
     private final Set<String> ids = new HashSet<>();

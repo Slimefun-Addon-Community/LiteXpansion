@@ -1,15 +1,23 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.armor.AdvancedSolarHelmet;
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
+import dev.j3fftw.litexpansion.items.DiamondDrill;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
+import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
+import dev.j3fftw.litexpansion.machine.Generator;
+import dev.j3fftw.litexpansion.machine.ManualMill;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
+import dev.j3fftw.litexpansion.machine.MetalForge;
+import dev.j3fftw.litexpansion.machine.MultiFunctionalElectricStorageUnit;
+import dev.j3fftw.litexpansion.machine.MultiFunctionalStorageUnit;
+import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
-import dev.j3fftw.litexpansion.machine.ScrapMachine;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;

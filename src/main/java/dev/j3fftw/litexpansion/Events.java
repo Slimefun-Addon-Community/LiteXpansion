@@ -1,21 +1,44 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
+import dev.j3fftw.litexpansion.items.DiamondDrill;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.utils.Utils;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
+import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Events implements Listener {
+
+    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList( Material.STONE,
+        Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
+        Material.NETHERRACK, Material.END_STONE ));
 
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {
@@ -70,7 +93,7 @@ public class Events implements Listener {
 
     @EventHandler
     @SuppressWarnings("ConstantConditions")
-    public void onStoneDrill(PlayerInteractEvent e) {
+    public void onMiningDrillUse(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
         if (block == null) return;
 
@@ -108,7 +131,7 @@ public class Events implements Listener {
 
     @EventHandler
     @SuppressWarnings("ConstantConditions")
-    public void onObsidiaDrill(PlayerInteractEvent e) {
+    public void onDiamondDrillUse(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
         if (block == null) return;
 
