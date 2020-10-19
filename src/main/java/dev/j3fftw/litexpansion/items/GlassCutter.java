@@ -6,6 +6,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
+import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -20,8 +21,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
 
 /**
  * The {@link GlassCutter} is a {@link SimpleSlimefunItem} that breaks
@@ -50,7 +49,9 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
     @SuppressWarnings("ConstantConditions")
     public void onGlassCut(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
-        if (block == null) return;
+        if (block == null) {
+            return;
+        }
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();

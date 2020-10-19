@@ -2,11 +2,9 @@ package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
-import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.machine.Recycler;
-import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
-import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -61,8 +59,7 @@ public final class Items {
         "",
         "&7Click any machine, generator, capacitor,",
         "&7or cargo node to instantly break it!",
-        "",
-        "&4Failure Chance: &e" + Utils.wrenchFailureChance() + "%"
+        ""
     );
     public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
         "GLASS_CUTTER",
@@ -72,26 +69,6 @@ public final class Items {
         "&7Cuts glass quickly",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 300 J"
-    );
-    public static final SlimefunItemStack MINING_DRILL = new SlimefunItemStack(
-        "MINING_DRILL",
-        Material.IRON_SHOVEL,
-        "&7Mining Drill",
-        "",
-        "&7Instantly breaks stone and stone variants",
-        "&7Right click to break block slower",
-        "",
-        "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
-    );
-    public static final SlimefunItemStack DIAMOND_DRILL = new SlimefunItemStack(
-        "DIAMOND_DRILL",
-        Material.DIAMOND_SHOVEL,
-        "&bDiamond Drill",
-        "",
-        "&7Instantly breaks obsidian, stone, and stone variants",
-        "&7Right click to break block slower",
-        "",
-        "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
     );
     public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
         "TREETAP",
@@ -108,6 +85,43 @@ public final class Items {
         "&7> &eShift+Right Click &7- Clear node configuration"
     );
     // Items
+
+    public static final SlimefunItemStack TIN_PLATE = new SlimefunItemStack(
+        "TIN_PLATE",
+        Material.WHITE_CARPET,
+        "&7Tin Plate"
+    );
+
+    public static final SlimefunItemStack TIN_ITEM_CASING = new SlimefunItemStack(
+        "TIN_ITEM_CASING",
+        Material.WHITE_CARPET,
+        "&7Tin Item Casing"
+    );
+
+    public static final SlimefunItemStack UNINSULATED_TIN_CABLE = new SlimefunItemStack(
+        "UNINSULATED_TIN_CABLE",
+        Material.STRING,
+        "&7Uninsulated Tin Cable"
+    );
+
+    public static final SlimefunItemStack TIN_CABLE = new SlimefunItemStack(
+        "TIN_CABLE",
+        Material.STRING,
+        "&7Tin Cable"
+    );
+
+    public static final SlimefunItemStack COPPER_PLATE = new SlimefunItemStack(
+        "COPPER_PLATE",
+        Material.ORANGE_CARPET,
+        "&7Copper Plate"
+    );
+
+    public static final SlimefunItemStack COPPER_ITEM_CASING = new SlimefunItemStack(
+        "COPPER_ITEM_CASING",
+        Material.ORANGE_CARPET,
+        "&7Copper Item Casing"
+    );
+
     public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
         "FOOD_SYNTHESIZER",
         new CustomItem(SkullItem.fromHash("a11a2df7d37af40ed5ce442fd2d78cd8ebcdcdc029d2ae691a2b64395cdf"),
@@ -235,12 +249,7 @@ public final class Items {
         Material.DIAMOND_BLOCK,
         "&7Advanced Machine Block"
     );
-    public static final SlimefunItemStack ENERGY_CRYSTAl = new SlimefunItemStack(
-        "ENERGY_CRYSTAL",
-        Material.DIAMOND,
-        "&7Energy Crystal"
-    );
-    //todo make it enchanted
+
     public static final SlimefunItemStack LAPOTRON_CRYSTAL = new SlimefunItemStack(
         "LAPOTRON_CRYSTAL",
         Material.DIAMOND,
@@ -328,6 +337,36 @@ public final class Items {
         LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_DAY_RATE) + " (Day)",
         LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_NIGHT_RATE) + " (Night)"
     );
+    public static final SlimefunItemStack MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT = new SlimefunItemStack(
+        "MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT",
+        Material.IRON_BLOCK,
+        "&7MFE"
+    );
+    public static final SlimefunItemStack MULTI_FUNCTIONAL_STORAGE_UNIT = new SlimefunItemStack(
+        "MULTI_FUNCTIONAL_STORAGE_UNIT",
+        Material.DIAMOND_BLOCK,
+        "&7MFSU"
+    );
+    public static final SlimefunItemStack GOLD_PLATE = new SlimefunItemStack(
+        "GOLD_PLATE",
+        Material.YELLOW_CARPET,
+        "&7Gold Plate"
+    );
+    public static final SlimefunItemStack GOLD_ITEM_CASING = new SlimefunItemStack(
+        "GOLD_ITEM_CASING",
+        Material.YELLOW_CARPET,
+        "&7Gold Item Casing"
+    );
+    public static final SlimefunItemStack UNINSULATED_GOLD_CABLE = new SlimefunItemStack(
+        "UNINSULATED_GOLD_CABLE",
+        Material.STRING,
+        "&7Uninsulated Gold Cable"
+    );
+    public static final SlimefunItemStack GOLD_CABLE = new SlimefunItemStack(
+        "GOLD_CABLE",
+        Material.STRING,
+        "&7Gold Cable"
+    );
     //Basic Machines
     public static final SlimefunItemStack REFINED_SMELTERY = new SlimefunItemStack(
         "REFINED_SMELTERY",
@@ -341,13 +380,85 @@ public final class Items {
         "&7Metal Forge"
     );
 
-    private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
+    public static final SlimefunItemStack MANUAL_MILL = new SlimefunItemStack(
+        "MANUAL_MILL",
+        Material.DISPENSER,
+        "&7Manual Mill"
+    );
+
+    public static final SlimefunItemStack GENERATOR = new SlimefunItemStack(
+        "GENERATOR",
+        Material.IRON_BLOCK,
+        "&7Generator"
+    );
+
+    public static final SlimefunItemStack RE_BATTERY = new SlimefunItemStack(
+        "RE_BATTERY",
+        Material.GLASS_BOTTLE,
+        "&7RE Battery"
+    );
+
+    public static final SlimefunItemStack ADVANCED_SOLAR_HELMET = new SlimefunItemStack(
+        "ADVANCED_SOLAR_HELMET",
+        Material.IRON_HELMET,
+        "&7Advanced Solar Helmet"
+    );
+
+    public static final SlimefunItemStack CARBONADO_SOLAR_HELMET = new SlimefunItemStack(
+        "CARBONADO_SOLAR_HELMET",
+        Material.GOLDEN_HELMET,
+        "&7Carbonado Solar Helmet"
+    );
+
+    public static final SlimefunItemStack ENERGIZED_SOLAR_HELMET = new SlimefunItemStack(
+        "ENERGIZED_SOLAR_HELMET",
+        Material.GOLDEN_HELMET,
+        "&7Energized Solar Helmet"
+    );
+
+    public static final SlimefunItemStack ADVANCEDLX_SOLAR_HELMET = new SlimefunItemStack(
+        "ADVANCEDLX_SOLAR_HELMET",
+        Material.DIAMOND_HELMET,
+        "&7Super Advanced Solar Helmet"
+    );
+
+    public static final SlimefunItemStack HYBRID_SOLAR_HELMET = new SlimefunItemStack(
+        "HYBRID_SOLAR_HELMET",
+        Material.DIAMOND_HELMET,
+        "&7Hybrid Solar Helmet"
+    );
+
+    public static final SlimefunItemStack ULTIMATE_SOLAR_HELMET = new SlimefunItemStack(
+        "ULTIMATE_SOLAR_HELMET",
+        Material.DIAMOND_HELMET,
+        "&7Ultimate Solar Helmet"
+    );
 
     static {
-        ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
-        GLASS_CUTTER.addEnchantment(glowEnchant, 1);
-        DIAMOND_DRILL.addEnchantment(glowEnchant, 1);
+        ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 1);
+        CARBONADO_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 2);
+        ENERGIZED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 3);
+        ADVANCEDLX_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
+        HYBRID_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+        ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 6);
     }
+
+    public static final SlimefunItemStack IRON_PLATE = new SlimefunItemStack(
+        "IRON_PLATE",
+        Material.WHITE_CARPET,
+        "&7Iron Plate"
+    );
+
+    public static final SlimefunItemStack DIAMOND_PLATE = new SlimefunItemStack(
+        "DIAMOND_PLATE",
+        Material.CYAN_CARPET,
+        "&7Diamond Plate"
+    );
+    public static final SlimefunItemStack THORIUM_PLATE = new SlimefunItemStack(
+        "THORIUM_PLATE",
+        Material.GRAY_CARPET,
+        "&7Thorium Plate"
+    );
 
     private Items() {}
 }

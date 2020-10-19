@@ -6,11 +6,17 @@ import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.bstats.bukkit.Metrics;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -18,13 +24,6 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import javax.annotation.Nonnull;
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -34,17 +33,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     public void onEnable() {
         instance = this;
 
-        if (!new File(getDataFolder(), "config.yml").exists())
+        if (!new File(getDataFolder(), "config.yml").exists()) {
             saveDefaultConfig();
-
-        if (!getConfig().contains("options.need-wrench-to-break-machines")) {
-            getConfig().set("options.need-wrench-to-break-machines", false);
-            saveConfig();
-        }
-
-        if (!getConfig().contains("options.wrench-failure-chance")) {
-            getConfig().set("options.wrench-failure-chance", 0.0);
-            saveConfig();
         }
 
         final Metrics metrics = new Metrics(this, 7111);
@@ -52,13 +42,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
-        }
-
-        if (getConfig().getDouble("options.wrench-failure-chance") < 0
-            || getConfig().getDouble("options.wrench-failure-chance") > 1
-        ) {
-            getLogger().log(Level.SEVERE, "The wrench failure chance must be or be between 0 and 1!");
-            getServer().getPluginManager().disablePlugin(this);
         }
 
         getServer().getPluginManager().registerEvents(new Events(), this);
@@ -74,9 +57,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
         }
 
-        Enchantment.registerEnchantment(new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
-                "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER"
-        }));
+        registerEnchantments();
 
         ItemSetup.INSTANCE.init();
 
@@ -87,11 +68,30 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         setupResearches();
         new ThoriumResource().register();
+
+//        if (Wrench.wrenchFailChance.getValue() < 0
+//            || Wrench.wrenchFailChance.getValue() > 1
+//        ) {
+//            getLogger().log(Level.SEVERE, "The wrench failure chance must be or be between 0 and 1!");
+//            getServer().getPluginManager().disablePlugin(this);
+//        }
     }
 
     @Override
     public void onDisable() {
         instance = null;
+    }
+
+    private void registerEnchantments() {
+        Enchantment glowEnchantment = new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
+            "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER", "LAPOTRON_CRYSTAL",
+            "ADVANCEDLX_SOLAR_HELMET", "HYBRID_SOLAR_HELMET", "ULTIMATE_SOLAR_HELMET"
+        });
+
+        // Prevent double-registration errors
+        if (Enchantment.getByKey(glowEnchantment.getKey()) == null) {
+            Enchantment.registerEnchantment(glowEnchantment);
+        }
     }
 
     private void setupResearches() {
@@ -113,7 +113,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         new Research(new NamespacedKey(this, "machinereee"),
             696972, "Machinereeeeee", 30)
-            .addItems(Items.METAL_FORGE, Items.REFINED_SMELTERY, Items.RUBBER_SYNTHESIZER_MACHINE)
+            .addItems(Items.METAL_FORGE, Items.REFINED_SMELTERY, Items.RUBBER_SYNTHESIZER_MACHINE, Items.MANUAL_MILL,
+                Items.GENERATOR)
             .register();
 
         new Research(new NamespacedKey(this, "the_better_panel"),
@@ -133,7 +134,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         new Research(new NamespacedKey(this, "platings"),
             696976, "Platings", 40)
-            .addItems(Items.IRIDIUM_PLATE)
+            .addItems(Items.IRIDIUM_PLATE, Items.COPPER_PLATE, Items.TIN_PLATE, Items.DIAMOND_PLATE, Items.IRON_PLATE,
+                Items.GOLD_PLATE, Items.THORIUM_PLATE)
             .register();
 
         new Research(new NamespacedKey(this, "rubber"),
@@ -168,7 +170,24 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         new Research(new NamespacedKey(this, "what_are_these_cables"),
             696983, "What are these cables", 25)
-            .addItems(Items.UNINSULATED_COPPER_CABLE, Items.COPPER_CABLE)
+            .addItems(Items.UNINSULATED_COPPER_CABLE, Items.COPPER_CABLE,
+                Items.UNINSULATED_COPPER_CABLE, Items.TIN_CABLE)
+            .register();
+
+        new Research(new NamespacedKey(this, "triple_a"),
+            696984, "Triple a", 20)
+            .addItems(Items.RE_BATTERY)
+            .register();
+
+        new Research(new NamespacedKey(this, "casing"),
+            696985, "S 340", 20)
+            .addItems(Items.TIN_ITEM_CASING, Items.COPPER_ITEM_CASING)
+            .register();
+
+        new Research(new NamespacedKey(this, "solar_helmets"),
+            696986, "More solar helmets", 30)
+            .addItems(Items.HYBRID_SOLAR_HELMET, Items.ADVANCED_SOLAR_HELMET, Items.ADVANCEDLX_SOLAR_HELMET,
+                Items.CARBONADO_SOLAR_HELMET, Items.ENERGIZED_SOLAR_HELMET, Items.ULTIMATE_SOLAR_HELMET)
             .register();
     }
 
@@ -180,7 +199,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
                 for (World world : Bukkit.getWorlds()) {
                     final BlockStorage storage = BlockStorage.getStorage(world);
-                    if (storage == null) continue;
+                    if (storage == null) {
+                        continue;
+                    }
 
                     final Field f = blockStorage.getDeclaredField("storage");
                     f.setAccessible(true);
@@ -189,9 +210,11 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
                     for (Map.Entry<Location, Config> entry : blocks.entrySet()) {
                         final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
-                        if (item == null || !(item.getAddon() instanceof LiteXpansion)) continue;
+                        if (item == null || !(item.getAddon() instanceof LiteXpansion)) {
+                            continue;
+                        }
 
-                        data.merge(item.getID(), 1, Integer::sum);
+                        data.merge(item.getId(), 1, Integer::sum);
                     }
                 }
             } catch (ReflectiveOperationException e) {

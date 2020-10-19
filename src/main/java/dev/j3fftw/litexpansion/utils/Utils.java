@@ -1,5 +1,8 @@
 package dev.j3fftw.litexpansion.utils;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
@@ -9,10 +12,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
 
 public final class Utils {
 
@@ -51,14 +50,6 @@ public final class Utils {
             return (Constants.SERVER_TICK_RATE * power);
         } else {
             return (1 / ((double) Constants.CUSTOM_TICKER_DELAY / Constants.SERVER_TICK_RATE) * power);
-        }
-    }
-
-    public static String wrenchFailureChance() {
-        if (!Constants.MACHINE_BREAK_REQUIRES_WRENCH) {
-            return "0";
-        } else {
-            return String.valueOf((Constants.WRENCH_FAIL_CHANCE * 100));
         }
     }
 
