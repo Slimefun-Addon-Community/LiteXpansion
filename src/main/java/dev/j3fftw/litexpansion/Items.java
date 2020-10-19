@@ -14,6 +14,7 @@ import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Slime;
 
 public final class Items {
 
@@ -444,7 +445,6 @@ public final class Items {
         Material.CYAN_CARPET,
         "&7Diamond Plate"
     );
-
     public static final SlimefunItemStack THORIUM_PLATE = new SlimefunItemStack(
         "THORIUM_PLATE",
         Material.GRAY_CARPET,

@@ -27,35 +27,35 @@ public class SolarHelmets extends SolarHelmet {
     public enum Type {
 
         ADVANCED(Items.ADVANCED_SOLAR_HELMET, 1, new ItemStack[] {
-            Items.IRON_PLATE, SlimefunItems.SOLAR_GENERATOR_2, Items.IRON_PLATE,
-            Items.IRON_PLATE, null, Items.IRON_PLATE,
-            null, null, null
+            null, SlimefunItems.SOLAR_GENERATOR_2, null,
+            Items.IRON_PLATE, SlimefunItems.SOLAR_HELMET, Items.IRON_PLATE,
+            Items.IRON_PLATE, null, Items.IRON_PLATE
         }),
 
         CARBONADO(Items.CARBONADO_SOLAR_HELMET, 2, new ItemStack[] {
-            Items.COPPER_PLATE, SlimefunItems.SOLAR_GENERATOR_3, Items.COPPER_PLATE,
-            Items.COPPER_PLATE, null, Items.COPPER_PLATE,
-            null, null, null
+            null, SlimefunItems.SOLAR_GENERATOR_3, null,
+            Items.COPPER_PLATE, Items.ADVANCED_SOLAR_HELMET, Items.COPPER_PLATE,
+            Items.COPPER_PLATE, null, Items.COPPER_PLATE
         }),
         ENERGIZED(Items.ENERGIZED_SOLAR_HELMET, 3, new ItemStack[] {
-            Items.GOLD_PLATE, SlimefunItems.SOLAR_GENERATOR_3, Items.GOLD_PLATE,
-            Items.GOLD_PLATE, null, Items.GOLD_PLATE,
-            null, null, null
+            null, SlimefunItems.SOLAR_GENERATOR_3, null,
+            Items.GOLD_PLATE, Items.CARBONADO_SOLAR_HELMET, Items.GOLD_PLATE,
+            Items.GOLD_PLATE, null, Items.GOLD_PLATE
         }),
         ADVANCEDLX(Items.ADVANCEDLX_SOLAR_HELMET, 5, new ItemStack[] {
-            Items.DIAMOND_PLATE, SlimefunItems.SOLAR_GENERATOR_4, Items.DIAMOND_PLATE,
-            Items.DIAMOND_PLATE, null, Items.DIAMOND_PLATE,
-            null, null, null
+            null, SlimefunItems.SOLAR_GENERATOR_4, null,
+            Items.DIAMOND_PLATE, Items.ENERGIZED_SOLAR_HELMET, Items.DIAMOND_PLATE,
+            Items.DIAMOND_PLATE, null, Items.DIAMOND_PLATE
         }),
         HYBRID(Items.HYBRID_SOLAR_HELMET, 10, new ItemStack[] {
-            Items.THORIUM_PLATE, Items.ADVANCED_SOLAR_PANEL, Items.THORIUM_PLATE,
-            Items.THORIUM_PLATE, null, Items.THORIUM_PLATE,
-            null, null, null
+            null, Items.ADVANCED_SOLAR_PANEL, null,
+            Items.THORIUM_PLATE, Items.ADVANCEDLX_SOLAR_HELMET, Items.THORIUM_PLATE,
+            Items.THORIUM_PLATE, null, Items.THORIUM_PLATE
         }),
         ULTIMATE(Items.ULTIMATE_SOLAR_HELMET, 20, new ItemStack[] {
-            Items.IRIDIUM_PLATE, Items.ULTIMATE_SOLAR_PANEL, Items.IRIDIUM_PLATE,
-            Items.IRIDIUM_PLATE, null, Items.IRIDIUM_PLATE,
-            null, null, null
+            null, Items.ULTIMATE_SOLAR_PANEL, null,
+            Items.IRIDIUM_PLATE, Items.HYBRID_SOLAR_HELMET, Items.IRIDIUM_PLATE,
+            Items.IRIDIUM_PLATE, null, Items.IRIDIUM_PLATE
         });
 
 
