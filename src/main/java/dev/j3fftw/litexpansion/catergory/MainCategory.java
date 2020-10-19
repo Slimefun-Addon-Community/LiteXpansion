@@ -20,8 +20,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class MainCategory extends FlexCategory {
 
-    private ChestMenu menu;
-
     public static final MainCategory INSTANCE = new MainCategory();
 
     public MainCategory() {
@@ -29,17 +27,6 @@ public class MainCategory extends FlexCategory {
             new CustomItem(Items.GENERATOR, "&5test")
         );
 
-        setupInv();
-        menu.setEmptySlotsClickable(false);
-    }
-
-    private void setupInv() {
-        menu = new ChestMenu("&5Test");
-
-        // Header
-        for (int i = 0; i < 9; ++i) {
-            menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
-        }
     }
 
     private ChestMenu create(Player p) {
@@ -83,6 +70,15 @@ public class MainCategory extends FlexCategory {
 
     @Override
     public void open(Player player, PlayerProfile playerProfile, SlimefunGuideLayout slimefunGuideLayout) {
+        ChestMenu menu = new ChestMenu("&5UU-Matter Recipes");
+
+        // Header
+        for (int i = 0; i < 9; ++i) {
+            menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
+        }
+
+        menu.setEmptySlotsClickable(false);
+
         menu.addItem(1, new CustomItem(ChestMenuUtils.getBackButton(player, "",
             ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide")))
         );
