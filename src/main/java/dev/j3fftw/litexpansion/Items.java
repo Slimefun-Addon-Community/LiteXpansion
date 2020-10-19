@@ -340,12 +340,12 @@ public final class Items {
     public static final SlimefunItemStack MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT",
         Material.IRON_BLOCK,
-        "MFE"
+        "&7MFE"
     );
     public static final SlimefunItemStack MULTI_FUNCTIONAL_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_STORAGE_UNIT",
         Material.DIAMOND_BLOCK,
-        "MFSU"
+        "&7MFSU"
     );
     public static final SlimefunItemStack GOLD_PLATE = new SlimefunItemStack(
         "GOLD_PLATE",
