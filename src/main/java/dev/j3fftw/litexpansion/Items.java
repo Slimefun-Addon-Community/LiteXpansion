@@ -14,6 +14,7 @@ import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 
 public final class Items {
 
@@ -339,12 +340,12 @@ public final class Items {
     public static final SlimefunItemStack MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT",
         Material.IRON_BLOCK,
-        "MFE"
+        "&7MFE"
     );
     public static final SlimefunItemStack MULTI_FUNCTIONAL_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_STORAGE_UNIT",
         Material.DIAMOND_BLOCK,
-        "MFSU"
+        "&7MFSU"
     );
     public static final SlimefunItemStack GOLD_PLATE = new SlimefunItemStack(
         "GOLD_PLATE",
@@ -395,6 +396,68 @@ public final class Items {
         "RE_BATTERY",
         Material.GLASS_BOTTLE,
         "&7RE Battery"
+    );
+
+    public static final SlimefunItemStack ADVANCED_SOLAR_HELMET = new SlimefunItemStack(
+        "ADVANCED_SOLAR_HELMET",
+        Material.IRON_HELMET,
+        "&7Advanced Solar Helmet"
+    );
+
+    public static final SlimefunItemStack CARBONADO_SOLAR_HELMET = new SlimefunItemStack(
+        "CARBONADO_SOLAR_HELMET",
+        Material.GOLDEN_HELMET,
+        "&7Carbonado Solar Helmet"
+    );
+
+    public static final SlimefunItemStack ENERGIZED_SOLAR_HELMET = new SlimefunItemStack(
+        "ENERGIZED_SOLAR_HELMET",
+        Material.GOLDEN_HELMET,
+        "&7Energized Solar Helmet"
+    );
+
+    public static final SlimefunItemStack ADVANCEDLX_SOLAR_HELMET = new SlimefunItemStack(
+        "ADVANCEDLX_SOLAR_HELMET",
+        Material.DIAMOND_HELMET,
+        "&7Super Advanced Solar Helmet"
+    );
+
+    public static final SlimefunItemStack HYBRID_SOLAR_HELMET = new SlimefunItemStack(
+        "HYBRID_SOLAR_HELMET",
+        Material.DIAMOND_HELMET,
+        "&7Hybrid Solar Helmet"
+    );
+
+    public static final SlimefunItemStack ULTIMATE_SOLAR_HELMET = new SlimefunItemStack(
+        "ULTIMATE_SOLAR_HELMET",
+        Material.DIAMOND_HELMET,
+        "&7Ultimate Solar Helmet"
+    );
+
+    static {
+        ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 1);
+        CARBONADO_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 2);
+        ENERGIZED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 3);
+        ADVANCEDLX_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
+        HYBRID_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+        ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 6);
+    }
+
+    public static final SlimefunItemStack IRON_PLATE = new SlimefunItemStack(
+        "IRON_PLATE",
+        Material.WHITE_CARPET,
+        "&7Iron Plate"
+    );
+
+    public static final SlimefunItemStack DIAMOND_PLATE = new SlimefunItemStack(
+        "DIAMOND_PLATE",
+        Material.CYAN_CARPET,
+        "&7Diamond Plate"
+    );
+    public static final SlimefunItemStack THORIUM_PLATE = new SlimefunItemStack(
+        "THORIUM_PLATE",
+        Material.GRAY_CARPET,
+        "&7Thorium Plate"
     );
 
     private Items() {}

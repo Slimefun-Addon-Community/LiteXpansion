@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.armor.AdvancedSolarHelmet;
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
@@ -51,6 +52,7 @@ final class ItemSetup {
         registerEndgameItems();
         registerCarbonStuff();
         registerSolarPanels();
+        registerSolarHelmets();
     }
 
     private void registerTools() {
@@ -143,17 +145,23 @@ final class ItemSetup {
             Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING,
             Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING
         );
-        registerItem(Items.GOLD_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.GOLD_INGOT));
+        registerNonPlaceableItem(Items.GOLD_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.GOLD_INGOT));
 
-        registerItem(Items.GOLD_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.GOLD_PLATE);
+        registerNonPlaceableItem(Items.GOLD_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.GOLD_PLATE);
 
-        registerItem(new SlimefunItemStack(Items.UNINSULATED_GOLD_CABLE, 3),
+        registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_GOLD_CABLE, 3),
             ManualMill.RECIPE_TYPE, Items.GOLD_ITEM_CASING
         );
 
-        registerItem(Items.GOLD_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
+        registerNonPlaceableItem(Items.GOLD_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
             rubberItem, Items.UNINSULATED_GOLD_CABLE
         );
+
+        registerNonPlaceableItem(Items.IRON_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.IRON_INGOT));
+        registerNonPlaceableItem(Items.DIAMOND_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.DIAMOND));
+        registerNonPlaceableItem(Items.THORIUM_PLATE, MetalForge.RECIPE_TYPE, Items.THORIUM);
+
+
         // Circuits
         registerNonPlaceableItem(Items.ELECTRONIC_CIRCUIT, RecipeType.ENHANCED_CRAFTING_TABLE,
             Items.COPPER_CABLE, Items.COPPER_CABLE, Items.COPPER_CABLE,
@@ -223,6 +231,15 @@ final class ItemSetup {
         new AdvancedSolarPanel(AdvancedSolarPanel.Type.ULTIMATE).register(plugin);
     }
 
+    private void registerSolarHelmets() {
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ADVANCED).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.CARBONADO).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ENERGIZED).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.HYBRID).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ADVANCEDLX).register(plugin);
+        new AdvancedSolarHelmet(AdvancedSolarHelmet.Type.ULTIMATE).register(plugin);
+    }
+
     //Register Items
     private void registerItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
                               @Nonnull ItemStack... items) {
@@ -237,7 +254,9 @@ final class ItemSetup {
 
             // make shapeless
             for (int i = 0; i < 9; i++) {
-                if (i == 4) continue;
+                if (i == 4) {
+                    continue;
+                }
                 final ItemStack[] recipe2 = new ItemStack[9];
                 recipe2[i] = items[0];
                 type.register(recipe2, result);
@@ -249,8 +268,9 @@ final class ItemSetup {
         if (items.length < 9) {
             recipe = new ItemStack[9];
             System.arraycopy(items, 0, recipe, 0, items.length);
-        } else
+        } else {
             recipe = items;
+        }
 
         new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
@@ -280,8 +300,9 @@ final class ItemSetup {
         if (items.length < 9) {
             recipe = new ItemStack[9];
             System.arraycopy(items, 0, recipe, 0, items.length);
-        } else
+        } else {
             recipe = items;
+        }
 
         new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
