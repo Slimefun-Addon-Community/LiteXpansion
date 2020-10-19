@@ -14,6 +14,7 @@ import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 
 public final class Items {
 
@@ -432,6 +433,15 @@ public final class Items {
         Material.DIAMOND_HELMET,
         "&7Ultimate Solar Helmet"
     );
+
+    static {
+        ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 1);
+        CARBONADO_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 2);
+        ENERGIZED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 3);
+        ADVANCEDLX_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
+        HYBRID_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+        ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 6);
+    }
 
     public static final SlimefunItemStack IRON_PLATE = new SlimefunItemStack(
         "IRON_PLATE",
