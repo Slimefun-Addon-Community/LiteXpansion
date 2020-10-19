@@ -22,25 +22,12 @@ public final class UuMatterCategory extends FlexCategory {
 
     public static final UuMatterCategory INSTANCE = new UuMatterCategory();
 
-    private final int[] recipeSlots = new int[] {12, 13, 14, 21, 22, 23, 30, 31, 32};
-    private ChestMenu menu;
+    private final int[] recipeSlots = new int[]{12, 13, 14, 21, 22, 23, 30, 31, 32};
 
     private UuMatterCategory() {
         super(new NamespacedKey(LiteXpansion.getInstance(), "uumatter_category"),
-            new CustomItem(Items.UU_MATTER, "&5UU-Matter Recipes")
+                new CustomItem(Items.UU_MATTER, "&5UU-Matter Recipes")
         );
-
-        setupInv();
-        menu.setEmptySlotsClickable(false);
-    }
-
-    private void setupInv() {
-        menu = new ChestMenu("&5UU-Matter Recipes");
-
-        // Header
-        for (int i = 0; i < 9; ++i) {
-            menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
-        }
     }
 
     private ChestMenu create(Player p) {
@@ -58,7 +45,7 @@ public final class UuMatterCategory extends FlexCategory {
             for (int i = 0; i < 9; i++) {
                 if (i == 1) {
                     menu.addItem(i, new CustomItem(ChestMenuUtils.getBackButton(p, "",
-                        ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(p, "guide.back.guide")))
+                            ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(p, "guide.back.guide")))
                     );
                     menu.addMenuClickHandler(i, (pl, s, is, action) -> {
                         open(p, profile, SlimefunGuideLayout.CHEST);
@@ -87,7 +74,7 @@ public final class UuMatterCategory extends FlexCategory {
 
     private void displayItem(ChestMenu menu, Player p, PlayerProfile profile, ItemStack output, ItemStack[] recipe) {
         final ChestMenu.MenuClickHandler clickHandler = (pl, s, clickedItem, a) -> onIngredientClick(profile,
-            clickedItem);
+                clickedItem);
 
         for (int i = 0; i < 9; ++i) {
             menu.addItem(recipeSlots[i], recipe[i], clickHandler);
@@ -116,8 +103,17 @@ public final class UuMatterCategory extends FlexCategory {
 
     @Override
     public void open(Player player, PlayerProfile playerProfile, SlimefunGuideLayout slimefunGuideLayout) {
+        ChestMenu menu = new ChestMenu("&5UU-Matter Recipes");
+
+        // Header
+        for (int i = 0; i < 9; ++i) {
+            menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
+        }
+
+        menu.setEmptySlotsClickable(false);
+
         menu.addItem(1, new CustomItem(ChestMenuUtils.getBackButton(player, "",
-            ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide")))
+                ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide")))
         );
 
         menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
