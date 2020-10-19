@@ -15,6 +15,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class MainCategory extends FlexCategory {
 
     public static final MainCategory INSTANCE = new MainCategory();
@@ -23,7 +25,6 @@ public class MainCategory extends FlexCategory {
         super(new NamespacedKey(LiteXpansion.getInstance(), "test_category"),
             new CustomItem(Items.GENERATOR, "&5test")
         );
-
     }
 
     private ChestMenu create(Player p) {
@@ -36,6 +37,7 @@ public class MainCategory extends FlexCategory {
         final Player p = profile.getPlayer();
         if (p != null) {
             final ChestMenu menu = this.create(p);
+            menu.setEmptySlotsClickable(false);
 
             // Header and back button
             for (int i = 0; i < 9; i++) {
@@ -61,19 +63,20 @@ public class MainCategory extends FlexCategory {
     }
 
     @Override
-    public boolean isVisible(Player p, PlayerProfile profile, SlimefunGuideLayout layout) {
+    public boolean isVisible(@Nonnull Player p, @Nonnull PlayerProfile profile, @Nonnull SlimefunGuideLayout layout) {
         return true;
     }
 
     @Override
     public void open(Player player, PlayerProfile playerProfile, SlimefunGuideLayout slimefunGuideLayout) {
+
         ChestMenu menu = new ChestMenu("&5UU-Matter Recipes");
 
         // Header
         for (int i = 0; i < 9; ++i) {
             menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
-
+      
         menu.setEmptySlotsClickable(false);
 
         menu.addItem(1, new CustomItem(ChestMenuUtils.getBackButton(player, "",
@@ -90,5 +93,4 @@ public class MainCategory extends FlexCategory {
 
         menu.open(player);
     }
-
 }
