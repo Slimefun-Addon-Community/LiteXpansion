@@ -22,7 +22,7 @@ public final class UuMatterCategory extends FlexCategory {
 
     public static final UuMatterCategory INSTANCE = new UuMatterCategory();
 
-    private final int[] recipeSlots = new int[]{12, 13, 14, 21, 22, 23, 30, 31, 32};
+    private final int[] recipeSlots = new int[] {12, 13, 14, 21, 22, 23, 30, 31, 32};
 
     private UuMatterCategory() {
         super(new NamespacedKey(LiteXpansion.getInstance(), "uumatter_category"),
