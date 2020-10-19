@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 public class SolarHelmets extends SolarHelmet {
@@ -20,6 +21,12 @@ public class SolarHelmets extends SolarHelmet {
             type.getGenerationRate()
         );
         this.type = type;
+        Items.ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 1);
+        Items.CARBONADO_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 2);
+        Items.ENERGIZED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 3);
+        Items.ADVANCEDLX_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
+        Items.HYBRID_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+        Items.ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 6);
     }
 
     @Getter
