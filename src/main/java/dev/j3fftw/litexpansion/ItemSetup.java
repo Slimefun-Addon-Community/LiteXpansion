@@ -5,6 +5,7 @@ import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
+import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.Generator;
@@ -59,6 +60,8 @@ final class ItemSetup {
         new CargoConfigurator().register(plugin);
         new GlassCutter().register(plugin);
         // new Wrench().register(plugin);
+        new MiningDrill(MiningDrill.Type.MINING).register(plugin);
+        new MiningDrill(MiningDrill.Type.DIAMOND).register(plugin);
     }
 
     private void registerMachines() {

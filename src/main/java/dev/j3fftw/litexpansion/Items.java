@@ -71,6 +71,26 @@ public final class Items {
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 300 J"
     );
+    public static final SlimefunItemStack MINING_DRILL = new SlimefunItemStack(
+        "MINING_DRILL",
+        Material.IRON_SHOVEL,
+        "&7Mining Drill",
+        "",
+        "&7Instantly breaks stone and stone variants",
+        "&7Right click to break block slower",
+        "",
+        "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
+    );
+    public static final SlimefunItemStack DIAMOND_DRILL = new SlimefunItemStack(
+        "DIAMOND_DRILL",
+        Material.DIAMOND_SHOVEL,
+        "&bDiamond Drill",
+        "",
+        "&7Instantly breaks obsidian, stone, and stone variants",
+        "&7Right click to break block slower",
+        "",
+        "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
+    );
     public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
         "TREETAP",
         Material.WOODEN_HOE,
@@ -467,6 +487,7 @@ public final class Items {
         ADVANCEDLX_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
         HYBRID_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
         ULTIMATE_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
+        DIAMOND_DRILL.addEnchantment(glowEnchant, 1);
     }
 
     private Items() {}
