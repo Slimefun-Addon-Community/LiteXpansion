@@ -1,6 +1,5 @@
 package dev.j3fftw.litexpansion;
 
-import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
@@ -44,8 +43,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
         }
 
-        getServer().getPluginManager().registerEvents(new Events(), this);
-
         // Enchantment
         try {
             if (!Enchantment.isAcceptingRegistrations()) {
@@ -61,8 +58,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         ItemSetup.INSTANCE.init();
 
+        getServer().getPluginManager().registerEvents(new Events(), this);
+
         // Armor
-        new ElectricChestplate().register(this);
 
         UUMatter.INSTANCE.register();
 

@@ -2,16 +2,13 @@ package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.Utils;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import java.util.ArrayList;
-import java.util.Arrays;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
@@ -19,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -32,12 +30,22 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Events implements Listener {
 
     ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList(Material.STONE,
         Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
         Material.NETHERRACK, Material.END_STONE)
     );
+
+    private final NanoBlade nanoBlade = (NanoBlade) Items.NANO_BLADE.getItem();
+    private final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
+    private final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
+    private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
 
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {
@@ -52,7 +60,6 @@ public class Events implements Listener {
         if (e.getDamager() instanceof Player) {
             Player p = (Player) e.getDamager();
             ItemStack itemInHand = p.getInventory().getItemInMainHand();
-            final NanoBlade nanoBlade = (NanoBlade) SlimefunItem.getByID(Items.NANO_BLADE.getItemId());
             if (nanoBlade.isItem(itemInHand)
                 && itemInHand.containsEnchantment(Enchantment.getByKey(Constants.GLOW_ENCHANT))
                 && nanoBlade.removeItemCharge(itemInHand, 10)
@@ -67,8 +74,6 @@ public class Events implements Listener {
         if (e.getEntity() instanceof Player && ((Player) e.getEntity()).getEquipment() != null) {
             Player p = (Player) e.getEntity();
             ItemStack chestplate = p.getEquipment().getChestplate();
-            final ElectricChestplate electricChestplate = (ElectricChestplate)
-                SlimefunItem.getByID(Items.ELECTRIC_CHESTPLATE.getItemId());
             if (chestplate != null
                 && electricChestplate.isItem(chestplate)
                 && electricChestplate.removeItemCharge(chestplate, (float) (e.getDamage() / 1.75))
@@ -183,6 +188,39 @@ public class Events implements Listener {
         }
     }
 
+    @EventHandler
+    @SuppressWarnings("ConstantConditions")
+    public void onGlassCut(PlayerInteractEvent e) {
+        final Block block = e.getClickedBlock();
+        if (block == null) return;
+
+        final Material blockType = block.getType();
+        final Location blockLocation = block.getLocation();
+        final ItemStack item = e.getItem();
+
+        if ((blockType == Material.GLASS
+            || blockType == Material.GLASS_PANE
+            || blockType.name().endsWith("_GLASS")
+            || blockType.name().endsWith("_GLASS_PANE")
+        ) && glassCutter.isItem(item)
+            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
+            blockLocation, ProtectableAction.BREAK_BLOCK)
+        ) {
+            e.setCancelled(true);
+
+            final SlimefunItem slimefunItem = BlockStorage.check(block);
+
+            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(item))
+                .removeItemCharge(item, 0.5F)) {
+                blockLocation.getWorld().dropItemNaturally(blockLocation,
+                    new ItemStack(blockType));
+                block.setType(Material.AIR);
+                e.getPlayer().playSound(block.getLocation(), Sound.BLOCK_GLASS_HIT,
+                    SoundCategory.BLOCKS, 1.5F, 1F);
+            }
+        }
+    }
+
     /*
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
@@ -293,7 +331,6 @@ public class Events implements Listener {
      */
 
     public void checkAndConsume(@Nonnull Player p, @Nullable FoodLevelChangeEvent e) {
-        FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
         for (ItemStack item : p.getInventory().getContents()) {
             if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 5F)) {
                 p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);
