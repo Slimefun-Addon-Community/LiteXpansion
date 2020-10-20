@@ -6,6 +6,7 @@ import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
+import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.Generator;
@@ -61,6 +62,8 @@ final class ItemSetup {
         new CargoConfigurator().register(plugin);
         new GlassCutter().register(plugin);
         // new Wrench().register(plugin);
+        new MiningDrill(MiningDrill.Type.MINING).register(plugin);
+        new MiningDrill(MiningDrill.Type.DIAMOND).register(plugin);
     }
 
     private void registerMachines() {
@@ -160,6 +163,7 @@ final class ItemSetup {
         );
 
         registerNonPlaceableItem(Items.IRON_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.IRON_INGOT));
+        registerNonPlaceableItem(Items.IRON_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.IRON_PLATE);
         registerNonPlaceableItem(Items.DIAMOND_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.DIAMOND));
         registerNonPlaceableItem(Items.THORIUM_PLATE, MetalForge.RECIPE_TYPE, Items.THORIUM);
 
@@ -182,6 +186,12 @@ final class ItemSetup {
             new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI),
             new ItemStack(Material.LAPIS_LAZULI), SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.LAPIS_LAZULI),
             new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI)
+        );
+
+        registerItem(Items.POWER_UNIT, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.RE_BATTERY, Items.UNINSULATED_COPPER_CABLE, Items.IRON_ITEM_CASING,
+            Items.RE_BATTERY, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.ELECTRIC_MOTOR,
+            Items.RE_BATTERY, Items.UNINSULATED_COPPER_CABLE, Items.IRON_ITEM_CASING
         );
 
         // Refined crap

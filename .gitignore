@@ -7,3 +7,5 @@
 .project
 .dependency-reduced-pom.xml
 *.sh
+s
+/dependency-reduced-pom.xml
