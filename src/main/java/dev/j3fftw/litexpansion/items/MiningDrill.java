@@ -12,6 +12,7 @@ import lombok.Getter;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -46,14 +47,14 @@ public class MiningDrill extends SimpleSlimefunItem<ItemUseHandler> implements L
     public enum Type {
 
         MINING(Items.MINING_DRILL, new ItemStack[] {
-            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
-            SlimefunItems.REINFORCED_PLATE, new ItemStack(Material.IRON_PICKAXE), SlimefunItems.REINFORCED_PLATE,
-            null, SlimefunItems.MEDIUM_CAPACITOR, null
+            null, Items.IRON_PLATE, null,
+            Items.IRON_PLATE, Items.IRON_PLATE, Items.IRON_PLATE,
+            Items.IRON_PLATE, Items.POWER_UNIT, Items.IRON_PLATE
         }),
         DIAMOND(Items.DIAMOND_DRILL, new ItemStack[] {
-            new ItemStack(Material.DIAMOND), new ItemStack(Material.DIAMOND), new ItemStack(Material.DIAMOND),
-            SlimefunItems.REINFORCED_PLATE, Items.MINING_DRILL, SlimefunItems.REINFORCED_PLATE,
-            null, Items.ADVANCED_CIRCUIT, null
+            null, null, null,
+            null, new ItemStack(Material.DIAMOND), null,
+            new ItemStack(Material.DIAMOND), Items.MINING_DRILL, new ItemStack(Material.DIAMOND)
         });
 
         @Nonnull

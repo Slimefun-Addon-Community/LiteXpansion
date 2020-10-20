@@ -34,9 +34,10 @@ import org.bukkit.inventory.ItemStack;
 
 public class Events implements Listener {
 
-    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList( Material.STONE,
+    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList(Material.STONE,
         Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
-        Material.NETHERRACK, Material.END_STONE ));
+        Material.NETHERRACK, Material.END_STONE)
+    );
 
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {
@@ -173,7 +174,9 @@ public class Events implements Listener {
         Player p = (Player) e.getWhoClicked();
         // 1.16 inventory, compare strings
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
-        if (diamondDrill.isItem(e.getCurrentItem()) && p.getOpenInventory().getType().toString().equals("SMITHING")) {
+        if (diamondDrill.isItem(e.getCurrentItem())
+            && p.getOpenInventory().getType().toString().equals("SMITHING")
+        ) {
 
             e.setCancelled(true);
             Utils.send(p, "&cYou can not upgrade your Diamond Drill!");

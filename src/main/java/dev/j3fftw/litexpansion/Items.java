@@ -16,6 +16,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Slime;
 
 public final class Items {
 
@@ -470,6 +471,18 @@ public final class Items {
         "THORIUM_PLATE",
         Material.GRAY_CARPET,
         "&7Thorium Plate"
+    );
+
+    public static final SlimefunItemStack POWER_UNIT = new SlimefunItemStack(
+        "POWER_UNIT",
+        Material.GOLDEN_HOE,
+        "&Power Unit"
+    );
+
+    public static final SlimefunItemStack IRON_ITEM_CASING = new SlimefunItemStack(
+        "IRON_ITEM_CASING",
+        Material.GRAY_CARPET,
+        "&7Iron Item Casing"
     );
 
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
