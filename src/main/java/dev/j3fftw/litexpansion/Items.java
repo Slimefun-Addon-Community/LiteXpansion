@@ -143,7 +143,7 @@ public final class Items {
     );
     public static final SlimefunItemStack THORIUM = new SlimefunItemStack(
         "THORIUM",
-        new CustomItem(SkullItem.fromHash("427d1a6184c62d4c4a67f862b8e19ec001abe4c7d889f23349e8dafe6d033"),
+        new CustomItem(SkullItem.fromHash("b87403257c0eaa518cf186deccde137d476556ccff146d503fb2e73956582f37"),
             "Thorium"),
         "&8Thorium",
         "",
@@ -159,7 +159,8 @@ public final class Items {
     );
     public static final SlimefunItemStack UU_MATTER = new SlimefunItemStack(
         "UU_MATTER",
-        Material.PURPLE_DYE,
+        new CustomItem(SkullItem.fromHash("54d39df0f813b7424406462854eb7249f8c76d80ce56f3af410e35a287062589"),
+            "UU-Matter"),
         "&5UU-Matter",
         "",
         "&7Can be used to create items or resources"
