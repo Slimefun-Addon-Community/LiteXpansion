@@ -2,7 +2,6 @@ package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.armor.AdvancedSolarHelmet;
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
-import dev.j3fftw.litexpansion.items.DiamondDrill;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
@@ -62,8 +61,8 @@ final class ItemSetup {
         new CargoConfigurator().register(plugin);
         new GlassCutter().register(plugin);
         // new Wrench().register(plugin);
-        new MiningDrill().register(plugin);
-        new DiamondDrill().register(plugin);
+        new MiningDrill(MiningDrill.Type.MINING).register(plugin);
+        new MiningDrill(MiningDrill.Type.DIAMOND).register(plugin);
     }
 
     private void registerMachines() {

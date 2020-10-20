@@ -1,7 +1,6 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
-import dev.j3fftw.litexpansion.items.DiamondDrill;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.utils.Constants;
@@ -138,7 +137,7 @@ public class Events implements Listener {
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
 
-        final DiamondDrill diamondDrill = (DiamondDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
+        final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
 
         if ((diamondDrill.isItem(e.getItem())
             && (drillableBlocks.contains(blockType)
@@ -174,7 +173,7 @@ public class Events implements Listener {
     public void onDiamondDrillUpgrade(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         // 1.16 inventory, compare strings
-        final DiamondDrill diamondDrill = (DiamondDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
+        final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
         if (diamondDrill.isItem(e.getCurrentItem()) && p.getOpenInventory().getType().toString().equals("SMITHING")) {
 
             e.setCancelled(true);
