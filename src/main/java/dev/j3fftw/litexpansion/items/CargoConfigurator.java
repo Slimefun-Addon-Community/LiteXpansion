@@ -5,6 +5,10 @@ import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -21,11 +25,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implements Listener {
 
@@ -51,11 +50,14 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
     @EventHandler
     @SuppressWarnings("ConstantConditions")
     public void onCargoConfiguratorItemClick(PlayerInteractEvent e) {
-        if (e.getItem() == null || e.getMaterial() != Material.COMPASS) return;
+        if (e.getItem() == null || e.getMaterial() != Material.COMPASS) {
+            return;
+        }
 
         final ItemStack clickedItem = e.getItem();
-        final SlimefunItem item = SlimefunItem.getByItem(e.getItem());
-        if (item == null || !item.getID().equals(Items.CARGO_CONFIGURATOR.getItemId())) return;
+        if (!this.isItem(clickedItem)) {
+            return;
+        }
 
         final ItemMeta meta = clickedItem.getItemMeta();
 
@@ -73,18 +75,24 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         }
 
         if ((e.getAction() != Action.RIGHT_CLICK_BLOCK && e.getAction() != Action.LEFT_CLICK_BLOCK)
-            || e.getClickedBlock() == null) return;
+            || e.getClickedBlock() == null) {
+            return;
+        }
 
         final SlimefunItem block = BlockStorage.check(e.getClickedBlock());
-        if (block == null) return;
+        if (block == null) {
+            return;
+        }
 
         final ItemStack clickedItemStack = block.getItem();
 
-        final String blockId = block.getID();
+        final String blockId = block.getId();
         if (!blockId.equals(SlimefunItems.CARGO_INPUT_NODE.getItemId())
             && !blockId.equals(SlimefunItems.CARGO_OUTPUT_NODE.getItemId())
             && !blockId.equals(SlimefunItems.CARGO_OUTPUT_NODE_2.getItemId())
-        ) return;
+        ) {
+            return;
+        }
 
         e.setCancelled(true);
 

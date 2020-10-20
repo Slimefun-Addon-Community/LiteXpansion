@@ -1,8 +1,8 @@
 package dev.j3fftw.litexpansion.utils;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nonnull;
 
 public class Timing {
 
@@ -44,8 +44,9 @@ public class Timing {
             sb.append("\n  Step ").append(idx++).append(": ").append(time(before, step));
         }
 
-        if (!steps.isEmpty())
+        if (!steps.isEmpty()) {
             sb.append("\n  Final step: ").append(time(steps.get(steps.size() - 1), end));
+        }
 
         System.out.println(sb.toString());
     }

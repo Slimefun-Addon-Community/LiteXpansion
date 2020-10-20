@@ -7,6 +7,10 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -20,11 +24,6 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
 
@@ -89,7 +88,9 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
             && (output.getType() != Items.SCRAP.getType()
             || output.getAmount() == output.getMaxStackSize()
             || !Items.SCRAP.getItem().isItem(output)))
-        ) return;
+        ) {
+            return;
+        }
 
         final BlockPosition pos = new BlockPosition(b.getWorld(), b.getX(), b.getY(), b.getZ());
         int currentProgress = progress.getOrDefault(pos, -1);
@@ -102,7 +103,9 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
         }
 
         // No progress and no input item, no tick needed. Or if there was no power (but can be processed)
-        if (currentProgress == -1 || !takePower(b)) return;
+        if (currentProgress == -1 || !takePower(b)) {
+            return;
+        }
 
         if (currentProgress == PROGRESS_AMOUNT) {
             if (output != null && output.getAmount() > 0)
@@ -122,7 +125,9 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
     private boolean takePower(@Nonnull Block b) {
         if (getCharge(b.getLocation()) < ENERGY_CONSUMPTION) return false;
         removeCharge(b.getLocation(), ENERGY_CONSUMPTION);
-        return true;
+        {
+            return true;
+        }
     }
 
     @Nonnull
