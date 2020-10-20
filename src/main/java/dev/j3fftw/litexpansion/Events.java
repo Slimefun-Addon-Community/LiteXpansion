@@ -1,10 +1,14 @@
 package dev.j3fftw.litexpansion;
 
+import org.bukkit.Location;
+import org.bukkit.Material;
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
+import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import javax.annotation.Nonnull;
@@ -26,6 +30,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class Events implements Listener {
 
@@ -225,7 +232,6 @@ public class Events implements Listener {
      */
 
     public void checkAndConsume(@Nonnull Player p, @Nullable FoodLevelChangeEvent e) {
-        FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
         for (ItemStack item : p.getInventory().getContents()) {
             if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 5F)) {
                 p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);

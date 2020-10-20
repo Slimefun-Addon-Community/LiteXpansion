@@ -43,8 +43,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
         }
 
-        getServer().getPluginManager().registerEvents(new Events(), this);
-
         // Enchantment
         try {
             if (!Enchantment.isAcceptingRegistrations()) {
@@ -59,6 +57,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         registerEnchantments();
 
         ItemSetup.INSTANCE.init();
+
+        getServer().getPluginManager().registerEvents(new Events(), this);
 
         // Armor
 
