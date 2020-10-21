@@ -124,7 +124,7 @@ public final class Items {
 
     public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
         "FOOD_SYNTHESIZER",
-        new CustomItem(SkullItem.fromHash("a11a2df7d37af40ed5ce442fd2d78cd8ebcdcdc029d2ae691a2b64395cdf"),
+        new CustomItem(SkullItem.fromHash("a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c"),
             "Food Synthesizer"),
         "&dFood Synthesizer",
         "",
@@ -159,8 +159,7 @@ public final class Items {
     );
     public static final SlimefunItemStack UU_MATTER = new SlimefunItemStack(
         "UU_MATTER",
-        new CustomItem(SkullItem.fromHash("54d39df0f813b7424406462854eb7249f8c76d80ce56f3af410e35a287062589"),
-            "UU-Matter"),
+        Material.PURPLE_DYE,
         "&5UU-Matter",
         "",
         "&7Can be used to create items or resources"
