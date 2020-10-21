@@ -41,19 +41,6 @@ public class RefinedSmeltery extends MultiBlockMachine {
         }, new ItemStack[0], BlockFace.DOWN);
     }
 
-    @Nonnull
-    @Override
-    public List<ItemStack> getDisplayRecipes() {
-        final List<ItemStack> items = new ArrayList<>();
-
-        for (int i = 0; i < recipes.size() - 1; i += 2) {
-            items.add(recipes.get(i)[0]);
-            items.add(recipes.get(i + 1)[0]);
-        }
-
-        return items;
-    }
-
     @Override
     public void onInteract(Player p, Block b) {
         Block dispBlock = b.getRelative(BlockFace.DOWN);

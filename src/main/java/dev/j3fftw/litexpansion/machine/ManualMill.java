@@ -44,19 +44,6 @@ public class ManualMill extends MultiBlockMachine {
         }, new ItemStack[0], BlockFace.DOWN);
     }
 
-    @Nonnull
-    @Override
-    public List<ItemStack> getDisplayRecipes() {
-        final List<ItemStack> items = new ArrayList<>();
-
-        for (int i = 0; i < recipes.size() - 1; i += 2) {
-            items.add(recipes.get(i)[0]);
-            items.add(recipes.get(i + 1)[0]);
-        }
-
-        return items;
-    }
-
     protected Inventory createVirtualInventory(Inventory inv) {
         Inventory fakeInv = Bukkit.createInventory(null, 9, "Fake Inventory");
 
