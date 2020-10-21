@@ -5,9 +5,7 @@ import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
-import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.inventory.InvUtils;
@@ -41,19 +39,6 @@ public class MetalForge extends MultiBlockMachine {
             ironBlock, new ItemStack(Material.DISPENSER), ironBlock,
             null, new ItemStack(Material.DIAMOND_BLOCK), null
         }, new ItemStack[0], BlockFace.DOWN);
-    }
-
-    @Nonnull
-    @Override
-    public List<ItemStack> getDisplayRecipes() {
-        final List<ItemStack> items = new ArrayList<>();
-
-        for (int i = 0; i < recipes.size() - 1; i += 2) {
-            items.add(recipes.get(i)[0]);
-            items.add(recipes.get(i + 1)[0]);
-        }
-
-        return items;
     }
 
     protected Inventory createVirtualInventory(Inventory inv) {
