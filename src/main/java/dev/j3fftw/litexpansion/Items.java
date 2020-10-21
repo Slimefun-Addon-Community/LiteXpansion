@@ -4,6 +4,7 @@ import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
+import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
@@ -434,15 +435,6 @@ public final class Items {
         "&7Ultimate Solar Helmet"
     );
 
-    static {
-        ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 1);
-        CARBONADO_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 2);
-        ENERGIZED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 3);
-        ADVANCEDLX_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
-        HYBRID_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
-        ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 6);
-    }
-
     public static final SlimefunItemStack IRON_PLATE = new SlimefunItemStack(
         "IRON_PLATE",
         Material.WHITE_CARPET,
@@ -459,6 +451,23 @@ public final class Items {
         Material.GRAY_CARPET,
         "&7Thorium Plate"
     );
+
+    private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
+
+    static {
+        ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 1);
+        CARBONADO_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 2);
+        ENERGIZED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 3);
+        ADVANCEDLX_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
+        HYBRID_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+        ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 6);
+        ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
+        GLASS_CUTTER.addEnchantment(glowEnchant, 1);
+        LAPOTRON_CRYSTAL.addEnchantment(glowEnchant, 1);
+        ADVANCEDLX_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
+        HYBRID_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
+        ULTIMATE_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
+    }
 
     private Items() {}
 }
