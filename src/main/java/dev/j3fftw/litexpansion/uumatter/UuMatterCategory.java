@@ -27,22 +27,7 @@ public final class UuMatterCategory extends FlexCategory {
 
     private UuMatterCategory() {
         super(new NamespacedKey(LiteXpansion.getInstance(), "uumatter_category"),
-            new CustomItem(SkullItem.fromHash("54d39df0f813b7424406462854eb7249f8c76d80ce56f3af410e35a287062589"),
-                "&5UU-Matter Recipes"
-        ));
-
-        setupInv();
-        menu.setEmptySlotsClickable(false);
-    }
-
-    private void setupInv() {
-        menu = new ChestMenu("&5UU-Matter Recipes");
-
-        // Header
-        for (int i = 0; i < 9; ++i) {
-            menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
-        }
-            new CustomItem(Items.UU_MATTER, "&5UU-Matter Recipes")
+            new CustomItem(SkullItem.fromHash("54d39df0f813b7424406462854eb7249f8c76d80ce56f3af410e35a287062589"), "&5UU-Matter Recipes")
         );
     }
 
