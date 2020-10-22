@@ -133,7 +133,7 @@ final class ItemSetup {
         registerNonPlaceableItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
 
         registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
-            ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT
+            ManualMill.RECIPE_TYPE, Items.COPPER_ITEM_CASING
         );
 
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
