@@ -16,6 +16,7 @@ import dev.j3fftw.litexpansion.machine.MultiFunctionalStorageUnit;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
+import dev.j3fftw.litexpansion.objects.DyeItem;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -196,7 +197,8 @@ final class ItemSetup {
     private void registerEndgameItems() {
         registerNonPlaceableItem(Items.SCRAP, Recycler.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE,
             "&7Any Item!"));
-        registerNonPlaceableItem(Items.UU_MATTER, MassFabricator.RECIPE_TYPE, Items.SCRAP);
+        new DyeItem(Items.LITEXPANSION, Items.UU_MATTER, MassFabricator.RECIPE_TYPE,
+            createSingleItemRecipe(Items.SCRAP)).register(plugin);
         registerNonPlaceableItem(Items.IRIDIUM, RecipeType.ENHANCED_CRAFTING_TABLE,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
             null, Items.UU_MATTER, null,
@@ -279,11 +281,7 @@ final class ItemSetup {
                                           @Nonnull ItemStack... items) {
         ItemStack[] recipe;
         if (items.length == 1) {
-            recipe = new ItemStack[] {
-                null, null, null,
-                null, items[0], null,
-                null, null, null
-            };
+            recipe = createSingleItemRecipe(items[0]);
             new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
 
             // make shapeless
@@ -315,5 +313,9 @@ final class ItemSetup {
             recipe[i] = item;
             RecipeType.ENHANCED_CRAFTING_TABLE.register(recipe, result);
         }
+    }
+
+    private ItemStack[] createSingleItemRecipe(ItemStack item) {
+        return new ItemStack[] {null, null, null, null, item, null, null, null, null};
     }
 }
