@@ -134,7 +134,7 @@ final class ItemSetup {
         registerNonPlaceableItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
 
         registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
-            ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT
+            ManualMill.RECIPE_TYPE, Items.COPPER_ITEM_CASING
         );
 
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -187,7 +187,6 @@ final class ItemSetup {
         registerNonPlaceableItem(Items.REFINED_IRON, RefinedSmeltery.RECIPE_TYPE,
             new ItemStack(Material.IRON_INGOT)
         );
-        registerRecipe(Items.REFINED_IRON, Items.MACHINE_BLOCK);
 
         // Resources
         new MagThor().register(plugin);
@@ -280,20 +279,6 @@ final class ItemSetup {
     private void registerNonPlaceableItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
                                           @Nonnull ItemStack... items) {
         ItemStack[] recipe;
-        if (items.length == 1) {
-            recipe = createSingleItemRecipe(items[0]);
-            new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
-
-            // make shapeless
-            for (int i = 0; i < 9; i++) {
-                if (i == 4) continue;
-                final ItemStack[] recipe2 = new ItemStack[9];
-                recipe2[i] = items[0];
-                type.register(recipe2, result);
-            }
-
-            return;
-        }
 
         if (items.length < 9) {
             recipe = new ItemStack[9];
@@ -305,17 +290,8 @@ final class ItemSetup {
         new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
 
-    // Haha shapeless recipe bitches!!!! <3 <3 <3
-    // DEAL WITH IT KIDDOS HAHAHAHHAHAHAHAHAH
-    private void registerRecipe(@Nonnull SlimefunItemStack result, @Nonnull SlimefunItemStack item) {
-        for (int i = 0; i < 9; i++) {
-            final ItemStack[] recipe = new ItemStack[9];
-            recipe[i] = item;
-            RecipeType.ENHANCED_CRAFTING_TABLE.register(recipe, result);
-        }
-    }
-
     private ItemStack[] createSingleItemRecipe(ItemStack item) {
         return new ItemStack[] {null, null, null, null, item, null, null, null, null};
     }
+
 }
