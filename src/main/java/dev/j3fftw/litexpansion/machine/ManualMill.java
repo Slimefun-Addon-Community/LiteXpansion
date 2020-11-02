@@ -105,7 +105,7 @@ public class ManualMill extends MultiBlockMachine {
             if (sfItemInv == null && sfItemRecipe == null) {
                 counter++;
             } else if (sfItemInv != null && sfItemRecipe != null
-                && sfItemInv.getID().equals(sfItemRecipe.getID())) {
+                && sfItemInv.getId().equals(sfItemRecipe.getId())) {
                 counter++;
             }
         }
