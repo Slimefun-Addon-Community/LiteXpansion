@@ -73,7 +73,7 @@ public class Generator extends CoalGenerator {
         super.registerFuel(new MachineFuel(1, new ItemStack(Material.BAMBOO)));
 
         // Banners
-        for (Material mat : Tag.BANNERS.getValues()) {
+        for (Material mat : Tag.ITEMS_BANNERS.getValues()) {
             registerFuel(new MachineFuel(1, new ItemStack(mat)));
         }
 
