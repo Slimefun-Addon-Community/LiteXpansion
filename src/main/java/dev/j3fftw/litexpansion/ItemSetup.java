@@ -102,11 +102,13 @@ final class ItemSetup {
             glass, glass, glass
         );
 
+
+        // Todo Remove this temp fix
         // Machine block
         registerItem(Items.MACHINE_BLOCK, MetalForge.RECIPE_TYPE,
-            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
-            Items.REFINED_IRON, null, Items.REFINED_IRON,
-            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON
+            Items.REFINED_IRON, new ItemStack(Material.IRON_INGOT), Items.REFINED_IRON,
+            new ItemStack(Material.IRON_INGOT), null, new ItemStack(Material.IRON_INGOT),
+            Items.REFINED_IRON, new ItemStack(Material.IRON_INGOT), Items.REFINED_IRON
         );
 
         // Advanced Machine Block
@@ -250,28 +252,7 @@ final class ItemSetup {
                 null, null, null
             };
             new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
-
-            // make shapeless
-            for (int i = 0; i < 9; i++) {
-                if (i == 4) {
-                    continue;
-                }
-                final ItemStack[] recipe2 = new ItemStack[9];
-                recipe2[i] = items[0];
-                type.register(recipe2, result);
-            }
-
-            return;
         }
-
-        if (items.length < 9) {
-            recipe = new ItemStack[9];
-            System.arraycopy(items, 0, recipe, 0, items.length);
-        } else {
-            recipe = items;
-        }
-
-        new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
 
     private void registerNonPlaceableItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
