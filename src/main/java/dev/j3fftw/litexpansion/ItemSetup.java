@@ -213,7 +213,12 @@ final class ItemSetup {
     }
 
     private void registerCarbonStuff() {
-        registerItem(Items.COAL_DUST, RecipeType.ORE_CRUSHER, new ItemStack(Material.COAL));
+        registerItem(Items.COAL_DUST, RecipeType.ORE_CRUSHER,
+            new ItemStack(Material.COAL), null, null,
+            null ,null ,null,
+            null ,null ,null
+        );
+        
         registerItem(Items.RAW_CARBON_FIBRE, RecipeType.ENHANCED_CRAFTING_TABLE,
             Items.COAL_DUST, Items.COAL_DUST, null,
             Items.COAL_DUST, Items.COAL_DUST, null
