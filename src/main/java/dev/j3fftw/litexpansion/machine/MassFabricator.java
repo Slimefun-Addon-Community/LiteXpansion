@@ -92,7 +92,9 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
         @Nullable ItemStack input = inv.getItemInSlot(INPUT_SLOTS[0]);
         @Nullable ItemStack input2 = inv.getItemInSlot(INPUT_SLOTS[1]);
         @Nullable final ItemStack output = inv.getItemInSlot(OUTPUT_SLOT);
-        if (output != null && output.getAmount() == output.getMaxStackSize()) {
+        if (output != null && (output.getType() != Items.UU_MATTER.getType()
+                || output.getAmount() == output.getMaxStackSize()
+                || !Items.UU_MATTER.getItem().isItem(output))) {
             return;
         }
 
