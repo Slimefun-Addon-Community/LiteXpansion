@@ -98,9 +98,9 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
             return;
         }
 
-        if (!SlimefunUtils.isItemSimilar(input, Items.SCRAP, true))
+        if (!Items.SCRAP.getItem().isItem(input))
             input = null;
-        if (!SlimefunUtils.isItemSimilar(input2, Items.SCRAP, true))
+        if (!Items.SCRAP.getItem().isItem(input2))
             input2 = null;
 
         if (input == null && input2 == null) {
