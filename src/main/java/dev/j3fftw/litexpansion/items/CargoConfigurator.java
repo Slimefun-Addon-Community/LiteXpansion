@@ -51,10 +51,9 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         return e -> e.setUseBlock(Event.Result.DENY);
     }
 
-    public boolean canUseCargoConfigurator(@Nonnull Player p, @Nonnull Block clicked) {
+    private boolean canUseCargoConfigurator(@Nonnull Player p, @Nonnull Block clicked) {
         return SlimefunPlugin.getProtectionManager().hasPermission(p, clicked, ProtectableAction.ACCESS_INVENTORIES);
     }
-
 
     @EventHandler
     @SuppressWarnings("ConstantConditions")
@@ -64,7 +63,8 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         }
 
         final ItemStack clickedItem = e.getItem();
-        if (!this.isItem(clickedItem)) {
+
+        if (!this.isItem(clickedItem) || SlimefunItem.getByItem(Items.CARGO_CONFIGURATOR).isDisabled()) {
             return;
         }
 
@@ -103,11 +103,8 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
             return;
         }
 
-        if (SlimefunItem.getByItem(Items.CARGO_CONFIGURATOR).isDisabled()) {
-            return;
-        }
+        final Player p = e.getPlayer();
 
-        Player p = e.getPlayer();
         if (!canUseCargoConfigurator(p, e.getClickedBlock()) && !p.hasPermission("slimefun.cargo.bypass")) {
             SlimefunPlugin.getLocalization().sendMessage(p, "inventory.no-access", true);
             return;
