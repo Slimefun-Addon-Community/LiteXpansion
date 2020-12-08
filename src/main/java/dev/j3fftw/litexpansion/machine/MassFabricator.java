@@ -7,7 +7,6 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nonnull;
@@ -92,13 +91,15 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
         @Nullable ItemStack input = inv.getItemInSlot(INPUT_SLOTS[0]);
         @Nullable ItemStack input2 = inv.getItemInSlot(INPUT_SLOTS[1]);
         @Nullable final ItemStack output = inv.getItemInSlot(OUTPUT_SLOT);
-        if (output != null && output.getAmount() == output.getMaxStackSize()) {
+        if (output != null && (output.getType() != Items.UU_MATTER.getType()
+                || output.getAmount() == output.getMaxStackSize()
+                || !Items.UU_MATTER.getItem().isItem(output))) {
             return;
         }
 
-        if (!SlimefunUtils.isItemSimilar(input, Items.SCRAP, true))
+        if (!Items.SCRAP.getItem().isItem(input))
             input = null;
-        if (!SlimefunUtils.isItemSimilar(input2, Items.SCRAP, true))
+        if (!Items.SCRAP.getItem().isItem(input2))
             input2 = null;
 
         if (input == null && input2 == null) {

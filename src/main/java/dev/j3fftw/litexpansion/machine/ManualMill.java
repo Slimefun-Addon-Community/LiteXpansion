@@ -5,9 +5,7 @@ import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
-import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
@@ -42,19 +40,6 @@ public class ManualMill extends MultiBlockMachine {
             ironBlock, new ItemStack(Material.DISPENSER), ironBlock,
             null, ironBlock, null
         }, new ItemStack[0], BlockFace.DOWN);
-    }
-
-    @Nonnull
-    @Override
-    public List<ItemStack> getDisplayRecipes() {
-        final List<ItemStack> items = new ArrayList<>();
-
-        for (int i = 0; i < recipes.size() - 1; i += 2) {
-            items.add(recipes.get(i)[0]);
-            items.add(recipes.get(i + 1)[0]);
-        }
-
-        return items;
     }
 
     protected Inventory createVirtualInventory(Inventory inv) {
@@ -120,7 +105,7 @@ public class ManualMill extends MultiBlockMachine {
             if (sfItemInv == null && sfItemRecipe == null) {
                 counter++;
             } else if (sfItemInv != null && sfItemRecipe != null
-                && sfItemInv.getID().equals(sfItemRecipe.getID())) {
+                && sfItemInv.getId().equals(sfItemRecipe.getId())) {
                 counter++;
             }
         }
