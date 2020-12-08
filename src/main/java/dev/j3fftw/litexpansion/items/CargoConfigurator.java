@@ -4,19 +4,18 @@ import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.data.PersistentDataAPI;
+import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -25,6 +24,11 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implements Listener {
 
@@ -47,6 +51,10 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         return e -> e.setUseBlock(Event.Result.DENY);
     }
 
+    private boolean canUseCargoConfigurator(@Nonnull Player p, @Nonnull Block clicked) {
+        return SlimefunPlugin.getProtectionManager().hasPermission(p, clicked, ProtectableAction.ACCESS_INVENTORIES);
+    }
+
     @EventHandler
     @SuppressWarnings("ConstantConditions")
     public void onCargoConfiguratorItemClick(PlayerInteractEvent e) {
@@ -55,7 +63,8 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         }
 
         final ItemStack clickedItem = e.getItem();
-        if (!this.isItem(clickedItem)) {
+
+        if (!this.isItem(clickedItem) || SlimefunItem.getByItem(Items.CARGO_CONFIGURATOR).isDisabled()) {
             return;
         }
 
@@ -91,6 +100,13 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
             && !blockId.equals(SlimefunItems.CARGO_OUTPUT_NODE.getItemId())
             && !blockId.equals(SlimefunItems.CARGO_OUTPUT_NODE_2.getItemId())
         ) {
+            return;
+        }
+
+        final Player p = e.getPlayer();
+
+        if (!canUseCargoConfigurator(p, e.getClickedBlock()) && !p.hasPermission("slimefun.cargo.bypass")) {
+            SlimefunPlugin.getLocalization().sendMessage(p, "inventory.no-access", true);
             return;
         }
 
