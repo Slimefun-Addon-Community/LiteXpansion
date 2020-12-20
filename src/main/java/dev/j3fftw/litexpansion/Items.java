@@ -501,7 +501,8 @@ public final class Items {
         LAPOTRON_CRYSTAL.addEnchantment(glowEnchant, 1);
         ADVANCEDLX_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
         HYBRID_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
-        ULTIMATE_SOLAR_HELMET.addEnchantment(glowEnchant, 1);    }
+        ULTIMATE_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
+    }
 
     private Items() {}
 }

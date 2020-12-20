@@ -36,16 +36,15 @@ import org.bukkit.inventory.ItemStack;
 
 public class Events implements Listener {
 
+    private final NanoBlade nanoBlade = (NanoBlade) Items.NANO_BLADE.getItem();
+    private final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
+    private final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
+    private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
     //TODO Come up with a better way for this.
     ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList(Material.STONE,
         Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
         Material.NETHERRACK, Material.END_STONE)
     );
-
-    private final NanoBlade nanoBlade = (NanoBlade) Items.NANO_BLADE.getItem();
-    private final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
-    private final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
-    private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
 
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {
