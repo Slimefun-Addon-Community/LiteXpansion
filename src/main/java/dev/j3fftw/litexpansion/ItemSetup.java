@@ -1,10 +1,12 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.armor.AdvancedSolarHelmet;
+import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
+import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.Generator;
@@ -61,6 +63,8 @@ final class ItemSetup {
         new CargoConfigurator().register(plugin);
         new GlassCutter().register(plugin);
         // new Wrench().register(plugin);
+        new MiningDrill(MiningDrill.Type.MINING).register(plugin);
+        new MiningDrill(MiningDrill.Type.DIAMOND).register(plugin);
     }
 
     private void registerMachines() {
@@ -135,7 +139,7 @@ final class ItemSetup {
         registerNonPlaceableItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
 
         registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
-            ManualMill.RECIPE_TYPE, Items.COPPER_ITEM_CASING
+            ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT
         );
 
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -160,6 +164,7 @@ final class ItemSetup {
         );
 
         registerNonPlaceableItem(Items.IRON_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.IRON_INGOT));
+        registerNonPlaceableItem(Items.IRON_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.IRON_PLATE);
         registerNonPlaceableItem(Items.DIAMOND_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.DIAMOND));
         registerNonPlaceableItem(Items.THORIUM_PLATE, MetalForge.RECIPE_TYPE, Items.THORIUM);
 
@@ -182,6 +187,12 @@ final class ItemSetup {
             new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI),
             new ItemStack(Material.LAPIS_LAZULI), SlimefunItems.POWER_CRYSTAL, new ItemStack(Material.LAPIS_LAZULI),
             new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI)
+        );
+
+        registerItem(Items.POWER_UNIT, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.RE_BATTERY, Items.UNINSULATED_COPPER_CABLE, Items.IRON_ITEM_CASING,
+            Items.RE_BATTERY, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.ELECTRIC_MOTOR,
+            Items.RE_BATTERY, Items.UNINSULATED_COPPER_CABLE, Items.IRON_ITEM_CASING
         );
 
         // Refined crap
@@ -211,6 +222,7 @@ final class ItemSetup {
         );
 
         new NanoBlade().register(plugin);
+        new ElectricChestplate().register(plugin);
     }
 
     private void registerCarbonStuff() {
@@ -258,16 +270,6 @@ final class ItemSetup {
             };
             new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
 
-            // make shapeless
-            for (int i = 0; i < 9; i++) {
-                if (i == 4) {
-                    continue;
-                }
-                final ItemStack[] recipe2 = new ItemStack[9];
-                recipe2[i] = items[0];
-                type.register(recipe2, result);
-            }
-
             return;
         }
 
@@ -295,6 +297,7 @@ final class ItemSetup {
         new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
 
+
     /**
      * Builds and ItemStack array that centers
      * the item in the guide. Only to be
@@ -318,5 +321,4 @@ final class ItemSetup {
     private ItemStack[] createSingleItemRecipe(ItemStack item) {
         return new ItemStack[] {item, null, null, null, null, null, null, null, null};
     }
-
 }
