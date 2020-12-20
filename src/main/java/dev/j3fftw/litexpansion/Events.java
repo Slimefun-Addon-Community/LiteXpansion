@@ -39,7 +39,18 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class Events implements Listener {
-  
+
+    private final NanoBlade nanoBlade = (NanoBlade) Items.NANO_BLADE.getItem();
+    private final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
+    private final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
+    private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
+
+    //TODO Come up with a better way for this.
+    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList(Material.STONE,
+        Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
+        Material.NETHERRACK, Material.END_STONE)
+    );
+
     /**
      * Checks if the player deals damage and has
      * an activated {@link NanoBlade} to multiply the damage.
@@ -47,25 +58,6 @@ public class Events implements Listener {
      *
      * @param e is a provided parameter of the event
      */
-
-    private final NanoBlade nanoBlade = (NanoBlade) Items.NANO_BLADE.getItem();
-    private final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
-    private final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
-    private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
-    //TODO Come up with a better way for this.
-    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList(Material.STONE,
-        Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
-        Material.NETHERRACK, Material.END_STONE)
-    );
-
-    @EventHandler
-    public void onHunger(FoodLevelChangeEvent e) {
-        Player p = (Player) e.getEntity();
-        if (e.getFoodLevel() < p.getFoodLevel()) {
-            checkAndConsume(p, e);
-        }
-    }
-
 
     @EventHandler
     public void onPlayerDamageDeal(EntityDamageByEntityEvent e) {
@@ -154,6 +146,8 @@ public class Events implements Listener {
 
         if (SlimefunItem.getByItem(item) instanceof DyeItem) {
             e.setCancelled(true);
+        }
+    }
 
     @EventHandler
     @SuppressWarnings("ConstantConditions")
