@@ -132,6 +132,7 @@ public class Events implements Listener {
         }
     }
 
+    // TODO combine onDiamondDrillUse with onMiningDrillUse
     @EventHandler
     @SuppressWarnings("ConstantConditions")
     public void onDiamondDrillUse(PlayerInteractEvent e) {
