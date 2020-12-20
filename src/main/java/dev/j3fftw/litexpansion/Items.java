@@ -67,9 +67,30 @@ public final class Items {
         Material.GHAST_TEAR,
         "&bGlass Cutter",
         "",
-        "&7Cuts glass quickly",
+        "&7> &eLeft Click &7- Cut glass quickly",
+        "&7> &eRight Click &7- Cut glass slowly",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 300 J"
+    );
+    public static final SlimefunItemStack MINING_DRILL = new SlimefunItemStack(
+        "MINING_DRILL",
+        Material.IRON_SHOVEL,
+        "&7Mining Drill",
+        "",
+        "&7Instantly breaks stone and stone variants",
+        "&7Right click to break block slower",
+        "",
+        "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
+    );
+    public static final SlimefunItemStack DIAMOND_DRILL = new SlimefunItemStack(
+        "DIAMOND_DRILL",
+        Material.DIAMOND_SHOVEL,
+        "&bDiamond Drill",
+        "",
+        "&7Instantly breaks obsidian, stone, and stone variants",
+        "&7Right click to break block slower",
+        "",
+        "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
     );
     public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
         "TREETAP",
@@ -452,6 +473,18 @@ public final class Items {
         "&7Thorium Plate"
     );
 
+    public static final SlimefunItemStack POWER_UNIT = new SlimefunItemStack(
+        "POWER_UNIT",
+        Material.GOLDEN_HOE,
+        "&Power Unit"
+    );
+
+    public static final SlimefunItemStack IRON_ITEM_CASING = new SlimefunItemStack(
+        "IRON_ITEM_CASING",
+        Material.GRAY_CARPET,
+        "&7Iron Item Casing"
+    );
+
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
 
     static {
@@ -463,6 +496,8 @@ public final class Items {
         ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 6);
         ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
         GLASS_CUTTER.addEnchantment(glowEnchant, 1);
+
+        DIAMOND_DRILL.addEnchantment(glowEnchant, 1);
         LAPOTRON_CRYSTAL.addEnchantment(glowEnchant, 1);
         ADVANCEDLX_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
         HYBRID_SOLAR_HELMET.addEnchantment(glowEnchant, 1);

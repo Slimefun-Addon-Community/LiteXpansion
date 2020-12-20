@@ -1,10 +1,12 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.armor.AdvancedSolarHelmet;
+import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
+import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.Generator;
@@ -16,10 +18,12 @@ import dev.j3fftw.litexpansion.machine.MultiFunctionalStorageUnit;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
+import dev.j3fftw.litexpansion.objects.DyeItem;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
+import io.github.thebusybiscuit.slimefun4.implementation.items.multiblocks.OreCrusher;
 import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -59,6 +63,8 @@ final class ItemSetup {
         new CargoConfigurator().register(plugin);
         new GlassCutter().register(plugin);
         // new Wrench().register(plugin);
+        new MiningDrill(MiningDrill.Type.MINING).register(plugin);
+        new MiningDrill(MiningDrill.Type.DIAMOND).register(plugin);
     }
 
     private void registerMachines() {
@@ -102,13 +108,11 @@ final class ItemSetup {
             glass, glass, glass
         );
 
-
-        // Todo Remove this temp fix
         // Machine block
         registerItem(Items.MACHINE_BLOCK, MetalForge.RECIPE_TYPE,
-            Items.REFINED_IRON, new ItemStack(Material.IRON_INGOT), Items.REFINED_IRON,
-            new ItemStack(Material.IRON_INGOT), null, new ItemStack(Material.IRON_INGOT),
-            Items.REFINED_IRON, new ItemStack(Material.IRON_INGOT), Items.REFINED_IRON
+            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON,
+            Items.REFINED_IRON, null, Items.REFINED_IRON,
+            Items.REFINED_IRON, Items.REFINED_IRON, Items.REFINED_IRON
         );
 
         // Advanced Machine Block
@@ -135,7 +139,7 @@ final class ItemSetup {
         registerNonPlaceableItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
 
         registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
-            ManualMill.RECIPE_TYPE, Items.COPPER_ITEM_CASING
+            ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT
         );
 
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -160,6 +164,7 @@ final class ItemSetup {
         );
 
         registerNonPlaceableItem(Items.IRON_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.IRON_INGOT));
+        registerNonPlaceableItem(Items.IRON_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.IRON_PLATE);
         registerNonPlaceableItem(Items.DIAMOND_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.DIAMOND));
         registerNonPlaceableItem(Items.THORIUM_PLATE, MetalForge.RECIPE_TYPE, Items.THORIUM);
 
@@ -184,6 +189,12 @@ final class ItemSetup {
             new ItemStack(Material.LAPIS_LAZULI), Items.ADVANCED_CIRCUIT, new ItemStack(Material.LAPIS_LAZULI)
         );
 
+        registerItem(Items.POWER_UNIT, RecipeType.ENHANCED_CRAFTING_TABLE,
+            Items.RE_BATTERY, Items.UNINSULATED_COPPER_CABLE, Items.IRON_ITEM_CASING,
+            Items.RE_BATTERY, SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.ELECTRIC_MOTOR,
+            Items.RE_BATTERY, Items.UNINSULATED_COPPER_CABLE, Items.IRON_ITEM_CASING
+        );
+
         // Refined crap
         registerNonPlaceableItem(Items.REFINED_IRON, RefinedSmeltery.RECIPE_TYPE,
             new ItemStack(Material.IRON_INGOT)
@@ -197,12 +208,13 @@ final class ItemSetup {
     private void registerEndgameItems() {
         registerNonPlaceableItem(Items.SCRAP, Recycler.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE,
             "&7Any Item!"));
-        registerNonPlaceableItem(Items.UU_MATTER, MassFabricator.RECIPE_TYPE, Items.SCRAP);
-        registerNonPlaceableItem(Items.IRIDIUM, RecipeType.ENHANCED_CRAFTING_TABLE,
+        new DyeItem(Items.LITEXPANSION, Items.UU_MATTER, MassFabricator.RECIPE_TYPE,
+            createSingleItemRecipeCentered(Items.SCRAP)).register(plugin);
+        new DyeItem(Items.LITEXPANSION, Items.IRIDIUM, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
-        );
+        }).register(plugin);
         registerNonPlaceableItem(Items.IRIDIUM_PLATE, MetalForge.RECIPE_TYPE,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM,
             Items.ADVANCED_ALLOY, new ItemStack(Material.DIAMOND), Items.ADVANCED_ALLOY,
@@ -210,23 +222,23 @@ final class ItemSetup {
         );
 
         new NanoBlade().register(plugin);
+        new ElectricChestplate().register(plugin);
     }
 
     private void registerCarbonStuff() {
-        registerItem(Items.COAL_DUST, RecipeType.ORE_CRUSHER,
-            new ItemStack(Material.COAL), null, null,
-            null ,null ,null,
-            null ,null ,null
-        );
-        
-        registerItem(Items.RAW_CARBON_FIBRE, RecipeType.ENHANCED_CRAFTING_TABLE,
+        new DyeItem(Items.LITEXPANSION, Items.COAL_DUST, RecipeType.ORE_CRUSHER,
+            createSingleItemRecipe(new ItemStack(Material.COAL))).register(plugin);
+        new DyeItem(Items.LITEXPANSION, Items.RAW_CARBON_FIBRE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             Items.COAL_DUST, Items.COAL_DUST, null,
-            Items.COAL_DUST, Items.COAL_DUST, null
-        );
+            Items.COAL_DUST, Items.COAL_DUST, null,
+            null, null, null
+        }).register(plugin);
 
-        registerItem(Items.RAW_CARBON_MESH, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.RAW_CARBON_FIBRE, Items.RAW_CARBON_FIBRE, null
-        );
+        new DyeItem(Items.LITEXPANSION, Items.RAW_CARBON_MESH, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
+            Items.RAW_CARBON_FIBRE, Items.RAW_CARBON_FIBRE, null,
+            null, null, null,
+            null, null, null
+        }).register(plugin);
 
         registerNonPlaceableItem(Items.CARBON_PLATE, RecipeType.COMPRESSOR, Items.RAW_CARBON_MESH);
     }
@@ -258,17 +270,6 @@ final class ItemSetup {
             };
             new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
 
-
-            // make shapeless
-//            for (int i = 0; i < 9; i++) {
-//                if (i == 4) {
-//                    continue;
-//                }
-//                final ItemStack[] recipe2 = new ItemStack[9];
-//                recipe2[i] = items[0];
-//                type.register(recipe2, result);
-//            }
-
             return;
         }
 
@@ -281,7 +282,6 @@ final class ItemSetup {
 
         new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
-
 
     private void registerNonPlaceableItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
                                           @Nonnull ItemStack... items) {
@@ -297,4 +297,28 @@ final class ItemSetup {
         new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
 
+
+    /**
+     * Builds and ItemStack array that centers
+     * the item in the guide. Only to be
+     * used for display recipes that have no effect,
+     * i.e. UU Matter in the Mass Fabricator
+     *
+     * @param item is the item shown in the guide
+     * @return a prebuilt recipe ItemStack array
+     */
+    private ItemStack[] createSingleItemRecipeCentered(ItemStack item) {
+        return new ItemStack[] {null, null, null, null, item, null, null, null, null};
+    }
+
+    /**
+     * Builds an ItemStack array for shapeless
+     * recipe machines, like the {@link OreCrusher}
+     *
+     * @param item is the item shown in the guide
+     * @return a prebuilt recipe ItemStack array
+     */
+    private ItemStack[] createSingleItemRecipe(ItemStack item) {
+        return new ItemStack[] {item, null, null, null, null, null, null, null, null};
+    }
 }
