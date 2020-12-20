@@ -36,6 +36,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Events implements Listener {
 
+    //TODO Come up with a better way for this.
     ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList(Material.STONE,
         Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
         Material.NETHERRACK, Material.END_STONE)
@@ -132,7 +133,7 @@ public class Events implements Listener {
         }
     }
 
-    // TODO combine onDiamondDrillUse with onMiningDrillUse
+    //TODO combine onDiamondDrillUse with onMiningDrillUse
     @EventHandler
     @SuppressWarnings("ConstantConditions")
     public void onDiamondDrillUse(PlayerInteractEvent e) {
