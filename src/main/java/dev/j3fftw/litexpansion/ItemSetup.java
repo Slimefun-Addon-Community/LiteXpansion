@@ -18,10 +18,12 @@ import dev.j3fftw.litexpansion.machine.MultiFunctionalStorageUnit;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
+import dev.j3fftw.litexpansion.objects.DyeItem;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
+import io.github.thebusybiscuit.slimefun4.implementation.items.multiblocks.OreCrusher;
 import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -206,12 +208,13 @@ final class ItemSetup {
     private void registerEndgameItems() {
         registerNonPlaceableItem(Items.SCRAP, Recycler.RECIPE_TYPE, new CustomItem(Material.COBBLESTONE,
             "&7Any Item!"));
-        registerNonPlaceableItem(Items.UU_MATTER, MassFabricator.RECIPE_TYPE, Items.SCRAP);
-        registerNonPlaceableItem(Items.IRIDIUM, RecipeType.ENHANCED_CRAFTING_TABLE,
+        new DyeItem(Items.LITEXPANSION, Items.UU_MATTER, MassFabricator.RECIPE_TYPE,
+            createSingleItemRecipeCentered(Items.SCRAP)).register(plugin);
+        new DyeItem(Items.LITEXPANSION, Items.IRIDIUM, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER,
             null, Items.UU_MATTER, null,
             Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
-        );
+        }).register(plugin);
         registerNonPlaceableItem(Items.IRIDIUM_PLATE, MetalForge.RECIPE_TYPE,
             Items.IRIDIUM, Items.ADVANCED_ALLOY, Items.IRIDIUM,
             Items.ADVANCED_ALLOY, new ItemStack(Material.DIAMOND), Items.ADVANCED_ALLOY,
@@ -223,15 +226,19 @@ final class ItemSetup {
     }
 
     private void registerCarbonStuff() {
-        registerItem(Items.COAL_DUST, RecipeType.ORE_CRUSHER, new ItemStack(Material.COAL));
-        registerItem(Items.RAW_CARBON_FIBRE, RecipeType.ENHANCED_CRAFTING_TABLE,
+        new DyeItem(Items.LITEXPANSION, Items.COAL_DUST, RecipeType.ORE_CRUSHER,
+            createSingleItemRecipe(new ItemStack(Material.COAL))).register(plugin);
+        new DyeItem(Items.LITEXPANSION, Items.RAW_CARBON_FIBRE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
             Items.COAL_DUST, Items.COAL_DUST, null,
-            Items.COAL_DUST, Items.COAL_DUST, null
-        );
+            Items.COAL_DUST, Items.COAL_DUST, null,
+            null, null, null
+        }).register(plugin);
 
-        registerItem(Items.RAW_CARBON_MESH, RecipeType.ENHANCED_CRAFTING_TABLE,
-            Items.RAW_CARBON_FIBRE, Items.RAW_CARBON_FIBRE, null
-        );
+        new DyeItem(Items.LITEXPANSION, Items.RAW_CARBON_MESH, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
+            Items.RAW_CARBON_FIBRE, Items.RAW_CARBON_FIBRE, null,
+            null, null, null,
+            null, null, null
+        }).register(plugin);
 
         registerNonPlaceableItem(Items.CARBON_PLATE, RecipeType.COMPRESSOR, Items.RAW_CARBON_MESH);
     }
@@ -288,5 +295,30 @@ final class ItemSetup {
         }
 
         new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
+    }
+
+
+    /**
+     * Builds and ItemStack array that centers
+     * the item in the guide. Only to be
+     * used for display recipes that have no effect,
+     * i.e. UU Matter in the Mass Fabricator
+     *
+     * @param item is the item shown in the guide
+     * @return a prebuilt recipe ItemStack array
+     */
+    private ItemStack[] createSingleItemRecipeCentered(ItemStack item) {
+        return new ItemStack[] {null, null, null, null, item, null, null, null, null};
+    }
+
+    /**
+     * Builds an ItemStack array for shapeless
+     * recipe machines, like the {@link OreCrusher}
+     *
+     * @param item is the item shown in the guide
+     * @return a prebuilt recipe ItemStack array
+     */
+    private ItemStack[] createSingleItemRecipe(ItemStack item) {
+        return new ItemStack[] {item, null, null, null, null, null, null, null, null};
     }
 }

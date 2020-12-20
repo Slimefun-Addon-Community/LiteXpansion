@@ -2,6 +2,7 @@ package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
+import dev.j3fftw.litexpansion.objects.DyeItem;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.utils.Constants;
@@ -30,11 +31,22 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+
+import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class Events implements Listener {
+  
+    /**
+     * Checks if the player deals damage and has
+     * an activated {@link NanoBlade} to multiply the damage.
+     * Power is consumed if both conditions are met.
+     *
+     * @param e is a provided parameter of the event
+     */
 
     private final NanoBlade nanoBlade = (NanoBlade) Items.NANO_BLADE.getItem();
     private final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
@@ -54,6 +66,7 @@ public class Events implements Listener {
         }
     }
 
+
     @EventHandler
     public void onPlayerDamageDeal(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player) {
@@ -68,6 +81,13 @@ public class Events implements Listener {
         }
     }
 
+    /**
+     * Checks if the player takes damage
+     * and has an {@link ElectricChestplate} to be immune to it
+     * Power is consumed if both conditions are met.
+     *
+     * @param e is a provided parameter of the event
+     */
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player && ((Player) e.getEntity()).getEquipment() != null) {
@@ -82,6 +102,28 @@ public class Events implements Listener {
         }
     }
 
+    /**
+     * Checks if the player's hunger level changes
+     * and has a {@link FoodSynthesizer} to be immune to it
+     * Power is consumed if conditions are met.
+     *
+     * @param e is a provided parameter of the event
+     */
+    @EventHandler
+    public void onHunger(FoodLevelChangeEvent e) {
+        Player p = (Player) e.getEntity();
+        if (e.getFoodLevel() < p.getFoodLevel()) {
+            checkAndConsume(p, e);
+        }
+    }
+
+    /**
+     * Checks if the player takes starvation damage
+     * and has a {@link FoodSynthesizer} to be immune to it
+     * Power is consumed if both conditions are met.
+     *
+     * @param e is a provided parameter of the event
+     */
     @EventHandler
     public void onHungerDamage(EntityDamageEvent e) {
         if (Items.FOOD_SYNTHESIZER == null || Items.FOOD_SYNTHESIZER.getItem().isDisabled()
@@ -93,6 +135,25 @@ public class Events implements Listener {
             checkAndConsume((Player) e.getEntity(), null);
         }
     }
+
+
+    /**
+     * Prevents animals from being dyed if the item used
+     * extends {@link DyeItem}.
+     *
+     * @param e is a provided parameter of the event
+     */
+    @EventHandler
+    public void onDye(PlayerInteractEntityEvent e) {
+        ItemStack item;
+        if (e.getHand() == EquipmentSlot.HAND) {
+            item = e.getPlayer().getInventory().getItemInMainHand();
+        } else {
+            item = e.getPlayer().getInventory().getItemInOffHand();
+        }
+
+        if (SlimefunItem.getByItem(item) instanceof DyeItem) {
+            e.setCancelled(true);
 
     @EventHandler
     @SuppressWarnings("ConstantConditions")
@@ -218,6 +279,7 @@ public class Events implements Listener {
                 e.getPlayer().playSound(block.getLocation(), Sound.BLOCK_GLASS_HIT,
                     SoundCategory.BLOCKS, 1.5F, 1F);
             }
+
         }
     }
 
@@ -330,6 +392,14 @@ public class Events implements Listener {
 
      */
 
+    /**
+     * Checks if the player has a {@link FoodSynthesizer}
+     * in their inventory. If it does, power is consumed
+     * and the player's hunger is reset to max
+     *
+     * @param p is the player who's hunger is being modified
+     * @param e is the FoodLevelChangeEvent linked to the player
+     */
     public void checkAndConsume(@Nonnull Player p, @Nullable FoodLevelChangeEvent e) {
         for (ItemStack item : p.getInventory().getContents()) {
             if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 5F)) {
