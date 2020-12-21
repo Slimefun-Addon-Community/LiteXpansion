@@ -50,6 +50,12 @@ public final class Utils {
         });
     }
 
+    /**
+     * Adds a block break handler onto machines so that
+     * the inventory is dropped when the block is broken
+     * @param id specifies the id of the block
+     * @param item specifies the SlimefunItem to be modified
+     */
     public static void registerInventoryDrop(String id, SlimefunItem item) {
         SlimefunItem.registerBlockHandler(id, (p, b, stack, reason) -> {
             BlockMenu inv = BlockStorage.getInventory(b);
