@@ -31,7 +31,7 @@ public final class Utils {
     }
 
     public static void putOutputSlot(BlockMenuPreset preset, int slot) {
-        preset.addItem(slot, null, new ChestMenu.AdvancedMenuClickHandler() {
+        preset.addMenuClickHandler(slot, new ChestMenu.AdvancedMenuClickHandler() {
 
             @Override
             public boolean onClick(Player p, int slot, ItemStack cursor, ClickAction action) {
@@ -40,7 +40,7 @@ public final class Utils {
 
             @Override
             public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor, ClickAction action) {
-                return cursor == null || cursor.getType() == Material.AIR;
+                return cursor == null || cursor.getType() == null || cursor.getType() == Material.AIR;
             }
         });
     }

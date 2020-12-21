@@ -20,6 +20,7 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.cscorelib2.blocks.BlockPosition;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
@@ -33,6 +34,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
     public static final int ENERGY_CONSUMPTION = 16_666;
     public static final int CAPACITY = ENERGY_CONSUMPTION * 3;
 
+    private static final int[] BORDER = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
     private static final int[] INPUT_SLOTS = new int[] {10, 11};
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
@@ -56,15 +58,25 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     private void setupInv() {
         createPreset(this, "&5Mass Fabricator", blockMenuPreset -> {
-            for (int i = 0; i < 27; i++)
+            for (int i : BORDER)
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
-
-            for (int slot : INPUT_SLOTS)
-                blockMenuPreset.addItem(slot, null, (player, i, itemStack, clickAction) -> true);
 
             Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
 
             blockMenuPreset.addItem(PROGRESS_SLOT, progressItem);
+            blockMenuPreset.addMenuClickHandler(PROGRESS_SLOT, ChestMenuUtils.getEmptyClickHandler());
+
+            registerBlockHandler(getId(), (p, b, stack, reason) -> {
+                BlockMenu inv = BlockStorage.getInventory(b);
+                Location location = b.getLocation();
+
+                if (inv != null) {
+                    inv.dropItems(location, getInputSlots());
+                    inv.dropItems(location, getOutputSlots());
+                }
+
+                return true;
+            });
         });
     }
 
