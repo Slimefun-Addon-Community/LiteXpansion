@@ -65,17 +65,7 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
             blockMenuPreset.addMenuClickHandler(PROGRESS_SLOT, ChestMenuUtils.getEmptyClickHandler());
         });
 
-        registerBlockHandler(getId(), (p, b, stack, reason) -> {
-            BlockMenu inv = BlockStorage.getInventory(b);
-            Location location = b.getLocation();
-
-            if (inv != null) {
-                inv.dropItems(location, getInputSlots());
-                inv.dropItems(location, getOutputSlots());
-            }
-
-            return true;
-        });
+        Utils.registerInventoryDrop(getId(), this);
     }
 
     @Override
