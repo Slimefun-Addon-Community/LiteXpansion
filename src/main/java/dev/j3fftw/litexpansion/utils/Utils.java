@@ -5,9 +5,14 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.cscorelib2.chat.ChatColors;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -31,7 +36,7 @@ public final class Utils {
     }
 
     public static void putOutputSlot(BlockMenuPreset preset, int slot) {
-        preset.addItem(slot, null, new ChestMenu.AdvancedMenuClickHandler() {
+        preset.addMenuClickHandler(slot, new ChestMenu.AdvancedMenuClickHandler() {
 
             @Override
             public boolean onClick(Player p, int slot, ItemStack cursor, ClickAction action) {
@@ -40,8 +45,28 @@ public final class Utils {
 
             @Override
             public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor, ClickAction action) {
-                return cursor == null || cursor.getType() == Material.AIR;
+                return cursor == null || cursor.getType() == null || cursor.getType() == Material.AIR;
             }
+        });
+    }
+
+    /**
+     * Adds a block break handler onto machines so that
+     * the inventory is dropped when the block is broken
+     * @param id specifies the id of the block
+     * @param item specifies the SlimefunItem to be modified
+     */
+    public static void registerInventoryDrop(String id, SlimefunItem item) {
+        SlimefunItem.registerBlockHandler(id, (p, b, stack, reason) -> {
+            BlockMenu inv = BlockStorage.getInventory(b);
+            Location location = b.getLocation();
+
+            if (inv != null) {
+                inv.dropItems(location, ((InventoryBlock) item).getInputSlots());
+                inv.dropItems(location, ((InventoryBlock) item).getOutputSlots());
+            }
+
+            return true;
         });
     }
 
