@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.Nonnull;
+import org.apache.commons.lang.Validate;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
@@ -65,6 +66,7 @@ public class GlowEnchant extends Enchantment {
     public boolean canEnchantItem(ItemStack item) {
         if (item.hasItemMeta()) {
             final ItemMeta itemMeta = item.getItemMeta();
+            Validate.notNull(itemMeta, "can not be null");
             final Optional<String> id = SlimefunPlugin.getItemDataService().getItemData(itemMeta);
 
             if (id.isPresent()) {

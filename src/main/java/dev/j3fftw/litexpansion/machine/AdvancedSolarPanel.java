@@ -19,6 +19,7 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -67,6 +68,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
         final int stored = getCharge(l);
         final boolean canGenerate = stored < getCapacity();
+        Validate.notNull(l.getWorld());
         final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), l.getWorld()) : 0;
 
         String generationType = "&4Unknown";
