@@ -30,8 +30,9 @@ public class Timing {
 
     public void stop(boolean printResults) {
         stop();
-        if (printResults)
+        if (printResults) {
             sendResults();
+        }
     }
 
     public void sendResults() {

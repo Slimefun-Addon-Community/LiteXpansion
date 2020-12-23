@@ -152,7 +152,9 @@ public class Events implements Listener {
     @SuppressWarnings("ConstantConditions")
     public void onMiningDrillUse(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
-        if (block == null) return;
+        if (block == null) {
+            return;
+        }
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
@@ -191,7 +193,9 @@ public class Events implements Listener {
     @SuppressWarnings("ConstantConditions")
     public void onDiamondDrillUse(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
-        if (block == null) return;
+        if (block == null) {
+            return;
+        }
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
@@ -246,7 +250,9 @@ public class Events implements Listener {
     @SuppressWarnings("ConstantConditions")
     public void onGlassCut(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
-        if (block == null) return;
+        if (block == null) {
+            return;
+        }
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();

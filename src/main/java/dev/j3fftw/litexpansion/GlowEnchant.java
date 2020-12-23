@@ -40,6 +40,7 @@ public class GlowEnchant extends Enchantment {
 
     @Nonnull
     @Override
+    @Deprecated
     public EnchantmentTarget getItemTarget() {
         return EnchantmentTarget.ALL;
     }

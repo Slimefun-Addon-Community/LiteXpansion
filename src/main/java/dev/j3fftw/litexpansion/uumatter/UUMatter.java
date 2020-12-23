@@ -32,7 +32,9 @@ public final class UUMatter {
     private UUMatter() {}
 
     public void register() {
-        if (registered) return;
+        if (registered) {
+            return;
+        }
 
         final File uuMatterFile = new File(LiteXpansion.getInstance().getDataFolder(), "uumatter.yml");
         if (!uuMatterFile.exists()) {
@@ -104,12 +106,13 @@ public final class UUMatter {
 
             final char[] chars = new char[3];
             System.arraycopy(line.toCharArray(), 0, chars, 0, 3);
-            for (char c : chars)
+            for (char c : chars) {
                 if (c == 'x') {
                     recipe[i++] = Items.UU_MATTER.clone();
                 } else {
                     recipe[i++] = null;
                 }
+            }
         }
     }
 

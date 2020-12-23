@@ -34,7 +34,8 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
     public static final int ENERGY_CONSUMPTION = 100;
     public static final int CAPACITY = 450;
 
-    private static final int[] BORDER = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
+    private static final int[] BORDER = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24
+        , 25, 26};
     private static final int INPUT_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
@@ -55,9 +56,9 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
 
     private void setupInv() {
         createPreset(this, "&8Recycler", blockMenuPreset -> {
-            for (int i : BORDER)
+            for (int i : BORDER) {
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
-
+            }
             Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
 
             blockMenuPreset.addItem(PROGRESS_SLOT, new CustomItem(Material.DEAD_BUSH, "&7Progress"));
@@ -80,7 +81,9 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
 
     private void tick(@Nonnull Block b) {
         @Nullable final BlockMenu inv = BlockStorage.getInventory(b);
-        if (inv == null) return;
+        if (inv == null) {
+            return;
+        }
 
         @Nullable final ItemStack input = inv.getItemInSlot(INPUT_SLOT);
         @Nullable final ItemStack output = inv.getItemInSlot(OUTPUT_SLOT);
@@ -109,9 +112,9 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
         }
 
         if (currentProgress == PROGRESS_AMOUNT) {
-            if (output != null && output.getAmount() > 0)
+            if (output != null && output.getAmount() > 0) {
                 output.setAmount(output.getAmount() + 1);
-            else {
+            } else {
                 inv.replaceExistingItem(OUTPUT_SLOT, Items.SCRAP.clone());
             }
             progress.remove(pos);
@@ -124,7 +127,9 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
     }
 
     private boolean takePower(@Nonnull Block b) {
-        if (getCharge(b.getLocation()) < ENERGY_CONSUMPTION) return false;
+        if (getCharge(b.getLocation()) < ENERGY_CONSUMPTION) {
+            return false;
+        }
         removeCharge(b.getLocation(), ENERGY_CONSUMPTION);
         {
             return true;

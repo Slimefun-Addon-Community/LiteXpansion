@@ -51,9 +51,9 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
         createPreset(this, type.getItem().getImmutableMeta().getDisplayName().orElse("&7Solar Panel"),
             blockMenuPreset -> {
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < 9; i++) {
                     blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
-
+                }
                 blockMenuPreset.addItem(PROGRESS_SLOT, generatingItem);
             });
     }
@@ -61,7 +61,9 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
     @Override
     public int getGeneratedOutput(@Nonnull Location l, @Nonnull Config data) {
         @Nullable final BlockMenu inv = BlockStorage.getInventory(l);
-        if (inv == null) return 0;
+        if (inv == null) {
+            return 0;
+        }
 
         final int stored = getCharge(l);
         final boolean canGenerate = stored < getCapacity();
@@ -85,7 +87,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
                     "", "&bRate: " + generationType,
                     "&7Generating at &6" + Utils.powerFormatAndFadeDecimals(Utils.perTickToPerSecond(rate)) + " J/s " +
                         "&8(" + rate + " J/t)",
-                    "", "&7Stored: &6" + Utils.powerFormatAndFadeDecimals(stored + rate) + " J"
+                    "", "&7Stored: &6" + Utils.powerFormatAndFadeDecimals((double) stored + rate) + " J"
                 )
                     : new CustomItem(Material.ORANGE_STAINED_GLASS_PANE, "&cNot Generating",
                     "", "&7Generator has reached maximum capacity.",

@@ -71,8 +71,10 @@ public class ManualMill extends MultiBlockMachine {
 
                     if (outputInv != null) {
                         craft(p, b, inv, input, output, outputInv);
-                    } else
+                    } else {
                         SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
+                    }
+
                 }
                 return;
             }

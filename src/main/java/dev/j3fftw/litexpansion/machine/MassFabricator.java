@@ -33,7 +33,8 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
     public static final int ENERGY_CONSUMPTION = 16_666;
     public static final int CAPACITY = ENERGY_CONSUMPTION * 3;
 
-    private static final int[] BORDER = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
+    private static final int[] BORDER = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+        , 26};
     private static final int[] INPUT_SLOTS = new int[] {10, 11};
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
@@ -57,8 +58,9 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     private void setupInv() {
         createPreset(this, "&5Mass Fabricator", blockMenuPreset -> {
-            for (int i : BORDER)
+            for (int i : BORDER) {
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
+            }
 
             Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
 
@@ -97,11 +99,12 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
             return;
         }
 
-        if (!Items.SCRAP.getItem().isItem(input))
+        if (!Items.SCRAP.getItem().isItem(input)) {
             input = null;
-        if (!Items.SCRAP.getItem().isItem(input2))
+        }
+        if (!Items.SCRAP.getItem().isItem(input2)) {
             input2 = null;
-
+        }
         if (input == null && input2 == null) {
             return;
         }
@@ -117,7 +120,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
         if (currentProgress != PROGRESS_AMOUNT) {
             if (input != null)
                 inv.consumeItem(INPUT_SLOTS[0]);
-            else
+             else
                 inv.consumeItem(INPUT_SLOTS[1]);
             progress.put(pos, ++currentProgress);
             ChestMenuUtils.updateProgressbar(inv, PROGRESS_SLOT, PROGRESS_AMOUNT - currentProgress,
