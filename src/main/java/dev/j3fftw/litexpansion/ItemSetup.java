@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.extrautils.objects.DyeItem;
 import dev.j3fftw.litexpansion.armor.AdvancedSolarHelmet;
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.CargoConfigurator;
@@ -18,7 +19,6 @@ import dev.j3fftw.litexpansion.machine.MultiFunctionalStorageUnit;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
-import dev.j3fftw.litexpansion.objects.DyeItem;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;

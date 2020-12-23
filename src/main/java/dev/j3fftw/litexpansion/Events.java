@@ -4,7 +4,6 @@ import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MiningDrill;
-import dev.j3fftw.litexpansion.objects.DyeItem;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.Utils;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;

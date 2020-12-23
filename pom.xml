@@ -63,6 +63,12 @@
             <version>1.7</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.j3fftw1</groupId>
+            <artifactId>extrautils</artifactId>
+            <version>99c6a98c6a</version>
+        </dependency>
     </dependencies>
 
     <build>

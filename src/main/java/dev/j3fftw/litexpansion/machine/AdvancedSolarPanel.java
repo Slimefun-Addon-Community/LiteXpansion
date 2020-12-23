@@ -1,7 +1,7 @@
 package dev.j3fftw.litexpansion.machine;
 
+import dev.j3fftw.extrautils.utils.Utils;
 import dev.j3fftw.litexpansion.Items;
-import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
