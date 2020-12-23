@@ -65,7 +65,6 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
             blockMenuPreset.addItem(PROGRESS_SLOT, progressItem);
             blockMenuPreset.addMenuClickHandler(PROGRESS_SLOT, ChestMenuUtils.getEmptyClickHandler());
 
-            Utils.registerInventoryDrop(getId(), this);
         });
     }
 

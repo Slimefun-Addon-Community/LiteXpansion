@@ -63,8 +63,6 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
             blockMenuPreset.addItem(PROGRESS_SLOT, new CustomItem(Material.DEAD_BUSH, "&7Progress"));
             blockMenuPreset.addMenuClickHandler(PROGRESS_SLOT, ChestMenuUtils.getEmptyClickHandler());
         });
-
-        Utils.registerInventoryDrop(getId(), this);
     }
 
     @Override

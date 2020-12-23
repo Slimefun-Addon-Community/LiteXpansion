@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.extrautils.objects.DyeItem;
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
 import dev.j3fftw.litexpansion.items.GlassCutter;
