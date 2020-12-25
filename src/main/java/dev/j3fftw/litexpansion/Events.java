@@ -12,11 +12,13 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -45,7 +47,7 @@ public class Events implements Listener {
     private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
 
     //TODO Come up with a better way for this.
-    ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList(Material.STONE,
+    private final ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList(Material.STONE,
         Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
         Material.NETHERRACK, Material.END_STONE)
     );
@@ -63,8 +65,9 @@ public class Events implements Listener {
         if (e.getDamager() instanceof Player) {
             Player p = (Player) e.getDamager();
             ItemStack itemInHand = p.getInventory().getItemInMainHand();
+            Validate.notNull(nanoBlade, "Can not be null");
             if (nanoBlade.isItem(itemInHand)
-                && itemInHand.containsEnchantment(Enchantment.getByKey(Constants.GLOW_ENCHANT))
+                && itemInHand.containsEnchantment(Objects.requireNonNull(Enchantment.getByKey(Constants.GLOW_ENCHANT)))
                 && nanoBlade.removeItemCharge(itemInHand, 10)
             ) {
                 e.setDamage(e.getDamage() * 1.75);
@@ -149,7 +152,6 @@ public class Events implements Listener {
     }
 
     @EventHandler
-    @SuppressWarnings("ConstantConditions")
     public void onMiningDrillUse(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
         if (block == null) {
@@ -161,6 +163,7 @@ public class Events implements Listener {
 
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getByID(Items.MINING_DRILL.getItemId());
 
+        Validate.notNull(miningDrill, "Can no be null");
         if (miningDrill.isItem(e.getItem()) && drillableBlocks.contains(blockType)
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, ProtectableAction.BREAK_BLOCK)
@@ -169,20 +172,24 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
+            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(e.getItem())))
                 .removeItemCharge(e.getItem(), 0.5F)) {
                 // This allows other plugins to register broken block as player broken
-                BlockBreakEvent newevent = new BlockBreakEvent(block, e.getPlayer());
-                Bukkit.getServer().getPluginManager().callEvent(newevent);
+                BlockBreakEvent newEvent = new BlockBreakEvent(block, e.getPlayer());
+                Bukkit.getServer().getPluginManager().callEvent(newEvent);
                 block.setType(Material.AIR);
                 e.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
 
                 // This has to be done because the item in the main hand is not a pickaxe
                 if (blockType == Material.STONE) {
-                    blockLocation.getWorld().dropItem(blockLocation, new ItemStack(Material.COBBLESTONE));
+                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                        new ItemStack(Material.COBBLESTONE)
+                    );
 
                 } else {
-                    blockLocation.getWorld().dropItem(blockLocation, new ItemStack(blockType));
+                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                        new ItemStack(blockType)
+                    );
                 }
             }
         }
@@ -190,7 +197,6 @@ public class Events implements Listener {
 
     //TODO combine onDiamondDrillUse with onMiningDrillUse
     @EventHandler
-    @SuppressWarnings("ConstantConditions")
     public void onDiamondDrillUse(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
         if (block == null) {
@@ -202,9 +208,10 @@ public class Events implements Listener {
 
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
 
+        Validate.notNull(diamondDrill, "Can not be null");
         if ((diamondDrill.isItem(e.getItem())
             && (drillableBlocks.contains(blockType)
-            || blockType.equals(Material.OBSIDIAN)
+            || blockType == Material.OBSIDIAN
             || blockType.toString().endsWith("_ORE")))
             && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, ProtectableAction.BREAK_BLOCK)
@@ -213,20 +220,25 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
-                .removeItemCharge(e.getItem(), 1.5F)) {
+            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(e.getItem())))
+                .removeItemCharge(e.getItem(), 1.5F)
+            ) {
                 // This allows other plugins to register broken block as player broken
-                BlockBreakEvent newevent = new BlockBreakEvent(block, e.getPlayer());
-                Bukkit.getServer().getPluginManager().callEvent(newevent);
+                BlockBreakEvent newEvent = new BlockBreakEvent(block, e.getPlayer());
+                Bukkit.getServer().getPluginManager().callEvent(newEvent);
                 block.setType(Material.AIR);
                 e.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
 
                 // This has to be done because the item in the main hand is not a pickaxe
                 if (blockType == Material.STONE) {
-                    blockLocation.getWorld().dropItem(blockLocation, new ItemStack(Material.COBBLESTONE));
+                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                        new ItemStack(Material.COBBLESTONE)
+                    );
 
                 } else {
-                    blockLocation.getWorld().dropItem(blockLocation, new ItemStack(blockType));
+                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                        new ItemStack(blockType)
+                    );
                 }
             }
         }
@@ -237,6 +249,7 @@ public class Events implements Listener {
         Player p = (Player) e.getWhoClicked();
         // 1.16 inventory, compare strings
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
+        Validate.notNull(diamondDrill, "Can not be null");
         if (diamondDrill.isItem(e.getCurrentItem())
             && p.getOpenInventory().getType().toString().equals("SMITHING")
         ) {
@@ -247,7 +260,6 @@ public class Events implements Listener {
     }
 
     @EventHandler
-    @SuppressWarnings("ConstantConditions")
     public void onGlassCut(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
         if (block == null) {
@@ -258,6 +270,7 @@ public class Events implements Listener {
         final Location blockLocation = block.getLocation();
         final ItemStack item = e.getItem();
 
+        Validate.notNull(glassCutter, "Can not be null");
         if ((blockType == Material.GLASS
             || blockType == Material.GLASS_PANE
             || blockType.name().endsWith("_GLASS")
@@ -270,13 +283,16 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(item))
-                .removeItemCharge(item, 0.5F)) {
-                blockLocation.getWorld().dropItemNaturally(blockLocation,
-                    new ItemStack(blockType));
+            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(item)))
+                .removeItemCharge(item, 0.5F)
+            ) {
+                Objects.requireNonNull(blockLocation.getWorld()).dropItemNaturally(blockLocation,
+                    new ItemStack(blockType)
+                );
                 block.setType(Material.AIR);
                 e.getPlayer().playSound(block.getLocation(), Sound.BLOCK_GLASS_HIT,
-                    SoundCategory.BLOCKS, 1.5F, 1F);
+                    SoundCategory.BLOCKS, 1.5F, 1F
+                );
             }
 
         }
@@ -401,6 +417,7 @@ public class Events implements Listener {
      */
     public void checkAndConsume(@Nonnull Player p, @Nullable FoodLevelChangeEvent e) {
         for (ItemStack item : p.getInventory().getContents()) {
+            Validate.notNull(foodSynth, "Can not be null");
             if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 5F)) {
                 p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);
                 p.setFoodLevel(20);
