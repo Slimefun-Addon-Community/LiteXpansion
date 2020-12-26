@@ -202,6 +202,26 @@ final class ItemSetup {
             new ItemStack(Material.IRON_INGOT)
         );
 
+        // Dust smelting
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.LAPIS_DUST},
+            new ItemStack(Material.LAPIS_LAZULI)
+        );
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.REDSTONE_DUST},
+            new ItemStack(Material.REDSTONE)
+        );
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.DIAMOND_DUST},
+            new ItemStack(Material.DIAMOND)
+        );
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.EMERALD_DUST},
+            new ItemStack(Material.EMERALD_ORE)
+        );
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.QUARTZ_DUST},
+            new ItemStack(Material.QUARTZ)
+        );
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.ANCIENT_DEBRIS_DUST},
+            new ItemStack(Material.NETHERITE_INGOT)
+        );
+
         // Resources
         new MagThor().register(plugin);
         new Thorium().register(plugin);

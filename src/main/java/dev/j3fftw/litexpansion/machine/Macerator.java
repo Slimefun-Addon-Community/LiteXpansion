@@ -1,11 +1,14 @@
 package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.litexpansion.Items;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
 public class Macerator extends AContainer {
@@ -23,45 +26,56 @@ public class Macerator extends AContainer {
             });
     }
 
+    @Override
     protected void registerDefaultRecipes() {
-        addRecipe(TIME, new ItemStack(Material.BLAZE_ROD), new ItemStack(Material.BLAZE_POWDER, 5));
-        addRecipe(TIME, new ItemStack(Material.COAL_BLOCK), new CustomItem(Items.COAL_DUST, 9));
-        addRecipe(TIME, new ItemStack(Material.REDSTONE_BLOCK), new ItemStack(Material.REDSTONE, 9));
-        addRecipe(TIME, new ItemStack(Material.QUARTZ_BLOCK), new ItemStack(Material.QUARTZ, 4));
-        addRecipe(TIME, new ItemStack(Material.BONE_BLOCK), new ItemStack(Material.BONE_MEAL, 9));
-        addRecipe(TIME, new ItemStack(Material.BONE), new ItemStack(Material.BONE_MEAL, 4));
-        addRecipe(TIME, new ItemStack(Material.CLAY), new ItemStack(Material.CLAY_BALL));
-        addRecipe(TIME, new ItemStack(Material.COAL), new CustomItem(Items.COAL_DUST));
-        addRecipe(TIME, new ItemStack(Material.COBBLESTONE), new ItemStack(Material.SAND));
-        addRecipe(TIME, new ItemStack(Material.GLOWSTONE), new ItemStack(Material.GLOWSTONE_DUST, 4));
-        addRecipe(TIME, new ItemStack(Material.GRAVEL), new ItemStack(Material.FLINT));
-        addRecipe(TIME, new ItemStack(Material.ICE), new ItemStack(Material.SNOWBALL, 2));
-        addRecipe(TIME, new ItemStack(Material.QUARTZ_STAIRS), new ItemStack(Material.QUARTZ, 6));
-        addRecipe(TIME, new ItemStack(Material.SANDSTONE), new ItemStack(Material.SAND));
-        addRecipe(TIME, new ItemStack(Material.STONE), new ItemStack(Material.COBBLESTONE));
-        addRecipe(TIME, new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.MAGENTA_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.LIGHT_BLUE_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.YELLOW_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.LIME_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.PINK_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.GRAY_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.LIGHT_GRAY_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.CYAN_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.PURPLE_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.BLUE_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.BROWN_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.GREEN_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.RED_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.BLACK_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(TIME, new ItemStack(Material.GRANITE), new ItemStack(Material.GRAVEL));
-        addRecipe(TIME, new ItemStack(Material.ANDESITE), new ItemStack(Material.GRAVEL));
-        addRecipe(TIME, new ItemStack(Material.DIORITE), new ItemStack(Material.GRAVEL));
+        addRecipe(new ItemStack(Material.BLAZE_ROD), new ItemStack(Material.BLAZE_POWDER, 5));
+        addRecipe(new ItemStack(Material.COAL_BLOCK), new CustomItem(Items.COAL_DUST, 9));
+        addRecipe(new ItemStack(Material.REDSTONE_BLOCK), new ItemStack(Material.REDSTONE, 9));
+        addRecipe(new ItemStack(Material.QUARTZ_BLOCK), new ItemStack(Material.QUARTZ, 4));
+        addRecipe(new ItemStack(Material.BONE_BLOCK), new ItemStack(Material.BONE_MEAL, 9));
+        addRecipe(new ItemStack(Material.BONE), new ItemStack(Material.BONE_MEAL, 4));
+        addRecipe(new ItemStack(Material.CLAY), new ItemStack(Material.CLAY_BALL));
+        addRecipe(new ItemStack(Material.COAL), new CustomItem(Items.COAL_DUST));
+        addRecipe(new ItemStack(Material.COBBLESTONE), new ItemStack(Material.SAND));
+        addRecipe(new ItemStack(Material.GLOWSTONE), new ItemStack(Material.GLOWSTONE_DUST, 4));
+        addRecipe(new ItemStack(Material.GRAVEL), new ItemStack(Material.FLINT));
+        addRecipe(new ItemStack(Material.ICE), new ItemStack(Material.SNOWBALL, 2));
+        addRecipe(new ItemStack(Material.QUARTZ_STAIRS), new ItemStack(Material.QUARTZ, 6));
+        addRecipe(new ItemStack(Material.SANDSTONE), new ItemStack(Material.SAND));
+        addRecipe(new ItemStack(Material.STONE), new ItemStack(Material.COBBLESTONE));
+        addRecipe(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.MAGENTA_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.LIGHT_BLUE_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.YELLOW_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.LIME_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.PINK_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.GRAY_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.LIGHT_GRAY_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.CYAN_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.PURPLE_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.BLUE_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.BROWN_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.GREEN_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.RED_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.BLACK_WOOL), new ItemStack(Material.STRING, 4));
+        addRecipe(new ItemStack(Material.GRANITE), new ItemStack(Material.GRAVEL));
+        addRecipe(new ItemStack(Material.ANDESITE), new ItemStack(Material.GRAVEL));
+        addRecipe(new ItemStack(Material.DIORITE), new ItemStack(Material.GRAVEL));
+        addRecipe(new ItemStack(Material.IRON_ORE), new CustomItem(SlimefunItems.IRON_DUST, 2));
+        addRecipe(new ItemStack(Material.COAL_ORE), new CustomItem(Items.COAL_DUST, 2));
+        addRecipe(new ItemStack(Material.LAPIS_ORE), new CustomItem(Items.LAPIS_DUST, 2));
+        addRecipe(new ItemStack(Material.GOLD_ORE), new CustomItem(SlimefunItems.GOLD_DUST, 2));
+        addRecipe(new ItemStack(Material.REDSTONE_ORE), new CustomItem(Items.REDSTONE_DUST, 2));
+        addRecipe(new ItemStack(Material.DIAMOND_ORE), new CustomItem(Items.DIAMOND_DUST, 2));
+        addRecipe(new ItemStack(Material.EMERALD_ORE), new CustomItem(Items.EMERALD_DUST, 2));
+        addRecipe(new ItemStack(Material.NETHER_QUARTZ_ORE), new CustomItem(Items.QUARTZ_DUST, 2));
+        addRecipe(new ItemStack(Material.NETHER_GOLD_ORE), new CustomItem(SlimefunItems.GOLD_DUST, 2));
+        addRecipe(new ItemStack(Material.ANCIENT_DEBRIS), new CustomItem(Items.ANCIENT_DEBRIS_DUST, 2));
     }
 
-    private void addRecipe(int seconds, ItemStack input, ItemStack output) {
-        registerRecipe(seconds, new ItemStack[] {input}, new ItemStack[] {output});
+    private void addRecipe(ItemStack input, ItemStack output) {
+        registerRecipe(Macerator.TIME, new ItemStack[] {input}, new ItemStack[] {output});
     }
 
     @Override

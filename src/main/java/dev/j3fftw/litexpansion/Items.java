@@ -491,6 +491,39 @@ public final class Items {
         "&7Iron Item Casing"
     );
 
+    public static final SlimefunItemStack LAPIS_DUST = new SlimefunItemStack(
+        "LAPIS_DUST",
+        Material.PURPLE_DYE,
+        "&7Lapiz Dust"
+    );
+
+    public static final SlimefunItemStack REDSTONE_DUST = new SlimefunItemStack(
+        "REDSTONE_DUST",
+        Material.RED_DYE,
+        "&7Redstone Dust"
+    );
+
+    public static final SlimefunItemStack DIAMOND_DUST = new SlimefunItemStack(
+        "DIAMOND_DUST",
+        Material.CYAN_DYE,
+        "&7Diamond Dust"
+    );
+    public static final SlimefunItemStack EMERALD_DUST = new SlimefunItemStack(
+        "EMERALD_DUST",
+        Material.LIME_DYE,
+        "&7Emerald Dust"
+    );
+    public static final SlimefunItemStack QUARTZ_DUST = new SlimefunItemStack(
+        "QUARTZ_DUST",
+        Material.WHITE_DYE,
+        "&7Quartz Dust"
+    );
+    public static final SlimefunItemStack ANCIENT_DEBRIS_DUST = new SlimefunItemStack(
+        "ANCIENT_DEBRIS_DUST",
+        Material.BROWN_DYE,
+        "&7Ancient Debris Dust"
+    );
+
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
 
     static {
