@@ -8,6 +8,7 @@ import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.Utils;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
+import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import java.util.ArrayList;
@@ -208,8 +209,11 @@ public class Events implements Listener {
 
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
 
+
+
         Validate.notNull(diamondDrill, "Can not be null");
         if ((diamondDrill.isItem(e.getItem())
+
             && (drillableBlocks.contains(blockType)
             || blockType == Material.OBSIDIAN
             || blockType.toString().endsWith("_ORE")))

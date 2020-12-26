@@ -16,6 +16,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Slime;
 
 public final class Items {
 
@@ -327,6 +328,11 @@ public final class Items {
         "",
         LoreBuilderDynamic.powerBuffer(RubberSynthesizer.CAPACITY),
         LoreBuilderDynamic.powerPerTick(RubberSynthesizer.ENERGY_CONSUMPTION)
+    );
+    public static final SlimefunItemStack MACERATOR = new SlimefunItemStack(
+        "MACERATOR",
+        Material.IRON_BLOCK,
+        "&7Macerator"
     );
     //// Solar panels
     public static final SlimefunItemStack ADVANCED_SOLAR_PANEL = new SlimefunItemStack(

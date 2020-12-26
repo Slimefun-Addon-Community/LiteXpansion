@@ -56,6 +56,7 @@ public class RubberSynthesizer extends AContainer implements RecipeDisplayItem {
         return new ItemStack(Material.FIRE_CHARGE);
     }
 
+    @Nonnull
     @Override
     public String getInventoryTitle() {
         return "&6Rubber Synthesizer";

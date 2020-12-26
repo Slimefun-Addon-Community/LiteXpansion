@@ -11,6 +11,7 @@ import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.Generator;
+import dev.j3fftw.litexpansion.machine.Macerator;
 import dev.j3fftw.litexpansion.machine.ManualMill;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.MetalForge;
@@ -77,6 +78,7 @@ final class ItemSetup {
         new MultiFunctionalStorageUnit().register(LiteXpansion.getInstance());
         new Generator().register(LiteXpansion.getInstance());
         new ManualMill().register(LiteXpansion.getInstance());
+        new Macerator().register(LiteXpansion.getInstance());
     }
 
     //Disable when SlimyTreeTaps exists
