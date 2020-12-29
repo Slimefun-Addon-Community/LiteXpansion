@@ -38,7 +38,8 @@ public class Generator extends CoalGenerator {
 
     @Override
     protected void registerDefaultFuelTypes() {
-
+        super.registerDefaultFuelTypes();
+        
         super.registerFuel(new MachineFuel(100, new ItemStack(Material.LAVA_BUCKET)));
         super.registerFuel(new MachineFuel(8, new ItemStack(Material.CHARCOAL)));
         super.registerFuel(new MachineFuel(6, new ItemStack(Material.SCAFFOLDING)));
@@ -74,22 +75,22 @@ public class Generator extends CoalGenerator {
 
         // Banners
         for (Material mat : Tag.ITEMS_BANNERS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
+            super.registerFuel(new MachineFuel(1, new ItemStack(mat)));
         }
 
         // Carpets
         for (Material mat : Tag.CARPETS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
+            super.registerFuel(new MachineFuel(1, new ItemStack(mat)));
         }
 
         // Saplings
         for (Material mat : Tag.SAPLINGS.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
+            super.registerFuel(new MachineFuel(1, new ItemStack(mat)));
         }
 
         // Wool
         for (Material mat : Tag.WOOL.getValues()) {
-            registerFuel(new MachineFuel(1, new ItemStack(mat)));
+            super.registerFuel(new MachineFuel(1, new ItemStack(mat)));
         }
 
     }
