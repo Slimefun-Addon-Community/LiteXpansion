@@ -340,9 +340,9 @@ public final class Items {
         "&7&lAdvanced Solar Panel",
         "&9Works at Night",
         "",
-        LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ADVANCED_STORAGE),
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ADVANCED_DAY_RATE) + " (Day)",
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ADVANCED_NIGHT_RATE) + " (Night)"
+        LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.advancedStorage),
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.advancedDayRate) + " (Day)",
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.advancedNightRate) + " (Night)"
     );
     public static final SlimefunItemStack HYBRID_SOLAR_PANEL = new SlimefunItemStack(
         "HYBRID_SOLAR_PANEL",
@@ -350,9 +350,9 @@ public final class Items {
         "&b&lHybrid Solar Panel",
         "&9Works at Night",
         "",
-        LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.HYBRID_STORAGE),
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.HYBRID_DAY_RATE) + " (Day + Nether)",
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.HYBRID_NIGHT_RATE) + " (Night + End)"
+        LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.hybridStorage),
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.hybridDayRate) + " (Day + Nether)",
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.hybridNightRate) + " (Night + End)"
     );
     public static final SlimefunItemStack ULTIMATE_SOLAR_PANEL = new SlimefunItemStack(
         "ULTIMATE_SOLAR_PANEL",
@@ -360,9 +360,9 @@ public final class Items {
         "&5&lUltimate Solar Panel",
         "&9Works at Night",
         "",
-        LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ULTIMATE_STORAGE),
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_DAY_RATE) + " (Day)",
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_NIGHT_RATE) + " (Night)"
+        LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ultimateStorage),
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ultimateDayRate) + " (Day)",
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ultimateNightRate) + " (Night)"
     );
     public static final SlimefunItemStack MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT",

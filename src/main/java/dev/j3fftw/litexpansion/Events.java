@@ -212,7 +212,6 @@ public class Events implements Listener {
 
         Validate.notNull(diamondDrill, "Can not be null");
         if ((diamondDrill.isItem(e.getItem())
-
             && (drillableBlocks.contains(blockType)
             || blockType == Material.OBSIDIAN
             || blockType.toString().endsWith("_ORE")))
