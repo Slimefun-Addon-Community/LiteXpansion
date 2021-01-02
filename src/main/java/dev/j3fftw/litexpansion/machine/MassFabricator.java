@@ -55,8 +55,10 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     private void setupInv() {
         createPreset(this, "&5Mass Fabricator", blockMenuPreset -> {
-            for (int i = 0; i < 27; i++)
+            for (int i = 0; i < 27; i++) {
+                if (i == INPUT_SLOTS[0] || i == INPUT_SLOTS[1]) continue;
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
+            }
 
             for (int slot : INPUT_SLOTS)
                 blockMenuPreset.addItem(slot, null, (player, i, itemStack, clickAction) -> true);
@@ -64,6 +66,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
             Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
 
             blockMenuPreset.addItem(PROGRESS_SLOT, progressItem);
+            blockMenuPreset.addMenuClickHandler(PROGRESS_SLOT, ChestMenuUtils.getEmptyClickHandler());
         });
     }
 

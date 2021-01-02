@@ -53,9 +53,10 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
 
     private void setupInv() {
         createPreset(this, "&8Recycler", blockMenuPreset -> {
-            for (int i = 0; i < 27; i++)
+            for (int i = 0; i < 27; i++) {
+                if (i == INPUT_SLOT) continue;
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
-
+            }
             blockMenuPreset.addItem(INPUT_SLOT, null, (player, i, itemStack, clickAction) -> true);
             Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
 

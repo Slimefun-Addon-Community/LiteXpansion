@@ -36,7 +36,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
     public static final int ADVANCED_NIGHT_RATE = 10;
     public static final int ADVANCED_OUTPUT = 320;
     public static final int ADVANCED_STORAGE = 320_000;
-    public static final int HYBRID_RATE = 640;
+    public static final int HYBRID_DAY_RATE = 640;
     public static final int HYBRID_NIGHT_RATE = 80;
     public static final int HYBRID_OUTPUT = 1200;
     public static final int HYBRID_STORAGE = 1_000_000;
@@ -155,7 +155,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
             SlimefunItems.ADVANCED_CIRCUIT_BOARD, Items.ADVANCED_MACHINE_BLOCK, SlimefunItems.ADVANCED_CIRCUIT_BOARD
         }),
 
-        HYBRID(Items.HYBRID_SOLAR_PANEL, HYBRID_RATE, HYBRID_NIGHT_RATE, HYBRID_OUTPUT, HYBRID_STORAGE,
+        HYBRID(Items.HYBRID_SOLAR_PANEL, HYBRID_DAY_RATE, HYBRID_NIGHT_RATE, HYBRID_OUTPUT, HYBRID_STORAGE,
             new ItemStack[] {
                 Items.CARBON_PLATE, new ItemStack(Material.LAPIS_BLOCK), Items.CARBON_PLATE,
                 Items.IRIDIUM_PLATE, Items.ADVANCED_MACHINE_BLOCK, Items.IRIDIUM_PLATE,
