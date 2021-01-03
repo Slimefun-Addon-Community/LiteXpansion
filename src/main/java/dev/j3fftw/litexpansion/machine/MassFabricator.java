@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion.machine;
 
+import dev.j3fftw.extrautils.interfaces.InventoryBlock;
 import dev.j3fftw.extrautils.utils.Utils;
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
@@ -14,7 +15,6 @@ import javax.annotation.Nullable;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
@@ -32,9 +32,6 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     public static final int ENERGY_CONSUMPTION = 16_666;
     public static final int CAPACITY = ENERGY_CONSUMPTION * 3;
-
-    private static final int[] BORDER = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
-        , 26};
     private static final int[] INPUT_SLOTS = new int[] {10, 11};
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
@@ -58,15 +55,13 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     private void setupInv() {
         createPreset(this, "&5Mass Fabricator", blockMenuPreset -> {
-            for (int i : BORDER) {
+            for (int i = 0; i < 27; i++) {
+                if (i == INPUT_SLOTS[0] || i == INPUT_SLOTS[1]) continue;
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
             }
-
             Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
-
             blockMenuPreset.addItem(PROGRESS_SLOT, progressItem);
             blockMenuPreset.addMenuClickHandler(PROGRESS_SLOT, ChestMenuUtils.getEmptyClickHandler());
-
         });
     }
 
@@ -120,7 +115,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
         if (currentProgress != PROGRESS_AMOUNT) {
             if (input != null)
                 inv.consumeItem(INPUT_SLOTS[0]);
-             else
+            else
                 inv.consumeItem(INPUT_SLOTS[1]);
             progress.put(pos, ++currentProgress);
             ChestMenuUtils.updateProgressbar(inv, PROGRESS_SLOT, PROGRESS_AMOUNT - currentProgress,

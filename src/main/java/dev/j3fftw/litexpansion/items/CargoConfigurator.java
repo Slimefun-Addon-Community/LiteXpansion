@@ -51,11 +51,10 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
     }
 
     private boolean canUseCargoConfigurator(@Nonnull Player p, @Nonnull Block clicked) {
-        return SlimefunPlugin.getProtectionManager().hasPermission(p, clicked, ProtectableAction.ACCESS_INVENTORIES);
+        return SlimefunPlugin.getProtectionManager().hasPermission(p, clicked, ProtectableAction.INTERACT_BLOCK);
     }
 
     @EventHandler
-    @SuppressWarnings("ConstantConditions")
     public void onCargoConfiguratorItemClick(PlayerInteractEvent e) {
         if (e.getItem() == null || e.getMaterial() != Material.COMPASS) {
             return;
@@ -133,7 +132,6 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         itemStack.setItemMeta(meta);
     }
 
-    @SuppressWarnings("ConstantConditions")
     private void runActions(@Nonnull PlayerInteractEvent e, @Nonnull ItemStack clickedItemStack, @Nonnull ItemMeta meta,
                             @Nonnull String blockId, @Nonnull List<String> lore, @Nonnull List<String> defaultLore
     ) {
