@@ -5,7 +5,7 @@ on:
     types: [created]
 
 jobs:
-  auto-approve:
+  auto-label:
     name: Label PRs
     runs-on: ubuntu-latest
 
