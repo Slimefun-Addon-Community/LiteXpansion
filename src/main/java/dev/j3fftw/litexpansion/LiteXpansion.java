@@ -2,6 +2,7 @@ package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
 import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.utils.Reflections;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
@@ -20,7 +21,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -43,24 +43,13 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
         }
 
-        // Enchantment
-        try {
-            if (!Enchantment.isAcceptingRegistrations()) {
-                Field accepting = Enchantment.class.getDeclaredField("acceptingNew");
-                accepting.setAccessible(true);
-                accepting.set(null, true);
-            }
-        } catch (IllegalAccessException | NoSuchFieldException ignored) {
-            getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
-        }
-
         registerEnchantments();
+
+        changeSfValues();
 
         ItemSetup.INSTANCE.init();
 
         getServer().getPluginManager().registerEvents(new Events(), this);
-
-        // Armor
 
         UUMatter.INSTANCE.register();
 
@@ -81,6 +70,16 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     }
 
     private void registerEnchantments() {
+        try {
+            if (!Enchantment.isAcceptingRegistrations()) {
+                Field accepting = Enchantment.class.getDeclaredField("acceptingNew");
+                accepting.setAccessible(true);
+                accepting.set(null, true);
+            }
+        } catch (IllegalAccessException | NoSuchFieldException ignored) {
+            getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
+        }
+
         Enchantment glowEnchantment = new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
             "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER", "LAPOTRON_CRYSTAL",
             "ADVANCEDLX_SOLAR_HELMET", "HYBRID_SOLAR_HELMET", "ULTIMATE_SOLAR_HELMET",
@@ -90,6 +89,14 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         // Prevent double-registration errors
         if (Enchantment.getByKey(glowEnchantment.getKey()) == null) {
             Enchantment.registerEnchantment(glowEnchantment);
+        }
+    }
+
+    private void changeSfValues() {
+        final SlimefunItem energizedPanel = SlimefunItem.getByID("SOLAR_GENERATOR_3");
+        if (energizedPanel != null) {
+            Reflections.setField(energizedPanel, "dayEnergy", 64);
+            Reflections.setField(energizedPanel, "nightEnergy", 32);
         }
     }
 
@@ -234,9 +241,5 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     public static LiteXpansion getInstance() {
         return instance;
-    }
-
-    public static FileConfiguration getCfg() {
-        return instance.getConfig();
     }
 }

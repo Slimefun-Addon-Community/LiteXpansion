@@ -123,6 +123,11 @@
                             <pattern>org.bstats.bukkit</pattern>
                             <shadedPattern>dev.j3fftw.litexpansion.bstats</shadedPattern>
                         </relocation>
+
+                        <relocation>
+                            <pattern>dev.j3fftw.extrautils</pattern>
+                            <shadedPattern>dev.j3fftw.litexpansion.extrautils</shadedPattern>
+                        </relocation>
                     </relocations>
                 </configuration>
             </plugin>
