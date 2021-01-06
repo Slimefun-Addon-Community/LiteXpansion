@@ -97,7 +97,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         final SlimefunItem energizedPanel = SlimefunItem.getByID("SOLAR_GENERATOR_3");
         if (energizedPanel != null) {
             Reflections.setField(energizedPanel, "dayEnergy", 80);
-            Reflections.setField(energizedPanel, "dayEnergy", 40);
+            Reflections.setField(energizedPanel, "nightEnergy", 40);
         }
     }
 

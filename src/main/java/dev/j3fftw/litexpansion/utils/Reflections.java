@@ -1,12 +1,13 @@
 package dev.j3fftw.litexpansion.utils;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 
 public final class Reflections {
 
     private Reflections() {}
 
-    public static void setStaticField(Class<?> clazz, String fieldName, Object newValue) {
+    public static void setStaticField(@Nonnull Class<?> clazz, @Nonnull String fieldName, @Nonnull Object newValue) {
         try {
             final Field f = clazz.getDeclaredField(fieldName);
             f.setAccessible(true); // NOSONAR
@@ -17,7 +18,7 @@ public final class Reflections {
         }
     }
 
-    public static void setField(Object instance, String fieldName, Object newValue) {
+    public static void setField(@Nonnull Object instance, @Nonnull String fieldName, @Nonnull Object newValue) {
         try {
             final Field f = instance.getClass().getDeclaredField(fieldName);
             f.setAccessible(true); // NOSONAR
