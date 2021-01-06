@@ -1,7 +1,6 @@
 package dev.j3fftw.litexpansion.utils;
 
 import dev.j3fftw.litexpansion.LiteXpansion;
-
 import javax.annotation.Nonnull;
 
 public final class Log {
