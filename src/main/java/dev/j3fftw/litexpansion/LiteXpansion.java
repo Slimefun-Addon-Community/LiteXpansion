@@ -6,12 +6,6 @@ import dev.j3fftw.litexpansion.utils.Reflections;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
@@ -24,13 +18,20 @@ import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.annotation.Nonnull;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private static LiteXpansion instance;
 
     @Override
     public void onEnable() {
-        instance = this;
+        setInstance(this);
 
         if (!new File(getDataFolder(), "config.yml").exists()) {
             saveDefaultConfig();
@@ -66,18 +67,12 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public void onDisable() {
-        instance = null;
+        setInstance(null);
     }
 
     private void registerEnchantments() {
-        try {
-            if (!Enchantment.isAcceptingRegistrations()) {
-                Field accepting = Enchantment.class.getDeclaredField("acceptingNew");
-                accepting.setAccessible(true);
-                accepting.set(null, true);
-            }
-        } catch (IllegalAccessException | NoSuchFieldException ignored) {
-            getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
+        if (!Enchantment.isAcceptingRegistrations()) {
+            Reflections.setStaticField(Enchantment.class, "acceptingNew", true);
         }
 
         Enchantment glowEnchantment = new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
@@ -237,6 +232,10 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     public String getBugTrackerURL() {
         return "https://github.com/J3fftw1/LiteXpansion/issues";
+    }
+
+    private static void setInstance(LiteXpansion ins) {
+        instance = ins;
     }
 
     public static LiteXpansion getInstance() {
