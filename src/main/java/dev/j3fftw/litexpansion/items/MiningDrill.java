@@ -23,11 +23,8 @@ import org.bukkit.inventory.ItemStack;
  */
 public class MiningDrill extends SimpleSlimefunItem<ItemUseHandler> implements Listener, Rechargeable {
 
-    private final Type type;
-
     public MiningDrill(Type type) {
         super(Items.LITEXPANSION, type.getItem(), RecipeType.ENHANCED_CRAFTING_TABLE, type.getRecipe());
-        this.type = type;
     }
 
     @Nonnull

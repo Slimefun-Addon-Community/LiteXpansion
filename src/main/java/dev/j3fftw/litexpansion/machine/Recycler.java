@@ -128,9 +128,7 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
             return false;
         }
         removeCharge(b.getLocation(), ENERGY_CONSUMPTION);
-        {
-            return true;
-        }
+        return true;
     }
 
     @Nonnull

@@ -6,6 +6,8 @@ import org.bukkit.entity.Player;
 
 public final class Utils {
 
+    private Utils() {}
+
     public static void send(Player player, String message) {
         player.sendMessage(ChatColor.GRAY + "[LiteXpansion] " + ChatColors.color(message));
     }
