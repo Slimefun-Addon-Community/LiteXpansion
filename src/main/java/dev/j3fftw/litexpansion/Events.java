@@ -10,9 +10,10 @@ import dev.j3fftw.litexpansion.utils.Utils;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -47,7 +48,7 @@ public class Events implements Listener {
     private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
 
     //TODO Come up with a better way for this.
-    private final ArrayList<Material> drillableBlocks = new ArrayList<>(Arrays.asList(Material.STONE,
+    private final Set<Material> drillableBlocks = new HashSet<>(Arrays.asList(Material.STONE,
         Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
         Material.NETHERRACK, Material.END_STONE)
     );

@@ -67,7 +67,7 @@ public final class UUMatter {
             this.recipes.size()
         });
 
-        UuMatterCategory.INSTANCE.register();
+        UuMatterCategory.INSTANCE.register(LiteXpansion.getInstance());
 
         registered = true;
     }

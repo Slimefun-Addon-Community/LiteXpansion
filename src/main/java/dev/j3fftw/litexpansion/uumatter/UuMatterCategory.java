@@ -123,7 +123,7 @@ public final class UuMatterCategory extends FlexCategory {
         );
 
         menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
-            SlimefunPlugin.getRegistry().getGuideLayout(slimefunGuideLayout).openMainMenu(playerProfile, 1);
+            SlimefunPlugin.getRegistry().getSlimefunGuide(slimefunGuideLayout).openMainMenu(playerProfile, 1);
             return false;
         });
 
