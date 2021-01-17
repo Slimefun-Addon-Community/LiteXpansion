@@ -216,7 +216,7 @@ final class ItemSetup {
             new ItemStack(Material.DIAMOND)
         );
         RecipeType.SMELTERY.register(new ItemStack[] {Items.EMERALD_DUST},
-            new ItemStack(Material.EMERALD_ORE)
+            new ItemStack(Material.EMERALD)
         );
         RecipeType.SMELTERY.register(new ItemStack[] {Items.QUARTZ_DUST},
             new ItemStack(Material.QUARTZ)
