@@ -23,9 +23,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
-public class CraftingMultiBlock extends MultiBlockMachine {
+public abstract class CraftingMultiBlock extends MultiBlockMachine {
 
     public CraftingMultiBlock(Category category, SlimefunItemStack item, ItemStack[] recipe,
                               ItemStack[] machineRecipes, BlockFace trigger) {
@@ -43,6 +44,8 @@ public class CraftingMultiBlock extends MultiBlockMachine {
 
         return fakeInv;
     }
+
+    public void onSuccessfulCraft(@Nonnull Block b) {}
 
     @Override
     public void onInteract(Player p, Block b) {
@@ -86,6 +89,8 @@ public class CraftingMultiBlock extends MultiBlockMachine {
             p.getWorld().playSound(b.getLocation(), Sound.BLOCK_WOODEN_BUTTON_CLICK_ON, 1, 1);
 
             outputInv.addItem(output);
+
+            onSuccessfulCraft(b);
         } else {
             SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
         }

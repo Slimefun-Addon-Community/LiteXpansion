@@ -5,8 +5,11 @@ import dev.j3fftw.litexpansion.LiteXpansion;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class ManualMill extends CraftingMultiBlock {
 
@@ -26,5 +29,11 @@ public class ManualMill extends CraftingMultiBlock {
             ironBlock, new ItemStack(Material.DISPENSER), ironBlock,
             null, ironBlock, null
         }, new ItemStack[0], BlockFace.DOWN);
+    }
+
+    @Override
+    public void onSuccessfulCraft(@Nonnull Block b) {
+        Block ironBlock = b.getRelative(BlockFace.DOWN, 2);
+        ironBlock.setType(Material.AIR);
     }
 }
