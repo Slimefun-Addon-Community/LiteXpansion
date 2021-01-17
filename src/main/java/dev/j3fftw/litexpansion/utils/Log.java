@@ -12,7 +12,7 @@ public final class Log {
     }
 
     public static void info(@Nonnull String message, @Nonnull Object... values) {
-        warn(replaceVariablesInMessage(message, values));
+        info(replaceVariablesInMessage(message, values));
     }
 
     public static void warn(@Nonnull String message) {
@@ -28,7 +28,7 @@ public final class Log {
     }
 
     public static void error(@Nonnull String message, @Nonnull Object... values) {
-        warn(replaceVariablesInMessage(message, values));
+        error(replaceVariablesInMessage(message, values));
     }
 
     private static String replaceVariablesInMessage(@Nonnull String message, @Nonnull Object... values) {
