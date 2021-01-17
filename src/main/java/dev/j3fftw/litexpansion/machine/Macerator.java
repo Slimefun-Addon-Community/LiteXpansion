@@ -70,6 +70,7 @@ public class Macerator extends AContainer {
         addRecipe(new ItemStack(Material.DIAMOND_ORE), new CustomItem(Items.DIAMOND_DUST, 2));
         addRecipe(new ItemStack(Material.EMERALD_ORE), new CustomItem(Items.EMERALD_DUST, 2));
         addRecipe(new ItemStack(Material.NETHER_QUARTZ_ORE), new CustomItem(Items.QUARTZ_DUST, 2));
+
         if (SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_16)) {
             addRecipe(new ItemStack(Material.NETHER_GOLD_ORE), new CustomItem(SlimefunItems.GOLD_DUST, 2));
             addRecipe(new ItemStack(Material.ANCIENT_DEBRIS), new CustomItem(Items.ANCIENT_DEBRIS_DUST, 2));
