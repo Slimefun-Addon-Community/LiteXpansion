@@ -119,13 +119,12 @@ public final class UuMatterCategory extends FlexCategory {
         menu.setEmptySlotsClickable(false);
 
         menu.addItem(1, new CustomItem(ChestMenuUtils.getBackButton(player, "",
-            ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide")))
+            ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide"))),
+            (pl, slot, item, action) -> {
+                SlimefunGuide.openMainMenu(playerProfile, slimefunGuideLayout, 1);
+                return false;
+            }
         );
-
-        menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
-            SlimefunPlugin.getRegistry().getSlimefunGuide(slimefunGuideLayout).openMainMenu(playerProfile, 1);
-            return false;
-        });
 
         // Other items
         int i = 9;
