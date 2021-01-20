@@ -40,7 +40,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         setupCustomMetrics(metrics);
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
-            new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
+            new GitHubBuildsUpdater(this, getFile(), "Slimefun-Addon-Community/LiteXpansion/master").start();
         }
 
         registerEnchantments();
@@ -230,7 +230,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     }
 
     public String getBugTrackerURL() {
-        return "https://github.com/J3fftw1/LiteXpansion/issues";
+        return "https://github.com/Slimefun-Addon-Community/LiteXpansion/issues";
     }
 
     private static void setInstance(LiteXpansion ins) {
