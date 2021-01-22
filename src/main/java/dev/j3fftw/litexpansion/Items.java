@@ -6,6 +6,7 @@ import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -19,7 +20,7 @@ import org.bukkit.enchantments.Enchantment;
 
 public final class Items {
 
-    // Category
+    //region Category
     public static final Category LITEXPANSION = new Category(
         new NamespacedKey(LiteXpansion.getInstance(), "litexpansion"),
         new CustomItem(SkullItem.fromHash("3f87fc5cbb233743a82fb0fa51fe739487f29bcc01c9026621ecefad197f4fb1"),
@@ -34,8 +35,9 @@ public final class Items {
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 250 J"
     );
+    //endregion
 
-    // Armor
+    //region Armor
     public static final SlimefunItemStack NANO_BLADE = new SlimefunItemStack(
         "NANO_BLADE",
         Material.DIAMOND_SWORD,
@@ -46,12 +48,11 @@ public final class Items {
         "",
         "&fToggle: &aRight Click",
         "",
-        "&8\u21E8 &7Consumes &e10J &7per hit",
-        "",
-        "&c&o&8\u21E8 &e\u26A1 &70 / 500 J"
+        "&c&o&8\u21E8 &e\u26A1 &70 / " + NanoBlade.CAPACITY + " J"
     );
+    //endregion
 
-    // Weapon
+    //region Weapon
     // Tools
     public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
         "WRENCH",
@@ -106,8 +107,9 @@ public final class Items {
         "&7> &eLeft Click  &7- Apply node configuration",
         "&7> &eShift+Right Click &7- Clear node configuration"
     );
-    // Items
+    //endregion
 
+    //region Items
     public static final SlimefunItemStack TIN_PLATE = new SlimefunItemStack(
         "TIN_PLATE",
         Material.WHITE_CARPET,
@@ -144,17 +146,6 @@ public final class Items {
         "&7Copper Item Casing"
     );
 
-    public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
-        "FOOD_SYNTHESIZER",
-        new CustomItem(SkullItem.fromHash("a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c"),
-            "Food Synthesizer"),
-        "&dFood Synthesizer",
-        "",
-        "&fKeeps you fed with artificial food.",
-        "&fComes in the flavors!",
-        "",
-        "&c&o&8\u21E8 &e\u26A1 &70 / 100 J"
-    );
     public static final SlimefunItemStack MAG_THOR = new SlimefunItemStack(
         "MAG_THOR",
         Material.IRON_INGOT,
@@ -163,6 +154,7 @@ public final class Items {
         "&7&oAn extremely durable alloy used",
         "&7&oonly in the most advanced machines"
     );
+
     public static final SlimefunItemStack THORIUM = new SlimefunItemStack(
         "THORIUM",
         new CustomItem(SkullItem.fromHash("b87403257c0eaa518cf186deccde137d476556ccff146d503fb2e73956582f37"),
@@ -172,6 +164,7 @@ public final class Items {
         LoreBuilder.radioactive(Radioactivity.HIGH),
         LoreBuilder.HAZMAT_SUIT_REQUIRED
     );
+
     public static final SlimefunItemStack SCRAP = new SlimefunItemStack(
         "SCRAP",
         Material.DEAD_BUSH,
@@ -238,8 +231,18 @@ public final class Items {
         Material.COBWEB,
         "&7Advanced Circuit"
     );
-    ////////////////
-    // CARBON CRAP
+
+    public static final SlimefunItemStack ENERGY_CRYSTAL = new SlimefunItemStack(
+        "ENERGY_CRYSTAL",
+        Material.DIAMOND,
+        "&cEnergy Crystal"
+    );
+    //endregion
+
+    //region Carbon Crap
+    //////////////////////////
+    // Carbon Crap
+    //////////////////////////
     public static final SlimefunItemStack COAL_DUST = new SlimefunItemStack(
         "COAL_DUST",
         Material.BLACK_DYE,
@@ -265,7 +268,8 @@ public final class Items {
         Material.PAPER,
         "&7Advanced Alloy"
     );
-    /////////
+    //endregion
+
     public static final SlimefunItemStack ADVANCED_MACHINE_BLOCK = new SlimefunItemStack(
         "ADVANCED_MACHINE_BLOCK",
         Material.DIAMOND_BLOCK,
@@ -461,6 +465,21 @@ public final class Items {
         "&7Ultimate Solar Helmet"
     );
 
+    public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
+        "FOOD_SYNTHESIZER",
+        new CustomItem(SkullItem.fromHash("a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c"),
+            "Food Synthesizer"),
+        "&dFood Synthesizer",
+        "",
+        "&fKeeps you fed with artificial food.",
+        "&fComes in the flavors!",
+        "",
+        "&c&o&8\u21E8 &e\u26A1 &70 / 100 J"
+    );
+
+    //////////////////////////
+    // Plating
+    //////////////////////////
     public static final SlimefunItemStack IRON_PLATE = new SlimefunItemStack(
         "IRON_PLATE",
         Material.WHITE_CARPET,
@@ -490,6 +509,9 @@ public final class Items {
         "&7Iron Item Casing"
     );
 
+    //////////////////////////
+    // Dust
+    //////////////////////////
     public static final SlimefunItemStack LAPIS_DUST = new SlimefunItemStack(
         "LAPIS_DUST",
         Material.PURPLE_DYE,

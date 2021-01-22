@@ -10,14 +10,9 @@ import dev.j3fftw.litexpansion.utils.Utils;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.cscorelib2.data.PersistentDataAPI;
 import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -39,6 +34,15 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 public class Events implements Listener {
 
@@ -64,14 +68,35 @@ public class Events implements Listener {
     @EventHandler
     public void onPlayerDamageDeal(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player) {
-            Player p = (Player) e.getDamager();
-            ItemStack itemInHand = p.getInventory().getItemInMainHand();
-            Validate.notNull(nanoBlade, "Can not be null");
-            if (nanoBlade.isItem(itemInHand)
-                && itemInHand.containsEnchantment(Objects.requireNonNull(Enchantment.getByKey(Constants.GLOW_ENCHANT)))
-                && nanoBlade.removeItemCharge(itemInHand, 10)
+            final Player p = (Player) e.getDamager();
+            final ItemStack itemInHand = p.getInventory().getItemInMainHand();
+
+            if (itemInHand.getType() == Material.DIAMOND_SWORD && itemInHand.hasItemMeta()
+                && nanoBlade.isItem(itemInHand)
             ) {
-                e.setDamage(e.getDamage() * 1.75);
+                final ItemMeta meta = itemInHand.getItemMeta();
+                final Optional<Boolean> opt = PersistentDataAPI.getOptionalBoolean(meta, Constants.NANO_BLADE_ENABLED);
+
+                boolean enabled;
+
+                if (opt.isPresent()) {
+                    enabled = opt.get();
+                } else {
+                    // We will set the persistent key on old items that don't initially have it
+                    enabled = meta.hasEnchant(Enchantment.getByKey(Constants.NANO_BLADE_ENABLED));
+                    PersistentDataAPI.setBoolean(meta, Constants.NANO_BLADE_ENABLED, enabled);
+                }
+
+                if (enabled) {
+                    // This has been deprecated for bloody ages. We may as well use it though as it fits the
+                    // use case and doesn't mean recalculations every hit
+                    // when Spigot decide to remove this, then we'll figure out the best route
+                    e.setDamage(EntityDamageEvent.DamageModifier.BASE, 20);
+                } else {
+                    e.setDamage(EntityDamageEvent.DamageModifier.BASE, 4);
+                }
+
+                // We may want to remove a bit of charge on hit... I guess figure out if we want to and do it here if so
             }
         }
     }
@@ -208,7 +233,6 @@ public class Events implements Listener {
         final Location blockLocation = block.getLocation();
 
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
-
 
 
         Validate.notNull(diamondDrill, "Can not be null");
