@@ -109,7 +109,7 @@
                 <configuration>
                     <relocations>
                         <relocation>
-                            <pattern>org.bstats.bukkit</pattern>
+                            <pattern>org.bstats</pattern>
                             <shadedPattern>dev.j3fftw.litexpansion.bstats</shadedPattern>
                         </relocation>
 
