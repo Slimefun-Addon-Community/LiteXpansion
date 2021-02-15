@@ -12,13 +12,13 @@ public class ElectricChestplate extends SlimefunItem implements Rechargeable {
     public ElectricChestplate() {
         super(Items.LITEXPANSION, Items.ELECTRIC_CHESTPLATE, MetalForge.RECIPE_TYPE, new ItemStack[] {
             Items.MAG_THOR, null, Items.MAG_THOR,
-            Items.MAG_THOR, SlimefunItems.SMALL_CAPACITOR, Items.MAG_THOR,
+            Items.MAG_THOR, SlimefunItems.BIG_CAPACITOR, Items.MAG_THOR,
             Items.MAG_THOR, Items.MAG_THOR, Items.MAG_THOR
         });
     }
 
     @Override
     public float getMaxItemCharge(ItemStack item) {
-        return 250;
+        return 1024;
     }
 }

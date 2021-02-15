@@ -1,6 +1,8 @@
 package dev.j3fftw.litexpansion;
 
+import dev.j3fftw.litexpansion.items.PassiveElectricRemoval;
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
+import dev.j3fftw.litexpansion.ticker.PassiveElectricRemovalTicker;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.Reflections;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
@@ -55,6 +57,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         setupResearches();
         new ThoriumResource().register();
+
+        final PassiveElectricRemovalTicker perTicker = new PassiveElectricRemovalTicker();
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, perTicker, 20, 20);
 
 //        if (Wrench.wrenchFailChance.getValue() < 0
 //            || Wrench.wrenchFailChance.getValue() > 1

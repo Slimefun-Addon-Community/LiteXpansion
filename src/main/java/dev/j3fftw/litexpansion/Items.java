@@ -33,7 +33,7 @@ public final class Items {
         "",
         "&8\u21E8 &7Negates all the damage dealt to player.",
         "",
-        "&c&o&8\u21E8 &e\u26A1 &70 / 250 J"
+        "&c&o&8\u21E8 &e\u26A1 &70 / 8192 J"
     );
     //endregion
 
