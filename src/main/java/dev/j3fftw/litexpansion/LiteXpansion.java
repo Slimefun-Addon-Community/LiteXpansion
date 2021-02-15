@@ -1,6 +1,5 @@
 package dev.j3fftw.litexpansion;
 
-import dev.j3fftw.litexpansion.items.PassiveElectricRemoval;
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
 import dev.j3fftw.litexpansion.ticker.PassiveElectricRemovalTicker;
 import dev.j3fftw.litexpansion.utils.Constants;
@@ -8,23 +7,25 @@ import dev.j3fftw.litexpansion.utils.Reflections;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.AdvancedPie;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import javax.annotation.Nonnull;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -197,7 +198,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     }
 
     private void setupCustomMetrics(@Nonnull Metrics metrics) {
-        metrics.addCustomChart(new Metrics.AdvancedPie("blocks_placed", () -> {
+        metrics.addCustomChart(new AdvancedPie("blocks_placed", () -> {
             final Map<String, Integer> data = new HashMap<>();
             try {
                 Class<?> blockStorage = Class.forName("me.mrCookieSlime.Slimefun.api.BlockStorage");
