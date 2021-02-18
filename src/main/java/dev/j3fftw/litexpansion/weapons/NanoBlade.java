@@ -7,6 +7,7 @@ import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import me.mrCookieSlime.Slimefun.cscorelib2.data.PersistentDataAPI;
 import org.bukkit.ChatColor;
@@ -31,7 +32,7 @@ public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rec
         super(Items.LITEXPANSION, Items.NANO_BLADE, MetalForge.RECIPE_TYPE, new ItemStack[] {
                 new ItemStack(Material.GLOWSTONE_DUST), Items.ADVANCED_ALLOY, null,
                 new ItemStack(Material.GLOWSTONE_DUST), Items.ADVANCED_ALLOY, null,
-                Items.CARBON_PLATE, Items.ENERGY_CRYSTAL, Items.CARBON_PLATE
+                Items.CARBON_PLATE, SlimefunItems.POWER_CRYSTAL, Items.CARBON_PLATE
             }
         );
     }

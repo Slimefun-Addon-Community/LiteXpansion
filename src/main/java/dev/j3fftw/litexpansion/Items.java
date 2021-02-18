@@ -231,12 +231,6 @@ public final class Items {
         Material.COBWEB,
         "&7Advanced Circuit"
     );
-
-    public static final SlimefunItemStack ENERGY_CRYSTAL = new SlimefunItemStack(
-        "ENERGY_CRYSTAL",
-        Material.DIAMOND,
-        "&cEnergy Crystal"
-    );
     //endregion
 
     //region Carbon Crap
