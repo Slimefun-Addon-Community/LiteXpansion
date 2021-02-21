@@ -7,9 +7,9 @@ import dev.j3fftw.litexpansion.utils.Reflections;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.AdvancedPie;
@@ -22,11 +22,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import java.io.File;
-import java.lang.reflect.Field;
-import java.sql.Ref;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -106,8 +103,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generation", 250);
         Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generation", 1200);
         Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generation", 20_000);
-
-        // energyProducedPerTick
     }
 
     private void setupResearches() {
@@ -210,31 +205,20 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     private void setupCustomMetrics(@Nonnull Metrics metrics) {
         metrics.addCustomChart(new AdvancedPie("blocks_placed", () -> {
             final Map<String, Integer> data = new HashMap<>();
-            try {
-                Class<?> blockStorage = Class.forName("me.mrCookieSlime.Slimefun.api.BlockStorage");
+            for (World world : Bukkit.getWorlds()) {
+                final BlockStorage storage = BlockStorage.getStorage(world);
+                if (storage == null) {
+                    continue;
+                }
 
-                for (World world : Bukkit.getWorlds()) {
-                    final BlockStorage storage = BlockStorage.getStorage(world);
-                    if (storage == null) {
+                for (Map.Entry<Location, Config> entry : storage.getRawStorage().entrySet()) {
+                    final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
+                    if (item == null || !(item.getAddon() instanceof LiteXpansion)) {
                         continue;
                     }
 
-                    final Field f = blockStorage.getDeclaredField("storage");
-                    f.setAccessible(true);
-                    @SuppressWarnings("unchecked") final Map<Location, Config> blocks =
-                        (Map<Location, Config>) f.get(storage);
-
-                    for (Map.Entry<Location, Config> entry : blocks.entrySet()) {
-                        final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
-                        if (item == null || !(item.getAddon() instanceof LiteXpansion)) {
-                            continue;
-                        }
-
-                        data.merge(item.getId(), 1, Integer::sum);
-                    }
+                    data.merge(item.getId(), 1, Integer::sum);
                 }
-            } catch (ReflectiveOperationException e) {
-                getLogger().log(Level.WARNING, "Failed to load placed blocks", e);
             }
             return data;
         }));
