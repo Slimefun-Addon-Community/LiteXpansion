@@ -79,9 +79,10 @@ public class Events implements Listener {
         if (e.getEntity() instanceof Player && ((Player) e.getEntity()).getEquipment() != null) {
             final Player p = (Player) e.getEntity();
             final ItemStack chestplate = p.getEquipment().getChestplate();
-            if (chestplate != null
+            if (e.getFinalDamage() > 0
+                && chestplate != null
                 && electricChestplate.isItem(chestplate)
-                && electricChestplate.removeItemCharge(chestplate, (float) e.getFinalDamage() * 20)
+                && electricChestplate.removeItemCharge(chestplate, Math.max(1, (float) e.getFinalDamage()) * 20)
             ) {
                 final ItemMeta meta = chestplate.getItemMeta();
                 final float newCharge = PassiveElectricRemoval.getCharge(meta);
