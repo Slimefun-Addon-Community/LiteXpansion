@@ -60,7 +60,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new ThoriumResource().register();
 
         final PassiveElectricRemovalTicker perTicker = new PassiveElectricRemovalTicker();
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, perTicker, 20, 20);
+        getServer().getScheduler().runTaskTimerAsynchronously(this, perTicker, 20, 20);
 
 //        if (Wrench.wrenchFailChance.getValue() < 0
 //            || Wrench.wrenchFailChance.getValue() > 1
