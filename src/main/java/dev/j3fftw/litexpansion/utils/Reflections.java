@@ -2,6 +2,7 @@ package dev.j3fftw.litexpansion.utils;
 
 import java.lang.reflect.Field;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public final class Reflections {
 
@@ -18,7 +19,8 @@ public final class Reflections {
         }
     }
 
-    public static void setField(@Nonnull Object instance, @Nonnull String fieldName, @Nonnull Object newValue) {
+    public static void setField(@Nullable Object instance, @Nonnull String fieldName, @Nonnull Object newValue) {
+        if (instance == null) return;
         try {
             final Field f = instance.getClass().getDeclaredField(fieldName);
             f.setAccessible(true); // NOSONAR

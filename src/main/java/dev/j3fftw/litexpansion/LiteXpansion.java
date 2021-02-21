@@ -23,6 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import javax.annotation.Nonnull;
 import java.io.File;
 import java.lang.reflect.Field;
+import java.sql.Ref;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -93,11 +94,20 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     }
 
     private void changeSfValues() {
+        // Vanilla SF
         final SlimefunItem energizedPanel = SlimefunItem.getByID("SOLAR_GENERATOR_3");
         if (energizedPanel != null) {
             Reflections.setField(energizedPanel, "dayEnergy", 64);
             Reflections.setField(energizedPanel, "nightEnergy", 32);
         }
+
+        // InfinityExpansion - Halved all values and made infinite panel much less
+        Reflections.setField(SlimefunItem.getByID("ADVANCED_PANEL"), "generation", 75);
+        Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generation", 250);
+        Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generation", 1200);
+        Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generation", 20_000);
+
+        // energyProducedPerTick
     }
 
     private void setupResearches() {
