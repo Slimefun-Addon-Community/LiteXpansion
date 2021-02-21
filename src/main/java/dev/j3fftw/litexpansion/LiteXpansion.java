@@ -103,6 +103,14 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generation", 250);
         Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generation", 1200);
         Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generation", 20_000);
+
+        // Riley decided to be annoying :^)
+        // I'll make a fucking finder for this if he changes it again - or just change it lower down so he can't
+        // mess it up
+        Reflections.setField(SlimefunItem.getByID("ADVANCED_PANEL"), "generationChangingThisToAnnoyLx", 75);
+        Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generationChangingThisToAnnoyLx", 250);
+        Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generationChangingThisToAnnoyLx", 1200);
+        Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generationChangingThisToAnnoyLx", 20_000);
     }
 
     private void setupResearches() {
