@@ -46,7 +46,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         registerEnchantments();
 
-        changeSfValues();
+        getServer().getScheduler().runTask(this, () -> changeSfValues());
 
         ItemSetup.INSTANCE.init();
 
