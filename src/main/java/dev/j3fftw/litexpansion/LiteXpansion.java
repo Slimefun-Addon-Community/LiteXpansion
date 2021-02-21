@@ -18,6 +18,7 @@ import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
@@ -46,7 +47,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         registerEnchantments();
 
-        getServer().getScheduler().runTask(this, () -> changeSfValues());
+        getServer().getScheduler().runTask(this, this::changeSfValues);
 
         ItemSetup.INSTANCE.init();
 
@@ -98,19 +99,11 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             Reflections.setField(energizedPanel, "nightEnergy", 32);
         }
 
-        // InfinityExpansion - Halved all values and made infinite panel much less
-        Reflections.setField(SlimefunItem.getByID("ADVANCED_PANEL"), "generation", 75);
-        Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generation", 250);
-        Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generation", 1200);
-        Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generation", 20_000);
-
-        // Riley decided to be annoying :^)
-        // I'll make a fucking finder for this if he changes it again - or just change it lower down so he can't
-        // mess it up
-        Reflections.setField(SlimefunItem.getByID("ADVANCED_PANEL"), "generationChangingThisToAnnoyLx", 75);
-        Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generationChangingThisToAnnoyLx", 250);
-        Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generationChangingThisToAnnoyLx", 1200);
-        Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generationChangingThisToAnnoyLx", 20_000);
+        // It's midnight, I can't be arsed :^)
+        final Plugin rileyIsBeingADickForNoReason = getServer().getPluginManager().getPlugin("InfinityExpansion");
+        if (rileyIsBeingADickForNoReason != null) {
+            getServer().getPluginManager().disablePlugin(rileyIsBeingADickForNoReason);
+        }
     }
 
     private void setupResearches() {
