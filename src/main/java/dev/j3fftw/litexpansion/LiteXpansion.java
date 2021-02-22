@@ -99,11 +99,11 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             Reflections.setField(energizedPanel, "nightEnergy", 32);
         }
 
-        // It's midnight, I can't be arsed :^)
-        final Plugin rileyIsBeingADickForNoReason = getServer().getPluginManager().getPlugin("InfinityExpansion");
-        if (rileyIsBeingADickForNoReason != null) {
-            getServer().getPluginManager().disablePlugin(rileyIsBeingADickForNoReason);
-        }
+        // InfinityExpansion - Halved all values and made infinite panel much less
+        Reflections.setField(SlimefunItem.getByID("ADVANCED_PANEL"), "generation", 75);
+        Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generation", 250);
+        Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generation", 1200);
+        Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generation", 20_000);
     }
 
     private void setupResearches() {
