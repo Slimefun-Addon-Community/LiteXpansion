@@ -313,16 +313,7 @@ final class ItemSetup {
 
     private void registerNonPlaceableItem(@Nonnull SlimefunItemStack item, @Nonnull RecipeType type,
                                           @Nonnull ItemStack... items) {
-        ItemStack[] recipe;
-
-        if (items.length < 9) {
-            recipe = new ItemStack[9];
-            System.arraycopy(items, 0, recipe, 0, items.length);
-        } else {
-            recipe = items;
-        }
-
-        new UnplaceableBlock(Items.LITEXPANSION, item, type, recipe).register(plugin);
+        registerNonPlaceableItem(item, 1, type, items);
     }
 
     /**
