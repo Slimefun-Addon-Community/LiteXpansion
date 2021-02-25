@@ -52,7 +52,6 @@ public interface PassiveElectricRemoval {
 
             is.setItemMeta(meta);
         }
-
     }
 
     // This is here until ChargeUtils is in the next RC
