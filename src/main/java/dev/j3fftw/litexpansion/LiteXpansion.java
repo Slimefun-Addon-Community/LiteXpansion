@@ -3,6 +3,7 @@ package dev.j3fftw.litexpansion;
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
 import dev.j3fftw.litexpansion.ticker.PassiveElectricRemovalTicker;
 import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.utils.Log;
 import dev.j3fftw.litexpansion.utils.Reflections;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
@@ -11,6 +12,7 @@ import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
+import org.bstats.MetricsBase;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.AdvancedPie;
 import org.bukkit.Bukkit;
@@ -39,7 +41,10 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         }
 
         final Metrics metrics = new Metrics(this, 7111);
-        setupCustomMetrics(metrics);
+        // TODO: Disabled for the min, seems to have caused a spike on some servers.
+        // Probably due to the immutable copy made by getRawStorage
+        // This could be switched back to reflection if we want it to be quick again
+//        setupCustomMetrics(metrics);
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
@@ -67,6 +72,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 //            getLogger().log(Level.SEVERE, "The wrench failure chance must be or be between 0 and 1!");
 //            getServer().getPluginManager().disablePlugin(this);
 //        }
+
+        forceMetricsPush(metrics);
     }
 
     @Override
@@ -205,14 +212,23 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private void setupCustomMetrics(@Nonnull Metrics metrics) {
         metrics.addCustomChart(new AdvancedPie("blocks_placed", () -> {
+            Log.info("--------------------------------");
+            Log.info("Starting Metrics collection");
+            Log.info("--                            --");
+            long start = System.currentTimeMillis();
             final Map<String, Integer> data = new HashMap<>();
             for (World world : Bukkit.getWorlds()) {
+                long a = System.currentTimeMillis();
                 final BlockStorage storage = BlockStorage.getStorage(world);
+                long b = System.currentTimeMillis();
+                Log.info("Took {}ms to get storage for {}", b - a, world.getName());
                 if (storage == null) {
                     continue;
                 }
 
-                for (Map.Entry<Location, Config> entry : storage.getRawStorage().entrySet()) {
+                long c = System.currentTimeMillis();
+                final Map<Location, Config> rawStorage = storage.getRawStorage();
+                for (Map.Entry<Location, Config> entry : rawStorage.entrySet()) {
                     final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
                     if (item == null || !(item.getAddon() instanceof LiteXpansion)) {
                         continue;
@@ -220,9 +236,18 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
                     data.merge(item.getId(), 1, Integer::sum);
                 }
+                long d = System.currentTimeMillis();
+                Log.info("Took {}ms to look through {} items", d - c, rawStorage.size());
             }
+            long end = System.currentTimeMillis();
+            Log.info("Took {}ms to log metrics", end - start);
             return data;
         }));
+    }
+
+    private void forceMetricsPush(@Nonnull Metrics metrics) {
+        MetricsBase base = (MetricsBase) Reflections.getField(Metrics.class, metrics, "metricsBase");
+        Reflections.invoke(MetricsBase.class, base, "submitData");
     }
 
     @Nonnull

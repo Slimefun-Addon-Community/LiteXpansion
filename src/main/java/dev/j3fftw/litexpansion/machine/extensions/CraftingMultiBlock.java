@@ -1,4 +1,4 @@
-package dev.j3fftw.litexpansion.machine;
+package dev.j3fftw.litexpansion.machine.extensions;
 
 import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;

@@ -20,10 +20,10 @@ import java.util.UUID;
  */
 public final class PassiveElectricRemovalTicker implements Runnable {
 
-    private final Set<TickerDataHolder> set = new HashSet<>();
-
     @Override
     public void run() {
+        final Set<TickerDataHolder> set = new HashSet<>();
+
         for (Player player : Bukkit.getOnlinePlayers()) {
             // This creates a copy and translates all the NMS items into CB items. This is pretty expensive
             final ItemStack[] contents = player.getInventory().getContents();
@@ -43,7 +43,7 @@ public final class PassiveElectricRemovalTicker implements Runnable {
         }
 
         Bukkit.getScheduler().runTask(LiteXpansion.getInstance(), () -> {
-            for (TickerDataHolder holder : this.set) {
+            for (TickerDataHolder holder : set) {
                 PassiveElectricRemoval.tick(holder.item, holder.per);
             }
         });
