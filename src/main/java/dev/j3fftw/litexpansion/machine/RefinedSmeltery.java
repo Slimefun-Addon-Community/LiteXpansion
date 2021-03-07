@@ -3,6 +3,8 @@ package dev.j3fftw.litexpansion.machine;
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import javax.annotation.Nonnull;
+
+import dev.j3fftw.litexpansion.machine.extensions.CraftingMultiBlock;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
