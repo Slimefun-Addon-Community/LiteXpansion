@@ -130,7 +130,7 @@ final class ItemSetup {
 
         registerNonPlaceableItem(Items.TIN_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.TIN_PLATE);
 
-        registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_TIN_CABLE, 3),
+        registerNonPlaceableItem(Items.UNINSULATED_TIN_CABLE, 3,
             ManualMill.RECIPE_TYPE, Items.TIN_ITEM_CASING
         );
 
@@ -142,7 +142,7 @@ final class ItemSetup {
 
         registerNonPlaceableItem(Items.COPPER_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.COPPER_PLATE);
 
-        registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_COPPER_CABLE, 3),
+        registerNonPlaceableItem(Items.UNINSULATED_COPPER_CABLE, 3,
             ManualMill.RECIPE_TYPE, Items.COPPER_ITEM_CASING
         );
 
@@ -159,7 +159,7 @@ final class ItemSetup {
 
         registerNonPlaceableItem(Items.GOLD_ITEM_CASING, ManualMill.RECIPE_TYPE, Items.GOLD_PLATE);
 
-        registerNonPlaceableItem(new SlimefunItemStack(Items.UNINSULATED_GOLD_CABLE, 3),
+        registerNonPlaceableItem(Items.UNINSULATED_GOLD_CABLE, 3,
             ManualMill.RECIPE_TYPE, Items.GOLD_ITEM_CASING
         );
 
@@ -311,7 +311,15 @@ final class ItemSetup {
         new SlimefunItem(Items.LITEXPANSION, result, type, recipe).register(plugin);
     }
 
-    private void registerNonPlaceableItem(@Nonnull SlimefunItemStack result, @Nonnull RecipeType type,
+    private void registerNonPlaceableItem(@Nonnull SlimefunItemStack item, @Nonnull RecipeType type,
+                                          @Nonnull ItemStack... items) {
+        registerNonPlaceableItem(item, 1, type, items);
+    }
+
+    /**
+     * Register an item with an output amount greater than 1
+     */
+    private void registerNonPlaceableItem(@Nonnull SlimefunItemStack item, int amount, @Nonnull RecipeType type,
                                           @Nonnull ItemStack... items) {
         ItemStack[] recipe;
 
@@ -322,7 +330,7 @@ final class ItemSetup {
             recipe = items;
         }
 
-        new UnplaceableBlock(Items.LITEXPANSION, result, type, recipe).register(plugin);
+        new UnplaceableBlock(Items.LITEXPANSION, item, type, recipe, new SlimefunItemStack(item, amount)).register(plugin);
     }
 
 
