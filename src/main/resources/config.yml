@@ -1,2 +1,3 @@
 options:
   auto-update: true
+  do-nerfs: true
