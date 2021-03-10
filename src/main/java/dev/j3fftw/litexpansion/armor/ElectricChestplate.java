@@ -19,6 +19,6 @@ public class ElectricChestplate extends SlimefunItem implements Rechargeable {
 
     @Override
     public float getMaxItemCharge(ItemStack item) {
-        return 1024;
+        return 8192;
     }
 }
