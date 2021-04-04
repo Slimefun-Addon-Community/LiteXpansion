@@ -107,10 +107,10 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         }
 
         // InfinityExpansion - Halved all values and made infinite panel much less
-        Reflections.setField(SlimefunItem.getByID("ADVANCED_PANEL"), "generation", 75);
-        Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generation", 250);
-        Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generation", 1200);
-        Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generation", 20_000);
+        Reflections.setField(SlimefunItem.getByID("ADVANCED_PANEL"), "generation", 74);
+        Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generation", 249);
+        Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generation", 1199);
+        Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generation", 19_999);
     }
 
     private void setupResearches() {
