@@ -2,11 +2,9 @@ package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
+import dev.j3fftw.litexpansion.machine.api.PoweredMachine;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
@@ -15,13 +13,15 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 
-public class RubberSynthesizer extends AContainer implements RecipeDisplayItem {
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
+
+public class RubberSynthesizer extends AContainer implements RecipeDisplayItem, PoweredMachine {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
         new NamespacedKey(LiteXpansion.getInstance(), "rubber_synthesizer"), Items.RUBBER_SYNTHESIZER_MACHINE
     );
-    public static final int ENERGY_CONSUMPTION = 20_000 / 26;
-    public static final int CAPACITY = ENERGY_CONSUMPTION * 5;
 
     public RubberSynthesizer() {
         super(Items.LITEXPANSION, Items.RUBBER_SYNTHESIZER_MACHINE, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -34,8 +34,8 @@ public class RubberSynthesizer extends AContainer implements RecipeDisplayItem {
 
     @Override
     protected void registerDefaultRecipes() {
-        registerRecipe(13, new ItemStack[] {new CustomItem(SlimefunItems.OIL_BUCKET)},
-            new ItemStack[] {new CustomItem(Items.RUBBER, 8), new ItemStack(Material.BUCKET)});
+        registerRecipe(13, new ItemStack[] { new CustomItem(SlimefunItems.OIL_BUCKET) },
+            new ItemStack[] { new CustomItem(Items.RUBBER, 8), new ItemStack(Material.BUCKET) });
     }
 
     @Nonnull
@@ -70,16 +70,21 @@ public class RubberSynthesizer extends AContainer implements RecipeDisplayItem {
 
     @Override
     public int getCapacity() {
-        return CAPACITY;
+        return getDefaultEnergyConsumption() * 5;
     }
 
     @Override
     public int getEnergyConsumption() {
-        return ENERGY_CONSUMPTION;
+        return getFinalEnergyConsumption();
     }
 
     @Override
     public int getSpeed() {
         return 1;
+    }
+
+    @Override
+    public int getDefaultEnergyConsumption() {
+        return 20_000 / 26;
     }
 }

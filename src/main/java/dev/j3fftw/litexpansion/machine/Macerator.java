@@ -1,6 +1,7 @@
 package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.litexpansion.Items;
+import dev.j3fftw.litexpansion.machine.api.PoweredMachine;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
@@ -11,10 +12,8 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class Macerator extends AContainer {
+public class Macerator extends AContainer implements PoweredMachine {
 
-    public static final int ENERGY_CONSUMPTION = 20_000 / 26;
-    public static final int CAPACITY = ENERGY_CONSUMPTION * 5;
     public static final int TIME = 5;
 
     public Macerator() {
@@ -100,12 +99,17 @@ public class Macerator extends AContainer {
 
     @Override
     public int getCapacity() {
-        return CAPACITY;
+        return getDefaultEnergyConsumption() * 5;
+    }
+
+    @Override
+    public int getDefaultEnergyConsumption() {
+        return 20_000 / 26;
     }
 
     @Override
     public int getEnergyConsumption() {
-        return ENERGY_CONSUMPTION;
+        return this.getFinalEnergyConsumption();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package dev.j3fftw.litexpansion.machine;
+package dev.j3fftw.litexpansion.machine.multiblock;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;

@@ -1,4 +1,4 @@
-package dev.j3fftw.litexpansion.machine;
+package dev.j3fftw.litexpansion.machine.generators;
 
 import dev.j3fftw.extrautils.interfaces.InventoryBlock;
 import dev.j3fftw.extrautils.utils.Utils;

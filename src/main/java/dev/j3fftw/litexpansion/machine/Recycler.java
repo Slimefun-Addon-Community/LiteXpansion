@@ -4,15 +4,11 @@ import dev.j3fftw.extrautils.interfaces.InventoryBlock;
 import dev.j3fftw.extrautils.utils.Utils;
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
+import dev.j3fftw.litexpansion.machine.api.PoweredMachine;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -26,14 +22,17 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
-public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetComponent, PoweredMachine {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
         new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.RECYCLER
     );
 
-    public static final int ENERGY_CONSUMPTION = 100;
-    public static final int CAPACITY = 450;
     private static final int INPUT_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
@@ -125,10 +124,10 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
     }
 
     private boolean takePower(@Nonnull Block b) {
-        if (getCharge(b.getLocation()) < ENERGY_CONSUMPTION) {
+        if (getCharge(b.getLocation()) < getFinalEnergyConsumption()) {
             return false;
         }
-        removeCharge(b.getLocation(), ENERGY_CONSUMPTION);
+        removeCharge(b.getLocation(), getFinalEnergyConsumption());
         return true;
     }
 
@@ -140,16 +139,21 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
 
     @Override
     public int getCapacity() {
-        return CAPACITY;
+        return getDefaultEnergyConsumption() * 3;
     }
 
     @Override
     public int[] getInputSlots() {
-        return new int[] {INPUT_SLOT};
+        return new int[] { INPUT_SLOT };
     }
 
     @Override
     public int[] getOutputSlots() {
-        return new int[] {OUTPUT_SLOT};
+        return new int[] { OUTPUT_SLOT };
+    }
+
+    @Override
+    public int getDefaultEnergyConsumption() {
+        return 100;
     }
 }

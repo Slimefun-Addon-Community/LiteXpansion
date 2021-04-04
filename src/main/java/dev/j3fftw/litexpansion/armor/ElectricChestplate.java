@@ -1,7 +1,7 @@
 package dev.j3fftw.litexpansion.armor;
 
 import dev.j3fftw.litexpansion.Items;
-import dev.j3fftw.litexpansion.machine.MetalForge;
+import dev.j3fftw.litexpansion.machine.multiblock.MetalForge;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;

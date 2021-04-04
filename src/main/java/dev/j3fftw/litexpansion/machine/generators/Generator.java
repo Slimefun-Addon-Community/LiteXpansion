@@ -1,4 +1,4 @@
-package dev.j3fftw.litexpansion.machine;
+package dev.j3fftw.litexpansion.machine.generators;
 
 import dev.j3fftw.litexpansion.Items;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.generators.CoalGenerator;

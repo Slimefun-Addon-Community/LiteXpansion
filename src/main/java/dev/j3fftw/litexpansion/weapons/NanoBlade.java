@@ -2,7 +2,7 @@ package dev.j3fftw.litexpansion.weapons;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.items.PassiveElectricRemoval;
-import dev.j3fftw.litexpansion.machine.MetalForge;
+import dev.j3fftw.litexpansion.machine.multiblock.MetalForge;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
