@@ -33,6 +33,8 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
         new NamespacedKey(LiteXpansion.getInstance(), "scrap_machine"), Items.RECYCLER
     );
 
+    public static final int ENERGY_CONSUMPTION = 200;
+    public static final int CAPACITY = ENERGY_CONSUMPTION * 3;
     private static final int INPUT_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
@@ -139,7 +141,7 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
 
     @Override
     public int getCapacity() {
-        return getDefaultEnergyConsumption() * 3;
+        return CAPACITY;
     }
 
     @Override
@@ -154,6 +156,6 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
 
     @Override
     public int getDefaultEnergyConsumption() {
-        return 100;
+        return ENERGY_CONSUMPTION;
     }
 }

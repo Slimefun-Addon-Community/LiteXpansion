@@ -32,6 +32,8 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
         new NamespacedKey(LiteXpansion.getInstance(), "mass_fabricator"), Items.MASS_FABRICATOR_MACHINE
     );
 
+    public static final int ENERGY_CONSUMPTION = 16_666;
+    public static final int CAPACITY = ENERGY_CONSUMPTION * 3;
     private static final int[] INPUT_SLOTS = new int[] { 10, 11 };
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
@@ -147,7 +149,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     @Override
     public int getCapacity() {
-        return getDefaultEnergyConsumption() * 3;
+        return CAPACITY;
     }
 
     @Override
@@ -162,6 +164,6 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     @Override
     public int getDefaultEnergyConsumption() {
-        return 16_666;
+        return ENERGY_CONSUMPTION;
     }
 }

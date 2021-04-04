@@ -19,6 +19,9 @@ import java.util.List;
 
 public class RubberSynthesizer extends AContainer implements RecipeDisplayItem, PoweredMachine {
 
+    public static final int ENERGY_CONSUMPTION = 20_000 / 26;
+    public static final int CAPACITY = ENERGY_CONSUMPTION * 5;
+
     public static final RecipeType RECIPE_TYPE = new RecipeType(
         new NamespacedKey(LiteXpansion.getInstance(), "rubber_synthesizer"), Items.RUBBER_SYNTHESIZER_MACHINE
     );
@@ -70,7 +73,7 @@ public class RubberSynthesizer extends AContainer implements RecipeDisplayItem, 
 
     @Override
     public int getCapacity() {
-        return getDefaultEnergyConsumption() * 5;
+        return CAPACITY;
     }
 
     @Override
