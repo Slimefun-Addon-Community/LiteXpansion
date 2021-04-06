@@ -51,7 +51,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         registerEnchantments();
 
-        getServer().getScheduler().runTask(this, this::changeSfValues);
+        if (getConfig().getBoolean("options.nerf-other-addons", true)) {
+            getServer().getScheduler().runTask(this, this::nerfCrap);
+        }
 
         ItemSetup.INSTANCE.init();
 
@@ -72,7 +74,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 //            getServer().getPluginManager().disablePlugin(this);
 //        }
 
-        forceMetricsPush(metrics);
+//        forceMetricsPush(metrics);
     }
 
     @Override
@@ -97,7 +99,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         }
     }
 
-    private void changeSfValues() {
+    private void nerfCrap() {
         // Vanilla SF
         final SlimefunItem energizedPanel = SlimefunItem.getByID("SOLAR_GENERATOR_3");
         if (energizedPanel != null) {
