@@ -44,6 +44,27 @@ public final class Reflections {
         }
     }
 
+    public static <T> T getField(@Nonnull Object instance, @Nonnull Field field) {
+        try {
+            return (T) field.get(instance);
+        } catch (ReflectiveOperationException e) {
+            Log.warn("Failed to get field value {} from {}", field, instance.getClass().getSimpleName());
+            return null;
+        }
+    }
+
+    public static Field getRawField(@Nonnull Class<?> clazz, @Nonnull String fieldName) {
+        try {
+            final Field f = clazz.getDeclaredField(fieldName);
+            f.setAccessible(true); // NOSONAR
+
+            return f;
+        } catch (ReflectiveOperationException e) {
+            Log.warn("Failed to get field {} in {}", fieldName, clazz.getSimpleName());
+            return null;
+        }
+    }
+
     public static void invoke(@Nonnull Class<?> clazz, @Nullable Object instance, @Nonnull String methodName) {
         try {
             final Method m = clazz.getDeclaredMethod(methodName);

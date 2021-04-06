@@ -3,33 +3,27 @@ package dev.j3fftw.litexpansion;
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
 import dev.j3fftw.litexpansion.ticker.PassiveElectricRemovalTicker;
 import dev.j3fftw.litexpansion.utils.Constants;
-import dev.j3fftw.litexpansion.utils.Log;
 import dev.j3fftw.litexpansion.utils.Reflections;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 import org.bstats.MetricsBase;
 import org.bstats.bukkit.Metrics;
-import org.bstats.charts.AdvancedPie;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
-import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
+import service.MetricsService;
 
 import javax.annotation.Nonnull;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private static LiteXpansion instance;
+
+    private final MetricsService metricsService = new MetricsService();
 
     @Override
     public void onEnable() {
@@ -40,10 +34,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         }
 
         final Metrics metrics = new Metrics(this, 7111);
-        // TODO: Disabled for the min, seems to have caused a spike on some servers.
-        // Probably due to the immutable copy made by getRawStorage
-        // This could be switched back to reflection if we want it to be quick again
-//        setupCustomMetrics(metrics);
+        metricsService.setup(metrics);
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
@@ -209,41 +200,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             .addItems(Items.HYBRID_SOLAR_HELMET, Items.ADVANCED_SOLAR_HELMET, Items.ADVANCEDLX_SOLAR_HELMET,
                 Items.CARBONADO_SOLAR_HELMET, Items.ENERGIZED_SOLAR_HELMET, Items.ULTIMATE_SOLAR_HELMET)
             .register();
-    }
-
-    private void setupCustomMetrics(@Nonnull Metrics metrics) {
-        metrics.addCustomChart(new AdvancedPie("blocks_placed", () -> {
-            Log.info("--------------------------------");
-            Log.info("Starting Metrics collection");
-            Log.info("--                            --");
-            long start = System.currentTimeMillis();
-            final Map<String, Integer> data = new HashMap<>();
-            for (World world : Bukkit.getWorlds()) {
-                long a = System.currentTimeMillis();
-                final BlockStorage storage = BlockStorage.getStorage(world);
-                long b = System.currentTimeMillis();
-                Log.info("Took {}ms to get storage for {}", b - a, world.getName());
-                if (storage == null) {
-                    continue;
-                }
-
-                long c = System.currentTimeMillis();
-                final Map<Location, Config> rawStorage = storage.getRawStorage();
-                for (Map.Entry<Location, Config> entry : rawStorage.entrySet()) {
-                    final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
-                    if (item == null || !(item.getAddon() instanceof LiteXpansion)) {
-                        continue;
-                    }
-
-                    data.merge(item.getId(), 1, Integer::sum);
-                }
-                long d = System.currentTimeMillis();
-                Log.info("Took {}ms to look through {} items", d - c, rawStorage.size());
-            }
-            long end = System.currentTimeMillis();
-            Log.info("Took {}ms to log metrics", end - start);
-            return data;
-        }));
     }
 
     private void forceMetricsPush(@Nonnull Metrics metrics) {
