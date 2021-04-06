@@ -14,7 +14,7 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
-import service.MetricsService;
+import dev.j3fftw.litexpansion.service.MetricsService;
 
 import javax.annotation.Nonnull;
 import java.io.File;

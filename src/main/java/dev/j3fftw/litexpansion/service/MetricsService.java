@@ -1,4 +1,4 @@
-package service;
+package dev.j3fftw.litexpansion.service;
 
 import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.utils.Reflections;
@@ -23,7 +23,7 @@ public class MetricsService {
 
     private final Map<UUID, Field> rawStorageMethods = new HashMap<>();
 
-    public MetricsService() {
+    public void setup(@Nonnull Metrics metrics) {
         // We need to make sure the worlds are loaded.
         LiteXpansion.getInstance().getServer().getScheduler().runTask(LiteXpansion.getInstance(), () -> {
             for (World world : Bukkit.getWorlds()) {
@@ -35,9 +35,12 @@ public class MetricsService {
                 }
             }
         });
+
+        // Setup charts
+        setupCharts(metrics);
     }
 
-    public void setup(@Nonnull Metrics metrics) {
+    private void setupCharts(@Nonnull Metrics metrics) {
         metrics.addCustomChart(new AdvancedPie("blocks_placed", () -> {
             final Map<String, Integer> data = new HashMap<>();
             for (World world : Bukkit.getWorlds()) {
