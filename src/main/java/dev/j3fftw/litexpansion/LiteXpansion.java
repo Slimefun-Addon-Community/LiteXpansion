@@ -57,15 +57,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         final PassiveElectricRemovalTicker perTicker = new PassiveElectricRemovalTicker();
         getServer().getScheduler().runTaskTimerAsynchronously(this, perTicker, 20, 20);
-
-//        if (Wrench.wrenchFailChance.getValue() < 0
-//            || Wrench.wrenchFailChance.getValue() > 1
-//        ) {
-//            getLogger().log(Level.SEVERE, "The wrench failure chance must be or be between 0 and 1!");
-//            getServer().getPluginManager().disablePlugin(this);
-//        }
-
-//        forceMetricsPush(metrics);
     }
 
     @Override
