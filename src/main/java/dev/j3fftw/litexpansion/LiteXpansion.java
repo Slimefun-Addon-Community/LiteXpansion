@@ -17,7 +17,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import dev.j3fftw.litexpansion.service.MetricsService;
 
 import javax.annotation.Nonnull;
-import java.io.File;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -29,9 +28,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     public void onEnable() {
         setInstance(this);
 
-        if (!new File(getDataFolder(), "config.yml").exists()) {
-            saveDefaultConfig();
-        }
+        getConfig().options().copyDefaults(true);
+        saveConfig();
 
         final Metrics metrics = new Metrics(this, 7111);
         metricsService.setup(metrics);
