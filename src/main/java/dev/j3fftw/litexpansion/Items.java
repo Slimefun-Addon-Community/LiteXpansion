@@ -339,8 +339,8 @@ public final class Items {
         "&9Works at Night",
         "",
         LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ADVANCED_STORAGE),
-        AdvancedSolarPanel.ADVANCED_DAY_RATE + "J/t (Day)",
-        AdvancedSolarPanel.ADVANCED_NIGHT_RATE + "J/t (Night)"
+        "&8⇨ &e⚡ &7" + AdvancedSolarPanel.ADVANCED_DAY_RATE + " J/t (Day)",
+        "&8⇨ &e⚡ &7" + AdvancedSolarPanel.ADVANCED_NIGHT_RATE + " J/t (Night)"
     );
     public static final SlimefunItemStack HYBRID_SOLAR_PANEL = new SlimefunItemStack(
         "HYBRID_SOLAR_PANEL",
@@ -349,8 +349,8 @@ public final class Items {
         "&9Works at Night",
         "",
         LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.HYBRID_STORAGE),
-        AdvancedSolarPanel.HYBRID_DAY_RATE + "J/t (Day + Nether)",
-        AdvancedSolarPanel.HYBRID_NIGHT_RATE + "J/t (Night + End)"
+        "&8⇨ &e⚡ &7" + AdvancedSolarPanel.HYBRID_DAY_RATE + " J/t (Day + Nether)",
+        "&8⇨ &e⚡ &7" + AdvancedSolarPanel.HYBRID_NIGHT_RATE + " J/t (Night + End)"
     );
     public static final SlimefunItemStack ULTIMATE_SOLAR_PANEL = new SlimefunItemStack(
         "ULTIMATE_SOLAR_PANEL",
@@ -359,8 +359,8 @@ public final class Items {
         "&9Works at Night",
         "",
         LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ULTIMATE_STORAGE),
-        AdvancedSolarPanel.ULTIMATE_DAY_RATE + "J/t (Day)",
-        AdvancedSolarPanel.ULTIMATE_NIGHT_RATE + "J/t (Night)"
+        "&8⇨ &e⚡ &7" + AdvancedSolarPanel.ULTIMATE_DAY_RATE + " J/t (Day)",
+        "&8⇨ &e⚡ &7" + AdvancedSolarPanel.ULTIMATE_NIGHT_RATE + " J/t (Night)"
     );
     public static final SlimefunItemStack MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT",
