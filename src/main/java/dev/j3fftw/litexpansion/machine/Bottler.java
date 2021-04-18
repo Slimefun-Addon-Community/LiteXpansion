@@ -13,13 +13,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class Bottler extends AContainer implements PoweredMachine {
 
-    public static final RecipeType RECIPE_TYPE = new RecipeType(
-        new NamespacedKey(LiteXpansion.getInstance(), "bottler"),
-        Items.BOTTLER,
-        "",
-        "&7Used to Bottle"
-    );
-
     public static final ItemStack concrete = new ItemStack(Material.WHITE_CONCRETE);
 
     public Bottler() {
