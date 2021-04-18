@@ -9,6 +9,9 @@ import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
+import dev.j3fftw.litexpansion.machine.Bottler;
+import dev.j3fftw.litexpansion.machine.ItemSmasher;
+import dev.j3fftw.litexpansion.machine.LiquidCleaner;
 import dev.j3fftw.litexpansion.machine.generators.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.generators.Generator;
 import dev.j3fftw.litexpansion.machine.Macerator;
@@ -80,6 +83,9 @@ final class ItemSetup {
         new Generator().register(LiteXpansion.getInstance());
         new ManualMill().register(LiteXpansion.getInstance());
         new Macerator().register(LiteXpansion.getInstance());
+        new Bottler().register(LiteXpansion.getInstance());
+        new ItemSmasher().register(LiteXpansion.getInstance());
+        new LiquidCleaner().register(LiteXpansion.getInstance());
     }
 
     //Disable when SlimyTreeTaps exists
@@ -148,7 +154,6 @@ final class ItemSetup {
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
             rubberItem, Items.UNINSULATED_COPPER_CABLE
         );
-
         registerItem(Items.RE_BATTERY, RecipeType.ENHANCED_CRAFTING_TABLE,
             null, Items.TIN_CABLE, null,
             Items.TIN_ITEM_CASING, new ItemStack(Material.REDSTONE), Items.TIN_ITEM_CASING,

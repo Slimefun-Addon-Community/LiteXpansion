@@ -222,6 +222,25 @@ public final class Items {
         Material.COBWEB,
         "&7Advanced Circuit"
     );
+
+    public static final SlimefunItemStack MOB_ESSENCE = new SlimefunItemStack(
+        "MOB_ESSENCE",
+        Material.LAVA_BUCKET,
+        "&7Mob Essence"
+    );
+
+    //TODO add it to bio generator
+    public static final SlimefunItemStack MOB_SCRAP = new SlimefunItemStack(
+        "MOB_SCRAP",
+        Material.BROWN_DYE,
+        "&7Mob Scrap"
+    );
+
+    public static final SlimefunItemStack LIQUID_EXP = new SlimefunItemStack(
+        "LIQUID_EXP",
+        Material.LAVA_BUCKET,
+        "&7Liquid Exp"
+    );
     //endregion
 
     //region Carbon Crap
@@ -287,6 +306,21 @@ public final class Items {
         "&7Mixed Metal Ingot"
     );
     // Machines
+    public static final SlimefunItemStack ITEM_SMASHER = new SlimefunItemStack(
+      "ITEM_SMASHER",
+      Material.WHITE_CONCRETE,
+      "&7Item Smasher"
+    );
+    public static final SlimefunItemStack BOTTLER = new SlimefunItemStack(
+        "BOTTLER",
+        Material.WHITE_STAINED_GLASS,
+        "&7Bottler"
+    );
+    public static final SlimefunItemStack LIQUID_CLEANER = new SlimefunItemStack(
+        "LIQUID_CLEANER",
+        Material.WHITE_WOOL,
+        "&7Liquid Cleaner"
+    );
     public static final SlimefunItemStack RECYCLER = new SlimefunItemStack(
         "SCRAP_MACHINE",
         Material.BLACK_CONCRETE,
