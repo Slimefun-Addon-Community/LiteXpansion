@@ -2,6 +2,7 @@ package dev.j3fftw.litexpansion.machine.extensions;
 
 import dev.j3fftw.extrautils.interfaces.InventoryBlock;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
+import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.Capacitor;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
@@ -68,12 +69,14 @@ public abstract class ChargingStorageUnit extends Capacitor implements Inventory
             }
         });
 
-        registerBlockHandler(this.getId(), (p, b, tool, reason) -> {
-            BlockMenu inv = BlockStorage.getInventory(b);
-            if (inv != null) {
-                inv.dropItems(b.getLocation(), this.getInputSlots());
+        addItemHandler(new SimpleBlockBreakHandler() {
+            @Override
+            public void onBlockBreak(@Nonnull Block b) {
+                BlockMenu inv = BlockStorage.getInventory(b);
+                if (inv != null) {
+                    inv.dropItems(b.getLocation(), INPUT_SLOT);
+                }
             }
-            return true;
         });
     }
 
