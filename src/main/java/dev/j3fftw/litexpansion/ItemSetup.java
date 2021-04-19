@@ -65,7 +65,6 @@ final class ItemSetup {
     private void registerTools() {
         new CargoConfigurator().register(plugin);
         new GlassCutter().register(plugin);
-        // new Wrench().register(plugin);
         new MiningDrill(MiningDrill.Type.MINING).register(plugin);
         new MiningDrill(MiningDrill.Type.DIAMOND).register(plugin);
     }

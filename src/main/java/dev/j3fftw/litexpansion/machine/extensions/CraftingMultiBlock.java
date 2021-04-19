@@ -27,7 +27,7 @@ import org.bukkit.inventory.ItemStack;
 
 public abstract class CraftingMultiBlock extends MultiBlockMachine {
 
-    public CraftingMultiBlock(Category category, SlimefunItemStack item, ItemStack[] recipe,
+    protected CraftingMultiBlock(Category category, SlimefunItemStack item, ItemStack[] recipe,
                               ItemStack[] machineRecipes, BlockFace trigger) {
         super(category, item, recipe, machineRecipes, trigger);
     }

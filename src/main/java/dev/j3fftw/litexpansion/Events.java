@@ -9,6 +9,7 @@ import dev.j3fftw.litexpansion.items.PassiveElectricRemoval;
 import dev.j3fftw.litexpansion.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.utils.ChargeUtils;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
@@ -85,7 +86,7 @@ public class Events implements Listener {
                 && electricChestplate.removeItemCharge(chestplate, Math.max(1, (float) e.getFinalDamage()) * 20)
             ) {
                 final ItemMeta meta = chestplate.getItemMeta();
-                final float newCharge = PassiveElectricRemoval.getCharge(meta);
+                final float newCharge = ChargeUtils.getCharge(meta);
 
                 e.setCancelled(true);
 
@@ -312,115 +313,6 @@ public class Events implements Listener {
 
         }
     }
-
-    /*
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent e) {
-
-        Player p = e.getPlayer();
-        Block block = e.getBlock();
-        Wrench wrench = (Wrench) Items.WRENCH.getItem();
-
-        if (Wrench.machineBreakRequiresWrench.getValue()
-            && !wrench.isItem(p.getInventory().getItemInMainHand())
-            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
-            block.getLocation(), ProtectableAction.BREAK_BLOCK)
-        ) {
-
-            SlimefunItem slimefunBlock = BlockStorage.check(block);
-
-            if (slimefunBlock instanceof EnergyNetComponent) {
-                e.setCancelled(true);
-                wrenchBlock(p, block, true, false);
-                Utils.send(p, "&cYou need a Wrench to break Slimefun machines!");
-                Utils.send(p, "&c(Slimefun Guide > LiteXpansion > Wrench)");
-            }
-        }
-    }
-
-    @EventHandler
-    @SuppressWarnings("ConstantConditions")
-    public void onWrenchUse(PlayerInteractEvent e) {
-
-        Player p = e.getPlayer();
-        Wrench wrench = (Wrench) Items.WRENCH.getItem();
-        ItemStack playerWrench = p.getInventory().getItemInMainHand();
-        final Block block = e.getClickedBlock();
-
-        if (block == null) return;
-
-        if (e.getHand() == EquipmentSlot.HAND && wrench.isItem(playerWrench)
-            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
-            block.getLocation(), ProtectableAction.BREAK_BLOCK)) {
-
-            SlimefunItem sfBlock = BlockStorage.check(block);
-
-            if (sfBlock instanceof EnergyNetComponent) {
-
-                if (Wrench.machineBreakRequiresWrench.getValue()) {
-
-                    double random = Math.random();
-                    wrenchBlock(p, block, random <= Wrench.wrenchFailChance.getValue(), true);
-
-                } else {
-                    wrenchBlock(p, block, false, true);
-                }
-
-                wrench.damageItem(p, playerWrench);
-
-            } else if (sfBlock != null
-                && (sfBlock.getID().startsWith("CARGO_NODE")
-                || sfBlock instanceof TrashCan)) {
-
-                wrenchBlock(p, block, false, true);
-                wrench.damageItem(p, playerWrench);
-
-            } else {
-                Utils.send(p, "&cYou can not use the wrench on this block!");
-            }
-        }
-    }
-
-    public static void wrenchBlock(Player p, Block b, boolean fail, boolean byInteract) {
-
-        if (fail) {
-
-            World blockWorld = b.getWorld();
-            Location blockLocation = b.getLocation();
-            SlimefunItem slimefunBlock = BlockStorage.check(b);
-            BlockMenu blockInventory = BlockStorage.getInventory(b);
-
-            if (BlockStorage.hasInventory(b)) {
-                int[] inputSlots = ((InventoryBlock) slimefunBlock).getInputSlots();
-                for (int slot : inputSlots) {
-
-                    if (blockInventory.getItemInSlot(slot) != null) {
-                        blockWorld.dropItemNaturally(blockLocation, blockInventory.getItemInSlot(slot));
-                    }
-                }
-                int[] outputSlots = ((InventoryBlock) slimefunBlock).getOutputSlots();
-                for (int slot : outputSlots) {
-                    if (blockInventory.getItemInSlot(slot) != null) {
-                        blockWorld.dropItemNaturally(blockLocation, blockInventory.getItemInSlot(slot));
-                    }
-                }
-            }
-
-            BlockStorage.clearBlockInfo(b);
-            b.setType(Material.AIR);
-            b.getWorld().dropItemNaturally(b.getLocation(), Items.MACHINE_BLOCK.clone());
-
-            if (byInteract) {
-                Utils.send(p, "&cOh no! Your wrench failed!");
-            }
-
-        } else {
-            BlockBreakEvent breakEvent = new BlockBreakEvent(b, p);
-            Bukkit.getServer().getPluginManager().callEvent(breakEvent);
-        }
-    }
-
-     */
 
     /**
      * Checks if the player has a {@link FoodSynthesizer}

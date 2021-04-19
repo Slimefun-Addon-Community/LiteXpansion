@@ -54,15 +54,6 @@ public final class Items {
 
     //region Weapon
     // Tools
-    public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
-        "WRENCH",
-        Material.GOLDEN_HOE,
-        "&6Wrench",
-        "",
-        "&7Click any machine, generator, capacitor,",
-        "&7or cargo node to instantly break it!",
-        ""
-    );
     public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
         "GLASS_CUTTER",
         Material.GHAST_TEAR,
