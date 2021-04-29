@@ -6,30 +6,30 @@ import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
+import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 
 public final class UUMatter {
 
     public static final UUMatter INSTANCE = new UUMatter();
 
-    private final Map<ItemStack, ItemStack[]> recipes = new LinkedHashMap<>();
-
     private boolean registered;
 
     private UUMatter() {}
+
+    private Category UuMatterCategory;
 
     public void register() {
         if (registered) {
@@ -44,15 +44,19 @@ public final class UUMatter {
                 LiteXpansion.getInstance().getLogger().log(Level.SEVERE, "Failed to copy default uumatter.yml file", e);
             }
         }
+        createCategory();
 
         Config config = new Config(LiteXpansion.getInstance(), "uumatter.yml");
+
+        // Counter to display how many recipes registered
+        int counter = 0;
 
         for (String key : config.getKeys("recipes")) {
             final int idx = key.indexOf(':');
             final String id = key.toUpperCase().replace(' ', '_').substring(0, idx == -1 ? key.length() : idx);
             final int amount = NumberUtils.getInt(key.substring(idx + 1), 1);
 
-            final ItemStack output = getOutputItem(id, amount);
+            final SlimefunItemStack output = getOutputItem(id, amount);
             if (output == null) {
                 continue;
             }
@@ -60,35 +64,35 @@ public final class UUMatter {
             final ItemStack[] recipe = new ItemStack[9];
             parseRecipe(config, key, recipe);
 
-            this.recipes.put(output, recipe);
-            addUuMatterRecipe(output, recipe);
+            counter++;
+            addUuMatterRecipe(output, amount, recipe);
         }
         LiteXpansion.getInstance().getLogger().log(Level.INFO, "Loaded {0} UU-Matter recipes", new Object[] {
-            this.recipes.size()
+            counter
         });
 
-        UuMatterCategory.INSTANCE.register(LiteXpansion.getInstance());
 
         registered = true;
     }
 
     @Nullable
-    private ItemStack getOutputItem(String id, int amount) {
-        ItemStack output;
+    private SlimefunItemStack getOutputItem(String id, int amount) {
+        SlimefunItemStack output;
 
-        final Material mat = Material.getMaterial(id);
-        if (mat != null) {
-            output = new ItemStack(mat, amount);
-        } else {
-            SlimefunItem item = SlimefunItem.getByID(id);
-            if (item == null) {
-                LiteXpansion.getInstance().getLogger().log(Level.WARNING,
-                    "Unable to create recipe, unknown output item: {0}", new Object[] {id});
+        // Make id unique, so it won't have conflict with other SF items
+        String UniqueID = "UU_" + id;
+
+        try{
+            output = new SlimefunItemStack(UniqueID, Objects.requireNonNull(Material.getMaterial(id)), "");
+        } catch (NullPointerException e){
+            try{
+                output = new SlimefunItemStack(UniqueID, Objects.requireNonNull(SlimefunItem.getByID(id)).getItem(), "");
+            } catch (NullPointerException ex){
+                LiteXpansion.getInstance().getLogger().log(Level.WARNING, "Unable to create recipe, unknown output item: {0}", new Object[] {id});
                 return null;
             }
-            output = item.getItem().clone();
-            output.setAmount(amount);
         }
+
         return output;
     }
 
@@ -116,25 +120,26 @@ public final class UUMatter {
         }
     }
 
-    public void addUuMatterRecipe(@Nonnull SlimefunItemStack item, int amount, @Nonnull ItemStack[] recipe) {
-        final ItemStack clone = item.clone();
-        clone.setAmount(amount);
-        this.addUuMatterRecipe(clone, recipe);
+    // Creating new category
+    public void createCategory(){
+        CustomItem categoryItem = new CustomItem(SkullItem.fromHash("54d39df0f813b7424406462854eb7249f8c76d80ce56f3af410e35a287062589"), "&5UU-Matter Recipes");
+        this.UuMatterCategory = new Category(new NamespacedKey(LiteXpansion.getInstance(), "uumatter_category"), categoryItem);
     }
 
-    public void addUuMatterRecipe(@Nonnull ItemStack result, @Nonnull ItemStack[] recipe) {
+    public void addUuMatterRecipe(@Nonnull SlimefunItemStack item, int amount, @Nonnull ItemStack[] recipe) {
         if (recipe.length < 9) {
             // Make the new length 9 and fill it with nulls
             recipe = Arrays.copyOf(recipe, 9);
         }
 
-        // Register to the enhanced crafting table
-        RecipeType.ENHANCED_CRAFTING_TABLE.register(recipe, result);
-        // Add to our recipes set, this is used for the GUI
-        this.recipes.put(result, recipe);
-    }
+        // Creating SlimeFunItem
+        SlimefunItem sfItem = new SlimefunItem(UuMatterCategory, item, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
+        // Set output amount
+        sfItem.setRecipeOutput(new SlimefunItemStack(item, amount));
+        // Allowing to act like vanilla item
+        sfItem.setUseableInWorkbench(true);
+        // Register item
+        sfItem.register(LiteXpansion.getInstance());
 
-    public Map<ItemStack, ItemStack[]> getRecipes() {
-        return Collections.unmodifiableMap(recipes);
     }
 }
