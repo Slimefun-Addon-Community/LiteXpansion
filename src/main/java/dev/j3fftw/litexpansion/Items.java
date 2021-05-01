@@ -295,7 +295,7 @@ public final class Items {
         "&fProduces &8Scrap &ffrom anything",
         "",
         LoreBuilderDynamic.powerBuffer(Recycler.CAPACITY),
-        LoreBuilderDynamic.powerPerSecond(Recycler.ENERGY_CONSUMPTION)
+        LoreBuilderDynamic.powerPerTick(Recycler.ENERGY_CONSUMPTION)
     );
     public static final SlimefunItemStack MASS_FABRICATOR_MACHINE = new SlimefunItemStack(
         "MASS_FABRICATOR_MACHINE",
@@ -305,7 +305,7 @@ public final class Items {
         "&fConverts &8Scrap &fto &5UU-Matter",
         "",
         LoreBuilderDynamic.powerBuffer(MassFabricator.CAPACITY),
-        LoreBuilderDynamic.powerPerSecond(MassFabricator.ENERGY_CONSUMPTION)
+        LoreBuilderDynamic.powerPerTick(MassFabricator.ENERGY_CONSUMPTION)
     );
     public static final SlimefunItemStack RUBBER_SYNTHESIZER_MACHINE = new SlimefunItemStack(
         "RUBBER_SYNTHESIZER",
@@ -315,7 +315,7 @@ public final class Items {
         "&fConverts Bucket of Oil to &7Rubber",
         "",
         LoreBuilderDynamic.powerBuffer(RubberSynthesizer.CAPACITY),
-        LoreBuilderDynamic.powerPerSecond(RubberSynthesizer.ENERGY_CONSUMPTION)
+        LoreBuilderDynamic.powerPerTick(RubberSynthesizer.ENERGY_CONSUMPTION)
     );
     public static final SlimefunItemStack MACERATOR = new SlimefunItemStack(
         "MACERATOR",
