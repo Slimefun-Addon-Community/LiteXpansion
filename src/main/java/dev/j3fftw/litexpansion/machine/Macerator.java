@@ -10,6 +10,7 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
 
 public class Macerator extends AContainer implements PoweredMachine {
@@ -33,31 +34,15 @@ public class Macerator extends AContainer implements PoweredMachine {
         addRecipe(new ItemStack(Material.QUARTZ_BLOCK), new ItemStack(Material.QUARTZ, 4));
         addRecipe(new ItemStack(Material.BONE_BLOCK), new ItemStack(Material.BONE_MEAL, 9));
         addRecipe(new ItemStack(Material.BONE), new ItemStack(Material.BONE_MEAL, 4));
-        addRecipe(new ItemStack(Material.CLAY), new ItemStack(Material.CLAY_BALL));
+        addRecipe(new ItemStack(Material.CLAY), new ItemStack(Material.CLAY_BALL, 4));
         addRecipe(new ItemStack(Material.COAL), new CustomItem(Items.COAL_DUST));
         addRecipe(new ItemStack(Material.COBBLESTONE), new ItemStack(Material.SAND));
         addRecipe(new ItemStack(Material.GLOWSTONE), new ItemStack(Material.GLOWSTONE_DUST, 4));
-        addRecipe(new ItemStack(Material.GRAVEL), new ItemStack(Material.FLINT));
-        addRecipe(new ItemStack(Material.ICE), new ItemStack(Material.SNOWBALL, 2));
-        addRecipe(new ItemStack(Material.QUARTZ_STAIRS), new ItemStack(Material.QUARTZ, 6));
-        addRecipe(new ItemStack(Material.SANDSTONE), new ItemStack(Material.SAND));
+        addRecipe(new ItemStack(Material.GRAVEL), new ItemStack(Material.FLINT, 2));
+        addRecipe(new ItemStack(Material.ICE), new ItemStack(Material.SNOWBALL, 4));
+        addRecipe(new ItemStack(Material.QUARTZ_STAIRS), new ItemStack(Material.QUARTZ, 4));
+        addRecipe(new ItemStack(Material.SANDSTONE), new ItemStack(Material.SAND, 4));
         addRecipe(new ItemStack(Material.STONE), new ItemStack(Material.COBBLESTONE));
-        addRecipe(new ItemStack(Material.WHITE_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.MAGENTA_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.LIGHT_BLUE_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.YELLOW_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.LIME_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.PINK_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.GRAY_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.LIGHT_GRAY_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.CYAN_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.PURPLE_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.BLUE_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.BROWN_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.GREEN_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.RED_WOOL), new ItemStack(Material.STRING, 4));
-        addRecipe(new ItemStack(Material.BLACK_WOOL), new ItemStack(Material.STRING, 4));
         addRecipe(new ItemStack(Material.GRANITE), new ItemStack(Material.GRAVEL));
         addRecipe(new ItemStack(Material.ANDESITE), new ItemStack(Material.GRAVEL));
         addRecipe(new ItemStack(Material.DIORITE), new ItemStack(Material.GRAVEL));
@@ -73,6 +58,10 @@ public class Macerator extends AContainer implements PoweredMachine {
         if (SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_16)) {
             addRecipe(new ItemStack(Material.NETHER_GOLD_ORE), new CustomItem(SlimefunItems.GOLD_DUST, 2));
             addRecipe(new ItemStack(Material.ANCIENT_DEBRIS), new CustomItem(Items.ANCIENT_DEBRIS_DUST, 2));
+        }
+
+        for (Material mat : Tag.WOOL.getValues()) {
+            addRecipe(new ItemStack(mat), new ItemStack(Material.STONE, 4));
         }
     }
 
