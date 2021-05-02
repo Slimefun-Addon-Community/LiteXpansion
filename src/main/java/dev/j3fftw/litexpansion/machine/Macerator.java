@@ -61,7 +61,7 @@ public class Macerator extends AContainer implements PoweredMachine {
         }
 
         for (Material mat : Tag.WOOL.getValues()) {
-            addRecipe(new ItemStack(mat), new ItemStack(Material.STONE, 4));
+            addRecipe(new ItemStack(mat), new ItemStack(Material.STRING, 4));
         }
     }
 
