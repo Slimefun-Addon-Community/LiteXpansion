@@ -135,12 +135,11 @@ public class Events implements Listener {
      */
     @EventHandler
     public void onHungerDamage(EntityDamageEvent e) {
-        if (Items.FOOD_SYNTHESIZER == null || Items.FOOD_SYNTHESIZER.getItem().isDisabled()
-            || !(e.getEntity() instanceof Player)) {
-            return;
-        }
-
-        if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+        if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION
+            && e.getEntity() instanceof Player
+            && Items.FOOD_SYNTHESIZER != null
+            && !Items.FOOD_SYNTHESIZER.getItem().isDisabled()
+        ) {
             checkAndConsume((Player) e.getEntity(), null);
         }
     }
