@@ -1,13 +1,10 @@
 package dev.j3fftw.litexpansion.items;
 
 import io.github.thebusybiscuit.slimefun4.utils.ChargeUtils;
-import me.mrCookieSlime.Slimefun.cscorelib2.chat.ChatColors;
+import javax.annotation.Nonnull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import javax.annotation.Nonnull;
-import java.util.regex.Pattern;
 
 public interface PassiveElectricRemoval {
 

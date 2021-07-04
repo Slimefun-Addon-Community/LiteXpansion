@@ -5,6 +5,8 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.SlimefunBackpack;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
+import java.util.List;
+import javax.annotation.Nonnull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -22,13 +24,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
-import java.util.List;
-
 public abstract class CraftingMultiBlock extends MultiBlockMachine {
 
     protected CraftingMultiBlock(Category category, SlimefunItemStack item, ItemStack[] recipe,
-                              ItemStack[] machineRecipes, BlockFace trigger) {
+                                 ItemStack[] machineRecipes, BlockFace trigger) {
         super(category, item, recipe, machineRecipes, trigger);
     }
 

@@ -2,6 +2,12 @@ package dev.j3fftw.litexpansion.service;
 
 import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.utils.Reflections;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -11,13 +17,6 @@ import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 public class MetricsService {
 

@@ -1,9 +1,9 @@
 package dev.j3fftw.litexpansion.utils;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public final class Reflections {
 

@@ -9,6 +9,10 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -21,11 +25,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
-
 public class MassFabricator extends SlimefunItem implements InventoryBlock, EnergyNetComponent, PoweredMachine {
 
     public static final RecipeType RECIPE_TYPE = new RecipeType(
@@ -34,7 +33,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     public static final int ENERGY_CONSUMPTION = 16_666;
     public static final int CAPACITY = ENERGY_CONSUMPTION * 3;
-    private static final int[] INPUT_SLOTS = new int[] { 10, 11 };
+    private static final int[] INPUT_SLOTS = new int[] {10, 11};
     private static final int OUTPUT_SLOT = 15;
     private static final int PROGRESS_SLOT = 13;
     private static final int PROGRESS_AMOUNT = 200; // Divide by 2 for seconds it takes
@@ -159,7 +158,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     @Override
     public int[] getOutputSlots() {
-        return new int[] { OUTPUT_SLOT };
+        return new int[] {OUTPUT_SLOT};
     }
 
     @Override

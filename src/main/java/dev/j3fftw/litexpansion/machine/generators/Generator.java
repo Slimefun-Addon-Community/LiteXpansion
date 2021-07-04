@@ -39,7 +39,7 @@ public class Generator extends CoalGenerator {
     @Override
     protected void registerDefaultFuelTypes() {
         super.registerDefaultFuelTypes();
-        
+
         super.registerFuel(new MachineFuel(100, new ItemStack(Material.LAVA_BUCKET)));
         super.registerFuel(new MachineFuel(8, new ItemStack(Material.CHARCOAL)));
         super.registerFuel(new MachineFuel(6, new ItemStack(Material.SCAFFOLDING)));
