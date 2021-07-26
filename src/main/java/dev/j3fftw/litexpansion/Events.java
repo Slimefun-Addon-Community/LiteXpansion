@@ -61,7 +61,7 @@ public class Events implements Listener {
         if (e.getItem().hasItemMeta()) {
             final SlimefunItem item = SlimefunItem.getByItem(e.getItem());
 
-            if (item instanceof PassiveElectricRemoval) {
+            if (item instanceof PassiveElectricRemoval || item instanceof ElectricChestplate) {
                 e.setCancelled(true);
             }
         }
