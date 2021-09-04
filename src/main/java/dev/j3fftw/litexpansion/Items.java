@@ -23,10 +23,13 @@ public final class Items {
 
     //region Category
     public static final ItemGroup LITEXPANSION = new ItemGroup(
-        new NamespacedKey(LiteXpansion.getInstance(), "litexpansion"),
+        new NamespacedKey(LiteXpansion.getInstance(),
+            "litexpansion"
+        ),
         new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
             "3f87fc5cbb233743a82fb0fa51fe739487f29bcc01c9026621ecefad197f4fb1")),
-            "&7LiteXpansion")
+            "&7LiteXpansion"
+        )
     );
 
     public static final SlimefunItemStack ELECTRIC_CHESTPLATE = new SlimefunItemStack(
@@ -153,7 +156,8 @@ public final class Items {
         "THORIUM",
         new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
             "b87403257c0eaa518cf186deccde137d476556ccff146d503fb2e73956582f37")),
-            "Thorium"),
+            "Thorium"
+        ),
         "&8Thorium",
         "",
         LoreBuilder.radioactive(Radioactivity.HIGH),
