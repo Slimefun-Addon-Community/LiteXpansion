@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

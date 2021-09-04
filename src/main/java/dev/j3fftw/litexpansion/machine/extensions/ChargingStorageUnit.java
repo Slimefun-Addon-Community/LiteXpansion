@@ -1,6 +1,10 @@
 package dev.j3fftw.litexpansion.machine.extensions;
 
 import dev.j3fftw.extrautils.interfaces.InventoryBlock;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.Capacitor;
@@ -9,12 +13,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
@@ -26,10 +26,10 @@ public abstract class ChargingStorageUnit extends Capacitor implements Inventory
     private final int jPerTick;
 
     @ParametersAreNonnullByDefault
-    protected ChargingStorageUnit(Category category, int capacity, int jPerTick, SlimefunItemStack item,
+    protected ChargingStorageUnit(ItemGroup itemGroup, int capacity, int jPerTick, SlimefunItemStack item,
                                   RecipeType recipeType, ItemStack[] recipe
     ) {
-        super(category, capacity, item, recipeType, recipe);
+        super(itemGroup, capacity, item, recipeType, recipe);
         this.jPerTick = jPerTick;
 
         setupInv();

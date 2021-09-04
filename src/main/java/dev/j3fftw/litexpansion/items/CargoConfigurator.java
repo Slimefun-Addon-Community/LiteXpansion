@@ -2,19 +2,20 @@ package dev.j3fftw.litexpansion.items;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+
+import io.github.thebusybiscuit.slimefun4.libraries.dough.data.persistent.PersistentDataAPI;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.cscorelib2.data.PersistentDataAPI;
-import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -51,7 +52,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
     }
 
     private boolean canUseCargoConfigurator(@Nonnull Player p, @Nonnull Block clicked) {
-        return SlimefunPlugin.getProtectionManager().hasPermission(p, clicked, ProtectableAction.INTERACT_BLOCK);
+        return Slimefun.getProtectionManager().hasPermission(p, clicked, Interaction.INTERACT_BLOCK);
     }
 
     @EventHandler
@@ -68,7 +69,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
 
         final ItemMeta meta = clickedItem.getItemMeta();
 
-        final List<String> defaultLore = Items.CARGO_CONFIGURATOR.getImmutableMeta().getLore()
+        final List<String> defaultLore = Items.CARGO_CONFIGURATOR.getItemMetaSnapshot().getLore()
             .orElse(new ArrayList<>());
         final List<String> lore = meta.hasLore() ? meta.getLore() : defaultLore;
 
@@ -104,7 +105,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         final Player p = e.getPlayer();
 
         if (!canUseCargoConfigurator(p, e.getClickedBlock()) && !p.hasPermission("slimefun.cargo.bypass")) {
-            SlimefunPlugin.getLocalization().sendMessage(p, "inventory.no-access", true);
+            Slimefun.getLocalization().sendMessage(p, "inventory.no-access", true);
             return;
         }
 

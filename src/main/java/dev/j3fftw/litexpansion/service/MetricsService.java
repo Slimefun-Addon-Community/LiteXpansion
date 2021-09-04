@@ -8,8 +8,9 @@ import java.util.Map;
 import java.util.UUID;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.AdvancedPie;
@@ -49,7 +50,7 @@ public class MetricsService {
                 }
 
                 for (Map.Entry<Location, Config> entry : rawStorage.entrySet()) {
-                    final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
+                    final SlimefunItem item = SlimefunItem.getById(entry.getValue().getString("id"));
                     if (item == null || !(item.getAddon() instanceof LiteXpansion)) {
                         continue;
                     }

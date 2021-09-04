@@ -12,7 +12,8 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunIte
 import java.util.Optional;
 import java.util.UUID;
 import javax.annotation.Nonnull;
-import me.mrCookieSlime.Slimefun.cscorelib2.data.PersistentDataAPI;
+
+import io.github.thebusybiscuit.slimefun4.libraries.dough.data.persistent.PersistentDataAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
