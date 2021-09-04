@@ -2,13 +2,11 @@ package dev.j3fftw.litexpansion.ticker;
 
 import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.items.PassiveElectricRemoval;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

@@ -3,10 +3,8 @@ package dev.j3fftw.litexpansion.machine.multiblock;
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.machine.extensions.CraftingMultiBlock;
-import javax.annotation.Nonnull;
-
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-
+import javax.annotation.Nonnull;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;

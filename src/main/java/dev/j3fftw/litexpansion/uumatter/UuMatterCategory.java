@@ -29,7 +29,8 @@ public final class UuMatterCategory extends FlexItemGroup {
 
     private UuMatterCategory() {
         super(new NamespacedKey(LiteXpansion.getInstance(), "uumatter_category"),
-            new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode("54d39df0f813b7424406462854eb7249f8c76d80ce56f3af410e35a287062589")),
+            new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
+                "54d39df0f813b7424406462854eb7249f8c76d80ce56f3af410e35a287062589")),
                 "&5UU-Matter Recipes")
         );
     }

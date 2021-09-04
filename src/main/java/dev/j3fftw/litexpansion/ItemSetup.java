@@ -30,9 +30,8 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
 import io.github.thebusybiscuit.slimefun4.implementation.items.multiblocks.OreCrusher;
-import javax.annotation.Nonnull;
-
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import javax.annotation.Nonnull;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

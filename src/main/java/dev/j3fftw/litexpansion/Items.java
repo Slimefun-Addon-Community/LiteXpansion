@@ -14,7 +14,6 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerHead;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerSkin;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
-
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -24,9 +23,11 @@ public final class Items {
 
     //region Category
     public static final ItemGroup LITEXPANSION = new ItemGroup(
-            new NamespacedKey(LiteXpansion.getInstance(), "litexpansion"),
-            new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode("3f87fc5cbb233743a82fb0fa51fe739487f29bcc01c9026621ecefad197f4fb1")),
-                "&7LiteXpansion"));
+        new NamespacedKey(LiteXpansion.getInstance(), "litexpansion"),
+        new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
+            "3f87fc5cbb233743a82fb0fa51fe739487f29bcc01c9026621ecefad197f4fb1")),
+            "&7LiteXpansion")
+    );
 
     public static final SlimefunItemStack ELECTRIC_CHESTPLATE = new SlimefunItemStack(
         "ELECTRIC_CHESTPLATE",
@@ -150,7 +151,8 @@ public final class Items {
 
     public static final SlimefunItemStack THORIUM = new SlimefunItemStack(
         "THORIUM",
-        new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode("b87403257c0eaa518cf186deccde137d476556ccff146d503fb2e73956582f37")),
+        new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
+            "b87403257c0eaa518cf186deccde137d476556ccff146d503fb2e73956582f37")),
             "Thorium"),
         "&8Thorium",
         "",
@@ -454,7 +456,8 @@ public final class Items {
 
     public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
         "FOOD_SYNTHESIZER",
-        new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode("a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c")),
+        new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
+            "a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c")),
             "Food Synthesizer"),
         "&dFood Synthesizer",
         "",

@@ -7,12 +7,11 @@ import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.Reflections;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import java.io.File;
-import javax.annotation.Nonnull;
-
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
+import java.io.File;
+import javax.annotation.Nonnull;
 import org.bstats.MetricsBase;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.NamespacedKey;
