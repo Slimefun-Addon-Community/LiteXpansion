@@ -5,22 +5,22 @@ import dev.j3fftw.extrautils.utils.Utils;
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.machine.api.PoweredMachine;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.blocks.BlockPosition;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.cscorelib2.blocks.BlockPosition;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -41,7 +41,7 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
 
     private static final Map<BlockPosition, Integer> progress = new HashMap<>();
 
-    private static final CustomItem progressItem = new CustomItem(Material.DEAD_BUSH, "&7Progress");
+    private static final CustomItemStack progressItem = new CustomItemStack(Material.DEAD_BUSH, "&7Progress");
 
     public Recycler() {
         super(Items.LITEXPANSION, Items.RECYCLER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
@@ -59,7 +59,7 @@ public class Recycler extends SlimefunItem implements InventoryBlock, EnergyNetC
                 blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
             }
             Utils.putOutputSlot(blockMenuPreset, OUTPUT_SLOT);
-            blockMenuPreset.addItem(PROGRESS_SLOT, new CustomItem(Material.DEAD_BUSH, "&7Progress"));
+            blockMenuPreset.addItem(PROGRESS_SLOT, new CustomItemStack(Material.DEAD_BUSH, "&7Progress"));
             blockMenuPreset.addMenuClickHandler(PROGRESS_SLOT, ChestMenuUtils.getEmptyClickHandler());
         });
     }

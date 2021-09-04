@@ -7,8 +7,10 @@ import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.PassiveElectricRemoval;
 import dev.j3fftw.litexpansion.utils.Utils;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.utils.ChargeUtils;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -16,9 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -174,12 +174,12 @@ public class Events implements Listener {
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
 
-        final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getByID(Items.MINING_DRILL.getItemId());
+        final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
 
         Validate.notNull(miningDrill, "Can no be null");
         if (miningDrill.isItem(e.getItem()) && drillableBlocks.contains(blockType)
-            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
-            blockLocation, ProtectableAction.BREAK_BLOCK)
+            && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
+            blockLocation, Interaction.BREAK_BLOCK)
         ) {
             e.setCancelled(true);
 
@@ -219,7 +219,7 @@ public class Events implements Listener {
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
 
-        final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
+        final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
 
 
         Validate.notNull(diamondDrill, "Can not be null");
@@ -227,8 +227,8 @@ public class Events implements Listener {
             && (drillableBlocks.contains(blockType)
             || blockType == Material.OBSIDIAN
             || blockType.toString().endsWith("_ORE")))
-            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
-            blockLocation, ProtectableAction.BREAK_BLOCK)
+            && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
+            blockLocation, Interaction.BREAK_BLOCK)
         ) {
             e.setCancelled(true);
 
@@ -262,7 +262,7 @@ public class Events implements Listener {
     public void onDiamondDrillUpgrade(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         // 1.16 inventory, compare strings
-        final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getByID(Items.DIAMOND_DRILL.getItemId());
+        final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
         Validate.notNull(diamondDrill, "Can not be null");
         if (diamondDrill.isItem(e.getCurrentItem())
             && p.getOpenInventory().getType().toString().equals("SMITHING")
@@ -290,8 +290,8 @@ public class Events implements Listener {
             || blockType.name().endsWith("_GLASS")
             || blockType.name().endsWith("_GLASS_PANE")
         ) && glassCutter.isItem(item)
-            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(),
-            blockLocation, ProtectableAction.BREAK_BLOCK)
+            && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
+            blockLocation, Interaction.BREAK_BLOCK)
         ) {
             e.setCancelled(true);
 

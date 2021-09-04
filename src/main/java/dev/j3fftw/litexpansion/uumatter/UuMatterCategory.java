@@ -2,25 +2,26 @@ package dev.j3fftw.litexpansion.uumatter;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
+import io.github.thebusybiscuit.slimefun4.api.items.groups.FlexItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
-import io.github.thebusybiscuit.slimefun4.core.categories.FlexCategory;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuideMode;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerHead;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerSkin;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public final class UuMatterCategory extends FlexCategory {
+public final class UuMatterCategory extends FlexItemGroup {
 
     public static final UuMatterCategory INSTANCE = new UuMatterCategory();
 
@@ -28,13 +29,13 @@ public final class UuMatterCategory extends FlexCategory {
 
     private UuMatterCategory() {
         super(new NamespacedKey(LiteXpansion.getInstance(), "uumatter_category"),
-            new CustomItem(SkullItem.fromHash("54d39df0f813b7424406462854eb7249f8c76d80ce56f3af410e35a287062589"),
+            new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode("54d39df0f813b7424406462854eb7249f8c76d80ce56f3af410e35a287062589")),
                 "&5UU-Matter Recipes")
         );
     }
 
     private ChestMenu create(@Nonnull Player p) {
-        final ChestMenu playerMenu = new ChestMenu(SlimefunPlugin.getLocalization().getMessage(p, "guide.title.main"));
+        final ChestMenu playerMenu = new ChestMenu(Slimefun.getLocalization().getMessage(p, "guide.title.main"));
         playerMenu.setEmptySlotsClickable(false);
         return playerMenu;
     }
@@ -48,8 +49,8 @@ public final class UuMatterCategory extends FlexCategory {
             // Header and back button
             for (int i = 0; i < 9; i++) {
                 if (i == 1) {
-                    menu.addItem(i, new CustomItem(ChestMenuUtils.getBackButton(p, "",
-                        ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(p, "guide.back.guide")))
+                    menu.addItem(i, new CustomItemStack(ChestMenuUtils.getBackButton(p, "",
+                        ChatColor.GRAY + Slimefun.getLocalization().getMessage(p, "guide.back.guide")))
                     );
                     menu.addMenuClickHandler(i, (pl, s, is, action) -> {
                         open(p, profile, mode);
@@ -117,8 +118,8 @@ public final class UuMatterCategory extends FlexCategory {
 
         menu.setEmptySlotsClickable(false);
 
-        menu.addItem(1, new CustomItem(ChestMenuUtils.getBackButton(player, "",
-            ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide"))),
+        menu.addItem(1, new CustomItemStack(ChestMenuUtils.getBackButton(player, "",
+            ChatColor.GRAY + Slimefun.getLocalization().getMessage(player, "guide.back.guide"))),
             (pl, slot, item, action) -> {
                 SlimefunGuide.openMainMenu(playerProfile, slimefunGuideLayout, 1);
                 return false;

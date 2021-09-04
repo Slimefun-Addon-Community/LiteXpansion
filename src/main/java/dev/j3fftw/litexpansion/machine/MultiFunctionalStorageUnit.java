@@ -2,7 +2,8 @@ package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.machine.extensions.ChargingStorageUnit;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+
 import org.bukkit.inventory.ItemStack;
 
 public class MultiFunctionalStorageUnit extends ChargingStorageUnit {

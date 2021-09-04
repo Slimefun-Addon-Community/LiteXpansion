@@ -1,18 +1,18 @@
 package dev.j3fftw.litexpansion.machine.extensions;
 
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.multiblocks.MultiBlockMachine;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.SlimefunBackpack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import java.util.List;
 import javax.annotation.Nonnull;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.cscorelib2.inventory.ItemUtils;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -26,9 +26,9 @@ import org.bukkit.inventory.ItemStack;
 
 public abstract class CraftingMultiBlock extends MultiBlockMachine {
 
-    protected CraftingMultiBlock(Category category, SlimefunItemStack item, ItemStack[] recipe,
+    protected CraftingMultiBlock(ItemGroup itemGroup, SlimefunItemStack item, ItemStack[] recipe,
                                  ItemStack[] machineRecipes, BlockFace trigger) {
-        super(category, item, recipe, machineRecipes, trigger);
+        super(itemGroup, item, recipe, machineRecipes, trigger);
     }
 
     protected Inventory createVirtualInventory(Inventory inv) {
@@ -36,7 +36,7 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
 
         for (int j = 0; j < inv.getContents().length; j++) {
             ItemStack stack = inv.getContents()[j] != null && inv.getContents()[j].getAmount() > 1 ?
-                new CustomItem(inv.getContents()[j], inv.getContents()[j].getAmount() - 1) : null;
+                new CustomItemStack(inv.getContents()[j], inv.getContents()[j].getAmount() - 1) : null;
             fakeInv.setItem(j, stack);
         }
 
@@ -67,7 +67,7 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
                 }
             }
 
-            SlimefunPlugin.getLocalization().sendMessage(p, "machines.pattern-not-found", true);
+            Slimefun.getLocalization().sendMessage(p, "machines.pattern-not-found", true);
         }
     }
 
@@ -90,7 +90,7 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
 
             onSuccessfulCraft(b);
         } else {
-            SlimefunPlugin.getLocalization().sendMessage(p, "machines.full-inventory", true);
+            Slimefun.getLocalization().sendMessage(p, "machines.full-inventory", true);
         }
     }
 
