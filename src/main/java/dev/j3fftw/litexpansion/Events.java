@@ -120,6 +120,7 @@ public class Events implements Listener {
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {
         Player p = (Player) e.getEntity();
+        p.getWorld().isClearWeather();
         if (e.getFoodLevel() < p.getFoodLevel()) {
             checkAndConsume(p, e);
         }
