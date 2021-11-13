@@ -542,7 +542,7 @@ public final class Items {
 
     public static final SlimefunItemStack UU_CRAFTER = new SlimefunItemStack(
         "UU_CRAFTER",
-        Material.CREEPER_HEAD,
+        Material.CRAFTING_TABLE,
         "&7UU Crafter"
     );
 
