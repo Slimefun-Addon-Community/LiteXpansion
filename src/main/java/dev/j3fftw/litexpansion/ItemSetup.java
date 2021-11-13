@@ -9,6 +9,7 @@ import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
+import dev.j3fftw.litexpansion.machine.UUCrafter;
 import dev.j3fftw.litexpansion.machine.Macerator;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.MultiFunctionalElectricStorageUnit;
@@ -70,16 +71,17 @@ final class ItemSetup {
     }
 
     private void registerMachines() {
-        new FoodSynthesizer().register(LiteXpansion.getInstance());
-        new Recycler().register(LiteXpansion.getInstance());
-        new MassFabricator().register(LiteXpansion.getInstance());
-        new RefinedSmeltery().register(LiteXpansion.getInstance());
-        new MetalForge().register(LiteXpansion.getInstance());
-        new MultiFunctionalElectricStorageUnit().register(LiteXpansion.getInstance());
-        new MultiFunctionalStorageUnit().register(LiteXpansion.getInstance());
-        new Generator().register(LiteXpansion.getInstance());
-        new ManualMill().register(LiteXpansion.getInstance());
-        new Macerator().register(LiteXpansion.getInstance());
+        new FoodSynthesizer().register(plugin);
+        new Recycler().register(plugin);
+        new MassFabricator().register(plugin);
+        new RefinedSmeltery().register(plugin);
+        new MetalForge().register(plugin);
+        new MultiFunctionalElectricStorageUnit().register(plugin);
+        new MultiFunctionalStorageUnit().register(plugin);
+        new Generator().register(plugin);
+        new ManualMill().register(plugin);
+        new Macerator().register(plugin);
+        new UUCrafter().register(plugin);
     }
 
     //Disable when SlimyTreeTaps exists
@@ -87,7 +89,7 @@ final class ItemSetup {
         if (!Bukkit.getServer().getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
             //Rubber
             registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
-            new RubberSynthesizer().register(LiteXpansion.getInstance());
+            new RubberSynthesizer().register(plugin);
         }
     }
 
