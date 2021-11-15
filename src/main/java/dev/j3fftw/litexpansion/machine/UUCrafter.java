@@ -50,9 +50,9 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
 
     public UUCrafter() {
         super(Items.LITEXPANSION, Items.UU_CRAFTER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
-            SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.REINFORCED_PLATE, SlimefunItems.ADVANCED_CIRCUIT_BOARD,
-            SlimefunItems.REINFORCED_PLATE, Items.MACHINE_BLOCK, SlimefunItems.REINFORCED_PLATE,
-            SlimefunItems.ADVANCED_CIRCUIT_BOARD, SlimefunItems.REINFORCED_PLATE, SlimefunItems.ADVANCED_CIRCUIT_BOARD
+            Items.UU_MATTER, new ItemStack(Material.CRAFTING_TABLE), Items.UU_MATTER,
+            Items.CARGO_CONFIGURATOR, Items.ADVANCED_MACHINE_BLOCK, Items.GLASS_CUTTER,
+            Items.UU_MATTER, Items.UU_MATTER, Items.UU_MATTER
         });
         setup();
         this.addItemHandler(
