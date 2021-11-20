@@ -108,7 +108,10 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
                 }
 
                 ItemStack output = entry.getKey().clone();
-                if (blockMenu.getItemInSlot(INPUT_SLOT).getAmount() >= amount
+                final ItemStack input = blockMenu.getItemInSlot(INPUT_SLOT);
+                
+                if (input != null
+                    && input.getAmount() >= amount
                     && blockMenu.fits(output, OUTPUT_SLOT)
                 ) {
                     blockMenu.pushItem(output, OUTPUT_SLOT);
