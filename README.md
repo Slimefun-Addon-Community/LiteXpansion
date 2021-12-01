@@ -26,7 +26,7 @@ To download LiteXpansion please click here: [Download LiteXpansion](https://theb
 
 ## :wrench: Config
 
-- `nerf-other-addons` - Enable this option will nerf Energized Solar Generator and panels in InfinityExpansion, otherwise all machines in LiteXpansion will consume double energy.
+- `nerf-other-addons` - Enable this option will nerf Energized Solar Generator and panels in InfinityExpansion, otherwise all machines in LiteXpansion will consume double energy. This option is enabled by default.
 
 ## Contents
 ### :card_index_dividers: Items
