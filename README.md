@@ -3,7 +3,6 @@ LiteXpansion is a Slimefun4 Addon that started with adding the use full items/ma
 
 ## :world_map: Navigation
 * [Download](#floppy_disk-download)
-* [Config](#wrench-config)
 * [Contents](#contents)
   * [Items](#card_index_dividers-items)
   * [Machines](#electric_plug-machines)
@@ -11,6 +10,7 @@ LiteXpansion is a Slimefun4 Addon that started with adding the use full items/ma
   * [Weapons](#crossed_swords-weapons)
   * [Armour](#shield-armour)
   * [UU Matter](#brain-uu-matter)
+  * [Config](#wrench-config)
 * [Discord](#computer-discord)
 
 ## :floppy_disk: Download
@@ -23,10 +23,6 @@ To download LiteXpansion please click here: [Download LiteXpansion](https://theb
     <img src="https://thebusybiscuit.github.io/builds/J3fftw1/LiteXpansion/master/badge.svg" alt="Build Server"/>
   </a>
 </p>
-
-## :wrench: Config
-
-- `nerf-other-addons` - Enable this option will nerf Energized Solar Generator and panels in InfinityExpansion, otherwise all machines in LiteXpansion will consume double energy. This option is enabled by default.
 
 ## Contents
 ### :card_index_dividers: Items
@@ -75,6 +71,12 @@ recipes:
     - 'x  '
     - '  x'
 ```
+
+### :wrench: Config
+
+There is one option you should mention in `/plugins/LiteXpansion/config.yml` file:
+
+- `nerf-other-addons` - Enable this option will nerf Energized Solar Generator and panels in InfinityExpansion, otherwise all machines in LiteXpansion will consume double energy. This option is enabled by default.
 
 ### :computer: Discord
 If you need to find a Slimefun item ID you can join the official Slimefun Discord by clicking the image below this text and doing `!item <name/ID>` in the `#bot-spam` channel.
