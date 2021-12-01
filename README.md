@@ -73,9 +73,10 @@ recipes:
     - '  x'
 ```
 
-There is one option you should mention in `/plugins/LiteXpansion/config.yml` file:
+There are two options in `/plugins/LiteXpansion/config.yml` file:
 
-- `nerf-other-addons` - Enable this option will nerf Energized Solar Generator and panels in InfinityExpansion, otherwise all machines in LiteXpansion will consume double energy. This option is enabled by default.
+- `auto-update` - By enabling this, LiteXpansion will automatically update itself to the latest version. (default: `true`)
+- `nerf-other-addons` - Enable this option will nerf Energized Solar Generator and panels in InfinityExpansion, otherwise all machines in LiteXpansion will consume double energy. (default: `true`)
 
 ### :computer: Discord
 If you need to find a Slimefun item ID you can join the official Slimefun Discord by clicking the image below this text and doing `!item <name/ID>` in the `#bot-spam` channel.
