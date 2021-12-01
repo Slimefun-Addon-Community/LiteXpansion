@@ -3,6 +3,7 @@ LiteXpansion is a Slimefun4 Addon that started with adding the use full items/ma
 
 ## :world_map: Navigation
 * [Download](#floppy_disk-download)
+* [Config](#wrench-config)
 * [Contents](#contents)
   * [Items](#card_index_dividers-items)
   * [Machines](#electric_plug-machines)
@@ -22,6 +23,10 @@ To download LiteXpansion please click here: [Download LiteXpansion](https://theb
     <img src="https://thebusybiscuit.github.io/builds/J3fftw1/LiteXpansion/master/badge.svg" alt="Build Server"/>
   </a>
 </p>
+
+## :wrench: Config
+
+- `nerf-other-addons` - Enable this option will nerf Energized Solar Generator and panels in InfinityExpansion, otherwise all machines in LiteXpansion will consume double energy.
 
 ## Contents
 ### :card_index_dividers: Items
