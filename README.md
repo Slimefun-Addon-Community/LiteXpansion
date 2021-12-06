@@ -10,6 +10,7 @@ LiteXpansion is a Slimefun4 Addon that started with adding the use full items/ma
   * [Weapons](#crossed_swords-weapons)
   * [Armour](#shield-armour)
   * [UU Matter](#brain-uu-matter)
+  * [Configuration](#gear-configuration)
 * [Discord](#computer-discord)
 
 ## :floppy_disk: Download
@@ -54,8 +55,9 @@ To download LiteXpansion please click here: [Download LiteXpansion](https://theb
 UU-Matter is a hard to create resource, it can be made in the Mass Fabricator with scrap. You can use UU-Matter to create many items such as grass blocks, glass, copper ingots, etc.
 
 Server admins are able to modify, add or remove UU-Matter recipes.
-#### :gear: Configuration
-To add, remove or change recipes you need to modify the `/plugins/LiteXpansion/uumatter.yml` file.
+
+### :gear: Configuration
+To add, remove or change UU Matter recipes you need to modify the `/plugins/LiteXpansion/uumatter.yml` file.
 
 Under `recipes` you need to specify the output, this can be a [Material](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html) or a Slimefun item ID (addons supported). If you want an amount more than one you can add a colon (`:`) and the amount. Then as a list you specify the recipe where space is nothing and `x` is UU-Matter.
 
@@ -70,6 +72,11 @@ recipes:
     - 'x  '
     - '  x'
 ```
+
+There are two options in `/plugins/LiteXpansion/config.yml` file:
+
+- `auto-update` - By enabling this, LiteXpansion will automatically update itself to the latest version. (default: `true`)
+- `nerf-other-addons` - Enable this option will nerf Energized Solar Generator and panels in InfinityExpansion, otherwise all machines in LiteXpansion will consume double energy. (default: `true`)
 
 ### :computer: Discord
 If you need to find a Slimefun item ID you can join the official Slimefun Discord by clicking the image below this text and doing `!item <name/ID>` in the `#bot-spam` channel.

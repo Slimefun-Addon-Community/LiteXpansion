@@ -82,7 +82,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private void nerfCrap() {
         // Vanilla SF
-        final SlimefunItem energizedPanel = SlimefunItem.getById("SOLAR_GENERATOR_3");
+        final SlimefunItem energizedPanel = SlimefunItem.getById("SOLAR_GENERATOR_4");
         if (energizedPanel != null) {
             Reflections.setField(energizedPanel, "dayEnergy", 64);
             Reflections.setField(energizedPanel, "nightEnergy", 32);
