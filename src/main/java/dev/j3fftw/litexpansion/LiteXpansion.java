@@ -10,13 +10,14 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
-import java.io.File;
-import javax.annotation.Nonnull;
 import org.bstats.MetricsBase;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import javax.annotation.Nonnull;
+import java.io.File;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -206,11 +207,11 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         return "https://github.com/Slimefun-Addon-Community/LiteXpansion/issues";
     }
 
-    private static void setInstance(LiteXpansion ins) {
-        instance = ins;
-    }
-
     public static LiteXpansion getInstance() {
         return instance;
+    }
+
+    private static void setInstance(LiteXpansion ins) {
+        instance = ins;
     }
 }

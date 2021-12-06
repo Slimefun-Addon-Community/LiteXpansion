@@ -9,13 +9,13 @@ import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
-import dev.j3fftw.litexpansion.machine.UUCrafter;
 import dev.j3fftw.litexpansion.machine.Macerator;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.MultiFunctionalElectricStorageUnit;
 import dev.j3fftw.litexpansion.machine.MultiFunctionalStorageUnit;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
+import dev.j3fftw.litexpansion.machine.UUCrafter;
 import dev.j3fftw.litexpansion.machine.generators.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.generators.Generator;
 import dev.j3fftw.litexpansion.machine.multiblock.ManualMill;
@@ -32,10 +32,11 @@ import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
 import io.github.thebusybiscuit.slimefun4.implementation.items.multiblocks.OreCrusher;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import javax.annotation.Nonnull;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
 
 final class ItemSetup {
 

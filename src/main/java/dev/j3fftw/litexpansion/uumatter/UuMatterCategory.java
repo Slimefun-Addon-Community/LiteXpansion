@@ -12,14 +12,15 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerHead;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerSkin;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 public final class UuMatterCategory extends FlexItemGroup {
 
@@ -120,7 +121,7 @@ public final class UuMatterCategory extends FlexItemGroup {
         menu.setEmptySlotsClickable(false);
 
         menu.addItem(1, new CustomItemStack(ChestMenuUtils.getBackButton(player, "",
-            ChatColor.GRAY + Slimefun.getLocalization().getMessage(player, "guide.back.guide"))),
+                ChatColor.GRAY + Slimefun.getLocalization().getMessage(player, "guide.back.guide"))),
             (pl, slot, item, action) -> {
                 SlimefunGuide.openMainMenu(playerProfile, slimefunGuideLayout, 1);
                 return false;

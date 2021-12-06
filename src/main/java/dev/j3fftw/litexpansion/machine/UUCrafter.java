@@ -10,7 +10,6 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
@@ -109,7 +108,7 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
 
                 ItemStack output = entry.getKey().clone();
                 final ItemStack input = blockMenu.getItemInSlot(INPUT_SLOT);
-                
+
                 if (input != null
                     && input.getAmount() >= amount
                     && blockMenu.fits(output, OUTPUT_SLOT)

@@ -1,10 +1,11 @@
 package dev.j3fftw.litexpansion.items;
 
 import io.github.thebusybiscuit.slimefun4.utils.ChargeUtils;
-import javax.annotation.Nonnull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import javax.annotation.Nonnull;
 
 public interface PassiveElectricRemoval {
 
