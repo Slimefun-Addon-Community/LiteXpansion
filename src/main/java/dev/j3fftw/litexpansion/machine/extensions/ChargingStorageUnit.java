@@ -25,7 +25,6 @@ public abstract class ChargingStorageUnit extends Capacitor implements Inventory
     private static final int INPUT_SLOT = 13;
 
     private final int jPerTick;
-    private final int capacity;
 
     @ParametersAreNonnullByDefault
     protected ChargingStorageUnit(ItemGroup itemGroup, int capacity, int jPerTick, SlimefunItemStack item,
@@ -33,7 +32,6 @@ public abstract class ChargingStorageUnit extends Capacitor implements Inventory
     ) {
         super(itemGroup, capacity, item, recipeType, recipe);
         this.jPerTick = jPerTick;
-        this.capacity = capacity;
 
         setupInv();
     }
