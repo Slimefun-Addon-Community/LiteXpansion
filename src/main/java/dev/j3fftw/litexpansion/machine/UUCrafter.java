@@ -24,10 +24,13 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
 
 public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNetComponent, PoweredMachine {
 
@@ -83,11 +86,16 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
 
     private void tick(Block block) {
         @Nullable final BlockMenu blockMenu = BlockStorage.getInventory(block);
+        final Location location = block.getLocation();
         if (blockMenu == null) {
             return;
         }
 
-        if (!whatIsRunning.get(block.getLocation())) {
+        if (this.getCharge(location) < getDefaultEnergyConsumption()) {
+            return;
+        }
+
+        if (!whatIsRunning.get(location)) {
             return;
         }
 
@@ -113,6 +121,7 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
                     && input.getAmount() >= amount
                     && blockMenu.fits(output, OUTPUT_SLOT)
                 ) {
+                    this.removeCharge(location, getDefaultEnergyConsumption());
                     blockMenu.pushItem(output, OUTPUT_SLOT);
                     blockMenu.consumeItem(INPUT_SLOT, amount);
                 }
