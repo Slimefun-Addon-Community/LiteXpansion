@@ -36,13 +36,13 @@ public class AdvancedSolarHelmet extends SolarHelmet {
     public enum Type {
 
         ADVANCED(Items.ADVANCED_SOLAR_HELMET, 1, new ItemStack[] {
-            null, SlimefunItems.SOLAR_GENERATOR_2, null,
+            null, SlimefunItems.SOLAR_GENERATOR_1, null,
             Items.IRON_PLATE, SlimefunItems.SOLAR_HELMET, Items.IRON_PLATE,
             Items.IRON_PLATE, null, Items.IRON_PLATE
         }),
 
         CARBONADO(Items.CARBONADO_SOLAR_HELMET, 2, new ItemStack[] {
-            null, SlimefunItems.SOLAR_GENERATOR_3, null,
+            null, SlimefunItems.SOLAR_GENERATOR_2, null,
             Items.COPPER_PLATE, Items.ADVANCED_SOLAR_HELMET, Items.COPPER_PLATE,
             Items.COPPER_PLATE, null, Items.COPPER_PLATE
         }),
