@@ -32,9 +32,13 @@ public class RefinedSmeltery extends CraftingMultiBlock {
     }
 
     @Override
-    public void onSuccessfulCraft(@Nonnull Block b) {
-        Block fire = b.getRelative(BlockFace.DOWN, 2);
-        fire.setType(Material.AIR);
+    public Block getSpecialBlock(Block b) {
+        return b.getRelative(BlockFace.DOWN, 2);
+    }
+
+    @Override
+    public boolean removeSpecialBlock() {
+        return true;
     }
 }
 

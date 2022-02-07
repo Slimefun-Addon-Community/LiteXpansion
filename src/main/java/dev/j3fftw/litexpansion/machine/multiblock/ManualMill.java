@@ -33,7 +33,12 @@ public class ManualMill extends CraftingMultiBlock {
     }
 
     @Override
-    public void onSuccessfulCraft(@Nonnull Block b) {
-        b.getRelative(BlockFace.DOWN, 2).setType(Material.AIR);
+    public Block getSpecialBlock(Block b) {
+        return b.getRelative(BlockFace.DOWN, 2);
+    }
+
+    @Override
+    public boolean removeSpecialBlock() {
+        return true;
     }
 }

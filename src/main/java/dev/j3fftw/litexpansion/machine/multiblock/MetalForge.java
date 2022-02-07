@@ -4,6 +4,7 @@ import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.machine.extensions.CraftingMultiBlock;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -33,8 +34,12 @@ public class MetalForge extends CraftingMultiBlock {
     }
 
     @Override
-    public void onSuccessfulCraft(@Nonnull Block b) {
-        Block diamondBlock = b.getRelative(BlockFace.DOWN, 2);
-        diamondBlock.setType(Material.AIR);
+    public Block getSpecialBlock(Block b) {
+        return b.getRelative(BlockFace.DOWN, 2);
+    }
+
+    @Override
+    public boolean removeSpecialBlock() {
+        return true;
     }
 }
