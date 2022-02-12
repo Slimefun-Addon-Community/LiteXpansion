@@ -30,7 +30,7 @@ public class MetalForge extends CraftingMultiBlock {
             anvil, new ItemStack(Material.STONE_BRICK_WALL), anvil,
             ironBlock, new ItemStack(Material.DISPENSER), ironBlock,
             null, new ItemStack(Material.DIAMOND_BLOCK), null
-        }, new ItemStack[0], BlockFace.DOWN);
+        }, new ItemStack[0], BlockFace.UP);
     }
 
     @Override

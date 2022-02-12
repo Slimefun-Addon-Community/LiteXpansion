@@ -28,7 +28,7 @@ public class RefinedSmeltery extends CraftingMultiBlock {
             null, new ItemStack(Material.STONE_BRICK_WALL), null,
             stone_bricks, new ItemStack(Material.DISPENSER), stone_bricks,
             null, new ItemStack(Material.FLINT_AND_STEEL), null
-        }, new ItemStack[0], BlockFace.DOWN);
+        }, new ItemStack[0], BlockFace.UP);
     }
 
     @Override

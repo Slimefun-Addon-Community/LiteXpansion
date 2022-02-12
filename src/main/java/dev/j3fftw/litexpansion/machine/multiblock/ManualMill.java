@@ -29,7 +29,7 @@ public class ManualMill extends CraftingMultiBlock {
             anvil, new ItemStack(Material.STONE_BRICK_WALL), anvil,
             ironBlock, new ItemStack(Material.DISPENSER), ironBlock,
             null, ironBlock, null
-        }, new ItemStack[0], BlockFace.DOWN);
+        }, new ItemStack[0], BlockFace.UP);
     }
 
     @Override
