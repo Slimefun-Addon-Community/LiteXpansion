@@ -15,6 +15,7 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -50,7 +51,7 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
         Block dispenser = b.getRelative(BlockFace.DOWN);
         BlockState state = PaperLib.getBlockState(dispenser, false).getState();
 
-        final Block specialBlock = getSpecialBlock(b);
+        final Block specialBlock = getSpecialBlock(dispenser);
         if (specialBlock != null && !specialBlock.getType().isAir() && BlockStorage.hasBlockInfo(specialBlock)) {
             p.sendMessage(ChatColor.RED + "You can't use Slimefun blocks as part of the multi-block >:(");
             return;
@@ -98,6 +99,7 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
                 final Block specialBlock = getSpecialBlock(dispenser);
                 if (specialBlock != null) {
                     specialBlock.setType(Material.AIR);
+                    specialBlock.getWorld().spawnParticle(Particle.PORTAL, specialBlock.getLocation(), 4, 0.5, 0.5, 0.5);
                 }
             }
         } else {
@@ -121,7 +123,13 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
         return true;
     }
 
-    public abstract Block getSpecialBlock(Block b);
+    /**
+     * Gets the special block which we wish to remove or handle.
+     *
+     * @param dispenser The dispenser used to get the special block
+     * @return The special block
+     */
+    public abstract Block getSpecialBlock(Block dispenser);
 
     public abstract boolean removeSpecialBlock();
 }

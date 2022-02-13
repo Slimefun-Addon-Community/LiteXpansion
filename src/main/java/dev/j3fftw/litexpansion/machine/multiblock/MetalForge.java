@@ -4,14 +4,12 @@ import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.machine.extensions.CraftingMultiBlock;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
 
 public class MetalForge extends CraftingMultiBlock {
 
@@ -30,12 +28,12 @@ public class MetalForge extends CraftingMultiBlock {
             anvil, new ItemStack(Material.STONE_BRICK_WALL), anvil,
             ironBlock, new ItemStack(Material.DISPENSER), ironBlock,
             null, new ItemStack(Material.DIAMOND_BLOCK), null
-        }, new ItemStack[0], BlockFace.UP);
+        }, new ItemStack[0], BlockFace.DOWN);
     }
 
     @Override
-    public Block getSpecialBlock(Block b) {
-        return b.getRelative(BlockFace.DOWN, 2);
+    public Block getSpecialBlock(Block dispenser) {
+        return dispenser.getRelative(BlockFace.DOWN);
     }
 
     @Override
