@@ -12,6 +12,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.utils.ChargeUtils;
+import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
@@ -229,7 +230,7 @@ public class Events implements Listener {
             && (drillableBlocks.contains(blockType)
             && !diamondDrill.isDisabled()
             || blockType == Material.OBSIDIAN
-            || blockType.toString().endsWith("_ORE")))
+            || SlimefunTag.ORES.isTagged(blockType)
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK)
         ) {
