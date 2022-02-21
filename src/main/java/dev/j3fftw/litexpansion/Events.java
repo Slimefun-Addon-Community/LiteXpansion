@@ -183,8 +183,9 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(e.getItem())))
-                .removeItemCharge(e.getItem(), 0.5F)) {
+            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
+                .removeItemCharge(e.getItem(), 0.5F)
+            ) {
                 // This allows other plugins to register broken block as player broken
                 BlockBreakEvent newEvent = new BlockBreakEvent(block, e.getPlayer());
                 Bukkit.getServer().getPluginManager().callEvent(newEvent);
@@ -193,12 +194,12 @@ public class Events implements Listener {
 
                 // This has to be done because the item in the main hand is not a pickaxe
                 if (blockType == Material.STONE) {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                    blockLocation.getWorld().dropItem(blockLocation,
                         new ItemStack(Material.COBBLESTONE)
                     );
 
                 } else {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                    blockLocation.getWorld().dropItem(blockLocation,
                         new ItemStack(blockType)
                     );
                 }
@@ -231,7 +232,7 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(e.getItem())))
+            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
                 .removeItemCharge(e.getItem(), 1.5F)
             ) {
                 // This allows other plugins to register broken block as player broken
@@ -242,12 +243,12 @@ public class Events implements Listener {
 
                 // This has to be done because the item in the main hand is not a pickaxe
                 if (blockType == Material.STONE) {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                    blockLocation.getWorld().dropItem(blockLocation,
                         new ItemStack(Material.COBBLESTONE)
                     );
 
                 } else {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                    blockLocation.getWorld().dropItem(blockLocation,
                         new ItemStack(blockType)
                     );
                 }
@@ -292,10 +293,9 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(item)))
-                .removeItemCharge(item, 0.5F)
+            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(item)).removeItemCharge(item, 0.5F)
             ) {
-                Objects.requireNonNull(blockLocation.getWorld()).dropItemNaturally(blockLocation,
+                blockLocation.getWorld().dropItemNaturally(blockLocation,
                     new ItemStack(blockType)
                 );
                 block.setType(Material.AIR);
