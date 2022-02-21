@@ -52,12 +52,6 @@ public class Events implements Listener {
     private final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
     private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
 
-    //TODO Come up with a better way for this.
-    private final Set<Material> drillableBlocks = new HashSet<>(Arrays.asList(Material.STONE,
-        Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
-        Material.NETHERRACK, Material.END_STONE)
-    );
-
     @EventHandler
     public void onItemDamage(PlayerItemDamageEvent e) {
         if (e.getItem().hasItemMeta()) {
@@ -179,7 +173,8 @@ public class Events implements Listener {
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
 
         Validate.notNull(miningDrill, "Can no be null");
-        if (miningDrill.isItem(e.getItem()) && drillableBlocks.contains(blockType)
+        if (miningDrill.isItem(e.getItem())
+            && SlimefunTag.STONE_VARIANTS.isTagged(blockType)
             && !miningDrill.isDisabled()
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK)
@@ -227,10 +222,8 @@ public class Events implements Listener {
 
         Validate.notNull(diamondDrill, "Can not be null");
         if ((diamondDrill.isItem(e.getItem())
-            && (drillableBlocks.contains(blockType)
             && !diamondDrill.isDisabled()
-            || blockType == Material.OBSIDIAN
-            || SlimefunTag.ORES.isTagged(blockType)
+            && SlimefunTag.MINEABLE_PICKAXE.isTagged(blockType)
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK)
         ) {
@@ -289,11 +282,8 @@ public class Events implements Listener {
         final ItemStack item = e.getItem();
 
         Validate.notNull(glassCutter, "Can not be null");
-        if ((blockType == Material.GLASS
-            || blockType == Material.GLASS_PANE
-            || blockType.name().endsWith("_GLASS")
-            || blockType.name().endsWith("_GLASS_PANE")
-        ) && glassCutter.isItem(item)
+        if (SlimefunTag.GLASS.isTagged(blockType)
+            && glassCutter.isItem(item)
             && !glassCutter.isDisabled()
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK)
