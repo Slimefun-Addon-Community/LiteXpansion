@@ -179,6 +179,7 @@ public class Events implements Listener {
 
         Validate.notNull(miningDrill, "Can no be null");
         if (miningDrill.isItem(e.getItem()) && drillableBlocks.contains(blockType)
+            && !miningDrill.isDisabled()
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK)
         ) {
@@ -226,6 +227,7 @@ public class Events implements Listener {
         Validate.notNull(diamondDrill, "Can not be null");
         if ((diamondDrill.isItem(e.getItem())
             && (drillableBlocks.contains(blockType)
+            && !diamondDrill.isDisabled()
             || blockType == Material.OBSIDIAN
             || blockType.toString().endsWith("_ORE")))
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
@@ -291,6 +293,7 @@ public class Events implements Listener {
             || blockType.name().endsWith("_GLASS")
             || blockType.name().endsWith("_GLASS_PANE")
         ) && glassCutter.isItem(item)
+            && !glassCutter.isDisabled()
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK)
         ) {
