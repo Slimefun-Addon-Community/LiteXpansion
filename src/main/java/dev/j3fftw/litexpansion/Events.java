@@ -222,7 +222,7 @@ public class Events implements Listener {
 
 
         Validate.notNull(diamondDrill, "Can not be null");
-        if ((diamondDrill.isItem(e.getItem())
+        if (diamondDrill.isItem(e.getItem())
             && !diamondDrill.isDisabled()
             && SlimefunTag.MINEABLE_PICKAXE.isTagged(blockType)
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
