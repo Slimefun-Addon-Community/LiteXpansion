@@ -24,18 +24,15 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.BlockingQueue;
 
 public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNetComponent, PoweredMachine {
 
     public static final int ENERGY_CONSUMPTION = 50_000;
-    public static final int CAPACITY = ENERGY_CONSUMPTION; 
+    public static final int CAPACITY = ENERGY_CONSUMPTION;
     public static final int INPUT_SLOT = 19;
     public static final int OUTPUT_SLOT = 25;
     public static final int[] CRAFTING_SLOTS = {12, 13, 14, 21, 22, 23, 30, 31, 32};
