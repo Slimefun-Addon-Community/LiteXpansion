@@ -6,11 +6,10 @@ import dev.j3fftw.litexpansion.machine.extensions.CraftingMultiBlock;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
 
 public class RefinedSmeltery extends CraftingMultiBlock {
 
@@ -21,20 +20,24 @@ public class RefinedSmeltery extends CraftingMultiBlock {
         "&7Used to refine ingots"
     );
 
-    private static final ItemStack stone_bricks = new ItemStack(Material.STONE_BRICKS);
+    private static final ItemStack STONE_BRICKS = new ItemStack(Material.STONE_BRICKS);
 
     public RefinedSmeltery() {
         super(Items.LITEXPANSION, Items.REFINED_SMELTERY, new ItemStack[] {
             null, new ItemStack(Material.STONE_BRICK_WALL), null,
-            stone_bricks, new ItemStack(Material.DISPENSER), stone_bricks,
+            STONE_BRICKS, new ItemStack(Material.DISPENSER), STONE_BRICKS,
             null, new ItemStack(Material.FLINT_AND_STEEL), null
         }, new ItemStack[0], BlockFace.DOWN);
     }
 
     @Override
-    public void onSuccessfulCraft(@Nonnull Block b) {
-        Block fire = b.getRelative(BlockFace.DOWN, 2);
-        fire.setType(Material.AIR);
+    public Block getSpecialBlock(Block dispenser) {
+        return dispenser.getRelative(BlockFace.DOWN);
+    }
+
+    @Override
+    public boolean removeSpecialBlock() {
+        return true;
     }
 }
 

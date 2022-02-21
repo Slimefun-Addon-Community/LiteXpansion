@@ -34,8 +34,8 @@ import java.util.concurrent.BlockingQueue;
 
 public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNetComponent, PoweredMachine {
 
-    public static final int ENERGY_CONSUMPTION = 200;
-    public static final int CAPACITY = ENERGY_CONSUMPTION * 3;
+    public static final int ENERGY_CONSUMPTION = 50_000;
+    public static final int CAPACITY = ENERGY_CONSUMPTION; 
     public static final int INPUT_SLOT = 19;
     public static final int OUTPUT_SLOT = 25;
     public static final int[] CRAFTING_SLOTS = {12, 13, 14, 21, 22, 23, 30, 31, 32};
