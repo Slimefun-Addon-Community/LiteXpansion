@@ -172,7 +172,7 @@ public class Events implements Listener {
 
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
 
-        Validate.notNull(miningDrill, "Can no be null");
+        Validate.notNull(miningDrill, "Can not be null");
         if (miningDrill.isItem(e.getItem())
             && SlimefunTag.STONE_VARIANTS.isTagged(blockType)
             && !miningDrill.isDisabled()
