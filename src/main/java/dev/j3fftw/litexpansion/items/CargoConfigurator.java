@@ -78,7 +78,6 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
             && e.getPlayer().isSneaking()
         ) {
             clearConfig(e.getPlayer(), clickedItem, meta, defaultLore, lore);
-            System.out.println("test4");
             e.setCancelled(true);
             return;
         }
@@ -124,17 +123,14 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         PersistentDataAPI.remove(meta, CARGO_BLOCK);
         PersistentDataAPI.remove(meta, CARGO_CONFIG);
         player.sendMessage(ChatColor.RED + "Cleared node configuration!");
-        System.out.println("test1");
 
         if (lore.size() != defaultLore.size()) {
             lore.clear();
             lore.addAll(defaultLore);
-            System.out.println("test2");
         }
 
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
-        System.out.println("test3");
     }
 
     private void runActions(@Nonnull PlayerInteractEvent e, @Nonnull ItemStack clickedItemStack, @Nonnull ItemMeta meta,
