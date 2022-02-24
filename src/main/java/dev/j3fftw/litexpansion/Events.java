@@ -163,11 +163,9 @@ public class Events implements Listener {
             return;
         }
 
-
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
         final ItemStack hand = event.getItem();
-
 
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
         if (miningDrill.isItem(hand)) {
@@ -198,8 +196,7 @@ public class Events implements Listener {
             DrillUse(1.5f, block, blockType, blockLocation, event);
         }
     }
-
-
+    
     public boolean Check(MiningDrill miningDrill, PlayerInteractEvent event, Location blockLocation) {
         return miningDrill.isItem(event.getItem())
             && !miningDrill.isDisabled()
