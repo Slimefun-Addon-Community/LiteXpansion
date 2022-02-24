@@ -23,7 +23,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
-import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -169,14 +168,15 @@ public class Events implements Listener {
         final Location blockLocation = block.getLocation();
         final ItemStack hand = event.getItem();
 
-        if (!SlimefunTag.STONE_VARIANTS.isTagged(blockType)) {
-            return;
-        }
 
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
         if (miningDrill.isItem(hand)) {
             Validate.notNull(miningDrill);
             if (!Check(miningDrill, event, blockLocation)) {
+                return;
+            }
+
+            if (!SlimefunTag.STONE_VARIANTS.isTagged(blockType)) {
                 return;
             }
 
@@ -230,6 +230,11 @@ public class Events implements Listener {
 
         BlockBreakEvent newEvent = new BlockBreakEvent(block, event.getPlayer());
         Bukkit.getServer().getPluginManager().callEvent(newEvent);
+
+        if (event.isCancelled()) {
+            return;
+        }
+
         block.setType(Material.AIR);
         event.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
 
@@ -238,7 +243,10 @@ public class Events implements Listener {
             blockLocation.getWorld().dropItem(blockLocation,
                 new ItemStack(Material.COBBLESTONE)
             );
-
+        } else if (blockType == Material.DEEPSLATE) {
+            blockLocation.getWorld().dropItem(blockLocation,
+                new ItemStack(Material.COBBLED_DEEPSLATE)
+            );
         } else {
             blockLocation.getWorld().dropItem(blockLocation,
                 new ItemStack(blockType)
