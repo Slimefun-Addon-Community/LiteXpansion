@@ -135,7 +135,6 @@ public class Events implements Listener {
         }
     }
 
-
     /**
      * Prevents animals from being dyed if the item used
      * extends {@link DyeItem}.
@@ -196,7 +195,8 @@ public class Events implements Listener {
             DrillUse(1.5f, block, blockType, blockLocation, event);
         }
     }
-    
+
+
     public boolean Check(MiningDrill miningDrill, PlayerInteractEvent event, Location blockLocation) {
         return miningDrill.isItem(event.getItem())
             && !miningDrill.isDisabled()
