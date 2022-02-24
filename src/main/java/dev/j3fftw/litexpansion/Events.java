@@ -164,13 +164,10 @@ public class Events implements Listener {
             return;
         }
 
-        System.out.println("hoi");
-
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
         final ItemStack hand = event.getItem();
-        System.out.println(hand);
 
         if (!SlimefunTag.STONE_VARIANTS.isTagged(blockType)) {
             return;
