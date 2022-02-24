@@ -191,7 +191,7 @@ public class Events implements Listener {
                 return;
             }
 
-            if (!Tag.MINEABLE_PICKAXE.isTagged(blockType)) {
+            if (!SlimefunTag.MINEABLE_PICKAXE.isTagged(blockType)) {
                 return;
             }
 
