@@ -168,8 +168,8 @@ public class Events implements Listener {
 
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
         if (miningDrill.isItem(hand)) {
-            Validate.notNull(miningDrill);
-            if (!Check(miningDrill, event, blockLocation)) {
+            
+            if (!check(miningDrill, event, blockLocation)) {
                 return;
             }
 
@@ -177,14 +177,14 @@ public class Events implements Listener {
                 return;
             }
 
-            DrillUse(0.5f, block, blockType, blockLocation, event);
+            drillUse(0.5f, block, blockType, blockLocation, event);
         }
 
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
         if (diamondDrill.isItem(hand)) {
 
             Validate.notNull(diamondDrill);
-            if (!Check(diamondDrill, event, blockLocation)) {
+            if (!check(diamondDrill, event, blockLocation)) {
                 return;
             }
 
@@ -192,19 +192,19 @@ public class Events implements Listener {
                 return;
             }
 
-            DrillUse(1.5f, block, blockType, blockLocation, event);
+            drillUse(1.5f, block, blockType, blockLocation, event);
         }
     }
 
 
-    public boolean Check(MiningDrill miningDrill, PlayerInteractEvent event, Location blockLocation) {
+    public boolean check(MiningDrill miningDrill, PlayerInteractEvent event, Location blockLocation) {
         return miningDrill.isItem(event.getItem())
             && !miningDrill.isDisabled()
             && Slimefun.getProtectionManager().hasPermission(event.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK);
     }
 
-    public void DrillUse(float charge, Block block, Material blockType,
+    public void drillUse(float charge, Block block, Material blockType,
                          Location blockLocation, PlayerInteractEvent event
     ) {
         event.setCancelled(true);
