@@ -168,7 +168,7 @@ public class Events implements Listener {
 
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
         if (miningDrill.isItem(hand)) {
-            
+
             if (!check(miningDrill, event, blockLocation)) {
                 return;
             }
@@ -183,7 +183,6 @@ public class Events implements Listener {
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
         if (diamondDrill.isItem(hand)) {
 
-            Validate.notNull(diamondDrill);
             if (!check(diamondDrill, event, blockLocation)) {
                 return;
             }
