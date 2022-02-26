@@ -18,6 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import java.io.File;
+import java.lang.ref.Reference;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -89,11 +90,18 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             Reflections.setField(energizedPanel, "nightEnergy", 32);
         }
 
-        // InfinityExpansion - Halved all values and made infinite panel much less
+        // InfinityExpansion - Halved all values and made infinite panel + infinity reactor much less
         Reflections.setField(SlimefunItem.getById("ADVANCED_PANEL"), "generation", 75);
         Reflections.setField(SlimefunItem.getById("CELESTIAL_PANEL"), "generation", 250);
         Reflections.setField(SlimefunItem.getById("VOID_PANEL"), "generation", 1200);
         Reflections.setField(SlimefunItem.getById("INFINITE_PANEL"), "generation", 20_000);
+        Reflections.setField(SlimefunItem.getById("INFINITY_REACTOR"), "generation", 60_000);
+
+        // SlimefunWarfare - Halved all values
+        Reflections.setField(SlimefunItem.getById("ELEMENTAL_REACTOR"), "generation", 8_192);
+
+        // Galactifun
+        Reflections.setField(SlimefunItem.getById("FUSION_REACTOR"), "generation", 8_192);
     }
 
     private void setupResearches() {
