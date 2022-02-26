@@ -18,7 +18,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import java.io.File;
-import java.lang.ref.Reference;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
