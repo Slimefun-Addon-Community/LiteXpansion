@@ -18,6 +18,8 @@ public class ThoriumResource implements GEOResource {
 
     private final NamespacedKey key = new NamespacedKey(LiteXpansion.getInstance(), "thorium");
 
+    private BiomeMap<Integer> map;
+
     public ThoriumResource () {
         final LiteXpansion instance = LiteXpansion.getInstance();
 
@@ -34,7 +36,7 @@ public class ThoriumResource implements GEOResource {
 
     @Override
     public int getDefaultSupply(@Nonnull World.Environment environment, Biome biome) {
-        return 1;
+        return map.getOrDefault(biome, 1);
     }
 
     @Nonnull
