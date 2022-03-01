@@ -6,11 +6,10 @@ import dev.j3fftw.litexpansion.machine.extensions.CraftingMultiBlock;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
 
 public class ManualMill extends CraftingMultiBlock {
 
@@ -33,7 +32,12 @@ public class ManualMill extends CraftingMultiBlock {
     }
 
     @Override
-    public void onSuccessfulCraft(@Nonnull Block b) {
-        b.getRelative(BlockFace.DOWN, 2).setType(Material.AIR);
+    public Block getSpecialBlock(Block dispenser) {
+        return dispenser.getRelative(BlockFace.DOWN);
+    }
+
+    @Override
+    public boolean removeSpecialBlock() {
+        return true;
     }
 }

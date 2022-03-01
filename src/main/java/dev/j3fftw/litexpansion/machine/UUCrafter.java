@@ -31,8 +31,8 @@ import java.util.Map;
 
 public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNetComponent, PoweredMachine {
 
-    public static final int ENERGY_CONSUMPTION = 200;
-    public static final int CAPACITY = ENERGY_CONSUMPTION * 3;
+    public static final int ENERGY_CONSUMPTION = 50_000;
+    public static final int CAPACITY = ENERGY_CONSUMPTION;
     public static final int INPUT_SLOT = 19;
     public static final int OUTPUT_SLOT = 25;
     public static final int[] CRAFTING_SLOTS = {12, 13, 14, 21, 22, 23, 30, 31, 32};
@@ -83,11 +83,16 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
 
     private void tick(Block block) {
         @Nullable final BlockMenu blockMenu = BlockStorage.getInventory(block);
+        final Location location = block.getLocation();
         if (blockMenu == null) {
             return;
         }
 
-        if (!whatIsRunning.get(block.getLocation())) {
+        if (this.getCharge(location) < getDefaultEnergyConsumption()) {
+            return;
+        }
+
+        if (!whatIsRunning.get(location)) {
             return;
         }
 
@@ -113,6 +118,7 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
                     && input.getAmount() >= amount
                     && blockMenu.fits(output, OUTPUT_SLOT)
                 ) {
+                    this.removeCharge(location, getDefaultEnergyConsumption());
                     blockMenu.pushItem(output, OUTPUT_SLOT);
                     blockMenu.consumeItem(INPUT_SLOT, amount);
                 }

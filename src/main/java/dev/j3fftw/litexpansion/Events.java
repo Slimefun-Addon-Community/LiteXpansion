@@ -12,6 +12,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.utils.ChargeUtils;
+import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
@@ -50,12 +51,6 @@ public class Events implements Listener {
     private final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
     private final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
     private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
-
-    //TODO Come up with a better way for this.
-    private final Set<Material> drillableBlocks = new HashSet<>(Arrays.asList(Material.STONE,
-        Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
-        Material.NETHERRACK, Material.END_STONE)
-    );
 
     @EventHandler
     public void onItemDamage(PlayerItemDamageEvent e) {
@@ -177,8 +172,10 @@ public class Events implements Listener {
 
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
 
-        Validate.notNull(miningDrill, "Can no be null");
-        if (miningDrill.isItem(e.getItem()) && drillableBlocks.contains(blockType)
+        Validate.notNull(miningDrill, "Can not be null");
+        if (miningDrill.isItem(e.getItem())
+            && SlimefunTag.STONE_VARIANTS.isTagged(blockType)
+            && !miningDrill.isDisabled()
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK)
         ) {
@@ -186,8 +183,9 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(e.getItem())))
-                .removeItemCharge(e.getItem(), 0.5F)) {
+            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
+                .removeItemCharge(e.getItem(), 0.5F)
+            ) {
                 // This allows other plugins to register broken block as player broken
                 BlockBreakEvent newEvent = new BlockBreakEvent(block, e.getPlayer());
                 Bukkit.getServer().getPluginManager().callEvent(newEvent);
@@ -196,12 +194,12 @@ public class Events implements Listener {
 
                 // This has to be done because the item in the main hand is not a pickaxe
                 if (blockType == Material.STONE) {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                    blockLocation.getWorld().dropItem(blockLocation,
                         new ItemStack(Material.COBBLESTONE)
                     );
 
                 } else {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                    blockLocation.getWorld().dropItem(blockLocation,
                         new ItemStack(blockType)
                     );
                 }
@@ -224,10 +222,9 @@ public class Events implements Listener {
 
 
         Validate.notNull(diamondDrill, "Can not be null");
-        if ((diamondDrill.isItem(e.getItem())
-            && (drillableBlocks.contains(blockType)
-            || blockType == Material.OBSIDIAN
-            || blockType.toString().endsWith("_ORE")))
+        if (diamondDrill.isItem(e.getItem())
+            && !diamondDrill.isDisabled()
+            && SlimefunTag.MINEABLE_PICKAXE.isTagged(blockType)
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK)
         ) {
@@ -235,7 +232,7 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(e.getItem())))
+            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
                 .removeItemCharge(e.getItem(), 1.5F)
             ) {
                 // This allows other plugins to register broken block as player broken
@@ -246,12 +243,12 @@ public class Events implements Listener {
 
                 // This has to be done because the item in the main hand is not a pickaxe
                 if (blockType == Material.STONE) {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                    blockLocation.getWorld().dropItem(blockLocation,
                         new ItemStack(Material.COBBLESTONE)
                     );
 
                 } else {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
+                    blockLocation.getWorld().dropItem(blockLocation,
                         new ItemStack(blockType)
                     );
                 }
@@ -286,11 +283,9 @@ public class Events implements Listener {
         final ItemStack item = e.getItem();
 
         Validate.notNull(glassCutter, "Can not be null");
-        if ((blockType == Material.GLASS
-            || blockType == Material.GLASS_PANE
-            || blockType.name().endsWith("_GLASS")
-            || blockType.name().endsWith("_GLASS_PANE")
-        ) && glassCutter.isItem(item)
+        if (SlimefunTag.GLASS.isTagged(blockType)
+            && glassCutter.isItem(item)
+            && !glassCutter.isDisabled()
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK)
         ) {
@@ -298,10 +293,9 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(item)))
-                .removeItemCharge(item, 0.5F)
+            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(item)).removeItemCharge(item, 0.5F)
             ) {
-                Objects.requireNonNull(blockLocation.getWorld()).dropItemNaturally(blockLocation,
+                blockLocation.getWorld().dropItemNaturally(blockLocation,
                     new ItemStack(blockType)
                 );
                 block.setType(Material.AIR);
