@@ -23,14 +23,14 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.17.1-R0.1-SNAPSHOT</version>
+            <version>1.18.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.github.Slimefun</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>RC-28</version>
+            <version>RC-30</version>
             <scope>provided</scope>
         </dependency>
 
@@ -72,6 +72,7 @@
                 <directory>${basedir}/src/main/resources/</directory>
                 <includes>
                     <include>*</include>
+                    <include>biome-maps/*.json</include>
                 </includes>
             </resource>
             <resource>
