@@ -97,16 +97,13 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         Reflections.setField(SlimefunItem.getById("INFINITE_PANEL"), "generation", 20_000);
         Reflections.setField(SlimefunItem.getById("INFINITY_REACTOR"), "gen", 50_000);
 
-        // SlimefunWarfare - Halved all values
-        Reflections.setField(SlimefunItem.getById("ELEMENTAL_REACTOR"), "energyProducedPerTick", 8_192);
+        if (getConfig().getBoolean("options.nerf-elemental-reactor", true) {
+            // SlimefunWarfare - Halved all values
+            Reflections.setField(SlimefunItem.getById("ELEMENTAL_REACTOR"), "energyProducedPerTick", 8_192);
+        }
 
         // Galactifun
         Reflections.setField(SlimefunItem.getById("FUSION_REACTOR"), "energyProducedPerTick", 8_192);
-
-        final Plugin thereIsNoReasonForThis = getServer().getPluginManager().getPlugin("SlimefunWarfare");
-        if (thereIsNoReasonForThis != null) {
-            getServer().getPluginManager().disablePlugin(thereIsNoReasonForThis);
-        }
 
     }
 
