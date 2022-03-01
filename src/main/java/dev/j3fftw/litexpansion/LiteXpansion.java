@@ -10,6 +10,7 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bstats.MetricsBase;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.NamespacedKey;
@@ -102,12 +103,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         // Galactifun
         Reflections.setField(SlimefunItem.getById("FUSION_REACTOR"), "energyProducedPerTick", 8_192);
-
-        final Plugin thereIsNoReasonForThis = getServer().getPluginManager().getPlugin("SlimefunWarfare");
-        if (thereIsNoReasonForThis != null) {
-            getServer().getPluginManager().disablePlugin(thereIsNoReasonForThis);
-        }
-
     }
 
     private void setupResearches() {
