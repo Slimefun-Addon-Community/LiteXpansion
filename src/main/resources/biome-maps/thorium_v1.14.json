@@ -1,0 +1,12 @@
+[
+  {
+    "value": 1,
+    "biomes": [
+      "minecraft:mountains",
+      "minecraft:wooded_mountains",
+      "minecraft:snowy_mountains",
+      "minecraft:gravelly_mountains",
+      "minecraft:modified_gravelly_mountains"
+    ]
+  }
+]
