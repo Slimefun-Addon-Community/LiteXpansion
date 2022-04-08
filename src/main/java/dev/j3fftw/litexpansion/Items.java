@@ -102,7 +102,7 @@ public final class Items {
         "",
         "&7> &eRight Click &7- Copy node configuration",
         "&7> &eLeft Click  &7- Apply node configuration",
-        "&7> &eShift+Right Click &7- Clear node configuration"
+        "&7> &eShift+Right Click &7- Clear node configurator"
     );
     //endregion
 
