@@ -214,6 +214,10 @@ public class Events implements Listener {
             return;
         }
 
+        if (!(slimefunItem instanceof Rechargeable)) {
+            return;
+        }
+
         final Rechargeable item = (Rechargeable) SlimefunItem.getByItem(event.getItem());
 
         if (item == null) {
