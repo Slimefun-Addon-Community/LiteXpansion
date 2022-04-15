@@ -41,10 +41,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 public class Events implements Listener {
 
@@ -139,7 +135,6 @@ public class Events implements Listener {
         }
     }
 
-
     /**
      * Prevents animals from being dyed if the item used
      * extends {@link DyeItem}.
@@ -161,100 +156,104 @@ public class Events implements Listener {
     }
 
     @EventHandler
-    public void onMiningDrillUse(PlayerInteractEvent e) {
-        final Block block = e.getClickedBlock();
+    public void onDrillUse(PlayerInteractEvent event) {
+        final Block block = event.getClickedBlock();
         if (block == null) {
             return;
         }
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
+        final ItemStack hand = event.getItem();
 
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
+        if (miningDrill.isItem(hand)) {
 
-        Validate.notNull(miningDrill, "Can not be null");
-        if (miningDrill.isItem(e.getItem())
-            && SlimefunTag.STONE_VARIANTS.isTagged(blockType)
-            && !miningDrill.isDisabled()
-            && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
-            blockLocation, Interaction.BREAK_BLOCK)
-        ) {
-            e.setCancelled(true);
-
-            final SlimefunItem slimefunItem = BlockStorage.check(block);
-
-            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
-                .removeItemCharge(e.getItem(), 0.5F)
-            ) {
-                // This allows other plugins to register broken block as player broken
-                BlockBreakEvent newEvent = new BlockBreakEvent(block, e.getPlayer());
-                Bukkit.getServer().getPluginManager().callEvent(newEvent);
-                block.setType(Material.AIR);
-                e.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
-
-                // This has to be done because the item in the main hand is not a pickaxe
-                if (blockType == Material.STONE) {
-                    blockLocation.getWorld().dropItem(blockLocation,
-                        new ItemStack(Material.COBBLESTONE)
-                    );
-
-                } else {
-                    blockLocation.getWorld().dropItem(blockLocation,
-                        new ItemStack(blockType)
-                    );
-                }
+            if (!check(miningDrill, event, blockLocation)) {
+                return;
             }
+
+            if (!SlimefunTag.STONE_VARIANTS.isTagged(blockType)) {
+                return;
+            }
+
+            drillUse(0.5f, block, blockType, blockLocation, event);
+        }
+
+        final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
+        if (diamondDrill.isItem(hand)) {
+
+            if (!check(diamondDrill, event, blockLocation)) {
+                return;
+            }
+
+            if (!SlimefunTag.MINEABLE_PICKAXE.isTagged(blockType)) {
+                return;
+            }
+
+            drillUse(1.5f, block, blockType, blockLocation, event);
         }
     }
 
-    //TODO combine onDiamondDrillUse with onMiningDrillUse
-    @EventHandler
-    public void onDiamondDrillUse(PlayerInteractEvent e) {
-        final Block block = e.getClickedBlock();
-        if (block == null) {
+
+    public boolean check(MiningDrill miningDrill, PlayerInteractEvent event, Location blockLocation) {
+        return miningDrill.isItem(event.getItem())
+            && !miningDrill.isDisabled()
+            && Slimefun.getProtectionManager().hasPermission(event.getPlayer(),
+            blockLocation, Interaction.BREAK_BLOCK);
+    }
+
+    public void drillUse(float charge, Block block, Material blockType,
+                         Location blockLocation, PlayerInteractEvent event
+    ) {
+        event.setCancelled(true);
+
+        final SlimefunItem slimefunItem = BlockStorage.check(block);
+
+        if (slimefunItem != null) {
             return;
         }
 
-        final Material blockType = block.getType();
-        final Location blockLocation = block.getLocation();
+        if (!(slimefunItem instanceof Rechargeable)) {
+            return;
+        }
 
-        final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
+        final Rechargeable item = (Rechargeable) SlimefunItem.getByItem(event.getItem());
 
+        if (item == null) {
+            return;
+        }
 
-        Validate.notNull(diamondDrill, "Can not be null");
-        if (diamondDrill.isItem(e.getItem())
-            && !diamondDrill.isDisabled()
-            && SlimefunTag.MINEABLE_PICKAXE.isTagged(blockType)
-            && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
-            blockLocation, Interaction.BREAK_BLOCK)
-        ) {
-            e.setCancelled(true);
+        if (!item.removeItemCharge(event.getItem(), charge)) {
+            return;
+        }
 
-            final SlimefunItem slimefunItem = BlockStorage.check(block);
+        BlockBreakEvent newEvent = new BlockBreakEvent(block, event.getPlayer());
+        Bukkit.getServer().getPluginManager().callEvent(newEvent);
 
-            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(e.getItem()))
-                .removeItemCharge(e.getItem(), 1.5F)
-            ) {
-                // This allows other plugins to register broken block as player broken
-                BlockBreakEvent newEvent = new BlockBreakEvent(block, e.getPlayer());
-                Bukkit.getServer().getPluginManager().callEvent(newEvent);
-                block.setType(Material.AIR);
-                e.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
+        if (event.isCancelled()) {
+            return;
+        }
 
-                // This has to be done because the item in the main hand is not a pickaxe
-                if (blockType == Material.STONE) {
-                    blockLocation.getWorld().dropItem(blockLocation,
-                        new ItemStack(Material.COBBLESTONE)
-                    );
+        block.setType(Material.AIR);
+        event.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
 
-                } else {
-                    blockLocation.getWorld().dropItem(blockLocation,
-                        new ItemStack(blockType)
-                    );
-                }
-            }
+        // This has to be done because the item in the main hand is not a pickaxe
+        if (blockType == Material.STONE) {
+            blockLocation.getWorld().dropItem(blockLocation,
+                new ItemStack(Material.COBBLESTONE)
+            );
+        } else if (blockType == Material.DEEPSLATE) {
+            blockLocation.getWorld().dropItem(blockLocation,
+                new ItemStack(Material.COBBLED_DEEPSLATE)
+            );
+        } else {
+            blockLocation.getWorld().dropItem(blockLocation,
+                new ItemStack(blockType)
+            );
         }
     }
+
 
     @EventHandler
     public void onDiamondDrillUpgrade(InventoryClickEvent e) {
