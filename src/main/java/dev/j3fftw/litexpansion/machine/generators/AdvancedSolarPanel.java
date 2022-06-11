@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion.machine.generators;
 
+import com.google.common.base.Preconditions;
 import dev.j3fftw.extrautils.interfaces.InventoryBlock;
 import dev.j3fftw.extrautils.utils.Utils;
 import dev.j3fftw.litexpansion.Items;
@@ -17,7 +18,6 @@ import lombok.Getter;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -69,7 +69,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
         final int stored = getCharge(l);
         final boolean canGenerate = stored < getCapacity();
-        Validate.notNull(l.getWorld());
+        Preconditions.checkNotNull(l.getWorld());
         final int rate = canGenerate ? getGeneratingAmount(inv.getBlock(), l.getWorld()) : 0;
 
         String generationType = "&4Unknown";

@@ -1,7 +1,7 @@
 package dev.j3fftw.litexpansion;
 
+import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import org.apache.commons.lang.Validate;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
@@ -67,7 +67,7 @@ public class GlowEnchant extends Enchantment {
     public boolean canEnchantItem(ItemStack item) {
         if (item.hasItemMeta()) {
             final ItemMeta itemMeta = item.getItemMeta();
-            Validate.notNull(itemMeta, "can not be null");
+            Preconditions.checkNotNull(itemMeta, "can not be null");
             final Optional<String> id = Slimefun.getItemDataService().getItemData(itemMeta);
 
             if (id.isPresent()) {

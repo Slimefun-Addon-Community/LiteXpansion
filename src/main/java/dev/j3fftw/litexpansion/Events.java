@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion;
 
+import com.google.common.base.Preconditions;
 import dev.j3fftw.extrautils.objects.DyeItem;
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
@@ -17,7 +18,6 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -260,7 +260,7 @@ public class Events implements Listener {
         Player p = (Player) e.getWhoClicked();
         // 1.16 inventory, compare strings
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
-        Validate.notNull(diamondDrill, "Can not be null");
+        Preconditions.checkNotNull(diamondDrill, "Can not be null");
         if (diamondDrill.isItem(e.getCurrentItem())
             && p.getOpenInventory().getType().toString().equals("SMITHING")
         ) {
@@ -281,7 +281,7 @@ public class Events implements Listener {
         final Location blockLocation = block.getLocation();
         final ItemStack item = e.getItem();
 
-        Validate.notNull(glassCutter, "Can not be null");
+        Preconditions.checkNotNull(glassCutter, "Can not be null");
         if (SlimefunTag.GLASS.isTagged(blockType)
             && glassCutter.isItem(item)
             && !glassCutter.isDisabled()
@@ -316,7 +316,7 @@ public class Events implements Listener {
      */
     public void checkAndConsume(@Nonnull Player p, @Nullable FoodLevelChangeEvent e) {
         for (ItemStack item : p.getInventory().getContents()) {
-            Validate.notNull(foodSynth, "Can not be null");
+            Preconditions.checkNotNull(foodSynth, "Can not be null");
             if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 5F)) {
                 p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);
                 p.setFoodLevel(20);
