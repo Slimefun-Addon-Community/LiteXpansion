@@ -16,15 +16,13 @@ import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 //todo make it generic then push to extrautils
 public class BlockMenuPresetTest extends BlockMenuPreset {
 
-    private UUCrafter autoCrafter;
+    private final UUCrafter autoCrafter;
 
     public BlockMenuPresetTest(@Nonnull String id, @Nonnull String title, @Nonnull UUCrafter autoCrafter) {
         super(id, title);

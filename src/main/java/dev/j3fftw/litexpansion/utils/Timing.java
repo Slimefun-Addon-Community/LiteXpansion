@@ -49,7 +49,7 @@ public class Timing {
             sb.append("\n  Final step: ").append(time(steps.get(steps.size() - 1), end));
         }
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     private String time(long a, long b) {

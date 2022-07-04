@@ -6,13 +6,13 @@ import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.biomes.BiomeMap;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
-
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
+import java.util.logging.Level;
 
 public class ThoriumResource implements GEOResource {
 
@@ -20,7 +20,7 @@ public class ThoriumResource implements GEOResource {
 
     private BiomeMap<Integer> map;
 
-    public ThoriumResource () {
+    public ThoriumResource() {
         final LiteXpansion instance = LiteXpansion.getInstance();
 
         try {

@@ -98,7 +98,8 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
                 final Block specialBlock = getSpecialBlock(dispenser);
                 if (specialBlock != null) {
                     specialBlock.setType(Material.AIR);
-                    specialBlock.getWorld().spawnParticle(Particle.PORTAL, specialBlock.getLocation(), 4, 0.5, 0.5, 0.5);
+                    specialBlock.getWorld().spawnParticle(Particle.PORTAL, specialBlock.getLocation(), 4, 0.5, 0.5,
+                        0.5);
                 }
             }
         } else {
