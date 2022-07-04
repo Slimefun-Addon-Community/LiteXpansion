@@ -68,9 +68,8 @@ public class Events implements Listener {
      */
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent e) {
-        if (e.getEntity() instanceof Player && ((Player) e.getEntity()).getEquipment() != null) {
-            final Player p = (Player) e.getEntity();
-            final ItemStack chestplate = p.getEquipment().getChestplate();
+        if (e.getEntity() instanceof Player player && player.getEquipment() != null) {
+            final ItemStack chestplate = player.getEquipment().getChestplate();
             if (e.getFinalDamage() > 0
                 && chestplate != null
                 && electricChestplate.isItem(chestplate)
@@ -88,12 +87,11 @@ public class Events implements Listener {
                     .append(String.valueOf(electricChestplate.getItemCharge(chestplate))).color(ChatColor.YELLOW)
                     .append(" J");
 
-                if (meta instanceof Damageable) {
+                if (meta instanceof Damageable damageable) {
                     final double chargePercent = (newCharge / electricChestplate.getMaxItemCharge(chestplate)) * 100;
                     final int percentOfMax = (int) ((chargePercent / 100) * chestplate.getType().getMaxDurability());
                     final int damage = Math.max(1, chestplate.getType().getMaxDurability() - percentOfMax);
-                    ((Damageable) meta).setDamage(damage);
-
+                    damageable.setDamage(damage);
                     chestplate.setItemMeta(meta);
                 }
 
@@ -127,11 +125,11 @@ public class Events implements Listener {
     @EventHandler
     public void onHungerDamage(EntityDamageEvent e) {
         if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION
-            && e.getEntity() instanceof Player
+            && e.getEntity() instanceof Player player
             && Items.FOOD_SYNTHESIZER != null
             && !Items.FOOD_SYNTHESIZER.getItem().isDisabled()
         ) {
-            checkAndConsume((Player) e.getEntity(), null);
+            checkAndConsume(player, null);
         }
     }
 
@@ -181,7 +179,7 @@ public class Events implements Listener {
         }
 
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
-        if (diamondDrill.isItem(hand)) {
+        if (diamondDrill != null && diamondDrill.isItem(hand)) {
 
             if (!check(diamondDrill, event, blockLocation)) {
                 return;

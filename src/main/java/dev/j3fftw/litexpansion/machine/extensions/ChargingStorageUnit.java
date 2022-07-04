@@ -88,8 +88,8 @@ public abstract class ChargingStorageUnit extends Capacitor implements Inventory
 
         final ItemStack input = inv.getItemInSlot(INPUT_SLOT);
         final SlimefunItem item = SlimefunItem.getByItem(input);
-        if (item instanceof Rechargeable && input.getAmount() == 1) {
-            ((Rechargeable) item).addItemCharge(input, this.jPerTick);
+        if (item instanceof Rechargeable rechargeable && input.getAmount() == 1) {
+            rechargeable.addItemCharge(input, this.jPerTick);
         }
     }
 }

@@ -15,6 +15,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +34,11 @@ public class BlockMenuPresetTest extends BlockMenuPreset {
 
     @Override
     public void init() {
-        List<Integer> crafting = Arrays.stream(UUCrafter.CRAFTING_SLOTS).boxed().collect(Collectors.toList());
+        List<Integer> crafting = new ArrayList<>();
+        for (int CRAFTING_SLOT : UUCrafter.CRAFTING_SLOTS) {
+            Integer integer = CRAFTING_SLOT;
+            crafting.add(integer);
+        }
 
         for (int i = 0; i < 54; i++) {
             if (i == UUCrafter.INPUT_SLOT

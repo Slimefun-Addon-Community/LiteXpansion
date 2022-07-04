@@ -57,8 +57,7 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
             return;
         }
 
-        if (state instanceof Dispenser) {
-            Dispenser disp = (Dispenser) state;
+        if (state instanceof Dispenser disp) {
             Inventory inv = disp.getInventory();
             List<ItemStack[]> inputs = RecipeType.getRecipeInputList(this);
 

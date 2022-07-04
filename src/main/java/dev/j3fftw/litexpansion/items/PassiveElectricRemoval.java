@@ -26,11 +26,11 @@ public interface PassiveElectricRemoval {
 
             ChargeUtils.setCharge(meta, newCharge, per.getCapacity());
 
-            if (meta instanceof Damageable) {
+            if (meta instanceof Damageable damageable) {
                 final double chargePercent = (newCharge / per.getCapacity()) * 100;
                 final int percentOfMax = (int) ((chargePercent / 100) * is.getType().getMaxDurability());
                 final int damage = Math.max(1, is.getType().getMaxDurability() - percentOfMax);
-                ((Damageable) meta).setDamage(damage);
+                damageable.setDamage(damage);
             }
 
             is.setItemMeta(meta);

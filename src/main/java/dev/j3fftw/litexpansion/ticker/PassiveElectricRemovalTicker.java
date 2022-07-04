@@ -33,9 +33,7 @@ public final class PassiveElectricRemovalTicker implements Runnable {
                 if (is != null && is.hasItemMeta()) {
                     final SlimefunItem item = SlimefunItem.getByItem(is);
 
-                    if (item instanceof PassiveElectricRemoval) {
-                        final PassiveElectricRemoval per = (PassiveElectricRemoval) item;
-
+                    if (item instanceof PassiveElectricRemoval per) {
                         set.add(new TickerDataHolder(player.getUniqueId(), i, is, per));
                     }
                 }
@@ -70,8 +68,7 @@ public final class PassiveElectricRemovalTicker implements Runnable {
 
         @Override
         public boolean equals(Object obj) {
-            if (obj instanceof TickerDataHolder) {
-                final TickerDataHolder tdh = (TickerDataHolder) obj;
+            if (obj instanceof TickerDataHolder tdh) {
                 return this.playerUuid.equals(tdh.playerUuid)
                     && this.slot == tdh.slot
                     && this.item.equals(tdh.item)
