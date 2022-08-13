@@ -159,6 +159,7 @@ public class Events implements Listener {
         if (block == null) {
             return;
         }
+        System.out.println("1");
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
@@ -167,29 +168,36 @@ public class Events implements Listener {
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
         if (miningDrill.isItem(hand)) {
 
+            System.out.println("2");
             if (!check(miningDrill, event, blockLocation)) {
                 return;
             }
 
+            System.out.println("3");
             if (!SlimefunTag.STONE_VARIANTS.isTagged(blockType)) {
                 return;
             }
 
+            System.out.println("4");
             drillUse(0.5f, block, blockType, blockLocation, event);
         }
 
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
         if (diamondDrill != null && diamondDrill.isItem(hand)) {
 
+            System.out.println("5");
             if (!check(diamondDrill, event, blockLocation)) {
                 return;
             }
 
+            System.out.println("6");
             if (!SlimefunTag.MINEABLE_PICKAXE.isTagged(blockType)) {
                 return;
             }
 
+            System.out.println("7");
             drillUse(1.5f, block, blockType, blockLocation, event);
+            System.out.println("8");
         }
     }
 
@@ -206,15 +214,15 @@ public class Events implements Listener {
     ) {
         event.setCancelled(true);
 
+        System.out.println("9");
+
         final SlimefunItem slimefunItem = BlockStorage.check(block);
 
         if (slimefunItem != null) {
             return;
         }
 
-        if (!(slimefunItem instanceof Rechargeable)) {
-            return;
-        }
+        System.out.println("11");
 
         final Rechargeable item = (Rechargeable) SlimefunItem.getByItem(event.getItem());
 
@@ -222,16 +230,18 @@ public class Events implements Listener {
             return;
         }
 
+        System.out.println("12");
+
         if (!item.removeItemCharge(event.getItem(), charge)) {
             return;
         }
 
+        System.out.println("13");
+
         BlockBreakEvent newEvent = new BlockBreakEvent(block, event.getPlayer());
         Bukkit.getServer().getPluginManager().callEvent(newEvent);
 
-        if (event.isCancelled()) {
-            return;
-        }
+        System.out.println("14");
 
         block.setType(Material.AIR);
         event.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
@@ -241,14 +251,17 @@ public class Events implements Listener {
             blockLocation.getWorld().dropItem(blockLocation,
                 new ItemStack(Material.COBBLESTONE)
             );
+            System.out.println("15");
         } else if (blockType == Material.DEEPSLATE) {
             blockLocation.getWorld().dropItem(blockLocation,
                 new ItemStack(Material.COBBLED_DEEPSLATE)
             );
+            System.out.println("16");
         } else {
             blockLocation.getWorld().dropItem(blockLocation,
                 new ItemStack(blockType)
             );
+            System.out.println("17");
         }
     }
 
