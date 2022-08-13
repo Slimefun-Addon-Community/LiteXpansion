@@ -212,10 +212,6 @@ public class Events implements Listener {
             return;
         }
 
-        if (!(slimefunItem instanceof Rechargeable)) {
-            return;
-        }
-
         final Rechargeable item = (Rechargeable) SlimefunItem.getByItem(event.getItem());
 
         if (item == null) {
@@ -228,10 +224,6 @@ public class Events implements Listener {
 
         BlockBreakEvent newEvent = new BlockBreakEvent(block, event.getPlayer());
         Bukkit.getServer().getPluginManager().callEvent(newEvent);
-
-        if (event.isCancelled()) {
-            return;
-        }
 
         block.setType(Material.AIR);
         event.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
