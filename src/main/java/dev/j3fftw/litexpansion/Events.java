@@ -21,14 +21,18 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Cat;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -41,6 +45,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Events implements Listener {
 
@@ -318,4 +323,25 @@ public class Events implements Listener {
             }
         }
     }
+
+    /**
+     * Rest In Peace Kleintje aka Chunker 9/16/2022
+     * You will be missed
+     * <p>
+     * This event is dedicated to my cat Kleintje also
+     * known as Chunker
+     */
+    @EventHandler
+    public void onCatSpawn(EntitySpawnEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof Cat cat) {
+            int randomNumber = ThreadLocalRandom.current().nextInt(0, 100_000);
+            if (cat.getCatType() == Cat.Type.RED && randomNumber == 91622) {
+                OfflinePlayer player = Bukkit.getOfflinePlayer("22815ad5-2a54-44c0-8f83-f65cfe5310f8"); // _lagpc_
+                entity.setCustomName("Kleintje");
+                ((Cat) entity).setOwner(player);
+            }
+        }
+    }
 }
+
