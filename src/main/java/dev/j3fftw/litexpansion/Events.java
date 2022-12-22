@@ -230,23 +230,7 @@ public class Events implements Listener {
         BlockBreakEvent newEvent = new BlockBreakEvent(block, event.getPlayer());
         Bukkit.getServer().getPluginManager().callEvent(newEvent);
 
-        block.setType(Material.AIR);
-        event.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
-
-        // This has to be done because the item in the main hand is not a pickaxe
-        if (blockType == Material.STONE) {
-            blockLocation.getWorld().dropItem(blockLocation,
-                new ItemStack(Material.COBBLESTONE)
-            );
-        } else if (blockType == Material.DEEPSLATE) {
-            blockLocation.getWorld().dropItem(blockLocation,
-                new ItemStack(Material.COBBLED_DEEPSLATE)
-            );
-        } else {
-            blockLocation.getWorld().dropItem(blockLocation,
-                new ItemStack(blockType)
-            );
-        }
+        block.breakNaturally();
     }
 
 
