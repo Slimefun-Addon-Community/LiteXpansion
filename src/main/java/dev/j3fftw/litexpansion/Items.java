@@ -545,6 +545,12 @@ public final class Items {
         "&7UU Crafter"
     );
 
+    public static final SlimefunItemStack CONVERTER = new SlimefunItemStack(
+        "CONVER",
+        Material.COAL_BLOCK,
+        "&7Converter"
+    );
+
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
 
     static {

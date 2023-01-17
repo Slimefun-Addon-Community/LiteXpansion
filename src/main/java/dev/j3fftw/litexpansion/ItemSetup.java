@@ -9,6 +9,7 @@ import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
+import dev.j3fftw.litexpansion.machine.Converter;
 import dev.j3fftw.litexpansion.machine.Macerator;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.MultiFunctionalElectricStorageUnit;
@@ -83,6 +84,7 @@ final class ItemSetup {
         new ManualMill().register(plugin);
         new Macerator().register(plugin);
         new UUCrafter().register(plugin);
+        new Converter().register(plugin);
     }
 
     //Disable when SlimyTreeTaps exists
