@@ -41,13 +41,13 @@ public class Converter extends AContainer implements PoweredMachine {
     @Nonnull
     @Override
     public String getInventoryTitle() {
-        return "&6Macerator";
+        return "&6Converter";
     }
 
     @Nonnull
     @Override
     public String getMachineIdentifier() {
-        return "MACERATOR";
+        return "CONVERTER";
     }
 
     @Override
