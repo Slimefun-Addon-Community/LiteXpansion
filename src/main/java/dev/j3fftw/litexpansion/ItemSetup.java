@@ -224,13 +224,9 @@ final class ItemSetup {
         RecipeType.SMELTERY.register(new ItemStack[] {Items.QUARTZ_DUST},
             new ItemStack(Material.QUARTZ)
         );
-
-        // 1.16
-        if (Slimefun.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_16)) {
-            RecipeType.SMELTERY.register(new ItemStack[] {Items.ANCIENT_DEBRIS_DUST},
-                new ItemStack(Material.NETHERITE_INGOT)
-            );
-        }
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.ANCIENT_DEBRIS_DUST},
+            new ItemStack(Material.NETHERITE_INGOT)
+        );
 
         // Resources
         new MagThor().register(plugin);

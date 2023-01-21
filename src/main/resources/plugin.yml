@@ -1,7 +1,7 @@
 name: LiteXpansion
 description: Description
 version: ${project.version}
-api-version: 1.14
+api-version: 1.16
 author: j3fftw
 depend: [Slimefun]
 softdepend: [SlimyTreeTaps]
