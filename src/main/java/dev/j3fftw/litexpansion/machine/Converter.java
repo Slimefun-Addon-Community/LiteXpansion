@@ -32,6 +32,18 @@ public class Converter extends AContainer implements PoweredMachine {
             addRecipe(new ItemStack(SlimefunItems.COPPER_INGOT), new ItemStack(Material.COPPER_INGOT));
         }
 
+        addRecipe(new ItemStack(Material.GOLD_INGOT), new ItemStack(SlimefunItems.GOLD_4K));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_4K), new ItemStack(Material.GOLD_INGOT));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_6K), new ItemStack(Material.GOLD_INGOT));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_8K), new ItemStack(Material.GOLD_INGOT));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_10K), new ItemStack(Material.GOLD_INGOT));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_12K), new ItemStack(Material.GOLD_INGOT));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_14K), new ItemStack(Material.GOLD_INGOT));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_16K), new ItemStack(Material.GOLD_INGOT));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_20K), new ItemStack(Material.GOLD_INGOT));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_22K), new ItemStack(Material.GOLD_INGOT));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_24K), new ItemStack(Material.GOLD_INGOT));
+        addRecipe(new ItemStack(SlimefunItems.GOLD_24K_BLOCK), new ItemStack(Material.GOLD_BLOCK));
     }
 
     private void addRecipe(ItemStack input, ItemStack output) {
