@@ -2,6 +2,7 @@ package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.extrautils.interfaces.InventoryBlock;
 import dev.j3fftw.litexpansion.Items;
+import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.machine.api.PoweredMachine;
 import dev.j3fftw.litexpansion.utils.BlockMenuPresetTest;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
@@ -113,8 +114,11 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
 
                 ItemStack output = entry.getKey().clone();
                 final ItemStack input = blockMenu.getItemInSlot(INPUT_SLOT);
+                SlimefunItem slimefunItem = SlimefunItem.getByItem(input);
 
                 if (input != null
+                    && slimefunItem != null
+                    && slimefunItem.getId().equals("UU_MATTER")
                     && input.getAmount() >= amount
                     && blockMenu.fits(output, OUTPUT_SLOT)
                 ) {
