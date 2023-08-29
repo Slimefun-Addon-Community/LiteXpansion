@@ -103,13 +103,18 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         Reflections.setField(SlimefunItem.getById("FUSION_REACTOR"), "energyProducedPerTick", 8_192);
 
         // SupremeExpansion - just no...
-        Reflections.setField(SlimefunItem.getById("SUPREME_GENERATOR"), "energyProducedPerTick", 20_000);
-        Reflections.setField(SlimefunItem.getById("THORNIUM_GENERATOR"), "energyProducedPerTick", 10_000);
-        Reflections.setField(SlimefunItem.getById("LUMIUM_GENERATOR"), "energyProducedPerTick", 5_000);
-        Reflections.setField(SlimefunItem.getById("LUX_GENERATOR"), "energyProducedPerTick", 2_500);
-        Reflections.setField(SlimefunItem.getById("AQUA_GENERATOR"), "energyProducedPerTick", 2_500);
-        Reflections.setField(SlimefunItem.getById("VENUS_GENERATOR"), "energyProducedPerTick", 2_500);
-        Reflections.setField(SlimefunItem.getById("IGNIS_GENERATOR"), "energyProducedPerTick", 2_500);
+        Reflections.setField(SlimefunItem.getById("SUPREME_SUPREME_GENERATOR"), "energyProducedPerTick", 20_000);
+        Reflections.setField(SlimefunItem.getById("SUPREME_THORNIUM_GENERATOR"), "energyProducedPerTick", 10_000);
+        Reflections.setField(SlimefunItem.getById("SUPREME_LUMIUM_GENERATOR"), "energyProducedPerTick", 5_000);
+        Reflections.setField(SlimefunItem.getById("SUPREME_BASIC_LUMIUM_GENERATOR"), "energyProducedPerTick", 500);
+        Reflections.setField(SlimefunItem.getById("SUPREME_LUX_GENERATOR"), "energyProducedPerTick", 2_500);
+        Reflections.setField(SlimefunItem.getById("SUPREME_BASIC_LUX_GENERATOR"), "energyProducedPerTick", 250);
+        Reflections.setField(SlimefunItem.getById("SUPREME_AQUA_GENERATOR"), "energyProducedPerTick", 2_500);
+        Reflections.setField(SlimefunItem.getById("SUPREME_BASIC_AQUA_GENERATOR"), "energyProducedPerTick", 250);
+        Reflections.setField(SlimefunItem.getById("SUPREME_VENUS_GENERATOR"), "energyProducedPerTick", 2_500);
+        Reflections.setField(SlimefunItem.getById("SUPREME_BASIC_VENUS_GENERATOR"), "energyProducedPerTick", 250);
+        Reflections.setField(SlimefunItem.getById("SUPREME_IGNIS_GENERATOR"), "energyProducedPerTick", 2_500);
+        Reflections.setField(SlimefunItem.getById("SUPREME_BASIC_IGNIS_GENERATOR"), "energyProducedPerTick", 250);
     }
 
     private void setupResearches() {
