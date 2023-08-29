@@ -43,6 +43,7 @@ final class ItemSetup {
 
     static final ItemSetup INSTANCE = new ItemSetup();
     private final ItemStack glass = new ItemStack(Material.GLASS);
+    private final ItemStack rubberItem;
     private final SlimefunAddon plugin = LiteXpansion.getInstance();
     private boolean initialised;
 
@@ -87,17 +88,19 @@ final class ItemSetup {
         new Converter().register(plugin);
     }
 
-    //Disable when SlimyTreeTaps exists
+    // Register only if SlimeTech and SlimyTreeTaps do not exist
     private void registerRubber() {
-        if (!Bukkit.getServer().getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
-            //Rubber
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("SlimeTech")) {
+            this.rubberItem = SlimefunItem.getById("SLIMETECH_RUBBER").getItem();
+        }else if (Bukkit.getServer().getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
+            this.rubberItem = SlimefunItem.getById("RUBBER").getItem();
+        }else {
             registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
             new RubberSynthesizer().register(plugin);
         }
     }
 
     private void registerMiscItems() {
-        final ItemStack rubberItem = SlimefunItem.getById("RUBBER").getItem();
 
         // Advanced Alloy
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
