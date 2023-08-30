@@ -43,7 +43,7 @@ final class ItemSetup {
 
     static final ItemSetup INSTANCE = new ItemSetup();
     private final ItemStack glass = new ItemStack(Material.GLASS);
-    private final ItemStack rubberItem;
+    private ItemStack rubberItem;
     private final SlimefunAddon plugin = LiteXpansion.getInstance();
     private boolean initialised;
 
@@ -90,11 +90,11 @@ final class ItemSetup {
 
     // Register only if SlimeTech and SlimyTreeTaps do not exist
     private void registerRubber() {
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("SlimeTech")) {
-            this.rubberItem = SlimefunItem.getById("SLIMETECH_RUBBER").getItem();
-        }else if (Bukkit.getServer().getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
+        if (Bukkit.getServer().getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
             this.rubberItem = SlimefunItem.getById("RUBBER").getItem();
-        }else {
+        } else if (Bukkit.getServer().getPluginManager().isPluginEnabled("SlimeTech")) {
+            this.rubberItem = SlimefunItem.getById("SLIMETECH_RUBBER").getItem();
+        } else {
             registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
             new RubberSynthesizer().register(plugin);
         }
