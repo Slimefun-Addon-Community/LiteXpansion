@@ -88,19 +88,23 @@ final class ItemSetup {
         new Converter().register(plugin);
     }
 
-    // Register only if SlimeTech and SlimyTreeTaps do not exist
+    // Register only if SlimyTreeTaps and SlimeTech do not exist
     private void registerRubber() {
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
-            this.rubberItem = SlimefunItem.getById("RUBBER").getItem();
-        } else if (Bukkit.getServer().getPluginManager().isPluginEnabled("SlimeTech")) {
-            this.rubberItem = SlimefunItem.getById("SLIMETECH_RUBBER").getItem();
+        ItemStack rubber;
+        if (Bukkit.getPluginManager().isPluginEnabled("SlimyTreeTaps")) {
+            rubber = SlimefunItem.getById("RUBBER").getItem();
+        } else if (Bukkit.getPluginManager().isPluginEnabled("SlimeTech")) {
+            rubber = SlimefunItem.getById("SLIMETECH_RUBBER").getItem();
         } else {
+            rubber = Items.RUBBER;
             registerNonPlaceableItem(Items.RUBBER, RubberSynthesizer.RECIPE_TYPE, SlimefunItems.OIL_BUCKET);
             new RubberSynthesizer().register(plugin);
         }
+        this.rubberItem = rubber;
     }
 
     private void registerMiscItems() {
+        ItemStack rubber = this.rubberItem;
 
         // Advanced Alloy
         registerNonPlaceableItem(Items.ADVANCED_ALLOY, RecipeType.COMPRESSOR, Items.MIXED_METAL_INGOT);
@@ -142,7 +146,7 @@ final class ItemSetup {
         );
 
         registerNonPlaceableItem(Items.TIN_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            rubberItem, Items.UNINSULATED_TIN_CABLE
+            rubber, Items.UNINSULATED_TIN_CABLE
         );
 
         registerNonPlaceableItem(Items.COPPER_PLATE, ManualMill.RECIPE_TYPE, SlimefunItems.COPPER_INGOT);
@@ -154,7 +158,7 @@ final class ItemSetup {
         );
 
         registerNonPlaceableItem(Items.COPPER_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            rubberItem, Items.UNINSULATED_COPPER_CABLE
+            rubber, Items.UNINSULATED_COPPER_CABLE
         );
 
         registerItem(Items.RE_BATTERY, RecipeType.ENHANCED_CRAFTING_TABLE,
@@ -171,7 +175,7 @@ final class ItemSetup {
         );
 
         registerNonPlaceableItem(Items.GOLD_CABLE, RecipeType.ENHANCED_CRAFTING_TABLE,
-            rubberItem, Items.UNINSULATED_GOLD_CABLE
+            rubber, Items.UNINSULATED_GOLD_CABLE
         );
 
         registerNonPlaceableItem(Items.IRON_PLATE, MetalForge.RECIPE_TYPE, new ItemStack(Material.IRON_INGOT));
