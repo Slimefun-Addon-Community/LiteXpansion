@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.github.Slimefun</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>RC-33</version>
+            <version>1aeb0e8</version>
             <scope>provided</scope>
         </dependency>
 
