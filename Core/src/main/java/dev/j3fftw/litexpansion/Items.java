@@ -5,6 +5,7 @@ import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.machine.generators.AdvancedSolarPanel;
+import dev.j3fftw.litexpansion.nms.NMSEnchants;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
@@ -551,7 +552,7 @@ public final class Items {
         "&7Converter"
     );
 
-    private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
+    private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT)==null? NMSEnchants.GLOW: Enchantment.getByKey(Constants.GLOW_ENCHANT);
 
     static {
         ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 1);
