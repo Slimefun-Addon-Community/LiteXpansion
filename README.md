@@ -50,3 +50,9 @@ You can also generally chat about LiteXpansion in the `#litexpansion` channel.
     <img src="https://discordapp.com/api/guilds/565557184348422174/widget.png?style=banner3" alt="Discord Invite"/>
   </a>
 </p>
+
+### 📥 Compilation
+To be able to compile this source,
+you need to get yourself [BuildTools](https://www.spigotmc.org/wiki/buildtools/) from SpigotMC and
+create 1.20.4 Minecraft mappings - NMS which are being used in [NMS_1.20.4_Enchants](NMS_1.20.4_Enchants)
+<br><b>Help-line: ``java -jar .\BuildTools.jar --remapped --rev 1.20.4``
