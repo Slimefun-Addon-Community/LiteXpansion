@@ -2,7 +2,6 @@ package dev.j3fftw.litexpansion.machine;
 
 import dev.j3fftw.extrautils.interfaces.InventoryBlock;
 import dev.j3fftw.litexpansion.Items;
-import dev.j3fftw.litexpansion.LiteXpansion;
 import dev.j3fftw.litexpansion.machine.api.PoweredMachine;
 import dev.j3fftw.litexpansion.utils.BlockMenuPresetTest;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;

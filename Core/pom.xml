@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>dev.j3fftw</groupId>
+        <artifactId>LiteXpansion</artifactId>
+        <version>MODIFIED</version>
+    </parent>
+    <artifactId>Core</artifactId>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.19-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.Slimefun</groupId>
+            <artifactId>Slimefun4</artifactId>
+            <version>1aeb0e8</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.Slimefun-Addon-Community</groupId>
+            <artifactId>extrautils</artifactId>
+            <version>73e76ac06c</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.j3fftw</groupId>
+            <artifactId>NMS_1.20.4_Enchants</artifactId>
+            <version>MODIFIED</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!--<defaultGoal>clean package</defaultGoal>
+        <finalName>${project.artifactId}</finalName>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory> &lt;!&ndash; (your resources folder location) &ndash;&gt;
+                <filtering>true
+                </filtering> &lt;!&ndash; this is the important part, it's what replaces, filters, all placeholders in the resources folder (such as ${project.version} in plugin.yml) &ndash;&gt;
+            </resource>
+        </resources>-->
+        <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/main/resources/</directory>
+                <includes>
+                    <include>*</include>
+                    <include>biome-maps/*.json</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}</directory>
+
+                <includes>
+                    <include>LICENSE</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${project.parent.basedir}\target\${project.parent.name}-${project.version}.jar</outputFile>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.bstats</pattern>
+                                    <shadedPattern>dev.j3fftw.litexpansion.bstats</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>dev.j3fftw.extrautils</pattern>
+                                    <shadedPattern>dev.j3fftw.litexpansion.extrautils</shadedPattern>
+                                </relocation>
+                            </relocations>
+                            <artifactSet>
+                                <includes>
+                                    <include>dev.j3fftw*</include>
+                                    <include>org.bstats</include>
+                                    <include>com.github.Slimefun-Addon-Community*</include>
+                                </includes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

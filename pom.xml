@@ -8,6 +8,11 @@
     <artifactId>LiteXpansion</artifactId>
     <version>MODIFIED</version>
 
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
     <repositories>
         <repository>
             <id>jitpack.io</id>
@@ -18,109 +23,11 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
     </repositories>
+    <packaging>pom</packaging>
+    <modules>
+        <module>Core</module>
+        <module>NMS_1.20.4_Enchants</module>
+    </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
 
-        <dependency>
-            <groupId>com.github.Slimefun</groupId>
-            <artifactId>Slimefun4</artifactId>
-            <version>1aeb0e8</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.bstats</groupId>
-            <artifactId>bstats-bukkit</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.Slimefun-Addon-Community</groupId>
-            <artifactId>extrautils</artifactId>
-            <version>73e76ac06c</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <defaultGoal>clean package</defaultGoal>
-        <finalName>${project.artifactId}</finalName>
-        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-
-        <resources>
-            <resource>
-                <targetPath>.</targetPath>
-                <filtering>true</filtering>
-                <directory>${basedir}/src/main/resources/</directory>
-                <includes>
-                    <include>*</include>
-                    <include>biome-maps/*.json</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>${basedir}</directory>
-
-                <includes>
-                    <include>LICENSE</include>
-                </includes>
-            </resource>
-        </resources>
-
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>16</source>
-                    <target>16</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-                <configuration>
-                    <relocations>
-                        <relocation>
-                            <pattern>org.bstats</pattern>
-                            <shadedPattern>dev.j3fftw.litexpansion.bstats</shadedPattern>
-                        </relocation>
-
-                        <relocation>
-                            <pattern>dev.j3fftw.extrautils</pattern>
-                            <shadedPattern>dev.j3fftw.litexpansion.extrautils</shadedPattern>
-                        </relocation>
-                    </relocations>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
